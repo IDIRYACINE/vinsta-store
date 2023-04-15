@@ -1,4 +1,4 @@
-import { EntityBase } from "@/common/entity.base";
+import { EntityBase } from "@/commons/entity.base";
 import { ProductEntity } from "@/domains/product/domain/ProductEntity";
 import { CategoryId, CategoryName, CategoryProductCount } from "./ValueObjects";
 

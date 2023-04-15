@@ -1,4 +1,4 @@
-import { EntityBase } from "@/common/entity.base";
+import { EntityBase } from "@/commons/entity.base";
 import { UserProps } from "../ports/UserTypes";
 
 export class UserEntity implements EntityBase<UserEntity>{

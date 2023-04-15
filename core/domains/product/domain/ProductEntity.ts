@@ -1,5 +1,5 @@
 import { ProductDescription, ProductId, ProductName, ProductPrice, ProductQuantity } from "./ValueObjects";
-import { EntityBase } from "@/common/entity.base";
+import { EntityBase } from "@/commons/entity.base";
 
 export class ProductEntity implements EntityBase<ProductEntity>{
     constructor(
