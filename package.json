@@ -1,0 +1,11 @@
+{
+  "name": "vinsta-store",
+  "version": "1.0.0",
+  "description": "e-commerce for small buisness",
+  "main": "index.ts",
+  "author": "IDIRYACINE <idiryacinesp@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "nextjs": "^0.0.3"
+  }
+}
