@@ -1,4 +1,4 @@
-import { OrderId } from "@/domains/orders/domain/ValueObjects"
+import { OrderId } from "@vinstacore/domains/orders/domain/ValueObjects"
 
 
 export interface OrderServicePort{

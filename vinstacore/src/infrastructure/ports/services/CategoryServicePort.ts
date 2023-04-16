@@ -1,8 +1,8 @@
 import { LimitProp, PageProp, UpdatedField } from "@/commons/api.base"
 import { OperationStatus } from "@/commons/operation-status.base"
 import { ImageUrl } from "@/commons/value-objects.base"
-import { CategoryEntity } from "@/domains/category/domain/CategoryEntity"
-import { CategoryId, CategoryName } from "@/domains/category/domain/ValueObjects"
+import { CategoryEntity } from "@vinstacore/domains/category/domain/CategoryEntity"
+import { CategoryId, CategoryName } from "@vinstacore/domains/category/domain/ValueObjects"
 
 
 export interface CategoryServicePort {

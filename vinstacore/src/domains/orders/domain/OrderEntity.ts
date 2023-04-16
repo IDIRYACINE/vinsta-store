@@ -1,5 +1,5 @@
 import { EntityBase } from "@/commons/entity.base";
-import { Address } from "@/domains/address";
+import { Address } from "@vinstacore/domains/address";
 import { OrderId, OrderStatus } from "./ValueObjects";
 
 export class OrderEntity implements EntityBase<OrderEntity>{

@@ -1,4 +1,4 @@
-import { FirebaseAdapter } from "vinstacore"
+import { FirebaseAdapter } from "@vinstacore"
 import AuthState from "../state/AuthState"
 import { AuthController } from "./AuthController"
 

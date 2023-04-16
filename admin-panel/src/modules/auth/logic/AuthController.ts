@@ -1,4 +1,5 @@
-import { LoginProps, UserServicePort } from "vinstacore";
+import { LoginProps, UserServicePort } from "@vinstacore";
+import router from "next/dist/client/router";
 import AuthState from "../state/AuthState";
 
 export class AuthController {
@@ -14,5 +15,9 @@ export class AuthController {
                 this.state.setUser(response.user)
             }
         })
+    }
+
+    navigateToDashboard(){
+        router.push("/admin/orders")
     }
 }

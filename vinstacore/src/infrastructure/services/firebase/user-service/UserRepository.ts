@@ -1,5 +1,5 @@
-import { CreateProps, CreateResponse, DeleteProps, DeleteResponse, FindProps, FindResponse, IRepository, LoadProps, LoadResponse, UpdateProps, UpdateResponse } from "@/infrastructure/ports/IRepositories";
-import { FindUserProps } from "@/infrastructure/ports/services/UserServicePort";
+import { CreateProps, CreateResponse, DeleteProps, DeleteResponse, FindProps, FindResponse, IRepository, LoadProps, LoadResponse, UpdateProps, UpdateResponse } from "@vinstacore/infrastructure/ports/IRepositories";
+import { FindUserProps } from "@vinstacore/infrastructure/ports/services/UserServicePort";
 
 export class FirebaseUserRepository implements IRepository {
 

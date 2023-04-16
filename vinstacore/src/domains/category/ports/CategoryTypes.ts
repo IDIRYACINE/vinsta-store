@@ -1,4 +1,4 @@
-import { ProductEntity } from "@/domains/product/domain/ProductEntity";
+import { ProductEntity } from "@vinstacore/domains/product/domain/ProductEntity";
 import { CategoryId, CategoryName, CategoryProductCount } from "../domain/ValueObjects";
 
 export interface CategoryProps {

@@ -1,6 +1,6 @@
 
 import { makeAutoObservable } from "mobx"
-import { UserEntity } from "vinstacore"
+import { UserEntity } from "@vinstacore"
 
 export default class AuthState {
     private user?: UserEntity

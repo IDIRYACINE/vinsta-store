@@ -1,6 +1,6 @@
 
 
-import { UserMapper } from "@/domains/users";
+import { UserMapper } from "@vinstacore/domains/users";
 import { FirebaseUserRepository } from "../user-service/UserRepository";
 import { FirebaseUserService } from "../user-service/UserService";
 

@@ -1,5 +1,5 @@
 import { EntityBase } from "@/commons/entity.base";
-import { ProductEntity } from "@/domains/product/domain/ProductEntity";
+import { ProductEntity } from "@vinstacore/domains/product/domain/ProductEntity";
 import { CategoryId, CategoryName, CategoryProductCount } from "./ValueObjects";
 
 export class CategoryEntity implements EntityBase<CategoryEntity>{

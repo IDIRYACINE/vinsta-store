@@ -1,6 +1,6 @@
-import { UserMapper } from "@/domains/users";
-import { IRepository } from "@/infrastructure/ports/IRepositories";
-import { FindUserProps, LoginProps, LoginResponse, SignupProps, SignupResponse, UserServicePort } from "@/infrastructure/ports/services/UserServicePort";
+import { UserMapper } from "@vinstacore/domains/users";
+import { IRepository } from "@vinstacore/infrastructure/ports/IRepositories";
+import { FindUserProps, LoginProps, LoginResponse, SignupProps, SignupResponse, UserServicePort } from "@vinstacore/infrastructure/ports/services/UserServicePort";
 
 export class FirebaseUserService implements UserServicePort {
 

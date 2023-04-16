@@ -15,9 +15,10 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "@/*": ["./src/*"]
+      "@storefront/*": ["./src/*"],
+      "@vinstacore" : ["../vinstacore/src/"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [ "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }

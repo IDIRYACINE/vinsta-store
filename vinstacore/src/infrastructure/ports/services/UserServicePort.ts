@@ -1,5 +1,5 @@
-import { UserEntity } from "@/domains/users/domain/UserEntity"
-import { UserEmail, UserPassword, UserPhone } from "@/domains/users/domain/ValueObjects"
+import { UserEntity } from "@vinstacore/domains/users/domain/UserEntity"
+import { UserEmail, UserPassword, UserPhone } from "@vinstacore/domains/users/domain/ValueObjects"
 import { FindProps } from "../IRepositories"
 
 export interface LoginProps{

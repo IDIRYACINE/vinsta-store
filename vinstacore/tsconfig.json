@@ -18,7 +18,7 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "@/*": ["*"]
+      "@vinstacore/*": ["*"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
