@@ -1,5 +1,5 @@
 import clsx from "clsx"
-import SidebarButton from "../../sidebarButton"
+import SidebarButton from "./SidebarButton"
 
 export default function Sidebar(){
     const className = clsx([

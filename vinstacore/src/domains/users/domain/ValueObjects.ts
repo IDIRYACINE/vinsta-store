@@ -22,3 +22,7 @@ export class UserRole{
 export class UserPhone{
     constructor(public readonly value: string){}
 }
+
+export class IsAdmin{
+    constructor(public readonly value: boolean){}
+}

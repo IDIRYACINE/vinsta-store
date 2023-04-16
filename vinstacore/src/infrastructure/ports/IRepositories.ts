@@ -1,9 +1,18 @@
+
+export interface User{
+    id: string
+    name: string
+    phone: string
+    isAdmin: boolean
+} 
+
 export interface FindProps {
 
 }
 
 export interface FindResponse {
-
+    data? : User
+    error? : Error
 }
 
 

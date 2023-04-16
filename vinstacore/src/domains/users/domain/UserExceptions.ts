@@ -1,4 +1,4 @@
-import { ExceptionBase, ExceptionCode, ExceptionName } from "@/commons/exceptions.base";
+import { ExceptionBase, ExceptionCode, ExceptionName } from "@/commons/exceptions.base"
 
 class UserExceptionCodes {
     static notRegistered = 0

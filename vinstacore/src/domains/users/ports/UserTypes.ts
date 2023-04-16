@@ -1,4 +1,4 @@
-import { UserId, UserName, UserPhone } from "../domain/ValueObjects";
+import { UserId, UserName, UserPassword, UserPhone } from "../domain/ValueObjects";
 
 export interface UserProps{
     id: UserId;

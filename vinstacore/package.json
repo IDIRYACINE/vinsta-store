@@ -1,0 +1,13 @@
+{
+  "name": "vinstacore",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc && resolve-tspaths"
+  },
+  "devDependencies": {
+    "resolve-tspaths": "^0.8.13",
+    "typescript": "^5.0.4"
+  }
+}

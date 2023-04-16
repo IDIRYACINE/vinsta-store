@@ -1,8 +1,10 @@
 import { UserEntity } from "@/domains/users/domain/UserEntity"
 import { UserEmail, UserPassword, UserPhone } from "@/domains/users/domain/ValueObjects"
+import { FindProps } from "../IRepositories"
 
 export interface LoginProps{
-    phone: UserPhone
+    phone: UserPhone,
+    password: UserPassword
 }
 
 
@@ -21,6 +23,14 @@ export interface SignupProps{
 
 export interface SignupResponse{
     
+}
+
+export class FindUserProps implements FindProps {
+    
+    constructor(
+        public readonly password?: string,
+        public readonly phone?: string,
+    ){}
 }
 
 export interface UserServicePort{

@@ -1,14 +1,11 @@
 import clsx from 'clsx';
 import Head from 'next/head';
 import { ReactNode } from 'react';
-import Navbar from './navigation/appbar/navbar';
-import Sidebar from './navigation/sidebar/sidebar';
+import Navbar from './navigation/appbar/Navbar';
+import Sidebar from './navigation/sidebar/Sidebar';
 
-type LayoutProps = {
-    children: ReactNode;
-};
 
-const Layout = ({ children }: LayoutProps) => {
+const Layout = () => {
     const className = clsx([
         'flex flex-row flex-start  w-full h-full fixed top-0 left-0',
     ])
@@ -26,7 +23,6 @@ const Layout = ({ children }: LayoutProps) => {
 
                 <div className={contentClassName}>
                     <Navbar />
-                    {children}
                 </div>
             </div>
 
