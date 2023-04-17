@@ -15,7 +15,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "core-build": "cd vinstacore && yarn build",
+    "admin-build": "cd admin-panel && yarn build"
+
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",

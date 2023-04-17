@@ -1,6 +1,9 @@
-import { OrdersPage } from "@admin"
+import { OrdersPage } from "admin-panel/src"
 
 function Page(){
+
+
+
     return (
         <OrdersPage/>
     )

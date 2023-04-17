@@ -1,4 +1,4 @@
-import { MapperBase } from "@/commons/mappers.base";
+import { MapperBase } from "@vinstacore/commons/mappers.base";
 import { User } from "@vinstacore/infrastructure/ports/IRepositories";
 import { UserEntity } from "./UserEntity";
 import { IsAdmin, UserId, UserName, UserPhone } from "./ValueObjects";

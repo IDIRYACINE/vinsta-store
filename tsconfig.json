@@ -18,14 +18,15 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "composite": true,
     "baseUrl": ".",
     "paths": {
       "@vinstastore/*": [
         "./src/*"
       ],
-      "@admin": [
-        "./admin-panel/src/"
-      ],
+      // "@admin": [
+      //   "./admin-panel/dist/"
+      // ],
       "@store": [
         "./storefront/src/"
       ],
@@ -35,15 +36,8 @@
     }
   },
   "references": [
-    {
-      "path": "./vinstacore"
-    },
-    {
-      "path": "./admin-panel"
-    },
-    {
-      "path": "./storefront"
-    }
+    {"path" : "./admin-panel"},
+  
   ],
   "include": [
     "next-env.d.ts",

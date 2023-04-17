@@ -1,4 +1,4 @@
-import { EntityBase } from "@/commons/entity.base";
+import { EntityBase } from "@vinstacore/commons/entity.base";
 import { Address } from "@vinstacore/domains/address";
 import { OrderId, OrderStatus } from "./ValueObjects";
 

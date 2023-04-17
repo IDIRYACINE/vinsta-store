@@ -1,4 +1,4 @@
-import { EntityBase } from "@/commons/entity.base";
+import { EntityBase } from "@vinstacore/commons/entity.base";
 import { ProductEntity } from "@vinstacore/domains/product/domain/ProductEntity";
 import { CategoryId, CategoryName, CategoryProductCount } from "./ValueObjects";
 

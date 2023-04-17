@@ -1,6 +1,6 @@
-import { LimitProp, PageProp, UpdatedField } from "@/commons/api.base"
-import { OperationStatus } from "@/commons/operation-status.base"
-import { ImageUrl } from "@/commons/value-objects.base"
+import { LimitProp, PageProp, UpdatedField } from "@vinstacore/commons/api.base"
+import { OperationStatus } from "@vinstacore/commons/operation-status.base"
+import { ImageUrl } from "@vinstacore/commons/value-objects.base"
 import { CategoryEntity } from "@vinstacore/domains/category/domain/CategoryEntity"
 import { CategoryId, CategoryName } from "@vinstacore/domains/category/domain/ValueObjects"
 

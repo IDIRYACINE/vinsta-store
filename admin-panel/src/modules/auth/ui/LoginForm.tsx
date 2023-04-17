@@ -6,7 +6,7 @@ function LoginForm() {
   const boxClassName = clsx("flex flex-row justify-start h-full");
   const imageUrl = "https://cdn4.buysellads.net/uu/1/126868/1669847230-GitLab_Blue.png"
   const contentClassName = clsx("flex flex-col justify-between items-end h-full ");
-  const contentStyling = {"min-width" : "20rem"}
+  const contentStyling = {"minWidth" : "20rem"}
 
 
   return (

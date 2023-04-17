@@ -6,7 +6,7 @@
     "skipLibCheck": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
+    "noEmit": false,
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "node",
@@ -14,12 +14,17 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "outDir": "./dist",
+    "composite": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "@vinstacore" : ["../vinstacore/src/"]
-    }
+      "@admin/*": ["./src/*"],
+      "@vinstacore": ["../vinstacore/src/"],
+    },
   },
+  "references": [
+    { "path": "../vinstacore" }
+  ],
   "include": [ "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }

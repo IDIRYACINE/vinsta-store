@@ -1,4 +1,4 @@
-import { EntityBase } from "@/commons/entity.base";
+import { EntityBase } from "@vinstacore/commons/entity.base";
 import { IsAdmin, UserId, UserName, UserPhone } from "./ValueObjects";
 
 export class UserEntity implements EntityBase<UserEntity>{
