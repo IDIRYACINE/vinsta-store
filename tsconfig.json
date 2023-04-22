@@ -30,8 +30,8 @@
       "@store": [
         "./storefront/src/"
       ],
-      "@vinstacore/*": [
-        "./vinstacore/src/*"
+      "@vinstacore": [
+        "./vinstacore/src/"
       ]
     }
   },

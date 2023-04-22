@@ -1,18 +1,49 @@
+export module Repository{
+    
 
-export interface User{
+export interface User {
     id: string
     name: string
     phone: string
     isAdmin: boolean
-} 
+}
+
+export interface OrderHeader {
+    id: string,
+    status: string,
+    createdAt: string,
+    total: number
+}
+
+export interface Address {
+    city: string,
+    subCity: string,
+}
+
+export interface OrderItem {
+    productId: string,
+    quantity: number,
+    price: number
+    images?: string[]
+}
+
+export interface Order {
+    header: OrderHeader,
+    shipping: Address,
+    items: OrderItem[]
+}
+
+
+}
+
 
 export interface FindProps {
 
 }
 
 export interface FindResponse {
-    data? : User
-    error? : Error
+    data?: Repository.User
+    error?: Error
 }
 
 
@@ -56,6 +87,6 @@ export interface IRepository {
     load(load: LoadProps): Promise<LoadResponse>
     create(create: CreateProps): Promise<CreateResponse>
     update(update: UpdateProps): Promise<UpdateResponse>
-    delete(delte:DeleteProps) : Promise<DeleteResponse>
+    delete(delte: DeleteProps): Promise<DeleteResponse>
 
 }

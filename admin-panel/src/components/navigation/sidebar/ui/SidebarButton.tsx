@@ -35,7 +35,6 @@ export default function SidebarButton(props: SidebarButtonProps) {
 
         function handleClick() {
             viewProps.state.setCurrentIndex(props.panel.id.value)
-            console.log(props.panel.path.value)
             router.push(props.panel.path.value)
         }
 
