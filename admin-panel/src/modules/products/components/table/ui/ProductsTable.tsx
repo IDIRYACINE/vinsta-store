@@ -4,34 +4,31 @@ import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import Paper from "@mui/material/Paper";
-import { OrderRowEntity } from "../domain/TableEntity";
 import { TableController } from "../logic/TableController";
-import { OrderHeader, OrderRow } from "./OrderRow";
+import { ProductHeader, ProductRow } from "./ProductRow";
 import { Box } from "@mui/material";
-import { OrderStatusTab } from "./OrderStatus";
-import { OrderStatus } from "@admin/modules/orders/domain/OrderStatus";
+import { ProductEntity } from "@vinstacore";
 
 interface TableProps {
   headersData: string[];
-  rowsData: OrderRowEntity[];
+  rowsData: ProductEntity[];
 }
 
-export default function OrdersTable(props: TableProps) {
+export default function ProductsTable(props: TableProps) {
   const controller = new TableController();
 
   return (
     <Box>
-      <OrderStatusTab statusList={OrderStatus.orderStatusList} />
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
           <TableHead>
-            <OrderHeader headers={props.headersData} />
+            <ProductHeader headers={props.headersData} />
           </TableHead>
           <TableBody>
             {props.rowsData.map((row) => (
-              <OrderRow
+              <ProductRow
                 handleClick={controller.handleRowClick}
-                key={row.orderHeader.id.value}
+                key={row.id.value}
                 item={row}
               />
             ))}

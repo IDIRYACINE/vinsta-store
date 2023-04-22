@@ -5,7 +5,7 @@ interface RowData{
     value: string;
 }
 
-export class OrderRow {
+export class OrderRowEntity {
 
     constructor(public readonly orderHeader: OrderHeader){
     }
@@ -20,12 +20,12 @@ export class OrderRow {
     }
 }
 
-export function mockOrderRows() : OrderRow[] {
+export function mockOrderRows() : OrderRowEntity[] {
     const mapper = new OrderMapper()
 
     const orders = mockOrders.map(raw => {
         const entity = mapper.toDomain(raw)
-        return new OrderRow(entity.header)
+        return new OrderRowEntity(entity.header)
     })
 
     return orders
