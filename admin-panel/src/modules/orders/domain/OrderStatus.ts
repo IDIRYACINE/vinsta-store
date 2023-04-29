@@ -17,8 +17,6 @@ class OrderStatus {
         if (status === undefined) {
             throw new Error('Invalid order status')
         }
-        console.log(status)
-        console.log(status.name)
 
         return status
     }

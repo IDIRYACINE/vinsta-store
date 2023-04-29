@@ -8,6 +8,15 @@ export interface User {
     isAdmin: boolean
 }
 
+export interface Category{
+    productCount: number
+    id :string,
+    name :string,
+    description? : string,
+    imageUrl : string,
+
+}
+
 export interface Product{
     id :string,
     name :string,

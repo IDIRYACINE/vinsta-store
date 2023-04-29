@@ -3,8 +3,8 @@ import { ReactNode, } from 'react';
 import Navbar from '@admin/components/navigation/appbar/Navbar';
 import Sidebar from '@admin/components/navigation/sidebar/ui/Sidebar';
 import {AdminContextProvider} from './AppContext';
-import { Box } from '@mui/material';
-
+import { Box, ThemeProvider } from '@mui/material';
+import {theme} from './AdminTheme';
 
 interface LayoutProps {
     children: ReactNode;
@@ -23,6 +23,7 @@ const AdminLayout = ({ children }: LayoutProps) => {
 
     return (
         <AdminContextProvider>
+            <ThemeProvider theme={theme}>
             <Box className={className}>
                 <Sidebar />
                 <Box className={contentClassName}>
@@ -31,7 +32,7 @@ const AdminLayout = ({ children }: LayoutProps) => {
                     {children}
                     </Box>
                 </Box>
-            </Box>
+            </Box></ThemeProvider>
         </AdminContextProvider>
     );
 };

@@ -10,6 +10,9 @@ const nextConfig = {
     return config;
   },
   reactStrictMode: true,
+  images: {
+    domains: ['images.freeimages.com'],
+}
 }
 
 module.exports = nextConfig

@@ -1,0 +1,18 @@
+{
+    "results" : [
+        {
+            "productCount": 2,
+            "id" :"1",
+            "name" :"cat2",
+            "description" : "description",
+            "imageUrl" : "https://images.freeimages.com/images/large-previews/bb0/cat-in-window-1218032.jpg"
+        },
+        {
+            "productCount": 2,
+            "id" :"2",
+            "name" :"cat1",
+            "description" : "description",
+            "imageUrl" : "https://images.freeimages.com/images/large-previews/bb0/cat-in-window-1218032.jpg"
+        }
+    ]
+}

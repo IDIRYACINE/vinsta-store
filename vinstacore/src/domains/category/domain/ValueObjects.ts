@@ -1,13 +1,21 @@
 
 
 export class CategoryId {
-    constructor(readonly id: string) {}
+    constructor(readonly value: string) {}
 }
 
 export class CategoryName {
-    constructor(readonly name: string) {}
+    constructor(readonly value: string) {}
 }
 
 export class CategoryProductCount {
-    constructor(readonly count: number) {}
+    constructor(readonly value: number) {}
+}
+
+export class CategoryImage {
+    constructor(readonly value: string) {}
+}
+
+export class CategoryDescription {
+    constructor(readonly value: string) {}
 }
