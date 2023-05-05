@@ -11,6 +11,8 @@ import { CategoryEntity } from "@vinstacore";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Image from "next/image";
+import { AdminAppContext } from "@admin/components/context/AppContext";
+import { useContext } from "react";
 
 interface CategoryActionsCellProps {
     onDelete: () => void;
@@ -58,25 +60,26 @@ function CategoryTableImageCell(props: CategoryImageCellProps) {
 interface CategoryRowProps {
     item: CategoryEntity;
     key: any;
-    handleDelete: (item: CategoryEntity) => void;
-    handleEdit: (item: CategoryEntity) => void;
 }
 
 function CategoryRow(props: CategoryRowProps) {
+    const {categoriesState} = useContext(AdminAppContext)
+    const {item} = props
 
-    function handleDelete() {
-        props.handleDelete(props.item)
+    function handleDelete(){
+        console.log("click")
+        categoriesState.displayDeleteModal(item)
     }
 
     function handleEdit() {
-        props.handleEdit(props.item)
+
     }
 
     return (
         <TableRow >
-            <CategoryTableImageCell imageUrl={props.item.imageUrl.value} name={props.item.name.value} />
-            <CategoryTableCell value={props.item.id.value.toString()} />
-            <CategoryTableCell value={props.item.description.value.toString()} />
+            <CategoryTableImageCell imageUrl={item.imageUrl.value} name={item.name.value} />
+            <CategoryTableCell value={item.id.value.toString()} />
+            <CategoryTableCell value={item.description.value.toString()} />
             <CategoryActionsCell onDelete={handleDelete} onEdit={handleEdit} />
         </TableRow>
     );

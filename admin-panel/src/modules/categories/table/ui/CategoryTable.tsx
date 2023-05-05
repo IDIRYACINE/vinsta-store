@@ -7,7 +7,7 @@ import Paper from "@mui/material/Paper";
 import { CategoryHeader, CategoryRow } from "./CategoryRow";
 import { Box } from "@mui/material";
 import { CategoryEntity } from "@vinstacore";
-import { CategoryTableController } from "../logic/TableController";
+import { CategoriesState } from "../../manager/state/CategoriesState";
 
 interface TableProps {
   headersData: string[];
@@ -15,20 +15,19 @@ interface TableProps {
 }
 
  function CategoryTable(props: TableProps) {
-  const controller = new CategoryTableController();
+
+  const {headersData,rowsData} = props 
 
   return (
     <Box>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
           <TableHead>
-            <CategoryHeader headers={props.headersData} />
+            <CategoryHeader headers={headersData} />
           </TableHead>
           <TableBody>
-            {props.rowsData.map((row) => (
+            {rowsData.map((row) => (
               <CategoryRow
-              handleDelete={controller.deleteCategory}
-              handleEdit ={controller.editCategory}
                 key={row.id.value}
                 item={row}
               />

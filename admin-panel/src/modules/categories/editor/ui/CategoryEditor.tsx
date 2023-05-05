@@ -2,6 +2,7 @@ import { AppTextField,AppTextArea } from "@admin/components/commons/Fields"
 import { Card,Box } from "@mui/material"
 import {EditorActions} from "./Actions"
 import { useState } from "react"
+import { SingleImageField } from "@admin/components/commons/Images"
 
 function CategoryEditor (){
 
@@ -41,6 +42,13 @@ function CategoryEditor (){
 
     }
 
+    const imageProps = {
+        label: "Image Url",
+        value: imageUrl,
+        onChange: (value: string) => setImageUrl(value),
+        className: "my-2"
+    }
+
     return (
         <Box className="w-full h-full flex flex-col justify-center items-center p-8">
         <Card className="flex flex-col p-4 w-full">
@@ -48,8 +56,9 @@ function CategoryEditor (){
                 <AppTextField {...nameProps} />
                 <AppTextField {...codeProps} />
             </Box>
-            
             <AppTextArea {...descriptionProps} />
+            <SingleImageField {...imageProps} />
+
             <EditorActions {...actionsProps} />
 
         </Card>

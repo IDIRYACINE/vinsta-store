@@ -17,7 +17,7 @@ const AdminLayout = ({ children }: LayoutProps) => {
     ])
 
     const contentClassName = clsx([
-        'flex flex-col w-full bg-gray-100'
+        'flex flex-col h-screen overflow-y-scroll w-full bg-gray-100'
     ])
 
 

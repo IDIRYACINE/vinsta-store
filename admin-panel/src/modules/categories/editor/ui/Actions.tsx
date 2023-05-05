@@ -1,4 +1,5 @@
-import { Box, Button } from "@mui/material";
+import { BaseContainedButton } from "@admin/components/commons/Buttons";
+import { Box } from "@mui/material";
 import clsx from "clsx";
 
 interface CreatorActionsProps {
@@ -15,8 +16,8 @@ function CreatorActions(props: CreatorActionsProps) {
     ])
     return (
         <Box className={className}>
-            <Button className="mr-2" onClick={props.onCancel} variant="contained">Cancel</Button>
-            <Button onClick={props.onSave} variant="contained">Save</Button>
+            <BaseContainedButton className="mr-2" onClick={props.onCancel} >Cancel</BaseContainedButton>
+            <BaseContainedButton onClick={props.onSave} >Save</BaseContainedButton>
         </Box>
     )
 }
@@ -34,9 +35,8 @@ function EditorActions(props: EditorActionsProps) {
     ])
     return (
         <Box className={className}>
-
-            <Button className="mr-2" onClick={props.onCancel} variant="contained">Cancel</Button>
-            <Button onClick={props.onSave} variant="contained">Save</Button>
+            <BaseContainedButton className="mr-2 bg-purple-500" onClick={props.onCancel} >Cancel</BaseContainedButton>
+            <BaseContainedButton onClick={props.onSave} >Save</BaseContainedButton>
         </Box>
     )
 }
