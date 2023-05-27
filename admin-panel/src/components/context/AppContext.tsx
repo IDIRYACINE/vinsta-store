@@ -1,5 +1,5 @@
 import { ReactNode,createContext } from 'react';
-import NavigationState from '@admin/components/navigation/sidebar/logic/State';
+import NavigationState from '@admin/components/navigation/sidebar/state/State';
 import { CategoriesState } from '@admin/modules/categories/manager/state/CategoriesState';
 
 

@@ -1,5 +1,5 @@
 import { BaseContainedButton } from "@admin/components/commons/Buttons";
-import { Box, Typography,Button } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { navigateToCategoryCreator } from "../logic/helpers";
 
 

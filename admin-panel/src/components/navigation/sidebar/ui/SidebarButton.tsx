@@ -3,7 +3,7 @@ import { Button } from "@mui/material"
 import clsx from "clsx";
 import { useContext } from "react";
 import { observer } from "mobx-react"
-import NavigationState from "@admin/components/navigation/sidebar/logic/State";
+import NavigationState from "@admin/components/navigation/sidebar/state/State";
 import router from "next/dist/client/router";
 import {PanelEntity} from "../domain/PanelEntity";
 
@@ -21,11 +21,11 @@ export default function SidebarButton(props: SidebarButtonProps) {
 
 
     const activeClassName = clsx([
-        'w-full bg-blue-500 text-white'
+        'w-full bg-purple-500 text-white'
     ])
 
     const passiveClassName = clsx([
-        'w-full text-blue-500 hover:text-white'
+        'w-full text-purple-500 hover:text-white'
     ])
 
 

@@ -1,17 +1,25 @@
-import { AppTextField,AppTextArea } from "@admin/components/commons/Fields"
-import { Card,Box } from "@mui/material"
-import {EditorActions} from "./Actions"
-import { useState } from "react"
+import { AppTextField, AppTextArea } from "@admin/components/commons/Fields"
+import { Card, Box } from "@mui/material"
+import { EditorActions } from "./Actions"
+import { useContext, useState } from "react"
 import { SingleImageField } from "@admin/components/commons/Images"
+import { goBack } from "@admin/components/navigation/sidebar/logic/helpers"
+import { CategoryEditorController } from "../logic/Controller"
+import { AdminAppContext } from "@admin/components/context/AppContext"
+import { CategoryEntity } from "@vinstacore"
 
-function CategoryEditor (){
+function CategoryEditor() {
+    const { categoriesState } = useContext(AdminAppContext)
 
-    const [name, setName] = useState<string>("")
-    const [imageUrl, setImageUrl] = useState<string>("")
-    const [categoryId, setCategoryId] = useState<string>("")
-    const [description, setDescription] = useState<string>("")   
+    let category = categoriesState.category as CategoryEntity
 
-   
+    const [name, setName] = useState<string>(category.name.value)
+    const [imageUrl, setImageUrl] = useState<string>(category.imageUrl.value)
+    const [categoryId, setCategoryId] = useState<string>(category.id.value)
+    const [description, setDescription] = useState<string>(category.description.value)
+
+
+
     const nameProps = {
         label: "Name",
         value: name,
@@ -34,10 +42,25 @@ function CategoryEditor (){
         rowCount: 4
     }
 
+    let controller = new CategoryEditorController()
+
+
+    function onSave() {
+
+        let category = controller.updateCategory({
+            name, imageUrl, description,
+            code: categoryId,
+        })
+
+        categoriesState.updateCategory(category)
+
+        goBack()
+    }
+
 
     const actionsProps = {
-        onSave: () => {},
-        onCancel: () => {},
+        onSave: onSave,
+        onCancel: goBack,
         className: "my-2"
 
     }
@@ -51,19 +74,19 @@ function CategoryEditor (){
 
     return (
         <Box className="w-full h-full flex flex-col justify-center items-center p-8">
-        <Card className="flex flex-col p-4 w-full">
-            <Box className="flex flex-row my-2 w-full">
-                <AppTextField {...nameProps} />
-                <AppTextField {...codeProps} />
-            </Box>
-            <AppTextArea {...descriptionProps} />
-            <SingleImageField {...imageProps} />
+            <Card className="flex flex-col p-4 w-full">
+                <Box className="flex flex-row my-2 w-full">
+                    <AppTextField {...nameProps} />
+                    <AppTextField {...codeProps} />
+                </Box>
+                <AppTextArea {...descriptionProps} />
+                <SingleImageField {...imageProps} />
 
-            <EditorActions {...actionsProps} />
+                <EditorActions {...actionsProps} />
 
-        </Card>
+            </Card>
         </Box>
     )
 }
 
-export {CategoryEditor}
+export { CategoryEditor }

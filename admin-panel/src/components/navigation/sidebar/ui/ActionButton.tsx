@@ -7,7 +7,7 @@ function ActionButton(){
     return (
         <Box className={classNormal}>
             <Button>Back</Button>
-            <Divider className="bg-blue-500" />
+            <Divider  />
         </Box>
     )
 }

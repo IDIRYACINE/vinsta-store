@@ -26,6 +26,7 @@ function CategoryPage() {
     
 
     useEffect(() => {
+        console.log("chanfged")
         categoriesState.loadMockCategories()
     },[categoriesState])
 
@@ -33,12 +34,16 @@ function CategoryPage() {
     
 
     const View = observer((props: StateProps) => {
+
+        const categoryDialogProps = {
+            isOpen : props.store.isModalOpen
+        }
         
         return (
             <Box className={className}>
                 <CategoryManagerHeader />
                 <CategoryTable headersData={headersData} rowsData={props.store.categories}  />
-                <DeleteCategoryDialog   />
+                <DeleteCategoryDialog {...categoryDialogProps}  />
             </Box>
 
 

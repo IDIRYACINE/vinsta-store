@@ -11,6 +11,14 @@ interface CreateCategoryEntityProps {
 
 }
 
+interface CreateCategoryRawOptions{
+    id:String,
+    name:String,
+    productCount:number,
+    imageUrl:String,
+    description? : String
+}
+
 export class CategoryEntity implements EntityBase<CategoryEntity>{
     public readonly id: CategoryId
     public readonly name: CategoryName
@@ -34,4 +42,5 @@ export class CategoryEntity implements EntityBase<CategoryEntity>{
     equals(other: CategoryEntity): boolean {
         return this.id.value === other.id.value;
     }
+
 }

@@ -1,14 +1,17 @@
 import { makeAutoObservable } from "mobx";
-import { CategoryEntity } from "@vinstacore";
+import { CategoryEntity, CategoryId } from "@vinstacore";
 import router from "next/dist/client/router";
 import { mockCategoryRows } from "../../table";
 
 
 
 class CategoriesState {
+    
 
     isModalOpen = false;
+    isLoaded = false;
     categories: CategoryEntity[] = []
+    category: CategoryEntity | undefined
 
     constructor() {
         makeAutoObservable(this)
@@ -18,7 +21,7 @@ class CategoriesState {
         this.isModalOpen = true
     }
 
-    closeModal(){
+    closeModal() {
         this.isModalOpen = false
     }
 
@@ -28,18 +31,48 @@ class CategoriesState {
 
     displayDeleteModal(item: CategoryEntity) {
         this.isModalOpen = true;
-        console.log(this.isModalOpen);
+        this.category = item
+    }
+
+    deleteCategory() {
+        if (this.category === undefined) return;
+
+
+        const index = this.categories.findIndex(category => category.equals(this.category as CategoryEntity));
+
+        if (index !== -1) {
+            this.categories.splice(index, 1);
+        }
+
+
+    }
+
+    addCategory(category: CategoryEntity) {
+        this.categories.push(category)
+    }
+
+    updateCategory(category: CategoryEntity) {
+        if(this.category === undefined) return
+
+        const index = this.categories.findIndex(category => category.equals(this.category as CategoryEntity));
+
+        if (index !== -1) {
+            this.categories[index] = category;
+        }
     }
 
     editCategory(item: CategoryEntity) {
+        this.category = item
         router.push(`/admin/categories/edit/${item.id.value}`)
 
     }
 
-    loadMockCategories(){
-        mockCategoryRows().then((res) => {
-            this.setCategories(res)
-        })
+    loadMockCategories() {
+        if (!this.isLoaded)
+            mockCategoryRows().then((res) => {
+                this.isLoaded = true
+                this.setCategories(res)
+            })
     }
 
 

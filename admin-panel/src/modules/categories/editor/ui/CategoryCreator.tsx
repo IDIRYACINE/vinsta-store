@@ -1,19 +1,23 @@
-import { AppTextField,AppTextArea } from "@admin/components/commons/Fields"
+import { AppTextField, AppTextArea } from "@admin/components/commons/Fields"
 import { SingleImageField } from "@admin/components/commons/Images"
-import { Card,Box } from "@mui/material"
+import { AdminAppContext } from "@admin/components/context/AppContext"
+import { goBack } from "@admin/components/navigation/sidebar/logic/helpers"
+import { Card, Box } from "@mui/material"
 
-import { useState } from "react"
-import {CreatorActions} from "./Actions"
+import { useContext, useState } from "react"
+import { CategoryEditorController } from "../logic/Controller"
+import { CreatorActions } from "./Actions"
 
-function CategoryCreator (){
+function CategoryCreator() {
 
     const [name, setName] = useState<string>("")
     const [imageUrl, setImageUrl] = useState<string>("")
     const [categoryId, setCategoryId] = useState<string>("")
     const [description, setDescription] = useState<string>("")
 
+    const controller = new CategoryEditorController()
+    const { categoriesState } = useContext(AdminAppContext)
 
-   
 
     const nameProps = {
         label: "Name",
@@ -39,9 +43,21 @@ function CategoryCreator (){
         className: "my-2"
     }
 
+    function onSave() {
+
+        let category = controller.createCategory({
+            name, imageUrl, description,
+            code: categoryId,
+        })
+
+        categoriesState.addCategory(category)
+
+        goBack()
+    }
+
     const actionsProps = {
-        onSave: () => {},
-        onCancel: () => {},
+        onSave: onSave,
+        onCancel: goBack,
         className: "my-2"
     }
 
@@ -54,18 +70,18 @@ function CategoryCreator (){
 
     return (
         <Box className="w-full h-full flex flex-col justify-center items-center p-8 ">
-        <Card className="flex flex-col p-4 w-full">
-            <Box className="flex flex-row my-2 w-full">
-                <AppTextField {...nameProps} />
-                <AppTextField {...codeProps} />
-            </Box>
-            <AppTextArea {...descriptionProps} />
-            <SingleImageField {...imageProps} />
-            <CreatorActions {...actionsProps} />
+            <Card className="flex flex-col p-4 w-full">
+                <Box className="flex flex-row my-2 w-full">
+                    <AppTextField {...nameProps} />
+                    <AppTextField {...codeProps} />
+                </Box>
+                <AppTextArea {...descriptionProps} />
+                <SingleImageField {...imageProps} />
+                <CreatorActions {...actionsProps} />
 
-        </Card>
+            </Card>
         </Box>
     )
 }
 
-export {CategoryCreator}
+export { CategoryCreator }

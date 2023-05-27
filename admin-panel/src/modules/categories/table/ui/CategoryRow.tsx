@@ -67,12 +67,11 @@ function CategoryRow(props: CategoryRowProps) {
     const {item} = props
 
     function handleDelete(){
-        console.log("click")
         categoriesState.displayDeleteModal(item)
     }
 
     function handleEdit() {
-
+        categoriesState.editCategory(item)
     }
 
     return (
