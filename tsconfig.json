@@ -9,6 +9,7 @@
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
+    "noImplicitAny": false,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
@@ -21,12 +22,12 @@
     "composite": true,
     "baseUrl": ".",
     "paths": {
-      "@vinstastore/*": [
-        "./src/*"
+      "@adminapp":[
+        "./adminapp/src/"
       ],
-      // "@admin": [
-      //   "./admin-panel/dist/"
-      // ],
+      "@storeapp": [
+        "./storeapp/"
+      ],
       "@store": [
         "./storefront/src/"
       ],
@@ -35,14 +36,11 @@
       ]
     }
   },
-  "references": [
-    {"path" : "./admin-panel"},
   
-  ],
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
   ],
   "exclude": [
     "node_modules"

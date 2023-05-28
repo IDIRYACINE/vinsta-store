@@ -4,3 +4,5 @@ node_modules
 .next
 build
 dist
+*.log
+package-lock.json

@@ -1,12 +1,13 @@
 
 
 import { UserMapper } from "@vinstacore/domains/users";
+import { UserServicePort } from "@vinstacore/index";
 import { FirebaseUserRepository } from "../user-service/UserRepository";
 import { FirebaseUserService } from "../user-service/UserService";
 
 let userService: FirebaseUserService;
 
-export function BuildUserService() {
+export function buildUserService() : UserServicePort {
     if (userService !== undefined) {
         return userService;
     }
@@ -21,3 +22,6 @@ export function BuildUserService() {
 
     return userService;
 }
+
+
+ 

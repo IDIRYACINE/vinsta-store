@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": false,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "outDir": "./dist/declarations",
+    "composite": true,
+    "baseUrl": ".",
+    "rootDir": "../",
+    "paths": {
+      "@adminapp/*": ["./src/*"],
+      "@vinstacore": ["../vinstacore/src/"],
+      "@pages/*" :["../pages/*"]
+    },
+  },
+  "references": [
+    { "path": "../vinstacore" },
+  ],
+  "include": [ "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
+}

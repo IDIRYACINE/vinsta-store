@@ -3,7 +3,8 @@ import { UserEmail, UserPassword, UserPhone } from "@vinstacore/domains/users/do
 import { FindProps } from "../IRepositories"
 
 export interface LoginProps{
-    phone: UserPhone,
+    email? : UserEmail,
+    phone?: UserPhone,
     password: UserPassword
 }
 

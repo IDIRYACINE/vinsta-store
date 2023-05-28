@@ -1,7 +1,7 @@
-import { BuildUserService } from "./builders/UserServiceBuilder";
+import { buildUserService } from "./builders/UserServiceBuilder";
 
 
 export module FirebaseAdapter {
-    export const userService = () => BuildUserService()
+    export const userService = () => buildUserService()
 
 }
