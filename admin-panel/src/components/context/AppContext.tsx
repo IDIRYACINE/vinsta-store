@@ -1,16 +1,19 @@
 import { ReactNode,createContext } from 'react';
 import NavigationState from '@admin/components/navigation/sidebar/state/State';
 import { CategoriesState } from '@admin/modules/categories/manager/state/CategoriesState';
+import { ProductsState } from '@admin/modules/products/manager/state/ProductsState';
 
 
 interface AdminContextValues {
     navState: NavigationState
-    categoriesState : CategoriesState
+    categoriesState : CategoriesState,
+    productsState : ProductsState
 }
 
 const intialValue : AdminContextValues = {
     navState: new NavigationState(),
-    categoriesState : new CategoriesState()
+    categoriesState : new CategoriesState(),
+    productsState : new ProductsState()
 }
 
 const AdminAppContext = createContext(intialValue);

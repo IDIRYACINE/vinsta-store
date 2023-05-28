@@ -17,13 +17,18 @@ export interface Category{
 
 }
 
+export interface Image {
+    id: number,
+    url : string
+}
+
 export interface Product{
     id :string,
     name :string,
     price : number,
     quantity :number,
     description? : string,
-    imageUrls : string[]
+    imageUrls : Image[]
 }
 
 export interface OrderHeader {

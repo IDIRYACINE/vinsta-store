@@ -1,0 +1,30 @@
+{
+    "results": [
+        {
+            "id": "1",
+            "name": "name",
+            "price": "122",
+            "description": "description",
+            "quantity": "3",
+            "imageUrls": [
+                {
+                    "id": "1",
+                    "url": "https://images.freeimages.com/images/large-previews/bb0/cat-in-window-1218032.jpg"
+                }
+            ]
+        },
+        {
+            "id": "3",
+            "name": "name2",
+            "price": "122",
+            "description": "description",
+            "quantity": "3",
+            "imageUrls": [
+                {
+                    "id": "2",
+                    "url": "https://images.freeimages.com/images/large-previews/bb0/cat-in-window-1218032.jpg"
+                }
+            ]
+        }
+    ]
+}

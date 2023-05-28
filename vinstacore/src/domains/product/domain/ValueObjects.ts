@@ -1,33 +1,33 @@
 
 export class ProductId {
-    
+
     constructor(public readonly value: string) {
 
     }
 }
 
 export class ProductName {
-   
+
     constructor(public readonly value: string) {
 
-    } 
-    
-    
+    }
+
+
 }
 
 export class ProductPrice {
-   
+
     constructor(public readonly value: number) {
 
     }
-    
+
 }
 
 export class ProductDescription {
-   
+
     constructor(public readonly value: string) {
 
-    } 
+    }
 }
 
 export class ProductQuantity {
@@ -38,7 +38,7 @@ export class ProductQuantity {
 }
 
 export class ProductImage {
-    constructor (public readonly value : string){
+    constructor(public readonly value: string, public readonly id: number) {
 
     }
 }
