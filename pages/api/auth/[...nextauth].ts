@@ -22,7 +22,8 @@ export const authOptions = {
 
                 if (response.user) {
                     const user = {
-                        id: response.user.id.value
+                        id: response.user.id.value,
+                        role : "customer"
                     }
 
                     return Promise.resolve(user)

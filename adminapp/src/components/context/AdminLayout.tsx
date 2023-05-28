@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import clsx from 'clsx';
 import { ReactNode, } from 'react';
 import Navbar from '@adminapp/components/navigation/appbar/Navbar';
@@ -9,6 +11,7 @@ import { getServerSession } from "next-auth/next"
 import { useSession } from "next-auth/react"
 
 import { authOptions } from "@pages/api/auth/[...nextauth]"
+import {AdminLoginPage} from "@adminapp/modules/auth"
 
 interface LayoutProps {
     children: ReactNode;
@@ -26,8 +29,17 @@ const AdminLayout = ({ children }: LayoutProps) => {
 
     const { data: session } = useSession()
 
-    if (session) {
-        session.user
+    const unauthorised = (!session) || (session && (session.user!.role === "admin"))
+
+    if (unauthorised) {
+        return (< AdminContextProvider >
+            <ThemeProvider theme={theme}>
+                <AdminLoginPage/>
+            </ThemeProvider>
+        </AdminContextProvider >
+        );
+
+
     }
 
 
