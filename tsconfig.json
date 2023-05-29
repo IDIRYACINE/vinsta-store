@@ -22,7 +22,7 @@
     "composite": true,
     "baseUrl": ".",
     "paths": {
-      "@adminapp":[
+      "@adminapp": [
         "./adminapp/src/"
       ],
       "@storeapp": [
@@ -34,15 +34,20 @@
       "@vinstacore": [
         "./vinstacore/src/"
       ]
-    }
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
-  
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
+    ".next/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"
-  ],
+  ]
 }

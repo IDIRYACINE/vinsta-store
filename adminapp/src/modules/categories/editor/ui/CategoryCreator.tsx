@@ -1,6 +1,9 @@
+'use client'
+
+
 import { AppTextField, AppTextArea } from "@adminapp/components/commons/Fields"
 import { SingleImageField } from "@adminapp/components/commons/Images"
-import { AdminAppContext } from "@adminapp/components/context/AppContext"
+import { adminContext } from "@adminapp/components/context/AppContext"
 import { goBack } from "@adminapp/components/navigation/sidebar/logic/helpers"
 import { Card, Box } from "@mui/material"
 
@@ -16,7 +19,7 @@ function CategoryCreator() {
     const [description, setDescription] = useState<string>("")
 
     const controller = new CategoryEditorController()
-    const { categoriesState } = useContext(AdminAppContext)
+    const { categoriesState } = adminContext
 
 
     const nameProps = {

@@ -1,5 +1,5 @@
 import { BaseContainedButton } from "@adminapp/components/commons/Buttons";
-import { AdminAppContext } from "@adminapp/components/context/AppContext";
+import { adminContext } from "@adminapp/components/context/AppContext";
 import { Box, Modal, Typography } from "@mui/material";
 import { useContext } from "react";
 
@@ -10,7 +10,7 @@ interface DeleteCategoryDialogProps {
 function DeleteCategoryDialog(props: DeleteCategoryDialogProps) {
     const { isOpen } = props
 
-    const { categoriesState } = useContext(AdminAppContext)
+    const { categoriesState } = adminContext
 
     function onClose() {
         categoriesState.closeModal()

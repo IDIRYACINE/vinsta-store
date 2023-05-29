@@ -1,3 +1,5 @@
+'use client'
+
 import { Box, Button, Divider } from "@mui/material"
 import clsx from "clsx"
 

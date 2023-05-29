@@ -1,3 +1,6 @@
+'use client'
+
+
 import { AppTextField, AppTextArea } from "@adminapp/components/commons/Fields"
 import { Card, Box } from "@mui/material"
 import { EditorActions } from "./Actions"
@@ -5,11 +8,11 @@ import { useContext, useState } from "react"
 import { ImageManager } from "@adminapp/components/commons/Images"
 import { goBack } from "@adminapp/components/navigation/sidebar/logic/helpers"
 import { ProductEditorController } from "../logic/Controller"
-import { AdminAppContext } from "@adminapp/components/context/AppContext"
+import { adminContext } from "@adminapp/components/context/AppContext"
 import { ProductEntity } from "@vinstacore"
 
 function ProductEditor() {
-    const { productsState } = useContext(AdminAppContext)
+    const { productsState } = adminContext
 
     let product = productsState.product as ProductEntity
 

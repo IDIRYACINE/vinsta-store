@@ -1,6 +1,8 @@
+'use client'
+
 import { AppTextField, AppTextArea } from "@adminapp/components/commons/Fields"
 import { ImageManager } from "@adminapp/components/commons/Images"
-import { AdminAppContext } from "@adminapp/components/context/AppContext"
+import { adminContext } from "@adminapp/components/context/AppContext"
 import { goBack } from "@adminapp/components/navigation/sidebar/logic/helpers"
 import { Card, Box } from "@mui/material"
 
@@ -19,7 +21,7 @@ function ProductCreator() {
     const [quantity, setQuantity] = useState<string>("0")
 
     const controller = new ProductEditorController()
-    const { productsState } = useContext(AdminAppContext)
+    const { productsState } = adminContext
 
 
     const nameProps = {

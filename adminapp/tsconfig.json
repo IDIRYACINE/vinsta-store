@@ -21,7 +21,7 @@
     "paths": {
       "@adminapp/*": ["./src/*"],
       "@vinstacore": ["../vinstacore/src/"],
-      "@pages/*" :["../pages/*"]
+      "@pages/*" :["../old_pages/*"]
     },
   },
   "references": [

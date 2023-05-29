@@ -1,3 +1,5 @@
+'use client'
+
 import { OrderStatus } from "@adminapp/modules/orders/domain/OrderStatus"
 import { Typography, Card, Tab, Tabs } from "@mui/material"
 import {useState,SyntheticEvent} from "react"

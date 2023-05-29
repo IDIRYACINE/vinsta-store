@@ -11,7 +11,7 @@ import { CategoryEntity } from "@vinstacore";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Image from "next/image";
-import { AdminAppContext } from "@adminapp/components/context/AppContext";
+import { adminContext } from "@adminapp/components/context/AppContext";
 import { useContext } from "react";
 
 interface CategoryActionsCellProps {
@@ -63,7 +63,7 @@ interface CategoryRowProps {
 }
 
 function CategoryRow(props: CategoryRowProps) {
-    const {categoriesState} = useContext(AdminAppContext)
+    const {categoriesState} = adminContext
     const {item} = props
 
     function handleDelete(){

@@ -1,4 +1,6 @@
-import { AdminAppContext } from "@adminapp/components/context/AppContext"
+'use client'
+
+import { adminContext } from "@adminapp/components/context/AppContext"
 import { Typography } from "@mui/material"
 import clsx from "clsx"
 import { observer } from "mobx-react"
@@ -17,7 +19,7 @@ export default function Navbar() {
         'w-full h-16 ',
     ])
 
-    const { navState } = useContext(AdminAppContext)
+    const { navState } = adminContext
 
     const NavTitle = observer((navProps: NavTitleProps) => {
         const panel = navProps.state.getCurrentPanel()

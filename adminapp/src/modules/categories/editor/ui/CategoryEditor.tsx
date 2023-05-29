@@ -1,3 +1,5 @@
+'use client'
+
 import { AppTextField, AppTextArea } from "@adminapp/components/commons/Fields"
 import { Card, Box } from "@mui/material"
 import { EditorActions } from "./Actions"
@@ -5,11 +7,11 @@ import { useContext, useState } from "react"
 import { SingleImageField } from "@adminapp/components/commons/Images"
 import { goBack } from "@adminapp/components/navigation/sidebar/logic/helpers"
 import { CategoryEditorController } from "../logic/Controller"
-import { AdminAppContext } from "@adminapp/components/context/AppContext"
+import { adminContext } from "@adminapp/components/context/AppContext"
 import { CategoryEntity } from "@vinstacore"
 
 function CategoryEditor() {
-    const { categoriesState } = useContext(AdminAppContext)
+    const { categoriesState } = adminContext
 
     let category = categoriesState.category as CategoryEntity
 

@@ -1,3 +1,5 @@
+'use client'
+
 import { Button, Card, Box, CardMedia, CardContent, TextField } from "@mui/material"
 import clsx from "clsx";
 import { useState } from "react";

@@ -10,7 +10,7 @@ import { ProductEntity } from "@vinstacore";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Image from "next/image";
-import { AdminAppContext } from "@adminapp/components/context/AppContext";
+import { adminContext } from "@adminapp/components/context/AppContext";
 import { useContext } from "react";
 
 interface ProductActionsCellProps {
@@ -62,7 +62,7 @@ interface ProductRowProps {
 }
 
 function ProductRow(props: ProductRowProps) {
-    const { productsState} = useContext(AdminAppContext)
+    const { productsState} = adminContext
     const {item} = props
 
     function handleDelete(){

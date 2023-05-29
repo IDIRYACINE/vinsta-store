@@ -1,5 +1,5 @@
 import { BaseContainedButton } from "@adminapp/components/commons/Buttons";
-import { AdminAppContext } from "@adminapp/components/context/AppContext";
+import { adminContext } from "@adminapp/components/context/AppContext";
 import { Box, Modal, Typography } from "@mui/material";
 import { useContext } from "react";
 
@@ -10,7 +10,7 @@ interface DeleteProductDialogProps {
 function DeleteProductDialog(props: DeleteProductDialogProps) {
     const { isOpen } = props
 
-    const { productsState } = useContext(AdminAppContext)
+    const { productsState } = adminContext
 
     function onClose() {
         productsState.closeModal()

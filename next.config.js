@@ -11,6 +11,9 @@ const nextConfig = {
     
     return config;
   },
+  experimental : {
+    appDir : true
+  },
   reactStrictMode: true,
   images: {
     domains: ['images.freeimages.com'],

@@ -1,3 +1,5 @@
+'use client'
+
 import { Box } from "@mui/material"
 import clsx from "clsx"
 import ProductManagerHeader from "./ProductManagerHeader"
@@ -6,8 +8,7 @@ import { ProductTable } from "../../table"
 import { observer } from "mobx-react"
 import { ProductsState } from "../state/ProductsState"
 import { DeleteProductDialog } from "./DeleteProductDialog"
-import { useContext, useEffect, useMemo } from "react"
-import { AdminAppContext } from "@adminapp/components/context/AppContext"
+import { adminContext } from "@adminapp/components/context/AppContext"
 
 
 interface StateProps {
@@ -19,17 +20,11 @@ function ProductPage() {
     const headersData = ["Product Name", "Product Id", "Description", "Action"]
 
 
-    const { productsState } = useContext(AdminAppContext)
+    const { productsState } = adminContext
     const className = clsx(["p-4 flex flex-col justify-center items-center"])
 
 
-
-
-    useEffect(() => {
-        productsState.loadMockProducts()
-    }, [productsState])
-
-
+    productsState.loadMockProducts()
 
 
     const View = observer((props: StateProps) => {
