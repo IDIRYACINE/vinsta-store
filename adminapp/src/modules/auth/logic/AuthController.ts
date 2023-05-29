@@ -13,6 +13,7 @@ export class AuthController {
         this.userService.login(props).then((response) => {
             if(response.user !== undefined){
                 this.state.setUser(response.user)
+                this.navigateToDashboard()
             }
         })
     }

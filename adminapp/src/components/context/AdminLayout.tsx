@@ -7,10 +7,8 @@ import Sidebar from '@adminapp/components/navigation/sidebar/ui/Sidebar';
 import { AdminContextProvider } from './AppContext';
 import { Box, ThemeProvider } from '@mui/material';
 import { theme } from './AdminTheme';
-import { getServerSession } from "next-auth/next"
-import { useSession } from "next-auth/react"
+import { getSession } from "next-auth/next"
 
-import { authOptions } from "@pages/api/auth/[...nextauth]"
 import {AdminLoginPage} from "@adminapp/modules/auth"
 
 interface LayoutProps {
@@ -27,20 +25,6 @@ const AdminLayout = ({ children }: LayoutProps) => {
         'flex flex-col h-screen overflow-y-scroll w-full bg-gray-100'
     ])
 
-    const { data: session } = useSession()
-
-    const unauthorised = (!session) || (session && (session.user!.role === "admin"))
-
-    if (unauthorised) {
-        return (< AdminContextProvider >
-            <ThemeProvider theme={theme}>
-                <AdminLoginPage/>
-            </ThemeProvider>
-        </AdminContextProvider >
-        );
-
-
-    }
 
 
     return (
@@ -63,13 +47,3 @@ const AdminLayout = ({ children }: LayoutProps) => {
 
 export { AdminLayout };
 
-
-export async function getServerSideProps() {
-    return {
-        props: {
-            session: await getServerSession(
-                authOptions
-            ),
-        },
-    }
-}

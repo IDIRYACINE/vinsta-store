@@ -1,47 +1,18 @@
 import NextAuth from "next-auth"
 
-import CredentialsProvider from 'next-auth/providers/credentials'
-import { FirebaseAdapter, UserEmail, UserPassword } from "vinstacore/src"
+import { FirestoreAdapter } from "@next-auth/firebase-adapter";
+import GoogleProvider from "next-auth/providers/google";
+import * as firestoreFunction from "firebase/firestore";
 
-export const authOptions = {
-    providers: [
-        CredentialsProvider({
-            name: 'Email and Password',
-            credentials: {
-                email: { label: 'Email', type: 'text' },
-                password: { label: 'Password', type: 'password' }
-            },
-            authorize: async (credentials) => {
 
-                const service = FirebaseAdapter.userService()
-
-                const response = await service.login({
-                    email: new UserEmail(credentials!.email),
-                    password: new UserPassword(credentials!.password)
-                })
-
-                if (response.user) {
-                    const user = {
-                        id: response.user.id.value,
-                        role : "customer"
-                    }
-
-                    return Promise.resolve(user)
-                } else {
-                    return Promise.resolve(null)
-                }
-            }
-        })
-    ],
-
-    callbacks: {
-        async session({ session, token, user }): Promise<any> {
-            session.accessToken = token.accessToken
-            session.user.id = token.id
-
-            return session
-        }
+export default NextAuth(
+    {
+        providers: [
+            GoogleProvider({
+                clientId: "424442380556-hs3ffeg545hpngcrd0aspvq90seukbs3.apps.googleusercontent.com",
+                clientSecret: "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"
+            })
+        ],
+        adapter: FirestoreAdapter()
     }
-}
-
-export default NextAuth(authOptions)
+)

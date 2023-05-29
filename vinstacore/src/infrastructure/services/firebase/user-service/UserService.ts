@@ -9,7 +9,7 @@ export class FirebaseUserService implements UserServicePort {
     }
 
     async login(loginProps: LoginProps): Promise<LoginResponse> {
-        const findProps = new FindUserProps(loginProps.password.value, loginProps.phone.value)
+        const findProps = new FindUserProps(loginProps.password.value, loginProps.email!.value)
         return this.userRepo.find(findProps).then((response) => {
 
             if (response.data === null) {
@@ -25,7 +25,7 @@ export class FirebaseUserService implements UserServicePort {
     }
 
     async loginAdmin(loginProps: LoginProps): Promise<LoginResponse> {
-        const findProps = new FindUserProps(loginProps.password.value, loginProps.phone.value)
+        const findProps = new FindUserProps(loginProps.password.value, loginProps.email!.value)
         return this.userRepo.find(findProps).then((response) => {
 
             if (response.data === null) {

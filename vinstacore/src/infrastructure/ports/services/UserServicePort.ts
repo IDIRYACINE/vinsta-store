@@ -29,8 +29,8 @@ export interface SignupResponse{
 export class FindUserProps implements FindProps {
     
     constructor(
-        public readonly password?: string,
-        public readonly phone?: string,
+        public readonly password: string,
+        public readonly identifier: string,
     ){}
 }
 

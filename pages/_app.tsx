@@ -9,14 +9,14 @@ interface LayoutProps {
   children: ReactNode;
 }
 
-export default function App({ Component, pageProps, router }: AppProps) {
+export default function App({ Component, pageProps: { session, ...pageProps }, router }: AppProps) {
   const isUnderAdminRoute = router.pathname.startsWith("/admin");
 
 
   const Layout = ({ children }: LayoutProps) => {
     if (isUnderAdminRoute) {
-      return (<SessionProvider session={pageProps.session}>
-        <AdminLayout>{children}</AdminLayout></SessionProvider>)
+      return (
+        <AdminLayout>{children}</AdminLayout>)
 
     } else {
       return <DefaultLayout>{children}</DefaultLayout>;
@@ -24,8 +24,11 @@ export default function App({ Component, pageProps, router }: AppProps) {
   }
 
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <SessionProvider session={pageProps.session}>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </SessionProvider>
+
   );
 }

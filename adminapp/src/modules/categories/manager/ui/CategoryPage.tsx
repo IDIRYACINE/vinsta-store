@@ -26,7 +26,6 @@ function CategoryPage() {
     
 
     useEffect(() => {
-        console.log("chanfged")
         categoriesState.loadMockCategories()
     },[categoriesState])
 
