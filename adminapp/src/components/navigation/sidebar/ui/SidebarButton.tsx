@@ -1,11 +1,11 @@
-'use client'
+"use client";
 
 import { adminContext } from "@adminapp/components/context/AppContext";
 import { Button } from "@mui/material"
 import clsx from "clsx";
 import { observer } from "mobx-react"
 import NavigationState from "@adminapp/components/navigation/sidebar/state/State";
-import router from "next/dist/client/router";
+import { useRouter } from 'next/navigation';
 import {PanelEntity} from "../domain/PanelEntity";
 
 
@@ -19,7 +19,8 @@ type ViewProps = {
 
 export default function SidebarButton(props: SidebarButtonProps) {
     const { navState } = adminContext
-    console.log("is on Client")
+
+    const router = useRouter()
 
     const activeClassName = clsx([
         'w-full bg-purple-500 text-white'

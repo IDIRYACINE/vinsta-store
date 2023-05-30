@@ -1,8 +1,8 @@
 import { Card, Divider, Typography } from "@mui/material"
-import { Address } from "@vinstacore"
+import { Repository } from "@vinstacore"
 
 interface ShippingCardProps{
-    address : Address
+    address : Repository.Address
 }
 
 function ShippingCard({address}:ShippingCardProps){
@@ -12,8 +12,8 @@ function ShippingCard({address}:ShippingCardProps){
             <Typography variant="h6">Shipping</Typography>
             <Divider sx={{"width":"100%"}}/>
 
-            <Typography variant="h6">{address.city.value}</Typography>
-            <Typography variant="h6">{address.subCity.value}</Typography>
+            <Typography variant="h6">{address.city}</Typography>
+            <Typography variant="h6">{address.subCity}</Typography>
 
         </Card>
     )

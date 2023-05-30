@@ -1,6 +1,6 @@
-import { OrderStatus } from "@adminapp/modules/orders/domain/OrderStatus"
+import { orderStatusfromString } from "@adminapp/modules/orders/domain/OrderStatus";
 import { TableCell, TableRow, Typography } from "@mui/material"
-import { OrderRowEntity } from "../domain/TableEntity"
+import { Repository } from "@vinstacore";
 import { OrderStatusLabel } from "./OrderStatus"
 
 interface OrderTableCellProps {
@@ -11,14 +11,14 @@ function OrderTableCell(props: OrderTableCellProps) {
 }
 
 interface OrderRowProps {
-    item: OrderRowEntity,
+    item: Repository.OrderHeader,
     key: any,
-    handleClick: (item:OrderRowEntity) => void,
+    handleClick: (item: Repository.OrderHeader) => void,
 }
 
 function OrderRow(props: OrderRowProps) {
-    const rawStatus = props.item.orderHeader.status.value
-    const orderStatus = OrderStatus.fromString(rawStatus)
+    const rawStatus = props.item.status
+    const orderStatus = orderStatusfromString(rawStatus)
 
     function handleClick() {
         props.handleClick(props.item)
@@ -26,10 +26,10 @@ function OrderRow(props: OrderRowProps) {
 
     return (
         <TableRow onClick={handleClick}>
-            <OrderTableCell value={props.item.orderHeader.id.value} />
-            <OrderTableCell value={props.item.orderHeader.createdAt.value.toString()} />
+            <OrderTableCell value={props.item.id} />
+            <OrderTableCell value={props.item.createdAt} />
             <TableCell><OrderStatusLabel status={orderStatus} /></TableCell>
-            <OrderTableCell value={props.item.orderHeader.total.value.toString()} />
+            <OrderTableCell value={props.item.total.toString()} />
         </TableRow>
     )
 }
@@ -52,3 +52,4 @@ function OrderHeader(props: OrderHeaderProps) {
 
 
 export { OrderRow, OrderHeader }
+

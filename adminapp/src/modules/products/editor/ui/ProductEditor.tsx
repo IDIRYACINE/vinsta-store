@@ -4,22 +4,22 @@
 import { AppTextField, AppTextArea } from "@adminapp/components/commons/Fields"
 import { Card, Box } from "@mui/material"
 import { EditorActions } from "./Actions"
-import { useContext, useState } from "react"
+import { useState } from "react"
 import { ImageManager } from "@adminapp/components/commons/Images"
-import { goBack } from "@adminapp/components/navigation/sidebar/logic/helpers"
 import { ProductEditorController } from "../logic/Controller"
 import { adminContext } from "@adminapp/components/context/AppContext"
-import { ProductEntity } from "@vinstacore"
+import { Repository } from "@vinstacore"
+import { useRouter } from "next/navigation"
 
 function ProductEditor() {
     const { productsState } = adminContext
 
-    let product = productsState.product as ProductEntity
+    let product = productsState.product as Repository.Product
 
-    const [name, setName] = useState<string>(product.name.value)
+    const [name, setName] = useState<string>(product.name)
     const [previewImageUrl, setPreviewImageUrl] = useState<string>("")
-    const [productId, setProductId] = useState<string>(product.id.value)
-    const [description, setDescription] = useState<string>(product.description.value)
+    const [productId, setProductId] = useState<string>(product.id)
+    const [description, setDescription] = useState<string>(product.description ?? "")
     const [imageUrls, setImageUrls] = useState<string[]>([])
     const [price, setPrice] = useState<string>("0")
     const [quantity, setQuantity] = useState<string>("0")
@@ -27,6 +27,12 @@ function ProductEditor() {
     let controller = new ProductEditorController()
 
 
+
+    const router = useRouter()
+
+    function goBack() {
+        router.back()
+    }
 
     const nameProps = {
         label: "Name",

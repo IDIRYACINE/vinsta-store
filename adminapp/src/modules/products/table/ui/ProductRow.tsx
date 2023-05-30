@@ -1,17 +1,17 @@
 import {
-   
+
     TableCell,
     TableRow,
     Typography,
     Box, Button
 } from "@mui/material";
-import { ProductEntity } from "@vinstacore";
+
+import { Repository } from "@vinstacore"
 
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Image from "next/image";
 import { adminContext } from "@adminapp/components/context/AppContext";
-import { useContext } from "react";
 
 interface ProductActionsCellProps {
     onDelete: () => void;
@@ -57,15 +57,15 @@ function ProductTableImageCell(props: ProductImageCellProps) {
 }
 
 interface ProductRowProps {
-    item: ProductEntity;
+    item: Repository.Product;
     key: any;
 }
 
 function ProductRow(props: ProductRowProps) {
-    const { productsState} = adminContext
-    const {item} = props
+    const { productsState } = adminContext
+    const { item } = props
 
-    function handleDelete(){
+    function handleDelete() {
         productsState.displayDeleteModal(item)
     }
 
@@ -75,9 +75,9 @@ function ProductRow(props: ProductRowProps) {
 
     return (
         <TableRow >
-            <ProductTableImageCell imageUrl={item.imageUrls[0].value} name={item.name.value} />
-            <ProductTableCell value={item.id.value.toString()} />
-            <ProductTableCell value={item.description.value.toString()} />
+            <ProductTableImageCell imageUrl={item.imageUrls[0].url} name={item.name} />
+            <ProductTableCell value={item.id} />
+            <ProductTableCell value={item.description??""} />
             <ProductActionsCell onDelete={handleDelete} onEdit={handleEdit} />
         </TableRow>
     );

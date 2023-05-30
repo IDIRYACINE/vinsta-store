@@ -3,12 +3,12 @@
 import { AppTextField, AppTextArea } from "@adminapp/components/commons/Fields"
 import { ImageManager } from "@adminapp/components/commons/Images"
 import { adminContext } from "@adminapp/components/context/AppContext"
-import { goBack } from "@adminapp/components/navigation/sidebar/logic/helpers"
 import { Card, Box } from "@mui/material"
 
-import { useContext, useState } from "react"
+import {  useState } from "react"
 import { ProductEditorController } from "../logic/Controller"
 import { CreatorActions } from "./Actions"
+import {useRouter} from "next/navigation"
 
 function ProductCreator() {
 
@@ -23,6 +23,11 @@ function ProductCreator() {
     const controller = new ProductEditorController()
     const { productsState } = adminContext
 
+    const router = useRouter()
+
+    function goBack(){
+        router.back()
+    }
 
     const nameProps = {
         label: "Name",
@@ -59,6 +64,7 @@ function ProductCreator() {
         onChange: (value: string) => setQuantity(value),
         className: "mr-2 w-full"
     }
+
 
 
     function onSave() {

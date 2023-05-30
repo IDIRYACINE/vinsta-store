@@ -6,17 +6,16 @@ import TableHead from "@mui/material/TableHead";
 import Paper from "@mui/material/Paper";
 import { ProductHeader, ProductRow } from "./ProductRow";
 import { Box } from "@mui/material";
-import { ProductEntity } from "@vinstacore";
-import { ProductsState } from "../../manager/state/ProductsState";
+import { Repository } from "@vinstacore";
 
 interface TableProps {
   headersData: string[];
-  rowsData: ProductEntity[];
+  rowsData: Repository.Product[];
 }
 
- function ProductTable(props: TableProps) {
+function ProductTable(props: TableProps) {
 
-  const {headersData,rowsData} = props 
+  const { headersData, rowsData } = props
 
   return (
     <Box>
@@ -28,7 +27,7 @@ interface TableProps {
           <TableBody>
             {rowsData.map((row) => (
               <ProductRow
-                key={row.id.value}
+                key={row.id}
                 item={row}
               />
             ))}

@@ -1,6 +1,6 @@
 import { makeAutoObservable } from "mobx";
-import { ProductEntity } from "@vinstacore";
-import router from "next/dist/client/router";
+import { Repository } from "@vinstacore";
+import router from "next/navigation";
 import { mockProductRows } from "../../table";
 
 
@@ -10,8 +10,8 @@ class ProductsState {
 
     isModalOpen = false;
     isLoaded = false;
-    products: ProductEntity[] = []
-    product: ProductEntity | undefined
+    products: Repository.Product[] = []
+    product: Repository.Product | undefined
 
     constructor() {
         makeAutoObservable(this)
@@ -25,11 +25,11 @@ class ProductsState {
         this.isModalOpen = false
     }
 
-    setProducts(products: ProductEntity[]) {
+    setProducts(products: Repository.Product[]) {
         this.products = products
     }
 
-    displayDeleteModal(item: ProductEntity) {
+    displayDeleteModal(item: Repository.Product) {
         this.isModalOpen = true;
         this.product = item
     }
@@ -38,7 +38,7 @@ class ProductsState {
         if (this.product === undefined) return;
 
 
-        const index = this.products.findIndex(product => product.equals(this.product as ProductEntity));
+        const index = this.products.findIndex(product => product.id === (this.product as Repository.Product).id);
 
         if (index !== -1) {
             this.products.splice(index, 1);
@@ -47,23 +47,23 @@ class ProductsState {
 
     }
 
-    addProduct(product: ProductEntity) {
+    addProduct(product: Repository.Product) {
         this.products.push(product)
     }
 
-    updateProduct(product: ProductEntity) {
+    updateProduct(product: Repository.Product) {
         if(this.product === undefined) return
 
-        const index = this.products.findIndex(product => product.equals(this.product as ProductEntity));
+        const index = this.products.findIndex(product => product.id === (this.product as Repository.Product).id );
 
         if (index !== -1) {
             this.products[index] = product;
         }
     }
 
-    editProduct(item: ProductEntity) {
+    editProduct(item: Repository.Product) {
         this.product = item
-        router.push(`/admin/Products/edit/${item.id.value}`)
+        router.push(`/admin/Products/edit/${item.id}`)
 
     }
 

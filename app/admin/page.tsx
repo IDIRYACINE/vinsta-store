@@ -1,5 +1,5 @@
 
 
-export default function adminHome(){
+export default function AdminHome(){
     return (<div></div>)
 }

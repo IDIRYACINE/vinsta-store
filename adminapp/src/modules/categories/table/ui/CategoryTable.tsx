@@ -6,17 +6,16 @@ import TableHead from "@mui/material/TableHead";
 import Paper from "@mui/material/Paper";
 import { CategoryHeader, CategoryRow } from "./CategoryRow";
 import { Box } from "@mui/material";
-import { CategoryEntity } from "@vinstacore";
-import { CategoriesState } from "../../manager/state/CategoriesState";
+import { Repository } from "@vinstacore";
 
 interface TableProps {
   headersData: string[];
-  rowsData: CategoryEntity[];
+  rowsData: Repository.Category[];
 }
 
- function CategoryTable(props: TableProps) {
+function CategoryTable(props: TableProps) {
 
-  const {headersData,rowsData} = props 
+  const { headersData, rowsData } = props
 
   return (
     <Box>
@@ -28,7 +27,7 @@ interface TableProps {
           <TableBody>
             {rowsData.map((row) => (
               <CategoryRow
-                key={row.id.value}
+                key={row.id}
                 item={row}
               />
             ))}

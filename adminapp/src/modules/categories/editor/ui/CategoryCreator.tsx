@@ -4,12 +4,12 @@
 import { AppTextField, AppTextArea } from "@adminapp/components/commons/Fields"
 import { SingleImageField } from "@adminapp/components/commons/Images"
 import { adminContext } from "@adminapp/components/context/AppContext"
-import { goBack } from "@adminapp/components/navigation/sidebar/logic/helpers"
 import { Card, Box } from "@mui/material"
 
-import { useContext, useState } from "react"
+import {  useState } from "react"
 import { CategoryEditorController } from "../logic/Controller"
 import { CreatorActions } from "./Actions"
+import {useRouter} from "next/navigation"
 
 function CategoryCreator() {
 
@@ -21,6 +21,11 @@ function CategoryCreator() {
     const controller = new CategoryEditorController()
     const { categoriesState } = adminContext
 
+    const router = useRouter()
+
+    function goBack(){
+        router.back()
+    }
 
     const nameProps = {
         label: "Name",

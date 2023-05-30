@@ -2,11 +2,11 @@
 
 import { Box } from "@mui/material"
 import clsx from "clsx"
-import { OrderEntity } from "@vinstacore"
+import { Repository } from "@vinstacore"
 import ShippingCard from "../components/shipping/ShippingCard"
 
 interface OrderDetaillsProps {
-    order : OrderEntity
+    order : Repository.Order
 }
 
 function OrderDetaills(props:OrderDetaillsProps){

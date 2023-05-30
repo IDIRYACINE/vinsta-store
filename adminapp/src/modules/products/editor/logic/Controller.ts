@@ -1,5 +1,5 @@
 
-import { ProductEntity, ProductMapper } from "@vinstacore";
+import { Repository } from "@vinstacore";
 
 
 interface createProductOptions {
@@ -20,8 +20,8 @@ export class ProductEditorController {
 
     }
 
-    public createProduct(options: createProductOptions): ProductEntity {
-        let product = new ProductMapper().toDomain({
+    public createProduct(options: createProductOptions): Repository.Product {
+        let product = {
             id: options.code,
             name: options.name,
             price: options.price,
@@ -33,16 +33,16 @@ export class ProductEditorController {
                     url: url
                 }
             })
-        })
+        }
 
 
         return product
 
     }
 
-    public updateProduct(options: createProductOptions): ProductEntity {
+    public updateProduct(options: createProductOptions): Repository.Product {
 
-        let product = new ProductMapper().toDomain({
+        let product ={
             id: options.code,
             name: options.name,
             price: options.price,
@@ -54,7 +54,7 @@ export class ProductEditorController {
                     url: url
                 }
             })
-        })
+        }
 
 
         return product

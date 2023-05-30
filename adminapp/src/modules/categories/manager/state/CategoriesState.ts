@@ -1,6 +1,6 @@
 import { makeAutoObservable } from "mobx";
-import { CategoryEntity, CategoryId } from "@vinstacore";
-import router from "next/dist/client/router";
+import { Repository } from "@vinstacore";
+import router from "next/navigation";
 import { mockCategoryRows } from "../../table";
 
 
@@ -10,8 +10,8 @@ class CategoriesState {
 
     isModalOpen = false;
     isLoaded = false;
-    categories: CategoryEntity[] = []
-    category: CategoryEntity | undefined
+    categories: Repository.Category[] = []
+    category: Repository.Category | undefined
 
     constructor() {
         makeAutoObservable(this)
@@ -25,11 +25,11 @@ class CategoriesState {
         this.isModalOpen = false
     }
 
-    setCategories(categories: CategoryEntity[]) {
+    setCategories(categories: Repository.Category[]) {
         this.categories = categories
     }
 
-    displayDeleteModal(item: CategoryEntity) {
+    displayDeleteModal(item: Repository.Category) {
         this.isModalOpen = true;
         this.category = item
     }
@@ -38,7 +38,7 @@ class CategoriesState {
         if (this.category === undefined) return;
 
 
-        const index = this.categories.findIndex(category => category.equals(this.category as CategoryEntity));
+        const index = this.categories.findIndex(category => category.id === (this.category as Repository.Category).id);
 
         if (index !== -1) {
             this.categories.splice(index, 1);
@@ -47,24 +47,23 @@ class CategoriesState {
 
     }
 
-    addCategory(category: CategoryEntity) {
+    addCategory(category: Repository.Category) {
         this.categories.push(category)
     }
 
-    updateCategory(category: CategoryEntity) {
+    updateCategory(category: Repository.Category) {
         if(this.category === undefined) return
 
-        const index = this.categories.findIndex(category => category.equals(this.category as CategoryEntity));
+        const index = this.categories.findIndex(category => category.id === (this.category as Repository.Category).id);
 
         if (index !== -1) {
             this.categories[index] = category;
         }
     }
 
-    editCategory(item: CategoryEntity) {
+    editCategory(item: Repository.Category) {
         this.category = item
-        router.push(`/admin/categories/edit/${item.id.value}`)
-
+       
     }
 
     loadMockCategories() {

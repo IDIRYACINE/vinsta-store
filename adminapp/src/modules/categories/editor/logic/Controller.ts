@@ -1,5 +1,5 @@
 
-import { CategoryEntity, CategoryMapper } from "@vinstacore";
+import { Repository } from "@vinstacore";
 
 
 interface createCategoryOptions {
@@ -18,28 +18,28 @@ export class CategoryEditorController {
 
     }
 
-    public createCategory(options: createCategoryOptions): CategoryEntity {
-        let category = new CategoryMapper().toDomain({
+    public createCategory(options: createCategoryOptions): Repository.Category {
+        let category = {
             productCount: 0,
             id: options.code,
             name: options.name,
             imageUrl: options.imageUrl,
             description: options.description
-        })
+        }
 
 
         return category
 
     }
 
-    public updateCategory(options: createCategoryOptions): CategoryEntity {
-        let category = new CategoryMapper().toDomain({
+    public updateCategory(options: createCategoryOptions): Repository.Category {
+        let category = {
             productCount: 0,
             id: options.code,
             name: options.name,
             imageUrl: options.imageUrl,
             description: options.description
-        })
+        }
 
 
         return category

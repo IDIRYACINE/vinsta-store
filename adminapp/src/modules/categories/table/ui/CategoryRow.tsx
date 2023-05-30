@@ -1,18 +1,16 @@
 import {
-    CardMedia,
-    Card,
     TableCell,
     TableRow,
     Typography,
     Box, Button
 } from "@mui/material";
-import { CategoryEntity } from "@vinstacore";
+import { Repository } from "@vinstacore";
 
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Image from "next/image";
 import { adminContext } from "@adminapp/components/context/AppContext";
-import { useContext } from "react";
+import {useRouter} from "next/navigation"
 
 interface CategoryActionsCellProps {
     onDelete: () => void;
@@ -58,27 +56,31 @@ function CategoryTableImageCell(props: CategoryImageCellProps) {
 }
 
 interface CategoryRowProps {
-    item: CategoryEntity;
+    item: Repository.Category;
     key: any;
 }
 
 function CategoryRow(props: CategoryRowProps) {
-    const {categoriesState} = adminContext
-    const {item} = props
+    const { categoriesState } = adminContext
+    const { item } = props
 
-    function handleDelete(){
+    const router = useRouter()
+
+    function handleDelete() {
         categoriesState.displayDeleteModal(item)
     }
 
     function handleEdit() {
         categoriesState.editCategory(item)
+        router.push(`/admin/categories/edit/${item.id}`)
+
     }
 
     return (
         <TableRow >
-            <CategoryTableImageCell imageUrl={item.imageUrl.value} name={item.name.value} />
-            <CategoryTableCell value={item.id.value.toString()} />
-            <CategoryTableCell value={item.description.value.toString()} />
+            <CategoryTableImageCell imageUrl={item.imageUrl} name={item.name} />
+            <CategoryTableCell value={item.id} />
+            <CategoryTableCell value={item.description ?? ""} />
             <CategoryActionsCell onDelete={handleDelete} onEdit={handleEdit} />
         </TableRow>
     );

@@ -1,27 +1,24 @@
 
-class OrderStatus {
-    static orderStatusList = [
-        new OrderStatus('confirmed', 'green-500'),
-        new OrderStatus('shipped', 'blue-500'),
-        new OrderStatus('onHold', 'orange-500'),
-        new OrderStatus('delivered', 'green-700'),
-        new OrderStatus('cancelled', 'red-500'),]
+interface OrderStatus {
+    name: string,
+    color: string
+}
+const orderStatusList = [
+    { name: 'confirmed', color: 'green-500' },
+    { name: 'shipped', color: 'blue-500' },
+    { name: 'onHold', color: 'orange-500' },
+    { name: 'delivered', color: 'green-700' },
+    { name: 'cancelled', color: 'red-500' }]
 
-    constructor(public readonly name: string, public readonly color: string) {
+function orderStatusfromString(value: string): OrderStatus {
 
+    const status = orderStatusList.find((status) => status.name === value)
+    if (status === undefined) {
+        throw new Error('Invalid order status')
     }
 
-    static fromString(value: string): OrderStatus {
-
-        const status = this.orderStatusList.find((status) => status.name === value)
-        if (status === undefined) {
-            throw new Error('Invalid order status')
-        }
-
-        return status
-    }
+    return status
 }
 
 
-
-export { OrderStatus }
+export { type OrderStatus , orderStatusfromString,orderStatusList  }

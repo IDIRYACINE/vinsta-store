@@ -1,5 +1,5 @@
 import { LoginProps, UserServicePort } from "@vinstacore";
-import router from "next/dist/client/router";
+import router from "next/navigation";
 import AuthState from "../state/AuthState";
 
 export class AuthController {
@@ -18,7 +18,4 @@ export class AuthController {
         })
     }
 
-    navigateToDashboard(){
-        router.push("/admin/orders")
-    }
 }

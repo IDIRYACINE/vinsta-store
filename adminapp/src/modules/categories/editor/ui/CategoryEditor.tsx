@@ -3,24 +3,29 @@
 import { AppTextField, AppTextArea } from "@adminapp/components/commons/Fields"
 import { Card, Box } from "@mui/material"
 import { EditorActions } from "./Actions"
-import { useContext, useState } from "react"
+import { useState } from "react"
 import { SingleImageField } from "@adminapp/components/commons/Images"
-import { goBack } from "@adminapp/components/navigation/sidebar/logic/helpers"
 import { CategoryEditorController } from "../logic/Controller"
 import { adminContext } from "@adminapp/components/context/AppContext"
-import { CategoryEntity } from "@vinstacore"
+import { Repository } from "@vinstacore"
+import { useRouter } from "next/navigation"
 
 function CategoryEditor() {
     const { categoriesState } = adminContext
 
-    let category = categoriesState.category as CategoryEntity
+    let category = categoriesState.category as Repository.Category
 
-    const [name, setName] = useState<string>(category.name.value)
-    const [imageUrl, setImageUrl] = useState<string>(category.imageUrl.value)
-    const [categoryId, setCategoryId] = useState<string>(category.id.value)
-    const [description, setDescription] = useState<string>(category.description.value)
+    const [name, setName] = useState<string>(category.name)
+    const [imageUrl, setImageUrl] = useState<string>(category.imageUrl)
+    const [categoryId, setCategoryId] = useState<string>(category.id)
+    const [description, setDescription] = useState<string>(category.description ?? "")
 
 
+    const router = useRouter()
+
+    function goBack() {
+        router.back()
+    }
 
     const nameProps = {
         label: "Name",
