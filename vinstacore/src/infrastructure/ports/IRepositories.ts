@@ -65,8 +65,7 @@ export interface FindProps {
 }
 
 export interface FindResponse {
-    data?: Repository.User
-    error?: Error
+   
 }
 
 
@@ -106,10 +105,10 @@ export interface LoadResponse {
 }
 
 export interface IRepository {
-    find(find: FindProps): Promise<FindResponse>
-    load(load: LoadProps): Promise<LoadResponse>
-    create(create: CreateProps): Promise<CreateResponse>
-    update(update: UpdateProps): Promise<UpdateResponse>
-    delete(delte: DeleteProps): Promise<DeleteResponse>
+    find(options: FindProps): Promise<FindResponse>
+    load(options: LoadProps): Promise<LoadResponse>
+    create(options: CreateProps): Promise<CreateResponse>
+    update(options: UpdateProps): Promise<UpdateResponse>
+    delete(options: DeleteProps): Promise<DeleteResponse>
 
 }

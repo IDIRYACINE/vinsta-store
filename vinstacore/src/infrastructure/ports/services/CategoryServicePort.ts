@@ -37,25 +37,25 @@ export interface FindCategoryProps {
 }
 
 export interface CreateCategoryResponse {
-    status: OperationStatus
+    // status: OperationStatus
 }
 
 export interface UpdateCategoryResponse {
-    status: OperationStatus
+    // status: OperationStatus
 }
 
 export interface DeleteCategoryResponse {
-    status: OperationStatus
+    // status: OperationStatus
 }
 
 export interface LoadCategoryResponse {
-    data: CategoryEntity[],
-    status: OperationStatus
+    // data: CategoryEntity[],
+    // status: OperationStatus
 }
 
 export interface FindCategoryResponse {
-    data: CategoryEntity,
-    status: OperationStatus
+    // data: CategoryEntity,
+    // status: OperationStatus
 
 }
 

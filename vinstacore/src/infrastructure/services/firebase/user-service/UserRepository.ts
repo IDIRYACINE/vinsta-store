@@ -14,9 +14,9 @@ export class FirebaseUserRepository implements IRepository {
     }
 
 
-    async find(find: FindUserProps): Promise<FindResponse> {
+    async find(options: FindUserProps): Promise<FindResponse> {
 
-        return signInWithEmailAndPassword(this.auth, find.identifier, find.password)
+        return signInWithEmailAndPassword(this.auth, options.identifier, options.password)
             .then(async (userCredential) => {
                 const user = userCredential.user
 
@@ -49,17 +49,17 @@ export class FirebaseUserRepository implements IRepository {
 
     }
 
-    load(load: LoadProps): Promise<LoadResponse> {
+    load(options:  LoadProps): Promise<LoadResponse> {
         throw new Error("Method not implemented.");
     }
-    create(create: CreateProps): Promise<CreateResponse> {
+    create(options:  CreateProps): Promise<CreateResponse> {
         throw new Error("Method not implemented.");
     }
-    update(update: UpdateProps): Promise<UpdateResponse> {
+    update(options:  UpdateProps): Promise<UpdateResponse> {
         throw new Error("Method not implemented.");
     }
 
-    delete(delte: DeleteProps): Promise<DeleteResponse> {
+    delete(options:  DeleteProps): Promise<DeleteResponse> {
         throw new Error("Method not implemented.");
     }
 
