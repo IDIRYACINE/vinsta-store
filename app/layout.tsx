@@ -1,3 +1,6 @@
+'use client'
+
+import { SessionProvider } from 'next-auth/react';
 import './globals.css';
 
 interface RootLayoutProps {
@@ -11,7 +14,11 @@ export default function RootLayout({
 
     return (
         <html lang="en" >
-            <body>{children} </body>
+            <body>
+                <SessionProvider>
+                    {children}
+                </SessionProvider>
+            </body>
         </html>
     );
 

@@ -6,4 +6,8 @@ export * from './domains/address'
 export * from './domains/category'
 export * from './infrastructure/ports/IRepositories'
 export * from './infrastructure/ports/services/UserServicePort'
+export * from './infrastructure/ports/services/CategoryServicePort'
+export * from './infrastructure/ports/services/ProductServicePort'
+export * from './infrastructure/ports/services/OrdersServicePort'
+
 export * from './infrastructure/services/firebase'

@@ -1,43 +1,40 @@
-import { CreateResponse, DeleteResponse, FindResponse, IRepository, LoadProps, LoadResponse, Repository, UpdateResponse } from "@vinstacore/index";
-import { CreateCategoryProps, DeleteCategoryProps, FindCategoryProps, UpdateCategoryProps } from "@vinstacore/infrastructure/ports/services/CategoryServicePort";
+import { LoadProps, Repository } from "@vinstacore/index";
+import { CreateCategoryProps, DeleteCategoryProps, FindCategoryProps, ICategoryRepostiroy, UpdateCategoryProps } from "@vinstacore/infrastructure/ports/services/CategoryServicePort";
 
 import { Firestore, getDoc, doc, collection, getDocs, setDoc, updateDoc, deleteDoc } from "firebase/firestore";
 
-export class CategoryRepostiroy implements IRepository {
+export class CategoryRepostiroy implements ICategoryRepostiroy {
     categoryCollection = "categories";
 
     public constructor(private readonly firestore: Firestore) { }
 
-    async find(options: FindCategoryProps): Promise<FindResponse> {
+    async find(options: FindCategoryProps): Promise<Repository.Category> {
 
         const categoryDoc = doc(this.firestore, this.categoryCollection, options.id.value)
 
-        const category = (await getDoc(categoryDoc)).data
+        const category = (await getDoc(categoryDoc)).data();
 
+        return category as Repository.Category
 
-        return {
-            data: category as any
-        }
     }
 
-    async load(options: LoadProps): Promise<LoadResponse> {
+    async load(options: LoadProps): Promise<Repository.Category[]> {
         const collectionRef = collection(this.firestore, this.categoryCollection);
 
         return getDocs(collectionRef).then((snapshot) => {
             const results: Repository.Category[] = [];
+
             snapshot.forEach((doc) => {
                 const data = doc.data() as Repository.Category;
                 results.push(data);
             });
 
-            return {
-                results,
-                totalCount: results.length,
-            };
+            return results
+
         });
     }
 
-    async create(options: CreateCategoryProps): Promise<CreateResponse> {
+    async create(options: CreateCategoryProps): Promise<void> {
         const category: Repository.Category = {
             productCount: 0,
             id: options.id.value,
@@ -47,22 +44,22 @@ export class CategoryRepostiroy implements IRepository {
 
         const categoryDoc = doc(this.firestore, this.categoryCollection, category.id);
 
-        return setDoc(categoryDoc, category).then(() => ({}));
+        setDoc(categoryDoc, category).then(() => ({}));
     }
 
-    async update(options: UpdateCategoryProps): Promise<UpdateResponse> {
+    async update(options: UpdateCategoryProps): Promise<void> {
         const categoryDoc = doc(this.firestore, this.categoryCollection, options.id.value);
 
         const updateData: Partial<Repository.Category> = {};
 
 
 
-        return updateDoc(categoryDoc, updateData).then(() => ({}));
+        updateDoc(categoryDoc, updateData).then(() => ({}));
     }
 
-    delete(options: DeleteCategoryProps): Promise<DeleteResponse> {
+    async delete(options: DeleteCategoryProps): Promise<void> {
         const categoryDoc = doc(this.firestore, this.categoryCollection, options.id.value);
 
-        return deleteDoc(categoryDoc).then(() => ({}));
+        deleteDoc(categoryDoc).then(() => ({}));
     }
 }

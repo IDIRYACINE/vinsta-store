@@ -48,7 +48,10 @@ function LoginForm() {
             autoComplete="admin password"
           />
 
-          <Button onClick={() => signIn()}>Login</Button>
+          <Button onClick={() => signIn(
+            "google",
+           
+          )}>Login</Button>
 
         </CardContent>
       </Box>

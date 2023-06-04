@@ -3,6 +3,7 @@ import { OperationStatus } from "@vinstacore/commons/operation-status.base"
 import { ImageUrl } from "@vinstacore/commons/value-objects.base"
 import { CategoryEntity } from "@vinstacore/domains/category/domain/CategoryEntity"
 import { CategoryId, CategoryName } from "@vinstacore/domains/category/domain/ValueObjects"
+import { Repository } from "../IRepositories"
 
 
 export interface CategoryServicePort {
@@ -12,6 +13,14 @@ export interface CategoryServicePort {
     load(loadProps: LoadCategoryProps): Promise<LoadCategoryResponse>
     find(findProps: FindCategoryProps): Promise<FindCategoryResponse>
 
+}
+
+export interface ICategoryRepostiroy {
+    create(createProps: CreateCategoryProps): Promise<void>
+    update(updateProps: UpdateCategoryProps): Promise<void>
+    delete(deleteProps: DeleteCategoryProps): Promise<void>
+    load(loadProps: LoadCategoryProps): Promise<Repository.Category[]>
+    find(findProps: FindCategoryProps): Promise<Repository.Category>
 }
 
 export interface CreateCategoryProps {
@@ -49,7 +58,7 @@ export interface DeleteCategoryResponse {
 }
 
 export interface LoadCategoryResponse {
-    // data: CategoryEntity[],
+    data: Repository.Category[],
     // status: OperationStatus
 }
 

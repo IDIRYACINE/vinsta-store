@@ -10,13 +10,18 @@ import { observer } from "mobx-react"
 import { CategoriesState } from "../state/CategoriesState"
 import { DeleteCategoryDialog } from "./DeleteCategoryDialog"
 import { adminContext } from "@adminapp/components/context/AppContext"
+import { Repository } from "vinstacore/src"
 
 
 interface StateProps {
     store: CategoriesState
 }
 
-function CategoryPage() {
+interface CategoryPageProps {
+    data : Repository.Category[]
+}
+
+function CategoryPage(props:CategoryPageProps) {
 
     const headersData = ["Category Name", "Category Id", "Description", "Action"]
 
@@ -24,7 +29,7 @@ function CategoryPage() {
     const {categoriesState} = adminContext
     const className = clsx(["p-4 flex flex-col justify-center items-center"])
    
-    categoriesState.loadMockCategories()
+    categoriesState.setCategories(props.data)
     
 
     const View = observer((props: StateProps) => {
