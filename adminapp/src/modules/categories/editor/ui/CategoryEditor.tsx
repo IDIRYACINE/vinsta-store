@@ -6,14 +6,21 @@ import { EditorActions } from "./Actions"
 import { useState } from "react"
 import { SingleImageField } from "@adminapp/components/commons/Images"
 import { CategoryEditorController } from "../logic/Controller"
-import { adminContext } from "@adminapp/components/context/AppContext"
 import { Repository } from "@vinstacore"
 import { useRouter } from "next/navigation"
 
-function CategoryEditor() {
-    const { categoriesState } = adminContext
 
-    let category = categoriesState.category as Repository.Category
+import { RootState, AppDispatch, updateCategory, } from "@adminapp/store";
+import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
+
+
+ const useAppDispatch = () => useDispatch<AppDispatch>()
+ const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
+
+function CategoryEditor() {
+
+    let category = useAppSelector(state => state.categories.editedCategory)!
+    const dispatch = useAppDispatch()
 
     const [name, setName] = useState<string>(category.name)
     const [imageUrl, setImageUrl] = useState<string>(category.imageUrl)
@@ -58,8 +65,9 @@ function CategoryEditor() {
             name, imageUrl, description,
             code: categoryId,
         })
-
-        categoriesState.updateCategory(category)
+        
+        dispatch(updateCategory(category))
+        
 
         goBack()
     }

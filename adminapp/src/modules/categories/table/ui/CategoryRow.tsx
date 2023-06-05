@@ -9,8 +9,15 @@ import { Repository } from "@vinstacore";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Image from "next/image";
-import { adminContext } from "@adminapp/components/context/AppContext";
 import {useRouter} from "next/navigation"
+
+
+import { RootState, AppDispatch, openDeleteCategoryDialog, setEditedCategory, } from "@adminapp/store";
+import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
+
+
+ const useAppDispatch = () => useDispatch<AppDispatch>()
+ const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
 interface CategoryActionsCellProps {
     onDelete: () => void;
@@ -61,17 +68,18 @@ interface CategoryRowProps {
 }
 
 function CategoryRow(props: CategoryRowProps) {
-    const { categoriesState } = adminContext
     const { item } = props
+
+    const dispatch = useAppDispatch()
 
     const router = useRouter()
 
     function handleDelete() {
-        categoriesState.displayDeleteModal(item)
+        dispatch(openDeleteCategoryDialog(item))
     }
 
     function handleEdit() {
-        categoriesState.editCategory(item)
+        dispatch(setEditedCategory(item))
         router.push(`/admin/categories/edit/${item.id}`)
 
     }

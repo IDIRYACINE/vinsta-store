@@ -1,13 +1,13 @@
 import { BaseContainedButton } from "@adminapp/components/commons/Buttons";
 import { Box, Typography } from "@mui/material";
-import { ProductRoutes  } from "@adminapp/components/navigation/Routes";
+import { ProductRoutes } from "@adminapp/components/navigation/Routes";
 import { useRouter } from "next/navigation";
 
 
 function ProductManagerHeader() {
     const router = useRouter()
-    function navigateToProductCreator (){
-  router.push(ProductRoutes.create);
+    function navigateToProductCreator() {
+        router.push(ProductRoutes.create);
 
     }
     return (

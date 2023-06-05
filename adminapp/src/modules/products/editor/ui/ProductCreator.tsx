@@ -2,8 +2,15 @@
 
 import { AppTextField, AppTextArea } from "@adminapp/components/commons/Fields"
 import { ImageManager } from "@adminapp/components/commons/Images"
-import { adminContext } from "@adminapp/components/context/AppContext"
 import { Card, Box } from "@mui/material"
+
+
+import { RootState, AppDispatch, addProduct, } from "@adminapp/store";
+import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
+
+
+ const useAppDispatch = () => useDispatch<AppDispatch>()
+ const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
 import {  useState } from "react"
 import { ProductEditorController } from "../logic/Controller"
@@ -21,9 +28,9 @@ function ProductCreator() {
     const [quantity, setQuantity] = useState<string>("0")
 
     const controller = new ProductEditorController()
-    const { productsState } = adminContext
 
     const router = useRouter()
+    const dispatch = useAppDispatch()
 
     function goBack(){
         router.back()
@@ -76,7 +83,7 @@ function ProductCreator() {
             quantity: parseInt(quantity)
         })
 
-        productsState.addProduct(product)
+        dispatch(addProduct(product))
 
         goBack()
     }

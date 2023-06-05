@@ -3,13 +3,19 @@
 
 import { AppTextField, AppTextArea } from "@adminapp/components/commons/Fields"
 import { SingleImageField } from "@adminapp/components/commons/Images"
-import { adminContext } from "@adminapp/components/context/AppContext"
 import { Card, Box } from "@mui/material"
 
 import {  useState } from "react"
 import { CategoryEditorController } from "../logic/Controller"
 import { CreatorActions } from "./Actions"
 import {useRouter} from "next/navigation"
+
+import { RootState, AppDispatch, addCategory, } from "@adminapp/store";
+import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
+
+
+ const useAppDispatch = () => useDispatch<AppDispatch>()
+ const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
 function CategoryCreator() {
 
@@ -19,7 +25,9 @@ function CategoryCreator() {
     const [description, setDescription] = useState<string>("")
 
     const controller = new CategoryEditorController()
-    const { categoriesState } = adminContext
+
+    const dispatch = useAppDispatch()
+
 
     const router = useRouter()
 
@@ -58,7 +66,7 @@ function CategoryCreator() {
             code: categoryId,
         })
 
-        categoriesState.addCategory(category)
+        dispatch(addCategory(category))
 
         goBack()
     }

@@ -11,7 +11,14 @@ import { Repository } from "@vinstacore"
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Image from "next/image";
-import { adminContext } from "@adminapp/components/context/AppContext";
+
+
+import { RootState, AppDispatch, openDeleteProductDialog, setEditedProduct, } from "@adminapp/store";
+import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
+
+
+ const useAppDispatch = () => useDispatch<AppDispatch>()
+ const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
 interface ProductActionsCellProps {
     onDelete: () => void;
@@ -62,22 +69,23 @@ interface ProductRowProps {
 }
 
 function ProductRow(props: ProductRowProps) {
-    const { productsState } = adminContext
     const { item } = props
+    const dispatch = useAppDispatch()
+
 
     function handleDelete() {
-        productsState.displayDeleteModal(item)
+        dispatch(openDeleteProductDialog(item))
     }
 
     function handleEdit() {
-        productsState.editProduct(item)
+        dispatch(setEditedProduct(item))
     }
 
     return (
         <TableRow >
             <ProductTableImageCell imageUrl={item.imageUrls[0].url} name={item.name} />
             <ProductTableCell value={item.id} />
-            <ProductTableCell value={item.description??""} />
+            <ProductTableCell value={item.description ?? ""} />
             <ProductActionsCell onDelete={handleDelete} onEdit={handleEdit} />
         </TableRow>
     );

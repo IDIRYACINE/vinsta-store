@@ -2,13 +2,20 @@
 
 import clsx from "clsx"
 import SidebarButton from "./SidebarButton"
-import Panels from "../domain/PanelEntity"
 import ActionButton from "./ActionButton"
 
 
+import { RootState,AppDispatch,} from "@adminapp/store";
+import { useDispatch, useSelector ,TypedUseSelectorHook} from "react-redux";
+
+
+ const useAppDispatch = () => useDispatch<AppDispatch>()
+ const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
 export default function Sidebar() {
-    console.log("client side")
+
+    const panels = useAppSelector(state => state.navigation.panels)
+
     const className = clsx([
         'flex flex-col items-center justify-between p-4 ',
         'w-64 h-full '
@@ -19,7 +26,7 @@ export default function Sidebar() {
         <aside className={className}>
             <ActionButton/>
             {
-                Panels.map((item, index) => {
+                panels.map((item, index) => {
                     return (<SidebarButton panel={item} key={index}  ></SidebarButton>)
                 })
             }

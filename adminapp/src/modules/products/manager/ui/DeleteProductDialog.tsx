@@ -1,32 +1,33 @@
+"use client";
+
 import { BaseContainedButton } from "@adminapp/components/commons/Buttons";
-import { adminContext } from "@adminapp/components/context/AppContext";
 import { Box, Modal, Typography } from "@mui/material";
-import { useContext } from "react";
+
+import { RootState,AppDispatch,closeDeleteProductDialog, deleteProduct} from "@adminapp/store";
+import { useDispatch, useSelector ,TypedUseSelectorHook} from "react-redux";
+
+ const useAppDispatch = () => useDispatch<AppDispatch>()
+ const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
 interface DeleteProductDialogProps {
-    isOpen: boolean
 }
 
 function DeleteProductDialog(props: DeleteProductDialogProps) {
-    const { isOpen } = props
-
-    const { productsState } = adminContext
+    const dispatch = useAppDispatch()
+    const isModalOpen = useAppSelector(state => state.categories.isModalOpen)
 
     function onClose() {
-        productsState.closeModal()
+        dispatch(closeDeleteProductDialog())
     }
 
     function onConfirm() {
-
-        productsState.deleteProduct()
-
-        productsState.closeModal()
+        dispatch(deleteProduct(null))
 
 
     }
 
     return (
-        <Modal open={isOpen}
+        <Modal open={isModalOpen}
             onClose={onClose}>
 
             <Box className="flex flex-col justify-between items-center">

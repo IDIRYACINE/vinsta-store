@@ -1,33 +1,30 @@
 'use client'
 
-import { adminContext } from "@adminapp/components/context/AppContext"
 import { Typography } from "@mui/material"
 import clsx from "clsx"
-import { observer } from "mobx-react"
-import NavigationState from "../sidebar/state/State"
+
+import { RootState,AppDispatch,} from "@adminapp/store";
+import { useDispatch, useSelector ,TypedUseSelectorHook} from "react-redux";
 
 
-interface NavTitleProps {
-    state:NavigationState
-}
+ const useAppDispatch = () => useDispatch<AppDispatch>()
+ const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
+
 
 export default function Navbar() {
+
+    const panel = useAppSelector(state => state.navigation.selectedPanel)
 
     const className = clsx([
         'flex-row p-4 flex-start justify-between bg-blue-500 text-white',
         'w-full h-16 ',
     ])
 
-    const { navState } = adminContext
 
-    const NavTitle = observer((navProps: NavTitleProps) => {
-        const panel = navProps.state.getCurrentPanel()
-        return <Typography variant="h5">{panel.name.value}</Typography>
-    })
 
     return (
         <nav className={className}>
-            <NavTitle state={navState} />
+            <Typography variant="h5">{panel.name.value}</Typography>
         </nav>
     )
 }

@@ -1,24 +1,27 @@
 "use client";
 
-import { adminContext } from "@adminapp/components/context/AppContext";
 import { Button } from "@mui/material"
 import clsx from "clsx";
-import { observer } from "mobx-react"
-import NavigationState from "@adminapp/components/navigation/sidebar/state/State";
 import { useRouter } from 'next/navigation';
-import {PanelEntity} from "../domain/PanelEntity";
+import { Panel } from "../domain/PanelEntity";
 
 
-interface SidebarButtonProps  {
-    panel: PanelEntity;
+import { RootState,AppDispatch,} from "@adminapp/store";
+import { useDispatch, useSelector ,TypedUseSelectorHook} from "react-redux";
+import { setActivePanel } from "@adminapp/store/slices/navigationSlice";
+
+
+ const useAppDispatch = () => useDispatch<AppDispatch>()
+ const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
+
+interface SidebarButtonProps {
+    panel: Panel;
 }
 
-type ViewProps = {
-    state: NavigationState
-}
 
 export default function SidebarButton(props: SidebarButtonProps) {
-    const { navState } = adminContext
+    const selectedPanelId = useAppSelector(state => state.navigation.selectedId)
+    const dispatch = useAppDispatch()
 
     const router = useRouter()
 
@@ -32,21 +35,17 @@ export default function SidebarButton(props: SidebarButtonProps) {
 
 
 
-    const View = observer((viewProps: ViewProps) => {
-        const isSelected = viewProps.state.getCurrentIndex() === props.panel.id.value
+    const isSelected = selectedPanelId.value === props.panel.id.value
 
-        function handleClick() {
-            viewProps.state.setCurrentIndex(props.panel.id.value)
-            router.push(props.panel.path.value)
-        }
+    function handleClick() {
+        dispatch(setActivePanel(props.panel.id))
+        router.push(props.panel.path.value)
+    }
 
-        return (
-            <Button onClick={handleClick} className={isSelected ? activeClassName : passiveClassName} variant="contained" >
-                {props.panel.name.value}
-            </Button>
-        )
-    })
-
-
-    return <View state={navState} />
+    return (
+        <Button onClick={handleClick} className={isSelected ? activeClassName : passiveClassName} variant="contained" >
+            {props.panel.name.value}
+        </Button>
+    )
 }
+

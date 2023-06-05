@@ -7,14 +7,20 @@ import { EditorActions } from "./Actions"
 import { useState } from "react"
 import { ImageManager } from "@adminapp/components/commons/Images"
 import { ProductEditorController } from "../logic/Controller"
-import { adminContext } from "@adminapp/components/context/AppContext"
 import { Repository } from "@vinstacore"
 import { useRouter } from "next/navigation"
 
-function ProductEditor() {
-    const { productsState } = adminContext
 
-    let product = productsState.product as Repository.Product
+import { RootState, AppDispatch, addProduct, } from "@adminapp/store";
+import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
+
+
+ const useAppDispatch = () => useDispatch<AppDispatch>()
+ const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
+
+function ProductEditor() {
+
+    let product = useAppSelector(state => state.products.editedProduct)!
 
     const [name, setName] = useState<string>(product.name)
     const [previewImageUrl, setPreviewImageUrl] = useState<string>("")
@@ -26,6 +32,7 @@ function ProductEditor() {
 
     let controller = new ProductEditorController()
 
+    const dispatch = useAppDispatch()
 
 
     const router = useRouter()
@@ -82,7 +89,7 @@ function ProductEditor() {
             quantity: parseInt(quantity)
         })
 
-        productsState.addProduct(product)
+        dispatch(addProduct(product))
 
         goBack()
     }
