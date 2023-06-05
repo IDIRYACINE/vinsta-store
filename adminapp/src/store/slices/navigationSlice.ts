@@ -12,10 +12,10 @@ export interface NavigationState {
 
 
 export const panels: Panel[] = [
-    { name: { value: "Orders" }, id: { value: 0 }, path: { value: "orders" } },
-    { name: { value: "Products" }, id: { value: 1 }, path: { value: "products" } },
-    { name: { value: "Categories" }, id: { value: 2 }, path: { value: "categories" } },
-    { name: { value: "Discounts" }, id: { value: 3 }, path: { value: "discounts" } }
+    { name: { value: "Orders" }, id: { value: 0 }, path: { value: "admin/orders" } },
+    { name: { value: "Products" }, id: { value: 1 }, path: { value: "admin/products" } },
+    { name: { value: "Categories" }, id: { value: 2 }, path: { value: "admin/categories" } },
+    { name: { value: "Discounts" }, id: { value: 3 }, path: { value: "admin/discounts" } }
 ]
 
 const initialState: NavigationState = {

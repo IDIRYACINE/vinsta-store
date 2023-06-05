@@ -6,12 +6,12 @@ import { EditorActions } from "./Actions"
 import { useState } from "react"
 import { SingleImageField } from "@adminapp/components/commons/Images"
 import { CategoryEditorController } from "../logic/Controller"
-import { Repository } from "@vinstacore"
 import { useRouter } from "next/navigation"
 
 
 import { RootState, AppDispatch, updateCategory, } from "@adminapp/store";
 import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
+import { updateCategoryApi } from "@adminapp/api/api"
 
 
  const useAppDispatch = () => useDispatch<AppDispatch>()
@@ -67,6 +67,8 @@ function CategoryEditor() {
         })
         
         dispatch(updateCategory(category))
+
+        updateCategoryApi(category)
         
 
         goBack()

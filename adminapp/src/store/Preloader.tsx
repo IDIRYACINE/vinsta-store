@@ -14,6 +14,8 @@ function Preloader({ categories,products,orders,panels }: { categories: Reposito
     orders:Repository.Order[],
     panels:Panel[],
 }) {
+
+
     
   const loaded = useRef(false);
 

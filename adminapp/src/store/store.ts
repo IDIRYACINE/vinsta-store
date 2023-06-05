@@ -5,12 +5,18 @@ import productsReducer from './slices/productsSlice'
 import categoriesReducer from './slices/categoriesSlice'
 import navigationReducer from './slices/navigationSlice'
 
+import { categoriesApi } from './services/categoriesApi'
+import { productsApi } from './services/productsApi'
+
+
 export const store = configureStore({
   reducer: {
     orders: ordersReducer,
     products : productsReducer,
     categories : categoriesReducer,
-    navigation : navigationReducer
+    navigation : navigationReducer,
+    [categoriesApi.reducerPath]: categoriesApi.reducer,
+    [productsApi.reducerPath]: productsApi.reducer,
   }
 })
 

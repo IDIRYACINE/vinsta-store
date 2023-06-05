@@ -26,6 +26,7 @@ const categoriesSlice = createSlice({
             state.editedCategory = action.payload;
         },
         addCategory(state, action: PayloadAction<Repository.Category>) {
+            console.log("addCategory", action.payload);
             state.categories.push(action.payload);
         },
         deleteCategory(state, action: PayloadAction<Repository.Category | null>) {
@@ -33,6 +34,8 @@ const categoriesSlice = createSlice({
             if(!targetCategory) return;
 
             state.categories = state.categories.filter((category) => category.id !== targetCategory.id);
+            state.editedCategory = null;
+            state.isModalOpen = false;
         },
         updateCategory(state, action: PayloadAction<Repository.Category>) {
             const index = state.categories.findIndex((category) => category.id === action.payload.id);

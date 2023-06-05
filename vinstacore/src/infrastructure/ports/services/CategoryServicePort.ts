@@ -68,3 +68,23 @@ export interface FindCategoryResponse {
 
 }
 
+
+export function CreateCategoryOptionsFromJson(body: any) {
+    return {
+        name: new CategoryName(body.name),
+        id: new CategoryId(body.id),
+        image: new ImageUrl(body.imageUrl)
+    }
+}
+
+export function UpdateCategoryOptionsFromJson(body: any) :UpdateCategoryProps {
+
+    const updatedFields = body.updatedFields.map((field: any) => {
+        return new UpdatedField(field.fieldName, field.newValue)
+    })
+
+    return {
+        id: new CategoryId(body.id),
+        updatedFields: updatedFields
+    }
+}

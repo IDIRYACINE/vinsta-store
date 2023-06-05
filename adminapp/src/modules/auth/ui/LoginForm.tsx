@@ -4,7 +4,6 @@ import { Button, Card, Box, CardMedia, CardContent, TextField } from "@mui/mater
 import clsx from "clsx";
 import { useState } from "react";
 import { UserEmail, UserPassword } from "vinstacore/src";
-import { AuthContext } from "../logic/AuthContext";
 import { signIn } from "next-auth/react"
 
 function LoginForm() {
@@ -17,12 +16,6 @@ function LoginForm() {
 
   const [email, setEmail] = useState<string>("idiryacinesp@gmail.com")
 
-  function login() {
-    AuthContext.controller.login({
-      password: new UserPassword(password)
-      , email: new UserEmail(email)
-    })
-  }
 
   return (
     <Card>
