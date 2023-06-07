@@ -1,6 +1,8 @@
 import { Repository } from "vinstacore/src";
 
 
+const baseUrl = "http://localhost:3000/api";
+
 export async function createCategoryApi(options: Repository.Category) {
   const response = await fetch("/api/category", {
     method: "POST",
@@ -26,7 +28,7 @@ export async function updateCategoryApi(options: Repository.Category) {
 }
 
 export async function deleteCategoryApi(categoryId: string | undefined) {
-  if(!categoryId) return;
+  if (!categoryId) return;
 
   const response = await fetch(`/api/category?categoryId=${categoryId}`, {
     method: "DELETE",
@@ -35,38 +37,15 @@ export async function deleteCategoryApi(categoryId: string | undefined) {
   return response.json();
 }
 
-export async function createProductApi(options: Repository.Product) {
-  const response = await fetch("/api/product", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(options),
+export async function loadCategoriesApi() {
+  let response = await fetch(`${baseUrl}/category`, {
+    method: "GET",
   });
 
-  return response.json();
+  let json = await response.json();
+
+  return json.data;
 }
-
-export async function updateProductApi(options: Repository.Product) {
-  const response = await fetch("/api/product", {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(options),
-  });
-
-  return response.json();
-}
-
-export async function deleteProductApi(productId: string) {
-  const response = await fetch(`/api/product?productId=${productId}`, {
-    method: "DELETE",
-  });
-
-  return response.json();
-}
-
 
 export async function updateOrderApi(options: Repository.Order) {
   const response = await fetch("/api/order", {

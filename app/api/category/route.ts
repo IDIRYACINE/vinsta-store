@@ -6,14 +6,17 @@ const categoryService:CategoryServicePort = FirebaseAdapter.categoryService();
 
 export async function GET(request: Request) {
 
-    const response = await categoryService.load({
+    let rawData = await categoryService.load({
       page: -1,
       limit: -1
     })
 
 
- 
-  return NextResponse.json({ data:response });
+    const res = NextResponse.json({ data:rawData });
+    res.headers.set('Cache-Control', 'no-store');
+
+
+    return res;
 }
 
 export async function POST(request: Request) {

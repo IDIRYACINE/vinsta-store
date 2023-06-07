@@ -11,16 +11,18 @@ import { Repository } from "@vinstacore"
 import { useRouter } from "next/navigation"
 
 
-import { RootState, AppDispatch, addProduct, } from "@adminapp/store";
+import { RootState, AppDispatch, addProduct, updateProduct, } from "@adminapp/store";
 import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
+import { updateProductApi } from "@adminapp/api/productApi"
 
 
- const useAppDispatch = () => useDispatch<AppDispatch>()
- const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
+const useAppDispatch = () => useDispatch<AppDispatch>()
+const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
 function ProductEditor() {
 
     let product = useAppSelector(state => state.products.editedProduct)!
+    const categoryId = useAppSelector(state => state.products.editedCategoryId)!
 
     const [name, setName] = useState<string>(product.name)
     const [previewImageUrl, setPreviewImageUrl] = useState<string>("")
@@ -89,7 +91,9 @@ function ProductEditor() {
             quantity: parseInt(quantity)
         })
 
-        dispatch(addProduct(product))
+        dispatch(updateProduct(product))
+        updateProductApi({ product, categoryId, productId: product.id })
+
 
         goBack()
     }

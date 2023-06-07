@@ -5,7 +5,7 @@ import { Box, Modal, Typography } from "@mui/material";
 
 import { RootState, AppDispatch, closeDeleteCategoryDialog, deleteCategory } from "@adminapp/store";
 import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
-import { deleteCategoryApi } from "@adminapp/api/api";
+import { deleteCategoryApi } from "@adminapp/api/categoryApi";
 
 const useAppDispatch = () => useDispatch<AppDispatch>()
 const useAppSelector: TypedUseSelectorHook<RootState> = useSelector

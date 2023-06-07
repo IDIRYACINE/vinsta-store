@@ -21,18 +21,20 @@ export class CategoryRepostiroy implements ICategoryRepostiroy {
     async load(options: LoadProps): Promise<Repository.Category[]> {
         const collectionRef = collection(this.firestore, this.categoryCollection);
 
-        return getDocs(collectionRef).then((snapshot) => {
-            const results: Repository.Category[] = [];
+        const snapshot = await getDocs(collectionRef);
 
-            snapshot.forEach((doc) => {
-                const data = doc.data() as Repository.Category;
-                results.push(data);
-            });
+        const results: Repository.Category[] = [];
 
-            return results
-
+        snapshot.forEach((doc) => {
+            const data = doc.data() as Repository.Category;
+            results.push(data);
         });
+
+
+        return results
+
     }
+
 
     async create(options: CreateCategoryProps): Promise<void> {
         const category: Repository.Category = {

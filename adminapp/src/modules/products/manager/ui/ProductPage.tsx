@@ -5,12 +5,11 @@ import clsx from "clsx"
 import ProductManagerHeader from "./ProductManagerHeader"
 import { ProductTable } from "../../table"
 
-import { RootState,AppDispatch,} from "@adminapp/store";
-import { useDispatch, useSelector ,TypedUseSelectorHook} from "react-redux";
+import { RootState, AppDispatch, } from "@adminapp/store";
+import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
 
 
- const useAppDispatch = () => useDispatch<AppDispatch>()
- const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
+const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
 
 import { DeleteProductDialog } from "./DeleteProductDialog"
@@ -29,16 +28,16 @@ function ProductPage() {
 
 
 
-        return (
-            <Box className={className}>
-                <ProductManagerHeader />
-                <ProductTable headersData={headersData} rowsData={products} />
-                <DeleteProductDialog  />
-            </Box>
+    return (
+        <Box className={className}>
+            <ProductManagerHeader />
+            <ProductTable headersData={headersData} rowsData={products} />
+            <DeleteProductDialog />
+        </Box>
 
 
-        )
-    }
+    )
+}
 
 
 

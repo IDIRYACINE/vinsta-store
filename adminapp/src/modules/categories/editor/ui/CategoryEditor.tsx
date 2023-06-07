@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation"
 
 import { RootState, AppDispatch, updateCategory, } from "@adminapp/store";
 import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
-import { updateCategoryApi } from "@adminapp/api/api"
+import { updateCategoryApi } from "@adminapp/api/categoryApi"
 
 
  const useAppDispatch = () => useDispatch<AppDispatch>()

@@ -5,6 +5,7 @@ import { Repository } from "@vinstacore";
 export interface ProductsState {
     products: Repository.Product[];
     editedProduct: Repository.Product | null;
+    editedCategoryId : number | null,
     isModalOpen: boolean;
 }
 
@@ -12,6 +13,7 @@ export interface ProductsState {
 const initialState: ProductsState = {
     products: [],
     editedProduct: null,
+    editedCategoryId : null,
     isModalOpen: false,
 };
 

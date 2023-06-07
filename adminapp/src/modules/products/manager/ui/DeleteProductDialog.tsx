@@ -5,6 +5,7 @@ import { Box, Modal, Typography } from "@mui/material";
 
 import { RootState,AppDispatch,closeDeleteProductDialog, deleteProduct} from "@adminapp/store";
 import { useDispatch, useSelector ,TypedUseSelectorHook} from "react-redux";
+import { deleteProductApi } from "@adminapp/api/productApi";
 
  const useAppDispatch = () => useDispatch<AppDispatch>()
  const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
@@ -14,7 +15,10 @@ interface DeleteProductDialogProps {
 
 function DeleteProductDialog(props: DeleteProductDialogProps) {
     const dispatch = useAppDispatch()
-    const isModalOpen = useAppSelector(state => state.categories.isModalOpen)
+    const isModalOpen = useAppSelector(state => state.products.isModalOpen)
+
+    const categoryId = useAppSelector(state => state.products.editedCategoryId)!
+    const productId = useAppSelector(state => state.products.editedProduct?.id)!
 
     function onClose() {
         dispatch(closeDeleteProductDialog())
@@ -22,7 +26,7 @@ function DeleteProductDialog(props: DeleteProductDialogProps) {
 
     function onConfirm() {
         dispatch(deleteProduct(null))
-
+        deleteProductApi({categoryId,productId})
 
     }
 

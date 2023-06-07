@@ -26,7 +26,6 @@ const categoriesSlice = createSlice({
             state.editedCategory = action.payload;
         },
         addCategory(state, action: PayloadAction<Repository.Category>) {
-            console.log("addCategory", action.payload);
             state.categories.push(action.payload);
         },
         deleteCategory(state, action: PayloadAction<Repository.Category | null>) {

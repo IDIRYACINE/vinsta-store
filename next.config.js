@@ -17,7 +17,8 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     domains: ['images.freeimages.com'],
-}
+  },
+  generateEtags: false
 }
 
 module.exports = nextConfig

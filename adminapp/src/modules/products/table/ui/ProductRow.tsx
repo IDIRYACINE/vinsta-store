@@ -16,9 +16,11 @@ import Image from "next/image";
 import { RootState, AppDispatch, openDeleteProductDialog, setEditedProduct, } from "@adminapp/store";
 import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
 
+import { useRouter } from "next/navigation";
 
- const useAppDispatch = () => useDispatch<AppDispatch>()
- const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
+const useAppDispatch = () => useDispatch<AppDispatch>()
+const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
+
 
 interface ProductActionsCellProps {
     onDelete: () => void;
@@ -71,6 +73,7 @@ interface ProductRowProps {
 function ProductRow(props: ProductRowProps) {
     const { item } = props
     const dispatch = useAppDispatch()
+    const router = useRouter()
 
 
     function handleDelete() {
@@ -79,6 +82,8 @@ function ProductRow(props: ProductRowProps) {
 
     function handleEdit() {
         dispatch(setEditedProduct(item))
+        router.push(`/admin/products/edit/${item.id}`)
+
     }
 
     return (

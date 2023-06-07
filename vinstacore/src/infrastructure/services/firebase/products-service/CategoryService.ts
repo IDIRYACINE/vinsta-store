@@ -25,11 +25,11 @@ export class FirebaseCategoryService implements CategoryServicePort {
         )
     }
     async load(loadProps: LoadCategoryProps): Promise<LoadCategoryResponse> {
-        const data = this.categoryRepo.load(
+        const data = await this.categoryRepo.load(
             loadProps
         )
 
-        return {data }
+        return data
     }
     async find(findProps: FindCategoryProps): Promise<FindCategoryResponse> {
         return this.categoryRepo.find(

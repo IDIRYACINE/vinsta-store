@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation"
 
 import { AppDispatch, addCategory, } from "@adminapp/store";
 import { useDispatch } from "react-redux";
-import { createCategoryApi } from "@adminapp/api/api"
+import { createCategoryApi } from "@adminapp/api/categoryApi"
 
 
 const useAppDispatch = () => useDispatch<AppDispatch>()

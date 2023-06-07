@@ -6,6 +6,8 @@ import { Database, get, ref, remove, set, update } from "firebase/database";
 
 export class ProductRepostiroy  implements IRepository {
 
+    productCollection = "products"
+
     public constructor(private readonly db:Database,private readonly mapper:ProductMapper) {
 
 
@@ -23,7 +25,7 @@ export class ProductRepostiroy  implements IRepository {
         }
     }
     async load(options: LoadProductProps): Promise<LoadResponse> {
-        const productsRef = ref(this.db, options.categoryId.value);
+        const productsRef = ref(this.db, `${this.productCollection}/${options.categoryId.value}`)
 
         return get(productsRef).then((snapshot) => {
             const results: Repository.Product[] = [];
@@ -42,7 +44,8 @@ export class ProductRepostiroy  implements IRepository {
 
     async create(options:  CreateProductProps): Promise<CreateResponse> {
 
-        const productRef = ref(this.db, `${options.cateogryId.value}/${options.productId.value}`)
+
+        const productRef = ref(this.db, `${this.productCollection}/${options.cateogryId.value}/${options.productId.value}`)
 
         const product : Repository.Product = this.mapper.toPersistence(options.product)
 
@@ -53,16 +56,16 @@ export class ProductRepostiroy  implements IRepository {
     }
 
     async update(options:  UpdateProductProps): Promise<UpdateResponse> {
-        const productRef = ref(this.db, `${options.categoryId.value}/${options.productId.value}`);
+        const productRef = ref(this.db, `${this.productCollection}/${options.categoryId.value}/${options.productId.value}`)
         
-        const updateData: Partial<Repository.Product> = options.updatedValues;
+        const updateData: Partial<Repository.Product> = options.updatedFields;
 
 
         return update(productRef, updateData).then(() => ({}));
     }
 
     async delete(options:  DeleteProductProps): Promise<DeleteResponse> {
-        const productRef = ref(this.db, `${options.categoryId.value}/${options.productId.value}`);
+        const productRef = ref(this.db, `${this.productCollection}/${options.categoryId.value}/${options.productId.value}`)
 
         return remove(productRef).then(() => ({}));
     }

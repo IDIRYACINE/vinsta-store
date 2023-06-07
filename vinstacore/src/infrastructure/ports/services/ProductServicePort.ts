@@ -1,5 +1,6 @@
+import { UpdatedField } from "@vinstacore/commons/api.base"
 import { CategoryId } from "@vinstacore/domains/category"
-import { ProductEntity, ProductId } from "@vinstacore/domains/product"
+import { ProductEntity, ProductId, ProductMapper } from "@vinstacore/domains/product"
 import { Repository } from "../IRepositories"
 
 
@@ -34,7 +35,7 @@ export interface CreateProductProps {
 export interface UpdateProductProps { 
     productId :ProductId,
     categoryId :CategoryId,
-    updatedValues : Partial<Repository.Product>
+    updatedFields : Partial<Repository.Product>
 }
 
 export interface DeleteProductProps {
@@ -54,3 +55,29 @@ export interface LoadProductProps {
     categoryId :CategoryId,
     productId : ProductId,
  }
+
+
+ export function CreateProductOptionsFromJson(json: any): CreateProductProps {
+    const product = new ProductMapper().toDomain(json.product)
+
+
+    return {
+        cateogryId : new CategoryId(json.categoryId),
+        productId : new ProductId(json.productId),
+        product :product
+    }
+
+}
+
+export function UpdateProductOptionsFromJson(json: any): UpdateProductProps {
+
+    const updatedFields = json.updatedFields.map((field: any) => {
+        return new UpdatedField(field.fieldName, field.newValue)
+    })
+
+    return {
+        productId : new ProductId(json.productId),
+        categoryId: new CategoryId(json.categoryId),
+        updatedFields: updatedFields
+    }
+}
