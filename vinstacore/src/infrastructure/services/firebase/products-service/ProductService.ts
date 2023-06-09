@@ -1,40 +1,64 @@
-import { IRepository } from "@vinstacore/index";
-import { CreateProductProps, CreateProductResponse, DeleteProductProps, DeleteProductResponse, FindProductProps, FindProductResponse, LoadProductProps, LoadProductResponse, ProductServicePort, UpdateProductProps, UpdateProductResponse } from "@vinstacore/infrastructure/ports/services/ProductServicePort";
+import { UpdatedField } from "@vinstacore/commons/api.base";
+import { CategoryId, IRepository, ProductId, ProductMapper } from "@vinstacore/index";
+import { CreateProductRawProps, CreateProductResponse, DeleteProductRawProps, DeleteProductResponse, FindProductRawProps, FindProductResponse, LoadProductRawProps, LoadProductResponse, ProductServicePort, UpdateProductRawProps, UpdateProductResponse } from "@vinstacore/infrastructure/ports/services/ProductServicePort";
+import { ProductRepostiroy } from "./ProductRepository";
 
 
 export class FirebaseProductService implements ProductServicePort {
 
 
-    constructor(private readonly productsRepo: IRepository) {
+    constructor(private readonly productsRepo: ProductRepostiroy, private readonly productMapper: ProductMapper) {
 
     }
-    find(findProps: FindProductProps): Promise<FindProductResponse> {
+    find(options: FindProductRawProps): Promise<FindProductResponse> {
 
         return this.productsRepo.find(
-            findProps
+            {
+                categoryId: new CategoryId(options.categoryId),
+                productId: new ProductId(options.productId)
+            }
         )
     }
 
-    async create(createProps: CreateProductProps): Promise<CreateProductResponse> {
+    async create(options: CreateProductRawProps): Promise<CreateProductResponse> {
+
 
         return this.productsRepo.create(
-            createProps
+            {
+                categoryId: new CategoryId(options.categoryId),
+                productId: new ProductId(options.productId),
+                product: this.productMapper.toDomain(options.product)
+            }
         )
 
     }
-    update(updateProps: UpdateProductProps): Promise<UpdateProductResponse> {
+    update(options: UpdateProductRawProps): Promise<UpdateProductResponse> {
+
+        const updatedFields = options.updatedFields.map((field: any) => {
+            return new UpdatedField(field.fieldName, field.newValue)
+        })
+
         return this.productsRepo.update(
-            updateProps
+            {
+                categoryId: new CategoryId(options.categoryId),
+                productId: new ProductId(options.productId),
+                updatedFields: updatedFields
+            }
         )
     }
-    delete(deleteProps: DeleteProductProps): Promise<DeleteProductResponse> {
+    delete(options: DeleteProductRawProps): Promise<DeleteProductResponse> {
         return this.productsRepo.delete(
-            deleteProps
+            {
+                categoryId: new CategoryId(options.categoryId),
+                productId: new ProductId(options.productId),
+            }
         )
     }
-    load(loadProps: LoadProductProps): Promise<LoadProductResponse> {
+    load(options: LoadProductRawProps): Promise<LoadProductResponse> {
         return this.productsRepo.load(
-            loadProps
+            {
+                categoryId: new CategoryId(options.categoryId),
+            }
         )
     }
 

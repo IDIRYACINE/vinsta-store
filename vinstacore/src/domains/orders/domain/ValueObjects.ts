@@ -34,14 +34,18 @@ export class OrderItem {
     constructor(
         public readonly productId: string,
         public readonly quantity: number,
-        public readonly price: number
+        public readonly categoryId: string,
+        public readonly price: number,
+        public readonly name: string,
     ) { }
 
     static OrderItemFromPersistence(persistence: Repository.OrderItem): OrderItem {
         return new OrderItem(
             persistence.productId,
             persistence.quantity,
-            persistence.price
+            persistence.categoryId,
+            persistence.price,
+            persistence.name
         )
     }
 }

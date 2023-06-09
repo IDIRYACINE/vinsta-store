@@ -46,6 +46,8 @@ export interface Address {
 export interface OrderItem {
     productId: string,
     quantity: number,
+    categoryId:string,
+    name:string,
     price: number
     images?: string[]
 }

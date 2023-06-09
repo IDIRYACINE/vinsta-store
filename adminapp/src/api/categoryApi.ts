@@ -46,15 +46,3 @@ export async function loadCategoriesApi() {
 
   return json.data;
 }
-
-export async function updateOrderApi(options: Repository.Order) {
-  const response = await fetch("/api/order", {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(options),
-  });
-
-  return response.json();
-}

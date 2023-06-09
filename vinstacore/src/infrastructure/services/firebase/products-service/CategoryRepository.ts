@@ -1,5 +1,5 @@
 import { LoadProps, Repository } from "@vinstacore/index";
-import { CreateCategoryProps, DeleteCategoryProps, FindCategoryProps, ICategoryRepostiroy, UpdateCategoryProps } from "@vinstacore/infrastructure/ports/services/CategoryServicePort";
+import { CreateCategoryProps, CreateCategoryResponse, DeleteCategoryProps, DeleteCategoryResponse, FindCategoryProps, ICategoryRepostiroy, LoadCategoryResponse, UpdateCategoryProps, UpdateCategoryResponse } from "@vinstacore/infrastructure/ports/services/CategoryServicePort";
 
 import { Firestore, getDoc, doc, collection, getDocs, setDoc, updateDoc, deleteDoc } from "firebase/firestore";
 
@@ -18,7 +18,7 @@ export class CategoryRepostiroy implements ICategoryRepostiroy {
 
     }
 
-    async load(options: LoadProps): Promise<Repository.Category[]> {
+    async load(options: LoadProps): Promise<LoadCategoryResponse> {
         const collectionRef = collection(this.firestore, this.categoryCollection);
 
         const snapshot = await getDocs(collectionRef);
@@ -31,12 +31,12 @@ export class CategoryRepostiroy implements ICategoryRepostiroy {
         });
 
 
-        return results
+        return {data:results}
 
     }
 
 
-    async create(options: CreateCategoryProps): Promise<void> {
+    async create(options: CreateCategoryProps): Promise<CreateCategoryResponse> {
         const category: Repository.Category = {
             productCount: 0,
             id: options.id.value,
@@ -46,22 +46,22 @@ export class CategoryRepostiroy implements ICategoryRepostiroy {
 
         const categoryDoc = doc(this.firestore, this.categoryCollection, category.id);
 
-        setDoc(categoryDoc, category).then(() => ({}));
+        return setDoc(categoryDoc, category).then(() => ({}));
     }
 
-    async update(options: UpdateCategoryProps): Promise<void> {
+    async update(options: UpdateCategoryProps): Promise<UpdateCategoryResponse> {
         const categoryDoc = doc(this.firestore, this.categoryCollection, options.id.value);
 
         const updateData: Partial<Repository.Category> = {};
 
 
 
-        updateDoc(categoryDoc, updateData).then(() => ({}));
+        return updateDoc(categoryDoc, updateData).then(() => ({}));
     }
 
-    async delete(options: DeleteCategoryProps): Promise<void> {
+    async delete(options: DeleteCategoryProps): Promise<DeleteCategoryResponse> {
         const categoryDoc = doc(this.firestore, this.categoryCollection, options.id.value);
 
-        deleteDoc(categoryDoc).then(() => ({}));
+        return deleteDoc(categoryDoc).then(() => ({}));
     }
 }

@@ -1,39 +1,60 @@
-import { IRepository } from "@vinstacore/index";
-import { CategoryServicePort, CreateCategoryProps, CreateCategoryResponse, DeleteCategoryProps, DeleteCategoryResponse, FindCategoryProps, FindCategoryResponse, LoadCategoryProps, LoadCategoryResponse, UpdateCategoryProps, UpdateCategoryResponse } from "@vinstacore/infrastructure/ports/services/CategoryServicePort";
+import { UpdatedField } from "@vinstacore/commons/api.base";
+import { ImageUrl } from "@vinstacore/commons/value-objects.base";
+import { CategoryId, CategoryImage, CategoryMapper, CategoryName } from "@vinstacore/index";
+import { CategoryServicePort, CreateCategoryRawProps, CreateCategoryResponse, DeleteCategoryRawProps, DeleteCategoryResponse, FindCategoryRawProps, FindCategoryResponse, LoadCategoryRawProps, LoadCategoryResponse, UpdateCategoryRawProps, UpdateCategoryResponse } from "@vinstacore/infrastructure/ports/services/CategoryServicePort";
+import { CategoryRepostiroy } from "./CategoryRepository";
 
 
 export class FirebaseCategoryService implements CategoryServicePort {
 
 
-    constructor(private readonly categoryRepo: IRepository) {
+    constructor(private readonly categoryRepo: CategoryRepostiroy,
+        private readonly categoryMapper: CategoryMapper
+    ) {
 
     }
 
-    async create(createProps: CreateCategoryProps): Promise<CreateCategoryResponse> {
+    async create(options: CreateCategoryRawProps): Promise<CreateCategoryResponse> {
+
         return this.categoryRepo.create(
-            createProps
+            {
+                name: new CategoryName(options.name),
+                id: new CategoryId(options.id),
+                image: new ImageUrl(options.image)
+            }
         )
     }
-    async update(updateProps: UpdateCategoryProps): Promise<UpdateCategoryResponse> {
+    async update(options: UpdateCategoryRawProps): Promise<UpdateCategoryResponse> {
+
+        const updatedFields = options.updatedFields.map((field: any) => {
+            return new UpdatedField(field.fieldName, field.newValue)
+        })
+
         return this.categoryRepo.update(
-            updateProps
+            {
+                id: new CategoryId(options.id),
+                updatedFields: updatedFields
+            }
         )
     }
-    async delete(deleteProps: DeleteCategoryProps): Promise<DeleteCategoryResponse> {
+    async delete(options: DeleteCategoryRawProps): Promise<DeleteCategoryResponse> {
         return this.categoryRepo.delete(
-            deleteProps
+            {
+                id: new CategoryId(options.id)
+            }
         )
     }
-    async load(loadProps: LoadCategoryProps): Promise<LoadCategoryResponse> {
-        const data = await this.categoryRepo.load(
-            loadProps
+    async load(options: LoadCategoryRawProps): Promise<LoadCategoryResponse> {
+        return await this.categoryRepo.load(
+            {}
         )
 
-        return data
     }
-    async find(findProps: FindCategoryProps): Promise<FindCategoryResponse> {
+    async find(options: FindCategoryRawProps): Promise<FindCategoryResponse> {
         return this.categoryRepo.find(
-            findProps
+            {
+                id: new CategoryId(options.id)
+            }
         )
     }
 

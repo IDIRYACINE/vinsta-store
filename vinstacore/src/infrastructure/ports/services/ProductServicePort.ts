@@ -4,7 +4,7 @@ import { ProductEntity, ProductId, ProductMapper } from "@vinstacore/domains/pro
 import { Repository } from "../IRepositories"
 
 
-export interface IProductRepository{
+export interface IProductRepository {
     find(options: FindProductProps): Promise<FindProductResponse>
     load(options: LoadProductProps): Promise<LoadProductResponse>
     create(options: CreateProductProps): Promise<CreateProductResponse>
@@ -14,70 +14,78 @@ export interface IProductRepository{
 
 
 export interface ProductServicePort {
-    create(createProps: CreateProductProps): Promise<CreateProductResponse>
-    update(updateProps: UpdateProductProps): Promise<UpdateProductResponse>
-    delete(deleteProps: DeleteProductProps): Promise<DeleteProductResponse>
-    load(loadProps: LoadProductProps): Promise<LoadProductResponse>
-    find (findProps : FindProductProps) : Promise<FindProductResponse>
+    create(options: CreateProductRawProps): Promise<CreateProductResponse>
+    update(options: UpdateProductRawProps): Promise<UpdateProductResponse>
+    delete(options: DeleteProductRawProps): Promise<DeleteProductResponse>
+    load(options: LoadProductRawProps): Promise<LoadProductResponse>
+    find(options: FindProductRawProps): Promise<FindProductResponse>
 }
 
-export interface FindProductResponse{
-    product? : ProductEntity 
+
+export interface CreateProductProps {
+    categoryId: CategoryId,
+    productId: ProductId,
+    product: ProductEntity
+
 }
 
-export interface CreateProductProps { 
-    cateogryId : CategoryId,
-    productId : ProductId,
-    product : ProductEntity
-    
-}
-
-export interface UpdateProductProps { 
-    productId :ProductId,
-    categoryId :CategoryId,
-    updatedFields : Partial<Repository.Product>
+export interface UpdateProductProps {
+    productId: ProductId,
+    categoryId: CategoryId,
+    updatedFields: Partial<Repository.Product>
 }
 
 export interface DeleteProductProps {
-    productId :ProductId,
-    categoryId :CategoryId
- }
+    productId: ProductId,
+    categoryId: CategoryId
+}
+
+
+export interface LoadProductProps {
+    categoryId: CategoryId
+}
+
+export interface FindProductProps {
+    categoryId: CategoryId,
+    productId: ProductId,
+}
+
+export interface CreateProductRawProps {
+    categoryId: string,
+    productId: string,
+    product: Repository.Product
+
+}
+
+export interface UpdateProductRawProps {
+    productId: string,
+    categoryId: string,
+    updatedFields: any
+}
+
+export interface DeleteProductRawProps {
+    productId: string,
+    categoryId: string
+}
+export interface LoadProductRawProps {
+    categoryId: string
+}
+
+export interface FindProductRawProps {
+    categoryId: string,
+    productId: string,
+}
+
 export interface CreateProductResponse { }
 export interface UpdateProductResponse { }
 export interface DeleteProductResponse { }
 
 export interface LoadProductResponse { }
-export interface LoadProductProps {
-    categoryId : CategoryId
- }
-
- export interface FindProductProps{
-    categoryId :CategoryId,
-    productId : ProductId,
- }
 
 
- export function CreateProductOptionsFromJson(json: any): CreateProductProps {
-    const product = new ProductMapper().toDomain(json.product)
-
-
-    return {
-        cateogryId : new CategoryId(json.categoryId),
-        productId : new ProductId(json.productId),
-        product :product
-    }
-
+export interface FindProductResponse {
+    product?: ProductEntity
 }
-
-export function UpdateProductOptionsFromJson(json: any): UpdateProductProps {
-
-    const updatedFields = json.updatedFields.map((field: any) => {
-        return new UpdatedField(field.fieldName, field.newValue)
-    })
-
-    return {
-        productId : new ProductId(json.productId),
-        categoryId: new CategoryId(json.categoryId),
-        updatedFields: updatedFields
-    }
+export interface FindProductResponse {
+    product?: ProductEntity
 }

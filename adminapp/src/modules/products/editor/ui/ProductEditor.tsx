@@ -19,7 +19,12 @@ import { updateProductApi } from "@adminapp/api/productApi"
 const useAppDispatch = () => useDispatch<AppDispatch>()
 const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
-function ProductEditor() {
+interface ProductEditorProps {
+    categories: Repository.Category[]
+}
+
+function ProductEditor(props:ProductEditorProps) {
+    const {categories} = props
 
     let product = useAppSelector(state => state.products.editedProduct)!
     const categoryId = useAppSelector(state => state.products.editedCategoryId)!

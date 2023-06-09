@@ -21,13 +21,13 @@ export function buildProductService(firebaseApp: FirebaseApp): ProductServicePor
     }
 
     const db = getDatabase(firebaseApp)
-    const firestore = getFirestore(firebaseApp)
     const productMapper = new ProductMapper();
 
     const productRepo = new ProductRepostiroy(db, productMapper);
 
     productService = new FirebaseProductService(
-        productRepo
+        productRepo,
+        productMapper
     );
 
     return productService;
@@ -47,6 +47,8 @@ export function buildCategoryService(firebaseApp: FirebaseApp): CategoryServiceP
 
     categoryService = new FirebaseCategoryService(
         categoryRepo,
+        categoryMapper
+        
 
     );
 

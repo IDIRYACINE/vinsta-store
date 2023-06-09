@@ -7,19 +7,19 @@ import { Repository } from "../IRepositories"
 
 
 export interface CategoryServicePort {
-    create(createProps: CreateCategoryProps): Promise<CreateCategoryResponse>
-    update(updateProps: UpdateCategoryProps): Promise<UpdateCategoryResponse>
-    delete(deleteProps: DeleteCategoryProps): Promise<DeleteCategoryResponse>
-    load(loadProps: LoadCategoryProps): Promise<LoadCategoryResponse>
-    find(findProps: FindCategoryProps): Promise<FindCategoryResponse>
+    create(options: CreateCategoryRawProps): Promise<CreateCategoryResponse>
+    update(options: UpdateCategoryRawProps): Promise<UpdateCategoryResponse>
+    delete(options: DeleteCategoryRawProps): Promise<DeleteCategoryResponse>
+    load(options: LoadCategoryRawProps): Promise<LoadCategoryResponse>
+    find(options: FindCategoryRawProps): Promise<FindCategoryResponse>
 
 }
 
 export interface ICategoryRepostiroy {
-    create(createProps: CreateCategoryProps): Promise<void>
-    update(updateProps: UpdateCategoryProps): Promise<void>
-    delete(deleteProps: DeleteCategoryProps): Promise<void>
-    load(loadProps: LoadCategoryProps): Promise<Repository.Category[]>
+    create(createProps: CreateCategoryProps): Promise<CreateCategoryResponse>
+    update(updateProps: UpdateCategoryProps): Promise<UpdateCategoryResponse>
+    delete(deleteProps: DeleteCategoryProps): Promise<DeleteCategoryResponse>
+    load(loadProps: LoadCategoryProps): Promise<LoadCategoryResponse>
     find(findProps: FindCategoryProps): Promise<Repository.Category>
 }
 
@@ -45,6 +45,30 @@ export interface FindCategoryProps {
     id: CategoryId
 }
 
+
+export interface CreateCategoryRawProps {
+    name: string,
+    id: string,
+    image: string
+}
+
+export interface UpdateCategoryRawProps {
+    id: string,
+    updatedFields: any
+}
+export interface DeleteCategoryRawProps {
+    id: string
+}
+export interface LoadCategoryRawProps {
+    page: number,
+    limit: number
+}
+
+export interface FindCategoryRawProps {
+    id: string
+}
+
+
 export interface CreateCategoryResponse {
     // status: OperationStatus
 }
@@ -68,23 +92,3 @@ export interface FindCategoryResponse {
 
 }
 
-
-export function CreateCategoryOptionsFromJson(body: any) {
-    return {
-        name: new CategoryName(body.name),
-        id: new CategoryId(body.id),
-        image: new ImageUrl(body.imageUrl)
-    }
-}
-
-export function UpdateCategoryOptionsFromJson(body: any) :UpdateCategoryProps {
-
-    const updatedFields = body.updatedFields.map((field: any) => {
-        return new UpdatedField(field.fieldName, field.newValue)
-    })
-
-    return {
-        id: new CategoryId(body.id),
-        updatedFields: updatedFields
-    }
-}
