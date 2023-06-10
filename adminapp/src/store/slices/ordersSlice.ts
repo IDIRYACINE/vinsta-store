@@ -1,19 +1,21 @@
 import { OrderStatus, orderStatusfromString } from "@adminapp/modules/orders/domain/OrderStatus";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import {  Repository } from "@vinstacore";
+import { Repository } from "@vinstacore";
 
 export interface OrdersState {
     orders: Repository.Order[];
     editedOrder: Repository.Order | null;
-    selectedOrderStatus : OrderStatus;
+    selectedOrderStatus: OrderStatus;
+    isModalOpen: boolean;
 }
 
 
 const initialState: OrdersState = {
     orders: [],
     editedOrder: null,
-    selectedOrderStatus : orderStatusfromString("confirmed")
+    isModalOpen: false,
+    selectedOrderStatus: orderStatusfromString("confirmed")
 };
 
 const ordersSlice = createSlice({
@@ -42,10 +44,25 @@ const ordersSlice = createSlice({
             if (index !== -1) {
                 state.orders[index] = action.payload;
             }
+        },
+        openUpdateOrderStatusModal(state, action: PayloadAction<Repository.Order>) {
+            state.editedOrder = action.payload;
+            state.isModalOpen = true;
+        }
+        ,
+        closeUpdateOrderStatusModal(state) {
+            state.isModalOpen = false;
+        },
+        updateOrderStatus(state, action: PayloadAction<OrderStatus>) {
+            const index = state.orders.findIndex((order) => order.header.id === state.editedOrder?.header.id);
+            if (index !== -1) {
+                state.orders[index].header.status = action.payload.name;
+            }
         }
 
     }
 });
 
-export const { setOrders,setSelectedOrderStatus, setEditedOrder, addOrder, removeOrder, updateOrder } = ordersSlice.actions;
+export const { setOrders, setSelectedOrderStatus, setEditedOrder, addOrder, removeOrder, updateOrder } = ordersSlice.actions;
+export const { closeUpdateOrderStatusModal, openUpdateOrderStatusModal,updateOrderStatus } = ordersSlice.actions;
 export default ordersSlice.reducer;

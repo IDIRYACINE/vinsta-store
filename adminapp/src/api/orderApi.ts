@@ -4,6 +4,18 @@ interface DeleteOrderApiOptions {
     orderId: string | number;
 }
 
+
+type PartialOrder = Omit<Repository.Order, "header" | "shipping" | "items"> & {
+    header?: Partial<Repository.OrderHeader>;
+    shipping?: Partial<Repository.Address>;
+    items?: Partial<Repository.OrderItem>[];
+};
+
+
+interface UpdateOrderApiOptions {
+    orderId: string | number;
+    updatedFields: PartialOrder;
+}
 interface CreateOrderApiOptions {
     order: Repository.Order;
 }
@@ -15,7 +27,7 @@ interface LoadOrderApiOptions {
 const baseUrl = `http://localhost:3000/api/order`
 
 
-export async function findOrderApi(props:LoadOrderApiOptions) : Promise<Repository.Order>{
+export async function findOrderApi(props: LoadOrderApiOptions): Promise<Repository.Order> {
     const targetUrl = `${baseUrl}?OrderId=${props.orderId}`
     let response = await fetch(targetUrl, {
         method: "GET",
@@ -49,7 +61,7 @@ export async function createOrderApi(options: CreateOrderApiOptions) {
     return response.json();
 }
 
-export async function updateOrderApi(options: DeleteOrderApiOptions) {
+export async function updateOrderApi(options: UpdateOrderApiOptions) {
     const response = await fetch(baseUrl, {
         method: "PUT",
         headers: {

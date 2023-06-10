@@ -4,6 +4,7 @@ import clsx from "clsx"
 import {  Repository } from "@vinstacore"
 import OrdersTable from "../components/table/ui/OrdersTable"
 import { useAppSelector } from "@adminapp/store/clientHooks";
+import { UpdateOrderStatusDialog } from "../components/common/UpdateOrderStatusDialog";
 
 
 interface OrderPageProps {
@@ -24,6 +25,7 @@ function OrdersPage() {
     return (
         <div className={className}>
             <OrdersTable headersData={headersData} rowsData={ordersHeaders} />
+            <UpdateOrderStatusDialog/>
         </div>
     )
 }
