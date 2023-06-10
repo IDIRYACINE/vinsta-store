@@ -1,19 +1,31 @@
+'use client';
+
 import clsx from "clsx"
-import { mockOrderHeaders } from "../components/table/domain/TableEntity"
+import {  Repository } from "@vinstacore"
 import OrdersTable from "../components/table/ui/OrdersTable"
+import { useAppSelector } from "@adminapp/store/clientHooks";
 
-function OrdersPage(){
 
-    const headersData = ["Order ID", "Order Date","Status", "Totale"]
-    const rows = mockOrderHeaders()
+interface OrderPageProps {
+    ordersHeaders: Repository.OrderHeader[]
+}
+
+function OrdersPage() {
+    const orderStatus = useAppSelector(state => state.orders.selectedOrderStatus)
+
+    const ordersHeaders = useAppSelector(state => state.orders.orders
+        .filter(order => order.header.status === orderStatus.name)
+        .map(order => order.header))
+
+    const headersData = ["Order ID", "Order Date", "Status", "Totale"]
 
     const className = clsx(["p-4 flex flex-col justify-center items-center"])
 
     return (
         <div className={className}>
-        <OrdersTable headersData={headersData} rowsData={rows} />
+            <OrdersTable headersData={headersData} rowsData={ordersHeaders} />
         </div>
     )
 }
 
-export {OrdersPage}
+export { OrdersPage }

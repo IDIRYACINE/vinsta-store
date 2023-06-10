@@ -41,9 +41,9 @@ export class FirebaseOrderService implements OrderServicePort {
                 }
             })
         })
-        
+
         return this.delete({
-            orderId:options.orderId
+            orderId: options.orderId
         })
     }
 

@@ -5,12 +5,9 @@ import { ImageManager } from "@adminapp/components/commons/Images"
 import { Card, Box } from "@mui/material"
 
 
-import { RootState, AppDispatch, addProduct, } from "@adminapp/store";
-import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
+import {  addProduct, } from "@adminapp/store";
+import { useAppDispatch, useAppSelector } from "@adminapp/store/clientHooks";
 
-
-const useAppDispatch = () => useDispatch<AppDispatch>()
-const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
 import { useState } from "react"
 import { ProductEditorController } from "../logic/Controller"

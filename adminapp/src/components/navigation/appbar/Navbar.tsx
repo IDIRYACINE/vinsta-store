@@ -2,21 +2,14 @@
 
 import { Typography } from "@mui/material"
 import clsx from "clsx"
-
-import { RootState,AppDispatch,} from "@adminapp/store";
-import { useDispatch, useSelector ,TypedUseSelectorHook} from "react-redux";
-
-
- const useAppDispatch = () => useDispatch<AppDispatch>()
- const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
-
+import { useAppSelector } from "@adminapp/store/clientHooks";
 
 export default function Navbar() {
 
     const panel = useAppSelector(state => state.navigation.selectedPanel)
 
     const className = clsx([
-        'flex-row p-4 flex-start justify-between bg-blue-500 text-white',
+        'flex-row p-4 flex-start justify-between bg-purple-500 text-white',
         'w-full h-16 ',
     ])
 

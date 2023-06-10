@@ -1,11 +1,25 @@
-import { OrdersPage } from "@adminapp"
+import { loadOrdersApi, OrdersPage, panels, setOrders, store } from "@adminapp"
+import Preloader from "adminapp/src/store/Preloader"
 
-function Page(){
+async function Page() {
+
+    const orders = (await loadOrdersApi())
+    store.dispatch(setOrders(orders))
+    const ordersHeaders = orders.map(order => order.header)
 
 
+
+    const preloaderProps = {
+        orders: orders,
+        panels: panels,
+    }
 
     return (
-        <OrdersPage/>
+        <>
+            <Preloader {...preloaderProps} />
+
+            <OrdersPage ordersHeaders={ordersHeaders} />
+        </>
     )
 }
 

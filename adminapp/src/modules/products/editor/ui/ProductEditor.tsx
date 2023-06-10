@@ -11,13 +11,10 @@ import { Repository } from "@vinstacore"
 import { useRouter } from "next/navigation"
 
 
-import { RootState, AppDispatch, addProduct, updateProduct, } from "@adminapp/store";
-import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
+import { addProduct, updateProduct, } from "@adminapp/store";
 import { updateProductApi } from "@adminapp/api/productApi"
+import { useAppDispatch, useAppSelector } from "@adminapp/store/clientHooks";
 
-
-const useAppDispatch = () => useDispatch<AppDispatch>()
-const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
 interface ProductEditorProps {
     categories: Repository.Category[]

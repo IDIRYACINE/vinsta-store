@@ -12,12 +12,9 @@ import Image from "next/image";
 import {useRouter} from "next/navigation"
 
 
-import { RootState, AppDispatch, openDeleteCategoryDialog, setEditedCategory, } from "@adminapp/store";
-import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
+import {   openDeleteCategoryDialog, setEditedCategory, } from "@adminapp/store";
+import { useAppDispatch, useAppSelector } from "@adminapp/store/clientHooks";
 
-
- const useAppDispatch = () => useDispatch<AppDispatch>()
- const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
 interface CategoryActionsCellProps {
     onDelete: () => void;
@@ -80,7 +77,7 @@ function CategoryRow(props: CategoryRowProps) {
 
     function handleEdit() {
         dispatch(setEditedCategory(item))
-        router.push(`/admin/categories/edit/${item.id}`)
+        router.replace(`/admin/categories/edit/${item.id}`)
 
     }
 

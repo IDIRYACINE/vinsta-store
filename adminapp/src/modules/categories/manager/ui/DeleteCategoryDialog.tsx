@@ -3,12 +3,10 @@
 import { BaseContainedButton } from "@adminapp/components/commons/Buttons";
 import { Box, Modal, Typography } from "@mui/material";
 
-import { RootState, AppDispatch, closeDeleteCategoryDialog, deleteCategory } from "@adminapp/store";
-import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
+import {   closeDeleteCategoryDialog, deleteCategory } from "@adminapp/store";
+import { useAppDispatch, useAppSelector } from "@adminapp/store/clientHooks";
 import { deleteCategoryApi } from "@adminapp/api/categoryApi";
 
-const useAppDispatch = () => useDispatch<AppDispatch>()
-const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
 interface DeleteCategoryDialogProps {
 }

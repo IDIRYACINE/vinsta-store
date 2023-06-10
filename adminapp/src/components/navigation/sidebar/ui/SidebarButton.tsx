@@ -1,18 +1,13 @@
 "use client";
 
+import { setActivePanel } from "@adminapp/store";
+import { useAppDispatch, useAppSelector } from "@adminapp/store/clientHooks";
 import { Button } from "@mui/material"
 import clsx from "clsx";
 import { useRouter } from 'next/navigation';
 import { Panel } from "../domain/PanelEntity";
 
 
-import { RootState,AppDispatch,} from "@adminapp/store";
-import { useDispatch, useSelector ,TypedUseSelectorHook} from "react-redux";
-import { setActivePanel } from "@adminapp/store/slices/navigationSlice";
-
-
- const useAppDispatch = () => useDispatch<AppDispatch>()
- const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
 interface SidebarButtonProps {
     panel: Panel;
@@ -39,7 +34,7 @@ export default function SidebarButton(props: SidebarButtonProps) {
 
     function handleClick() {
         dispatch(setActivePanel(props.panel.id))
-        router.push(props.panel.path.value)
+        router.replace(props.panel.path.value)
     }
 
     return (

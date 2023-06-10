@@ -23,7 +23,7 @@ export default function OrdersTable(props: TableProps) {
   const router = useRouter()
 
   function handleRowClick(orderHeader: Repository.OrderHeader) {
-    router.push(
+    router.replace(
       `/admin/orders/${orderHeader.id}`
     )
   }

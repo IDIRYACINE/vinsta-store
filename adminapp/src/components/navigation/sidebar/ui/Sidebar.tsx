@@ -3,14 +3,8 @@
 import clsx from "clsx"
 import SidebarButton from "./SidebarButton"
 import ActionButton from "./ActionButton"
+import { useAppSelector } from "@adminapp/store/clientHooks"
 
-
-import { RootState,AppDispatch,} from "@adminapp/store";
-import { useDispatch, useSelector ,TypedUseSelectorHook} from "react-redux";
-
-
- const useAppDispatch = () => useDispatch<AppDispatch>()
- const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
 export default function Sidebar() {
 
@@ -24,7 +18,7 @@ export default function Sidebar() {
 
     return (
         <aside className={className}>
-            <ActionButton/>
+            <ActionButton />
             {
                 panels.map((item, index) => {
                     return (<SidebarButton panel={item} key={index}  ></SidebarButton>)

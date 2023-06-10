@@ -4,26 +4,36 @@ import { useRef } from "react";
 import { store } from "./store";
 import { Repository } from "@vinstacore";
 import { Panel } from "@adminapp/components/navigation";
-import { setOrders } from "./slices/ordersSlice";
+import { setOrders, setSelectedOrderStatus } from "./slices/ordersSlice";
 import { setProducts } from "./slices/productsSlice";
 import { setCategories } from "./slices/categoriesSlice";
 import { setPanels } from "./slices/navigationSlice";
-
-function Preloader({ categories,products,orders,panels }: { categories: Repository.Category[],
-    products:Repository.Product[],
-    orders:Repository.Order[],
-    panels:Panel[],
-}) {
+import { orderStatusfromString } from "@adminapp/modules/orders/domain/OrderStatus";
 
 
-    
+interface PreloaderProps {
+  categories?: Repository.Category[],
+  products?: Repository.Product[],
+  orders?: Repository.Order[],
+  panels?: Panel[],
+}
+
+function Preloader({ categories, products, orders, panels }: PreloaderProps) {
+
+
+
   const loaded = useRef(false);
 
   if (!loaded.current) {
-    store.dispatch(setOrders(orders));
-    store.dispatch(setProducts(products));
-    store.dispatch(setCategories(categories));
-    store.dispatch(setPanels(panels));
+
+    if (categories !== undefined) store.dispatch(setCategories(categories));
+    if (products !== undefined) store.dispatch(setProducts(products));
+    if (orders !== undefined) {
+      store.dispatch(setOrders(orders));
+      store.dispatch(setSelectedOrderStatus(orderStatusfromString("confirmed")))
+
+    }
+    if (panels !== undefined) store.dispatch(setPanels(panels));
 
     loaded.current = true;
   }

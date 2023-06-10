@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 function ProductManagerHeader() {
     const router = useRouter()
     function navigateToProductCreator() {
-        router.push(ProductRoutes.create);
+        router.replace(ProductRoutes.create);
 
     }
     return (

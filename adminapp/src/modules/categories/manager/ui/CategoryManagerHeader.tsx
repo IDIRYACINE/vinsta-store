@@ -11,7 +11,7 @@ function CategoryManagerHeader() {
     const router = useRouter()
 
     function navigateToCategoryCreator() {
-        router.push(CategoryRoutes.create);
+        router.replace(CategoryRoutes.create);
     }
 
     return (

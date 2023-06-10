@@ -16,22 +16,4 @@ function orderToRowData(orderHeader: Repository.OrderHeader): RowData[] {
 }
 
 
-function mockOrderHeaders(): Repository.OrderHeader[] {
-
-    const orders = mockOrders.map(raw => {
-        return raw.header
-    })
-
-    return orders
-}
-
-function mockOrderRows() : Repository.Order[] {
-
-    const orders = mockOrders.map(raw => {
-        return raw
-    })
-
-    return orders
-}
-
-export { mockOrderHeaders ,mockOrderRows, orderToRowData }
+export { orderToRowData }

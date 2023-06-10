@@ -13,13 +13,12 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Image from "next/image";
 
 
-import { RootState, AppDispatch, openDeleteProductDialog, setEditedProduct, } from "@adminapp/store";
-import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
+import { openDeleteProductDialog, setEditedProduct, } from "@adminapp/store";
+import { useAppDispatch, useAppSelector } from "@adminapp/store/clientHooks";
+
 
 import { useRouter } from "next/navigation";
 
-const useAppDispatch = () => useDispatch<AppDispatch>()
-const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
 
 interface ProductActionsCellProps {
@@ -82,7 +81,7 @@ function ProductRow(props: ProductRowProps) {
 
     function handleEdit() {
         dispatch(setEditedProduct(item))
-        router.push(`/admin/products/edit/${item.id}`)
+        router.replace(`/admin/products/edit/${item.id}`)
 
     }
 
