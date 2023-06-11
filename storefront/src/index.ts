@@ -1,2 +1,3 @@
 
-export * from "./components/DefaultLayout"
+export * from "./context/StoreLayout"
+export * from "./modules/homepage"

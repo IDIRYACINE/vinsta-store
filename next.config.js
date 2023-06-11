@@ -5,7 +5,7 @@ const nextConfig = {
   webpack(config){
     config.resolve.alias['@adminapp'] = path.join(__dirname, './adminapp/src');
     config.resolve.alias['@vinstacore'] = path.join(__dirname, './vinstacore/src');
-    config.resolve.alias['@storeapp'] = path.join(__dirname, './storeapp');
+    config.resolve.alias['@storefront'] = path.join(__dirname, './storefront/src');
     config.resolve.alias['@pages'] = path.join(__dirname, './pages');
 
     

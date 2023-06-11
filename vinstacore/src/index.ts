@@ -9,5 +9,5 @@ export * from './infrastructure/ports/services/UserServicePort'
 export * from './infrastructure/ports/services/CategoryServicePort'
 export * from './infrastructure/ports/services/ProductServicePort'
 export * from './infrastructure/ports/services/OrdersServicePort'
-
+export * from './application/PanelEntity'
 export * from './infrastructure/services/firebase'

@@ -25,8 +25,8 @@
       "@adminapp": [
         "./adminapp/src/"
       ],
-      "@storeapp": [
-        "./storeapp/"
+      "@storefront": [
+        "./storefront/src/"
       ],
       "@store": [
         "./storefront/src/"

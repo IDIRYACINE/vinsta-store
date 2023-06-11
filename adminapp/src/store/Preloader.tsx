@@ -2,8 +2,7 @@
 
 import { useRef } from "react";
 import { store } from "./store";
-import { Repository } from "@vinstacore";
-import { Panel } from "@adminapp/components/navigation";
+import { Repository ,Panel} from "@vinstacore";
 import { setOrders, setSelectedOrderStatus } from "./slices/ordersSlice";
 import { setProducts } from "./slices/productsSlice";
 import { setCategories } from "./slices/categoriesSlice";

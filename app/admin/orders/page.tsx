@@ -18,7 +18,7 @@ async function Page() {
         <>
             <Preloader {...preloaderProps} />
 
-            <OrdersPage ordersHeaders={ordersHeaders} />
+            <OrdersPage  />
         </>
     )
 }

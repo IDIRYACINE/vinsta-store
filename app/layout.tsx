@@ -1,7 +1,7 @@
 'use client'
 
-import { SessionProvider } from 'next-auth/react';
 import './globals.css';
+import { StoreLayout } from '@storefront';
 
 interface RootLayoutProps {
     children: React.ReactNode;
@@ -15,9 +15,9 @@ export default function RootLayout({
     return (
         <html lang="en" >
             <body>
-                <SessionProvider>
+                <StoreLayout>
                     {children}
-                </SessionProvider>
+                </StoreLayout>
             </body>
         </html>
     );
