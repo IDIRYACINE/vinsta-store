@@ -7,15 +7,19 @@ interface DeleteProductApiOptions {
 
 interface CreateProductApiOptions {
   categoryId: string | number;
-  productId : string | number;
+  productId: string | number;
   product: Repository.Product;
 }
 
+interface LoadProductsApiOptions {
+  categoryId: string | number
+}
 
+const baseUrl = "/api/product";
 
 
 export async function createProductApi(options: CreateProductApiOptions) {
-  const response = await fetch("/api/product", {
+  const response = await fetch(baseUrl, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -27,7 +31,7 @@ export async function createProductApi(options: CreateProductApiOptions) {
 }
 
 export async function updateProductApi(options: CreateProductApiOptions) {
-  const response = await fetch("/api/product", {
+  const response = await fetch(baseUrl, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -39,10 +43,19 @@ export async function updateProductApi(options: CreateProductApiOptions) {
 }
 
 export async function deleteProductApi(options: DeleteProductApiOptions) {
-  const response = await fetch(`/api/product?productId=${options.productId}cateoryId=${options.categoryId}`, {
+  const response = await fetch(`${baseUrl}?productId=${options.productId}cateoryId=${options.categoryId}`, {
     method: "DELETE",
   });
 
   return response.json();
 }
 
+export async function loadProductsApi(options: LoadProductsApiOptions): Promise<Repository.Product[]> {
+  let response = await fetch(`${baseUrl}?categoryId=${options.categoryId}`, {
+    method: "GET",
+  });
+
+  let json = await response.json();
+
+  return json.data;
+}

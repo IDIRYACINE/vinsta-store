@@ -8,7 +8,8 @@ export function HeroSection(){
         "backgroundImage" : "url('images/heroBackground.jpg')",
         "backgroundSize" : "cover",
         "height" : "100vh",
-        "width" : "100vw"
+        "width" : "100vw",
+        "marginTop" : "2rem"
     }
 
     return (

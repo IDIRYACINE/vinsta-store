@@ -1,18 +1,19 @@
 "use client"
 
 import { Grid, Typography, Box } from "@mui/material";
-import { useAppSelector } from "@storefront/store";
-import { CategoryCard } from "./CategoryCard";
+import { useAppDispatch, useAppSelector } from "@storefront/store";
+import { ProductCard } from "./ProductCard";
 
 
 
-export function CategoryGrid() {
+export function ProductGrid() {
     let maxHorizontalCards = 2;
 
-    const categories = useAppSelector(
+    let products = useAppSelector(
         state =>
-            state.products.categories
-                .filter(category => category.productCount > 0)
+            state.products.products
+                .filter(products => products.categoryId === state.products.displayedCategory)
+                [0].products
     );
 
     const continerStyle = {
@@ -25,10 +26,10 @@ export function CategoryGrid() {
     }
 
 
-    if (categories.length === 0) {
+    if (products.length === 0) {
         return (
             <Box sx={continerStyle}>
-                <Typography variant="h4">No categories found</Typography>
+                <Typography variant="h4">No products found</Typography>
             </Box>
         )
     }
@@ -36,10 +37,10 @@ export function CategoryGrid() {
     return (
         <Grid sx={continerStyle} container spacing={maxHorizontalCards}>
             {
-                categories.map(category => {
+                products.map(product => {
                     return (
-                        <Grid item key={category.id} xs={12} sm={6} md={4} lg={3} xl={2}>
-                            <CategoryCard category={category} />
+                        <Grid item key={product.id} xs={12} sm={6} md={4} lg={3} xl={2}>
+                            <ProductCard product={product} />
                         </Grid>
                     )
                 })

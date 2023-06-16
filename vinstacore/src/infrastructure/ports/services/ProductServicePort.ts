@@ -68,7 +68,7 @@ export interface DeleteProductRawProps {
     categoryId: string
 }
 export interface LoadProductRawProps {
-    categoryId: string
+    categoryId: string 
 }
 
 export interface FindProductRawProps {

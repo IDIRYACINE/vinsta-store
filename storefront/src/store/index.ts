@@ -7,3 +7,4 @@ export * from "./slices/navigationSlice";
 export * from "./clientHooks";
 export * from "./services/categoriesApi";
 export * from "./services/productsApi";
+export * from "./Preloader"

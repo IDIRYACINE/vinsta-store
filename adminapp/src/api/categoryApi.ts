@@ -37,7 +37,7 @@ export async function deleteCategoryApi(categoryId: string | undefined) {
   return response.json();
 }
 
-export async function loadCategoriesApi() {
+export async function loadCategoriesApi(): Promise<Repository.Category[]> {
   let response = await fetch(`${baseUrl}/category`, {
     method: "GET",
   });

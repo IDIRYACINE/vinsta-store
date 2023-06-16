@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef } from "react";
 import { Repository, Panel } from "@vinstacore";
+import { setCategories, useAppDispatch } from ".";
 
 
 interface PreloaderProps {
@@ -13,14 +13,13 @@ interface PreloaderProps {
 function Preloader({ categories, products, panels }: PreloaderProps) {
 
 
+    const dispatch = useAppDispatch();
 
-    const loaded = useRef(false);
-
-    if (!loaded.current) {
-
-
-        loaded.current = true;
+    if (categories != undefined) {
+        dispatch(setCategories(categories));
     }
+
+
 
     return null;
 }
