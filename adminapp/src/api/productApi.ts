@@ -51,9 +51,15 @@ export async function deleteProductApi(options: DeleteProductApiOptions) {
 }
 
 export async function loadProductsApi(options: LoadProductsApiOptions): Promise<Repository.Product[]> {
+  
+  if(options.categoryId === null){
+    return []
+  }
+
   let response = await fetch(`${baseUrl}?categoryId=${options.categoryId}`, {
     method: "GET",
   });
+
 
   let json = await response.json();
 

@@ -1,7 +1,7 @@
 "use client"
 
 import { Grid, Typography, Box } from "@mui/material";
-import { useAppSelector } from "@storefront/store";
+import { activeCategorySelector, useAppSelector } from "@storefront/store";
 import { CategoryCard } from "./CategoryCard";
 
 
@@ -11,8 +11,7 @@ export function CategoryGrid() {
 
     const categories = useAppSelector(
         state =>
-            state.products.categories
-                .filter(category => category.productCount > 0)
+        activeCategorySelector(state)
     );
 
     const continerStyle = {

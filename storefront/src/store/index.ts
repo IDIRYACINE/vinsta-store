@@ -8,3 +8,4 @@ export * from "./clientHooks";
 export * from "./services/categoriesApi";
 export * from "./services/productsApi";
 export * from "./Preloader"
+export * from "./slices/selectors"

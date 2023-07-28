@@ -1,7 +1,7 @@
 "use client"
 
 import { Grid, Typography, Box } from "@mui/material";
-import { useAppDispatch, useAppSelector } from "@storefront/store";
+import { displayedProductsSelector,  useAppSelector } from "@storefront/store";
 import { ProductCard } from "./ProductCard";
 
 
@@ -11,18 +11,16 @@ export function ProductGrid() {
 
     let products = useAppSelector(
         state =>
-            state.products.products
-                .filter(products => products.categoryId === state.products.displayedCategory)
-                [0].products
+            displayedProductsSelector(state)
     );
 
     const continerStyle = {
         "display": "flex",
         "flexDirection": "row",
         "justifyContent": "center",
-        "alignItems" : "center",
-        "height" : "100vh",
-        "width" : "100vw"
+        "alignItems": "center",
+        "height": "100vh",
+        "width": "100vw"
     }
 
 

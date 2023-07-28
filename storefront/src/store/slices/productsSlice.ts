@@ -1,14 +1,14 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { Repository } from "@vinstacore";
 
-interface ProductTearsue {
+interface ProductTreasure {
     categoryId: number | string,
     products: Repository.Product[]
 }
 
 export interface ProductsState {
-    products: ProductTearsue[];
+    products: ProductTreasure[];
     categories: Repository.Category[];
     displayedProduct: Repository.Product | null;
     displayedCategory: number |string| null,
@@ -29,7 +29,7 @@ const productsSlice = createSlice({
     name: "products",
     initialState,
     reducers: {
-        setProducts(state, action: PayloadAction<ProductTearsue>) {
+        setProducts(state, action: PayloadAction<ProductTreasure>) {
             const index = state.products.findIndex(product => product.categoryId === action.payload.categoryId)
             if (index === -1) {
                 state.products.push(action.payload)

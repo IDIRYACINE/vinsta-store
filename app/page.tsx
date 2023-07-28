@@ -4,15 +4,19 @@
 import { HomePage } from "@storefront";
 import { loadCategoriesApi } from "adminapp/src";
 import { mockCategoryRows } from "adminapp/src/modules/categories/table";
+import { setCategories, useAppDispatch } from "storefront/src/store";
 import Preloader from "storefront/src/store/Preloader";
 
-export default async function Home() {
+export default function Home() {
+    const dispatch = useAppDispatch()
 
-    const categories = await mockCategoryRows()
+    loadCategoriesApi().then((categories) => {
+        dispatch(setCategories(categories))
+    })
      
     return (
         <>
-        <Preloader categories={categories} />
+        <Preloader  />
         <HomePage />
         </>
 

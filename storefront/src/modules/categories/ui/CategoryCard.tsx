@@ -15,6 +15,7 @@ export function CategoryCard(props: CategoryCardProps) {
     const dispatch = useAppDispatch()
 
     function navigateToCategory() {
+        console.log(category.id)
         dispatch(setDisplayedCategory(category.id))
         router.replace(`/category`)
     }
@@ -24,7 +25,7 @@ export function CategoryCard(props: CategoryCardProps) {
         <Card>
             <CardActionArea onClick={navigateToCategory}>
                 <CardMedia
-                    sx={{ height: 140, width: "100%" }}
+                    sx={{ height: "50vh", width: "100%" }}
                     image={category.imageUrl}
                     title={category.name}
                 />
