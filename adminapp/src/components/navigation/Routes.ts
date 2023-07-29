@@ -1,6 +1,6 @@
 
 
-enum BaseRoutes {
+enum AdminRoutes {
     admin = "/admin",
     categories = "/admin/categories",
     products = "/admin/products",
@@ -17,4 +17,8 @@ enum ProductRoutes {
     edit = "/admin/products/edit",
 }
 
-export {BaseRoutes,CategoryRoutes,ProductRoutes}
+enum ClientRoutes {
+
+}
+
+export {AdminRoutes,CategoryRoutes,ProductRoutes,ClientRoutes}

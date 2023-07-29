@@ -15,7 +15,6 @@ export function CategoryCard(props: CategoryCardProps) {
     const dispatch = useAppDispatch()
 
     function navigateToCategory() {
-        console.log(category.id)
         dispatch(setDisplayedCategory(category.id))
         router.replace(`/category`)
     }

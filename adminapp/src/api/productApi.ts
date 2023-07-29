@@ -1,5 +1,7 @@
 import { Repository } from "vinstacore/src";
 
+const isTest = true
+
 interface DeleteProductApiOptions {
   productId: string;
   categoryId: string | number;
@@ -52,9 +54,17 @@ export async function deleteProductApi(options: DeleteProductApiOptions) {
 
 export async function loadProductsApi(options: LoadProductsApiOptions): Promise<Repository.Product[]> {
   
+  if(isTest){
+    const resTest =  (await fetch("http://localhost:3000/testData/products.json"));
+    const temp = await resTest.json()
+    return temp.results
+  }
+
   if(options.categoryId === null){
     return []
   }
+
+   
 
   let response = await fetch(`${baseUrl}?categoryId=${options.categoryId}`, {
     method: "GET",
@@ -63,5 +73,5 @@ export async function loadProductsApi(options: LoadProductsApiOptions): Promise<
 
   let json = await response.json();
 
-  return json.data;
+  return json.data.results;
 }

@@ -5,7 +5,7 @@ import { Card, Box } from "@mui/material"
 import { EditorActions } from "./Actions"
 import { useState } from "react"
 import { SingleImageField } from "@adminapp/components/commons/Images"
-import { CategoryEditorController } from "../logic/Controller"
+import { CategoryEditorController, goBack } from "../logic/Controller"
 import { useRouter } from "next/navigation"
 
 
@@ -28,9 +28,6 @@ function CategoryEditor() {
 
     const router = useRouter()
 
-    function goBack() {
-        router.back()
-    }
 
     const nameProps = {
         label: "Name",
@@ -66,16 +63,17 @@ function CategoryEditor() {
         
         dispatch(updateCategory(category))
 
-        updateCategoryApi(category)
+        updateCategoryApi(category).then((res)=>{
+            goBack(router)
+        })
         
 
-        goBack()
     }
 
 
     const actionsProps = {
         onSave: onSave,
-        onCancel: goBack,
+        onCancel: () => goBack(router),
         className: "my-2"
 
     }

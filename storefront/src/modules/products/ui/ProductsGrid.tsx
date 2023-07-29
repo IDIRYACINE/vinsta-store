@@ -1,18 +1,19 @@
 "use client"
 
 import { Grid, Typography, Box } from "@mui/material";
-import { displayedProductsSelector,  useAppSelector } from "@storefront/store";
+import { Repository } from "@vinstacore";
 import { ProductCard } from "./ProductCard";
 
 
+interface ProductGridProps{
+    products : Repository.Product[]
+}
 
-export function ProductGrid() {
+export function ProductGrid(props:ProductGridProps) {
+    let {products} = props
     let maxHorizontalCards = 2;
 
-    let products = useAppSelector(
-        state =>
-            displayedProductsSelector(state)
-    );
+    
 
     const continerStyle = {
         "display": "flex",
@@ -31,6 +32,8 @@ export function ProductGrid() {
             </Box>
         )
     }
+
+
 
     return (
         <Grid sx={continerStyle} container spacing={maxHorizontalCards}>

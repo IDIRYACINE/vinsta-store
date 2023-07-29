@@ -4,6 +4,8 @@ import { loadProductsApi } from "adminapp/src";
 import { ProductGrid } from "storefront/src/modules/products";
 import { categoryProductsSelector, setProducts, useAppDispatch, useAppSelector } from "storefront/src/store";
 
+
+
 export default function Page() {
 
     const dispatch = useAppDispatch()
@@ -14,22 +16,31 @@ export default function Page() {
 
     const products = useAppSelector(state => categoryProductsSelector(state))
 
-    if (products.length === 0) {
-        loadProductsApi({ categoryId: displayedCategoryId }).then((loadedProducts) => {
+   
+        if (products.length === 0) {
+           
+            
 
-            dispatch(setProducts(
-                {
-                    categoryId: displayedCategoryId,
-                    products: loadedProducts
-                }
-            ))
-        })
-    }
+
+
+
+            loadProductsApi({ categoryId: displayedCategoryId }).then((loadedProducts) => {
+                dispatch(setProducts(
+                    {
+                        categoryId: displayedCategoryId,
+                        products: loadedProducts
+                    }
+                ))
+            })
+        }
+    
+
+    
 
 
     return (
         <>
-            <ProductGrid></ProductGrid>
+            <ProductGrid products={products} ></ProductGrid>
         </>
     )
 }

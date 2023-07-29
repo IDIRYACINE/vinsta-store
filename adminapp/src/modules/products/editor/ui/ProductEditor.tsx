@@ -6,7 +6,7 @@ import { Card, Box } from "@mui/material"
 import { EditorActions } from "./Actions"
 import { useState } from "react"
 import { ImageManager } from "@adminapp/components/commons/Images"
-import { ProductEditorController } from "../logic/Controller"
+import { goBack, ProductEditorController } from "../logic/Controller"
 import { Repository } from "@vinstacore"
 import { useRouter } from "next/navigation"
 
@@ -41,9 +41,6 @@ function ProductEditor(props:ProductEditorProps) {
 
     const router = useRouter()
 
-    function goBack() {
-        router.back()
-    }
 
     const nameProps = {
         label: "Name",
@@ -94,10 +91,11 @@ function ProductEditor(props:ProductEditorProps) {
         })
 
         dispatch(updateProduct(product))
-        updateProductApi({ product, categoryId, productId: product.id })
+        updateProductApi({ product, categoryId, productId: product.id }).then ((res) => {
+            goBack(router)
+        })
 
 
-        goBack()
     }
 
     function deleteImage(id: number) {
@@ -112,7 +110,7 @@ function ProductEditor(props:ProductEditorProps) {
 
     const actionsProps = {
         onSave: onSave,
-        onCancel: goBack,
+        onCancel: () => goBack(router),
         className: "my-2"
 
     }

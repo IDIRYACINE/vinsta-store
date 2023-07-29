@@ -1,5 +1,8 @@
 
+import { navigateReplace } from "@adminapp/components/navigation/router";
+import { AdminRoutes } from "@adminapp/components/navigation/Routes";
 import { Repository } from "@vinstacore";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
 
 
 interface createProductOptions {
@@ -61,4 +64,9 @@ export class ProductEditorController {
 
     }
 
+}
+
+
+export function goBack(router:AppRouterInstance){
+    navigateReplace(router,AdminRoutes.products)
 }

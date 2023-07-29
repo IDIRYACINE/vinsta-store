@@ -2,7 +2,7 @@ import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { Repository } from "@vinstacore";
 
-interface ProductTreasure {
+export interface ProductTreasure {
     categoryId: number | string,
     products: Repository.Product[]
 }

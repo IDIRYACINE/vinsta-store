@@ -20,7 +20,7 @@ export class FirebaseCategoryService implements CategoryServicePort {
             {
                 name: new CategoryName(options.name),
                 id: new CategoryId(options.id),
-                image: new ImageUrl(options.image)
+                image: new ImageUrl(options.imageUrl)
             }
         )
     }

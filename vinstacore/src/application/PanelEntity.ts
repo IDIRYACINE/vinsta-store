@@ -32,3 +32,18 @@ export interface Panel {
     iconClassName?: PanelIconClassName
 
 }
+
+
+
+export abstract class Routes {
+    admin = "/admin"
+    adminProducts = `${this.admin}/products`
+    adminCategories = `${this.admin}/categories`
+    adminDiscounts = `${this.admin}/discounts`
+    dashbaord = "/"
+    categories = `${this.dashbaord}/categories`
+    category = `${this.dashbaord}/category`
+    product = `${this.dashbaord}/product`
+    cart = `${this.dashbaord}/cart`
+    delivery = `${this.dashbaord}/delivery`
+}

@@ -6,7 +6,7 @@ import { SingleImageField } from "@adminapp/components/commons/Images"
 import { Card, Box } from "@mui/material"
 
 import { useState } from "react"
-import { CategoryEditorController } from "../logic/Controller"
+import { CategoryEditorController,goBack } from "../logic/Controller"
 import { CreatorActions } from "./Actions"
 import { useRouter } from "next/navigation"
 
@@ -32,9 +32,6 @@ function CategoryCreator() {
 
     const router = useRouter()
 
-    function goBack() {
-        router.back()
-    }
 
     const nameProps = {
         label: "Name",
@@ -68,15 +65,15 @@ function CategoryCreator() {
         })
 
         dispatch(addCategory(category))
+        createCategoryApi(category).then((res) => {
+            goBack(router)
+        })
 
-        createCategoryApi(category)
-
-        goBack()
     }
 
     const actionsProps = {
         onSave: onSave,
-        onCancel: goBack,
+        onCancel: () => goBack(router),
         className: "my-2"
     }
 

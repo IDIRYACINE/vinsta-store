@@ -49,7 +49,7 @@ export interface FindCategoryProps {
 export interface CreateCategoryRawProps {
     name: string,
     id: string,
-    image: string
+    imageUrl: string
 }
 
 export interface UpdateCategoryRawProps {

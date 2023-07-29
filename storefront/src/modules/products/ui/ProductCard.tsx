@@ -24,7 +24,7 @@ export function ProductCard(props: ProductCardProps) {
         <Card>
             <CardActionArea onClick={navigateToProduct}>
                 <CardMedia
-                    sx={{ height: 140, width: 140 }}
+                    sx={{ height: "40vh", width: "100%" }}
                     image={product.imageUrls[0].url}
                     title={product.name}
                 />

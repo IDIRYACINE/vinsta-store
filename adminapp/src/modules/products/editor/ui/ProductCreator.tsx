@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector } from "@adminapp/store/clientHooks";
 
 
 import { useState } from "react"
-import { ProductEditorController } from "../logic/Controller"
+import { goBack, ProductEditorController } from "../logic/Controller"
 import { CreatorActions } from "./Actions"
 import { useRouter } from "next/navigation"
 import { createProductApi } from "@adminapp/api/productApi";
@@ -40,9 +40,6 @@ function ProductCreator(props:ProductCreatorProps) {
     const router = useRouter()
     const dispatch = useAppDispatch()
 
-    function goBack() {
-        router.back()
-    }
 
     const nameProps = {
         label: "Name",
@@ -92,10 +89,11 @@ function ProductCreator(props:ProductCreatorProps) {
         })
 
         dispatch(addProduct(product))
-        createProductApi({ product, categoryId, productId: product.id })
+        createProductApi({ product, categoryId, productId: product.id }).then((res) => {
+            // goBack(router)
+        })
 
 
-        goBack()
     }
 
     function deleteImage(id: number) {
@@ -110,7 +108,7 @@ function ProductCreator(props:ProductCreatorProps) {
 
     const actionsProps = {
         onSave: onSave,
-        onCancel: goBack,
+        onCancel: () => goBack(router),
         className: "my-2"
     }
 

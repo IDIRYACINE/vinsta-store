@@ -4,17 +4,17 @@ import { CreateProductProps, DeleteProductProps, FindProductProps, LoadProductPr
 import { Database, get, ref, remove, set, update } from "firebase/database";
 
 
-export class ProductRepostiroy  implements IRepository {
+export class ProductRepostiroy implements IRepository {
 
     productCollection = "products"
 
-    public constructor(private readonly db:Database,private readonly mapper:ProductMapper) {
+    public constructor(private readonly db: Database, private readonly mapper: ProductMapper) {
 
 
     }
 
     async find(options: FindProductProps): Promise<FindResponse> {
-        
+
         const productsRef = ref(this.db, `${options.categoryId.value}/${options.productId.value}`);
 
         const product = get(productsRef)
@@ -42,29 +42,25 @@ export class ProductRepostiroy  implements IRepository {
         });
     }
 
-    async create(options:  CreateProductProps): Promise<CreateResponse> {
-
+    async create(options: CreateProductProps): Promise<CreateResponse> {
 
         const productRef = ref(this.db, `${this.productCollection}/${options.categoryId.value}/${options.productId.value}`)
 
-        const product : Repository.Product = this.mapper.toPersistence(options.product)
+        const product: Repository.Product = this.mapper.toPersistence(options.product)
 
-        return set(productRef, product).then(() => {
-            return {}
-        })
-        
+        return set(productRef, product).then(() => ({}))
     }
 
-    async update(options:  UpdateProductProps): Promise<UpdateResponse> {
+    async update(options: UpdateProductProps): Promise<UpdateResponse> {
         const productRef = ref(this.db, `${this.productCollection}/${options.categoryId.value}/${options.productId.value}`)
-        
+
         const updateData: Partial<Repository.Product> = options.updatedFields;
 
 
         return update(productRef, updateData).then(() => ({}));
     }
 
-    async delete(options:  DeleteProductProps): Promise<DeleteResponse> {
+    async delete(options: DeleteProductProps): Promise<DeleteResponse> {
         const productRef = ref(this.db, `${this.productCollection}/${options.categoryId.value}/${options.productId.value}`)
 
         return remove(productRef).then(() => ({}));
