@@ -1,23 +1,36 @@
-import { Button, Card, CardMedia, Container, Typography } from "@mui/material"
+import { Button, Card, CardActions, CardMedia, Container,IconButton, Typography } from "@mui/material"
 import { Repository } from "@vinstacore"
+import DeleteIcon from '@mui/icons-material/Delete';
+import { useAppDispatch,openItemDialog } from "@storefront/store";
 
 
 interface CartItemCardProps {
-    item: Repository.Product
+    item: Repository.Product,
+    onDelete : (item:Repository.Product) => void
 }
 function CartItemCard(props: CartItemCardProps) {
-    const { item } = props
+    const { item ,onDelete} = props
 
     const imageStyle = {
         height: "10vh",
-        width: "10vw"
+        width: "10vw",
     }
 
-    return (<Card>
+    const boxStyle = {
+        display:"flex",
+        flexDirection:"row",
+        justifyContent : "space-between",
+        alignItems : "center"
+    }
+
+    return (<Card sx = {boxStyle}>
         <CardMedia sx={imageStyle} image={item.imageUrls[0].url} />
         <Typography variant="body1">
             {item.name}
         </Typography>
+        <CardActions>
+            <IconButton onClick={() => onDelete(item)}><DeleteIcon/></IconButton>
+        </CardActions>
     </Card>)
 }
 
@@ -28,6 +41,7 @@ interface CartViewProps {
 
 export function CartView(props: CartViewProps) {
     const { items } = props
+    const dispatch = useAppDispatch()
 
     const containerStyle = {
         display: "flex",
@@ -46,6 +60,11 @@ export function CartView(props: CartViewProps) {
 
     }
 
+
+    function handleRemoveItem(item:Repository.Product){
+        dispatch(openItemDialog(item))
+    }
+
     return (
 
         <Container>
@@ -53,7 +72,7 @@ export function CartView(props: CartViewProps) {
 
                 {
                     items.map(item => {
-                        return <CartItemCard item={item} key={item.id} />
+                        return <CartItemCard onDelete={handleRemoveItem} item={item} key={item.id} />
                     })
                 }
 

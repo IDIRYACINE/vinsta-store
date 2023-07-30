@@ -1,5 +1,5 @@
 import { Box, Card, CardActionArea, CardMedia, Container, Typography } from "@mui/material"
-import { useState } from "react"
+import { useState, ReactNode } from "react"
 import { Repository } from "@vinstacore"
 
 interface DisplayImageProps {
@@ -17,8 +17,8 @@ function DisplayImage(props: DisplayImageProps) {
 
     return (
         <Card>
-            <CardActionArea onClick={handleClick}  sx={{padding:"0.5rem"}}>
-                <CardMedia image={image.url} sx={size}/>
+            <CardActionArea onClick={handleClick} sx={{ padding: "0.5rem" }}>
+                <CardMedia image={image.url} sx={size} />
             </CardActionArea>
         </Card>
     )
@@ -69,43 +69,23 @@ export function DisplayImageRoster(props: DisplayImageRosterProps) {
 
 }
 
-
-interface PriceDisplayProps {
-    currency: string,
-    price: number | string
+interface AppBodyProps {
+    children: ReactNode
 }
+export function AppBody(props: AppBodyProps) {
+    const appBarHeight = '5rem'
 
-export function PriceDisplay(props: PriceDisplayProps) {
+    const containerStyle = {
+        paddingTop : appBarHeight
+    }
 
-    const { price, currency } = props
 
     return (
-        <Container sx={{ backgroundColor: "white", display: "flex", justifyContent: "center" }}>
-            <Typography color ="burlywood" variant="h4">
-                {price} {currency}
-            </Typography>
+        <Container sx ={containerStyle}>
+            {
+                props.children
+            }
         </Container>
+
     )
-}
-
-interface DisplayTypographyProps {
-    text: string,
-    color?: string
-}
-
-export function DisplayTypography(props: DisplayTypographyProps) {
-    const { text, color } = props
-
-
-    return <Typography color={color}>{text}</Typography>
-}
-
-
-export function SandwichTypography(props: DisplayTypographyProps) {
-    const { text, color } = props
-
-
-    return (<Container>
-        <Typography color={color}>{text}</Typography>
-    </Container>)
 }

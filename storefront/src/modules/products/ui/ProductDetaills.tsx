@@ -1,10 +1,10 @@
 
 import { Typography, Box, Button } from "@mui/material";
-import { DisplayImageRoster, PriceDisplay, SandwichTypography } from "@storefront/components/Generics";
-import { useAppSelector,useAppDispatch, addItem } from "@storefront/store";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useRouter } from "next/navigation";
 import { goBack } from "../logic/helpers";
+import {useAppSelector, useAppDispatch, addItem } from "@storefront/store";
+import { DisplayImageRoster, PriceDisplay, SandwichTypography,} from "@storefront/components";
 
 
 
@@ -38,10 +38,10 @@ export function ProductDetaills() {
         backgroundColor: "burlywood",
         padding: "0.5rem",
         width: "40vw",
-        display:"flex",
-        flexDirection :"column",
-        justifyContent :"space-between",
-        alignItems :"center"
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        alignItems: "center"
     }
 
     return (
@@ -64,7 +64,7 @@ export function ProductDetaills() {
 
 interface ActionsRowProps {
     addToCart: () => void,
-    goBack: () => void ,
+    goBack: () => void,
 }
 function ActionsRow(props: ActionsRowProps) {
     const { addToCart, goBack } = props

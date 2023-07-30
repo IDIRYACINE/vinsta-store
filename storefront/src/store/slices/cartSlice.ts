@@ -19,7 +19,7 @@ const cartSlice = createSlice({
     name: "cart",
     initialState,
     reducers: {
-        setcart(state, action: PayloadAction<Repository.Product[]>) {
+        setCart(state, action: PayloadAction<Repository.Product[]>) {
             state.cart = action.payload;
         },
         
@@ -27,8 +27,11 @@ const cartSlice = createSlice({
             state.cart.push(action.payload);
         }
         ,
-        removeItem(state, action: PayloadAction<Repository.Product>) {
-            state.cart = state.cart.filter((item) => item.id !== action.payload.id);
+        removeItem(state, action: PayloadAction<Repository.Product | null>) {
+            const targetItem = state.editedItem?? action.payload;
+            if(!targetItem) return;
+
+            state.cart = state.cart.filter((item) => item.id !== targetItem.id);
         },
         updateItem(state, action: PayloadAction<Repository.Product>) {
             const index = state.cart.findIndex((item) => item.id === action.payload.id);
@@ -36,10 +39,18 @@ const cartSlice = createSlice({
                 state.cart[index] = action.payload;
             }
         },
+        openItemDialog(state, action: PayloadAction<Repository.Product>) {
+            state.editedItem = action.payload;
+            state.isModalOpen = true;
+        },
+        closeItemDialog(state) {
+            state.isModalOpen = false;
+            state.editedItem = null
+        }
       
 
     }
 });
 
-export const { setcart,  addItem, removeItem, updateItem } = cartSlice.actions;
+export const { setCart, openItemDialog,closeItemDialog, addItem, removeItem, updateItem } = cartSlice.actions;
 export default cartSlice.reducer;

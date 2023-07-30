@@ -1,8 +1,10 @@
 'use client';
 
 
-import { AppBar, Box, Typography } from '@mui/material';
+import { AppBar, IconButton, Typography, Toolbar } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { ClientRoutes } from '@vinstacore';
+import { useRouter } from 'next/navigation';
 
 
 
@@ -21,17 +23,35 @@ export function Logo() {
 
 export function Navbar() {
 
+    const router = useRouter()
+
     const appBarStyle = {
-        display: "flex",
+        "display": "flex",
         "flexDirection": "row",
         "justifyContent": "space-between",
-        "padding": "1rem",
+    }
+
+
+    function navigateToHome() {
+        router.replace(ClientRoutes.home)
+
+    }
+
+    function navigateToCart() {
+        router.replace(ClientRoutes.cart)
     }
 
     return (
-        <AppBar sx={appBarStyle}>
-            <Logo />
-            <ShoppingCartIcon />
+        <AppBar position="fixed">
+            <Toolbar sx={appBarStyle}>
+                <IconButton onClick={navigateToHome}>
+                    <Logo />
+                </IconButton>
+                <IconButton onClick={navigateToCart}>
+                    <ShoppingCartIcon />
+                </IconButton>
+            </Toolbar>
         </AppBar>
+
     )
 }

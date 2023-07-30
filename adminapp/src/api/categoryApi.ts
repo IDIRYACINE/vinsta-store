@@ -38,6 +38,7 @@ export async function deleteCategoryApi(categoryId: string | undefined) {
 }
 
 export async function loadCategoriesApi(): Promise<Repository.Category[]> {
+  
   if(Boolean(process.env.IS_TEST_MODE)){
     const resTest =  (await fetch("http://localhost:3000/testData/categories.json"));
     const temp = await resTest.json()
