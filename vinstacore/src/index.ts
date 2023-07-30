@@ -10,4 +10,7 @@ export * from './infrastructure/ports/services/CategoryServicePort'
 export * from './infrastructure/ports/services/ProductServicePort'
 export * from './infrastructure/ports/services/OrdersServicePort'
 export * from './application/PanelEntity'
+export * from './application/Router'
+export * from './application/Routes'
+
 export * from './infrastructure/services/firebase'

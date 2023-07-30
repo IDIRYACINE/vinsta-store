@@ -42,3 +42,15 @@ export class ProductImage {
 
     }
 }
+
+export class SizeId {
+    constructor(public readonly value: number ) {
+
+    }
+}
+
+export class SizeName {
+    constructor(public readonly value: string, ) {
+
+    }
+}

@@ -1,7 +1,7 @@
 import { BaseContainedButton } from "@adminapp/components/commons/Buttons";
 import { Box, Typography } from "@mui/material";
 
-import { CategoryRoutes } from "@adminapp/components/navigation/Routes";
+import { CategoryRoutes } from "@vinstacore";
 import { useRouter } from "next/navigation";
 
 

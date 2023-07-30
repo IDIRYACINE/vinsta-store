@@ -18,7 +18,11 @@ enum ProductRoutes {
 }
 
 enum ClientRoutes {
-
+    home = "/",
+    products = "/category",
+    productDetaills = "/product",
+    cart = "/cart",
+    delivery = "/delivery"
 }
 
-export {AdminRoutes,CategoryRoutes,ProductRoutes,ClientRoutes}
+export { AdminRoutes, CategoryRoutes, ProductRoutes, ClientRoutes }

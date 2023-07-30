@@ -17,6 +17,11 @@ export interface Category{
 
 }
 
+export interface Size {
+    size:string,
+    id:number
+}
+
 export interface Image {
     id: number,
     url : string

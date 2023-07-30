@@ -1,7 +1,5 @@
 
-import { navigateReplace } from "@adminapp/components/navigation/router";
-import { AdminRoutes } from "@adminapp/components/navigation/Routes";
-import { Repository } from "@vinstacore";
+import { Repository ,navigateReplace,AdminRoutes} from "@vinstacore";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
 
 

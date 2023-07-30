@@ -1,6 +1,5 @@
 import { Repository } from "vinstacore/src";
 
-const isTest = true
 
 interface DeleteProductApiOptions {
   productId: string;
@@ -53,8 +52,7 @@ export async function deleteProductApi(options: DeleteProductApiOptions) {
 }
 
 export async function loadProductsApi(options: LoadProductsApiOptions): Promise<Repository.Product[]> {
-  
-  if(isTest){
+  if(Boolean(process.env.IS_TEST_MODE)){
     const resTest =  (await fetch("http://localhost:3000/testData/products.json"));
     const temp = await resTest.json()
     return temp.results

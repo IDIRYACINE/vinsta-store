@@ -27,6 +27,6 @@
   "references": [
     { "path": "../vinstacore" },
   ],
-  "include": [ "**/*.ts", "**/*.tsx", "../vinstacore/src/application/PanelEntity.ts"],
+  "include": [ "**/*.ts", "**/*.tsx", "../vinstacore/src/application/PanelEntity.ts", "../vinstacore/src/application/router.ts"],
   "exclude": ["node_modules"]
 }
