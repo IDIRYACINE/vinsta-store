@@ -43,7 +43,7 @@ export function Navbar() {
 
     return (
         <AppBar position="fixed">
-            <Toolbar sx={appBarStyle}>
+            <Toolbar color="white" sx={appBarStyle}>
                 <IconButton onClick={navigateToHome}>
                     <Logo />
                 </IconButton>

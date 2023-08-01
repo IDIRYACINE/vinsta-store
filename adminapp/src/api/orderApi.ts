@@ -7,7 +7,7 @@ interface DeleteOrderApiOptions {
 
 type PartialOrder = Omit<Repository.Order, "header" | "shipping" | "items"> & {
     header?: Partial<Repository.OrderHeader>;
-    shipping?: Partial<Repository.Address>;
+    shipping?: Partial<Repository.Contacts>;
     items?: Partial<Repository.OrderItem>[];
 };
 
@@ -18,6 +18,7 @@ interface UpdateOrderApiOptions {
 }
 interface CreateOrderApiOptions {
     order: Repository.Order;
+    orderId : string | number;
 }
 
 interface LoadOrderApiOptions {

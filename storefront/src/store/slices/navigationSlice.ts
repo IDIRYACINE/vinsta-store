@@ -7,6 +7,7 @@ export interface NavigationState {
     panels: Panel[];
     selectedId: PanelId;
     selectedPanel: Panel;
+    isModalOpen : boolean;
 
 }
 
@@ -21,7 +22,8 @@ export const panels: Panel[] = [
 const initialState: NavigationState = {
     panels: panels,
     selectedId: panels[0].id,
-    selectedPanel: panels[0]
+    selectedPanel: panels[0],
+    isModalOpen : false
 };
 
 const navigationSlice = createSlice({
@@ -34,9 +36,15 @@ const navigationSlice = createSlice({
         },
         setPanels(state, action: PayloadAction<Panel[]>) {
             state.panels = action.payload;
-        }
+        },
+          openModel(state) {
+            state.isModalOpen = true
+        },
+        closeModel(state) {
+            state.isModalOpen = false
+        },
     }
 });
 
-export const { setActivePanel,setPanels } = navigationSlice.actions;
+export const { setActivePanel,setPanels,openModel,closeModel } = navigationSlice.actions;
 export default navigationSlice.reducer;

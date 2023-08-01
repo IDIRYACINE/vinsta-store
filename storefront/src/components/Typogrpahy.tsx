@@ -11,7 +11,7 @@ export function PriceDisplay(props: PriceDisplayProps) {
 
     return (
         <Container sx={{ backgroundColor: "white", display: "flex", justifyContent: "center" }}>
-            <Typography color ="burlywood" variant="h4">
+            <Typography color="burlywood" variant="h4">
                 {price} {currency}
             </Typography>
         </Container>
@@ -27,7 +27,35 @@ export function DisplayTypography(props: DisplayTypographyProps) {
     const { text, color } = props
 
 
-    return <Typography color={color}>{text}</Typography>
+    return <Typography variant="h2" color={color}>{text}</Typography>
+}
+
+
+interface TypographProps {
+    text: string,
+    color?: string
+}
+export function BodyTypograph(props: TypographProps) {
+    const { text } = props
+
+    return <Typography variant="body1">{text}</Typography>
+
+}
+
+
+export function TitleTypograph(props: TypographProps) {
+    const { text } = props
+
+    return <Typography variant="caption">{text}</Typography>
+
+}
+
+
+export function SubTitleTypograph(props: TypographProps) {
+    const { text } = props
+
+    return <Typography variant="subtitle1">{text}</Typography>
+
 }
 
 

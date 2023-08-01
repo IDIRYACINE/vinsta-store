@@ -1,0 +1,70 @@
+{
+    "results": [
+        {
+            "productId": "3",
+            "name": "name2",
+            "price": "122",
+            "description": "description",
+            "quantity": "3",
+            "images": [
+                "https://images.freeimages.com/images/large-previews/bb0/cat-in-window-1218032.jpg"
+            ],
+            "categoryId": "1"
+        },
+        {
+            "productId": "77",
+            "name": "name2",
+            "price": "122",
+            "description": "description",
+            "quantity": "3",
+            "images": [
+                "https://images.freeimages.com/images/large-previews/bb0/cat-in-window-1218032.jpg"
+            ],
+            "categoryId": "1"
+        },
+        {
+            "productId": "66",
+            "name": "name2",
+            "price": "122",
+            "description": "description",
+            "quantity": "3",
+            "images": [
+                "https://images.freeimages.com/images/large-previews/bb0/cat-in-window-1218032.jpg"
+            ],
+            "categoryId": "1"
+        },
+        {
+            "productId": "55",
+            "name": "name2",
+            "price": "122",
+            "description": "description",
+            "quantity": "3",
+            "images": [
+                "https://images.freeimages.com/images/large-previews/bb0/cat-in-window-1218032.jpg"
+            ],
+            "categoryId": "1"
+        },
+        {
+            "productId": "44",
+            "name": "name2",
+            "price": "122",
+            "description": "description",
+            "quantity": "3",
+            "images": [
+                "https://images.freeimages.com/images/large-previews/bb0/cat-in-window-1218032.jpg"
+            ],
+            "categoryId": "1"
+        },
+        {
+            "productId": "33",
+            "name": "name2",
+            "price": "122",
+            "description": "description",
+            "quantity": "3",
+            "images": [
+                "https://images.freeimages.com/images/large-previews/bb0/cat-in-window-1218032.jpg"
+            ],
+            "categoryId": "1"
+        }
+    ]
+}

@@ -1,5 +1,5 @@
 import { MapperBase } from "@vinstacore/commons/mappers.base";
-import { Address, City, CitySub } from "@vinstacore/domains/address";
+import { Contact, City, CitySub } from "@vinstacore/domains/address";
 import { Repository, } from "@vinstacore/infrastructure/ports/IRepositories";
 import { CategoryEntity } from "./CategoryEntity";
 import { CategoryDescription, CategoryId, CategoryImage, CategoryName, CategoryProductCount } from "./ValueObjects";

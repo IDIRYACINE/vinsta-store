@@ -1,5 +1,6 @@
 import { MapperBase } from "@vinstacore/commons/mappers.base";
-import { Address, City, CitySub } from "@vinstacore/domains/address";
+import { Contact, City } from "@vinstacore/domains/address";
+import { UserPhone, UserName } from "@vinstacore/domains/users";
 import { Repository, } from "@vinstacore/infrastructure/ports/IRepositories";
 import { OrderEntity, OrderHeader } from "./OrderEntity";
 import { OrderDate, OrderId, OrderItem, OrderStatus, OrderTotalPrice } from "./ValueObjects";
@@ -15,9 +16,10 @@ export class OrderMapper implements MapperBase<OrderEntity, Repository.Order>{
             new OrderTotalPrice(raw.header.total)
         )
 
-        const shipping = new Address(
+        const shipping = new Contact(
             City.fromString(raw.shipping.city),
-            CitySub.fromString(raw.shipping.subCity)
+            new UserPhone(raw.shipping.phone),
+            new UserName(raw.shipping.customer)
         )
 
         const items = raw.items.map(item => {
@@ -37,6 +39,8 @@ export class OrderMapper implements MapperBase<OrderEntity, Repository.Order>{
                 productId: item.productId,
                 quantity: item.quantity,
                 price: item.price,
+                categoryId: item.categoryId,
+                name: item.name
             }
         })
         return {
@@ -48,10 +52,12 @@ export class OrderMapper implements MapperBase<OrderEntity, Repository.Order>{
             },
             shipping: {
                 city: domain.shipping.city.value,
-                subCity: domain.shipping.subCity.value
+                customer: domain.shipping.customer.value,
+                phone: domain.shipping.phone.value,
             },
             items: items
         }
     }
 
 }
+

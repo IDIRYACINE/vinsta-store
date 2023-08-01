@@ -9,7 +9,7 @@ export class OrderId {
     }
 }
 
-enum EOrderStatus { confirmed = "confirmed", declined = "declined", cancelled = "cancelled", onHold = "onHold" }
+export enum EOrderStatus { confirmed = "confirmed", declined = "declined", cancelled = "cancelled", onHold = "onHold" }
 
 export class OrderStatus {
     constructor(public readonly value: EOrderStatus) { }

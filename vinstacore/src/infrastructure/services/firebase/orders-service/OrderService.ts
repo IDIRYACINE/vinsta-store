@@ -93,12 +93,14 @@ export class FirebaseOrderService implements OrderServicePort {
 
         for (const categoryId in updatedCategories) {
             const category = updatedCategories[categoryId];
-            //TODO FIX THIS LOGIC
             this.categoryService.update({
                 id: categoryId,
-                updatedFields: {
-                    "productCount": category.total
-                }
+                updatedFields: [
+                    {
+                        "fieldName" : "productCount",
+                        "newValue" : category.total,
+                    }
+                ]
             });
 
             category.items.forEach(productId => this.productService.delete({

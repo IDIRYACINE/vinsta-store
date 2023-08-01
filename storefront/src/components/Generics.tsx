@@ -1,4 +1,4 @@
-import { Box, Card, CardActionArea, CardMedia, Container, Typography } from "@mui/material"
+import { Box, Card, CardActionArea, CardMedia, Container, Button, Typography } from "@mui/material"
 import { useState, ReactNode } from "react"
 import { Repository } from "@vinstacore"
 
@@ -76,16 +76,40 @@ export function AppBody(props: AppBodyProps) {
     const appBarHeight = '5rem'
 
     const containerStyle = {
-        paddingTop : appBarHeight
+        paddingTop: appBarHeight
     }
 
 
     return (
-        <Container sx ={containerStyle}>
+        <Container sx={containerStyle}>
             {
                 props.children
             }
         </Container>
 
+    )
+}
+
+
+interface ActionsRowProps {
+    onCancel: () => void,
+    onConfirm: () => void
+}
+
+export function ActionsRow(props: ActionsRowProps) {
+    const { onCancel, onConfirm } = props
+
+    const boxStyle = {
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between"
+    }
+
+    return (
+        <Container sx={boxStyle}>
+            <Button onClick={onCancel} >Cancel</Button>
+            <Button onClick={onConfirm} >Confirm</Button>
+
+        </Container>
     )
 }

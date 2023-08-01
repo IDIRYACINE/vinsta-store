@@ -1,12 +1,12 @@
 import { Button, Card, CardActions, CardMedia, Container,IconButton, Typography } from "@mui/material"
 import { Repository } from "@vinstacore"
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useAppDispatch,openItemDialog } from "@storefront/store";
+import { useAppDispatch,openItemDialog, openModel } from "@storefront/store";
 
 
 interface CartItemCardProps {
-    item: Repository.Product,
-    onDelete : (item:Repository.Product) => void
+    item: Repository.OrderItem,
+    onDelete : (item:Repository.OrderItem) => void
 }
 function CartItemCard(props: CartItemCardProps) {
     const { item ,onDelete} = props
@@ -24,7 +24,7 @@ function CartItemCard(props: CartItemCardProps) {
     }
 
     return (<Card sx = {boxStyle}>
-        <CardMedia sx={imageStyle} image={item.imageUrls[0].url} />
+        <CardMedia sx={imageStyle} image={item.images![0]} />
         <Typography variant="body1">
             {item.name}
         </Typography>
@@ -36,12 +36,13 @@ function CartItemCard(props: CartItemCardProps) {
 
 
 interface CartViewProps {
-    items: Repository.Product[]
+    items: Repository.OrderItem[]
 }
 
 export function CartView(props: CartViewProps) {
     const { items } = props
     const dispatch = useAppDispatch()
+
 
     const containerStyle = {
         display: "flex",
@@ -61,8 +62,13 @@ export function CartView(props: CartViewProps) {
     }
 
 
-    function handleRemoveItem(item:Repository.Product){
+    function handleRemoveItem(item:Repository.OrderItem){
         dispatch(openItemDialog(item))
+    }
+
+    function handleShipOrder(){
+        dispatch(openModel())
+
     }
 
     return (
@@ -72,14 +78,14 @@ export function CartView(props: CartViewProps) {
 
                 {
                     items.map(item => {
-                        return <CartItemCard onDelete={handleRemoveItem} item={item} key={item.id} />
+                        return <CartItemCard onDelete={handleRemoveItem} item={item} key={item.productId} />
                     })
                 }
 
             </Container>
 
             <Container sx={actionBarStyle}>
-                <Button>Ship Order</Button>
+                <Button onClick={handleShipOrder}>Ship Order</Button>
             </Container>
 
         </Container >)

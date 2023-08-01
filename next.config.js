@@ -12,7 +12,19 @@ const nextConfig = {
     return config;
   },
   experimental : {
-    appDir : true
+    appDir : true,
+    modularizeImports: {
+      lodash: {
+        transform: 'lodash/{{member}}'
+      },
+      '@mui/material': {
+        transform: '@mui/material/{{member}}'
+      },
+      
+      '@mui/icons-material/?(((\\w*)?/?)*)': {
+        transform: '@mui/icons-material/{{ matches.[1] }}/{{member}}'
+      }
+    }
   },
   reactStrictMode: true,
   images: {

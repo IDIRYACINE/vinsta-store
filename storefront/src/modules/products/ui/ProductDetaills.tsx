@@ -2,7 +2,7 @@
 import { Typography, Box, Button } from "@mui/material";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useRouter } from "next/navigation";
-import { goBack } from "../logic/helpers";
+import { convertProductToCartItem, goBack } from "../logic/helpers";
 import {useAppSelector, useAppDispatch, addItem } from "@storefront/store";
 import { DisplayImageRoster, PriceDisplay, SandwichTypography,} from "@storefront/components";
 
@@ -12,6 +12,7 @@ import { DisplayImageRoster, PriceDisplay, SandwichTypography,} from "@storefron
 export function ProductDetaills() {
 
     const product = useAppSelector(state => state.products.displayedProduct)
+    const categoryId = useAppSelector(state => state.products.displayedCategory!)
     const dispatch = useAppDispatch()
     const router = useRouter()
 
@@ -25,7 +26,9 @@ export function ProductDetaills() {
 
 
     function handleAddToCart() {
-        dispatch(addItem(product!))
+        const item = convertProductToCartItem(product!, categoryId!)
+
+        dispatch(addItem(item))
         goBack(router)
     }
 

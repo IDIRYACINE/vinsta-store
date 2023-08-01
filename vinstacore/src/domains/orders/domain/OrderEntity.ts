@@ -1,11 +1,11 @@
 import { EntityBase } from "@vinstacore/commons/entity.base";
-import { Address } from "@vinstacore/domains/address";
+import { Contact } from "@vinstacore/domains/address";
 import { OrderDate, OrderId, OrderItem, OrderStatus, OrderTotalPrice } from "./ValueObjects";
 
 export class OrderEntity implements EntityBase<OrderEntity>{
     constructor(
         public readonly header: OrderHeader,
-        public readonly shipping: Address,
+        public readonly shipping: Contact,
         public readonly items: OrderItem[]
     ) { }
 
