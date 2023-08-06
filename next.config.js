@@ -13,10 +13,9 @@ const nextConfig = {
   },
   experimental : {
     appDir : true,
+    cache: false,
     modularizeImports: {
-      lodash: {
-        transform: 'lodash/{{member}}'
-      },
+     
       '@mui/material': {
         transform: '@mui/material/{{member}}'
       },

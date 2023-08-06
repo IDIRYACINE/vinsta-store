@@ -1,20 +1,39 @@
 'use client'
 
 import { createTheme } from "@mui/material";
-import { green, purple } from '@mui/material/colors';
+import { brown } from '@mui/material/colors';
 
 const theme = createTheme({
-    palette: {
-        primary: {
-          main: purple[500],
-        },
-        secondary: {
-          main: green[500],
+  palette: {
+    primary: {
+      light: brown[300],
+      main: brown[500],
+      contrastText: '#ffffff',
+
+    },
+    secondary: {
+      main: "#ffffff",
+    },
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          "&.MuiButton-contained": {
+            backgroundColor: brown[300],
+
+            "&.MuiButton-contained:hover": {
+              backgroundColor: brown[500],
+            },
+
+          }
         },
       },
-});
+    },
+  }
+},);
 
 
 export {
-    theme
+  theme
 }

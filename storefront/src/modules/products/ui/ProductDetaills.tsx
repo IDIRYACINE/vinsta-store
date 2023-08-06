@@ -72,15 +72,23 @@ interface ActionsRowProps {
 function ActionsRow(props: ActionsRowProps) {
     const { addToCart, goBack } = props
 
+    const cartButtonSx= {
+        flex : 2,
+    }
+
+    const backButtonSx = {
+        flex : 1,
+    }
+
     return (
         <Box sx={{ displayDirection: "row", display: "flex" }}>
-            <Button onClick={addToCart}>
+            <Button sx={cartButtonSx} onClick={addToCart}>
                 <Box>
                     <Typography variant="body1">Add to cart</Typography>
                     <ShoppingCartIcon />
                 </Box>
             </Button>
-            <Button onClick={goBack}>Go back</Button>
+            <Button sx={backButtonSx} onClick={goBack}>Go back</Button>
         </Box>
     )
 }

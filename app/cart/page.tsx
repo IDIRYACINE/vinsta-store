@@ -8,17 +8,15 @@ import { useAppDispatch } from "adminapp/src/store/clientHooks"
 export default function Page() {
 
     const items = useAppSelector(state => state.orders.cart)
-    // const disaptch = useAppDispatch()
-    // loadCartApi().then((cart) => {
-    //     disaptch(setCart(cart))
-    // })
+    const totalPrice = useAppSelector(state => state.orders.totalPrice)
+
 
 
 
 
     return (
         <AppBody>
-            <CartView items={items}></CartView>
+            <CartView totalPrice={totalPrice} items={items}></CartView>
             <RemoveItemDialog />
             <ShippingDialog />
         </AppBody>

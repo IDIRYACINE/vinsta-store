@@ -12,11 +12,13 @@ import { generateOrder } from "../logic/helper"
 
 
 interface ShippingFormProps {
-    cart: Repository.OrderItem[]
+    cart: Repository.OrderItem[],
+    totalPrice: number
 }
 export function ShippingForm(props: ShippingFormProps) {
     const { cart } = props
     const dispatch = useAppDispatch()
+    const [orderId, setOrderId] = useState<string | null>(null)
 
 
     const [destination, selectDestination] = useState<Repository.Destination>(destinations[0])
@@ -74,9 +76,15 @@ export function ShippingForm(props: ShippingFormProps) {
         createOrderApi({ order, orderId: order.header.id }).then((res) => {
             dispatch(updateOrderId(order.header.id))
             dispatch(setCart([]))
-            dispatch(closeModel())
+            setOrderId(order.header.id)
         })
 
+    }
+
+    if (orderId != null) {
+        return (<Container sx={formStyle}>
+            <DisplayTypography text={`Order Id: ${orderId}`} />
+        </Container>)
     }
 
     return (
@@ -98,6 +106,8 @@ export function ShippingDialog() {
     const dispatch = useAppDispatch()
     const isModalOpen = useAppSelector(state => state.navigation.isModalOpen)
     const cart = useAppSelector(state => state.orders.cart)
+    const totalPrice = useAppSelector(state => state.orders.totalPrice)
+
 
     function onClose() {
         dispatch(closeModel())
@@ -124,9 +134,14 @@ export function ShippingDialog() {
         <Modal style={modalStyle} open={isModalOpen}
             onClose={onClose}>
 
-            <Box sx={contentStyle}>
-                <ShippingForm cart={cart} />
-            </Box>
+            {
+                cart.length === 0 ? <DisplayTypography text="Cart is empty" />
+                    : <Box sx={contentStyle}>
+                        <ShippingForm cart={cart} totalPrice={totalPrice}/>
+                    </Box>
+            }
+
+
 
         </Modal>
     )

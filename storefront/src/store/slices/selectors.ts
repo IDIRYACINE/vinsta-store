@@ -5,6 +5,7 @@ import { ProductTreasure } from "./productsSlice"
 const selectAllProducts = (state: RootState) => state.products.products
 const selectDisplayedCategory = (state: RootState) => state.products.displayedCategory
 const selectAllCategories = (state: RootState) => state.products.categories
+const selectCartItems = (state: RootState) => state.orders.cart
 
 const categoryProductsSelector = createSelector([selectAllProducts, selectDisplayedCategory], (allProducts, displayedCategoryId) => {
     const products: ProductTreasure[] = allProducts.filter(products => products.categoryId === displayedCategoryId)
@@ -26,4 +27,8 @@ const displayedProductsSelector = createSelector([selectAllProducts, selectDispl
     return isEmpty ? [] : filteredProducts[0].products
 })
 
-export { categoryProductsSelector, activeCategorySelector, displayedProductsSelector }
+const cartItemsCountSelector = createSelector([selectCartItems], (cartItems) => {
+    return cartItems.length
+})
+
+export { categoryProductsSelector,cartItemsCountSelector, activeCategorySelector, displayedProductsSelector }

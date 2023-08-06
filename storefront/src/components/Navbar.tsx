@@ -1,10 +1,11 @@
 'use client';
 
 
-import { AppBar, IconButton, Typography, Toolbar } from '@mui/material';
+import { AppBar, IconButton, Typography, Toolbar, Tooltip, Badge } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { ClientRoutes } from '@vinstacore';
 import { useRouter } from 'next/navigation';
+import { cartItemsCountSelector, useAppSelector } from '@storefront/store';
 
 
 
@@ -20,10 +21,28 @@ export function Logo() {
 
 }
 
+interface AppCartButtonProps {
+    onClick: () => void,
+    cartItemsCount: number
+}
+function AppCartButton(props: AppCartButtonProps) {
+    const { onClick, cartItemsCount } = props
+
+
+
+    return <IconButton onClick={onClick}>
+        <Badge badgeContent={String(cartItemsCount)} color="error">
+
+            <ShoppingCartIcon color="secondary" />
+        </Badge>
+    </IconButton>
+}
+
 
 export function Navbar() {
 
     const router = useRouter()
+    const cartItemsCount = useAppSelector(state => cartItemsCountSelector(state))
 
     const appBarStyle = {
         "display": "flex",
@@ -31,14 +50,13 @@ export function Navbar() {
         "justifyContent": "space-between",
     }
 
+    function navigateToCart() {
+        router.replace(ClientRoutes.cart)
+    }
 
     function navigateToHome() {
         router.replace(ClientRoutes.home)
 
-    }
-
-    function navigateToCart() {
-        router.replace(ClientRoutes.cart)
     }
 
     return (
@@ -47,9 +65,7 @@ export function Navbar() {
                 <IconButton onClick={navigateToHome}>
                     <Logo />
                 </IconButton>
-                <IconButton onClick={navigateToCart}>
-                    <ShoppingCartIcon />
-                </IconButton>
+                <AppCartButton onClick={navigateToCart} cartItemsCount={cartItemsCount} />
             </Toolbar>
         </AppBar>
 

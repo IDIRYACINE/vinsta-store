@@ -36,11 +36,12 @@ function CartItemCard(props: CartItemCardProps) {
 
 
 interface CartViewProps {
-    items: Repository.OrderItem[]
+    items: Repository.OrderItem[],
+    totalPrice : number
 }
 
 export function CartView(props: CartViewProps) {
-    const { items } = props
+    const { items,totalPrice } = props
     const dispatch = useAppDispatch()
 
 
@@ -86,6 +87,7 @@ export function CartView(props: CartViewProps) {
 
             <Container sx={actionBarStyle}>
                 <Button onClick={handleShipOrder}>Ship Order</Button>
+                <Button variant="contained" color="primary">Total Price : {totalPrice} Da</Button>
             </Container>
 
         </Container >)
