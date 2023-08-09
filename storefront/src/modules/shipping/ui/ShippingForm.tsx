@@ -3,10 +3,9 @@
 import { Container, Modal, Box, Button, Typography } from "@mui/material"
 import { ActionsRow, DisplayTypography } from "@storefront/components"
 import { useState } from "react"
-import { Repository } from "@vinstacore"
+import { Destination, Repository, DeliveryType, destinations } from "@vinstacore"
 import { AppTextField, DestinationSelector } from "./Components"
 import { useAppDispatch, closeModel, useAppSelector, updateOrderId, setCart } from "@storefront/store"
-import { destinations } from "../data/destinations"
 import { createOrderApi } from "../../../../../adminapp/src/api/orderApi"
 import { generateOrder } from "../logic/helper"
 
@@ -20,16 +19,20 @@ export function ShippingForm(props: ShippingFormProps) {
     const dispatch = useAppDispatch()
     const [orderId, setOrderId] = useState<string | null>(null)
 
+    const deliveryTypes = DeliveryType.values()
 
-    const [destination, selectDestination] = useState<Repository.Destination>(destinations[0])
+
+    const [destination, selectDestination] = useState<Destination>(destinations[0])
     const [fullName, updateFullName] = useState<string>("")
     const [phoneNumber, updatePhone] = useState<string>("")
+    const [homeAddress, onHomeAddressChange] = useState<string>("")
+    const [deliveryType, selectDeliveryType] = useState<DeliveryType>(deliveryTypes[0])
 
 
     const formStyle = {
         display: "flex",
         flexDirection: "column",
-        justifyContent: "space-between",
+        justifyContent: "space-evenly",
         alignItems: "start",
         padding: "0.5rem",
         height: "100%",
@@ -39,7 +42,8 @@ export function ShippingForm(props: ShippingFormProps) {
     const fullNameFieldProps = {
         label: "FullName",
         value: fullName,
-        onChange: updateFullName
+        onChange: updateFullName,
+        className :"mr-2"
     }
 
 
@@ -52,7 +56,12 @@ export function ShippingForm(props: ShippingFormProps) {
     const destinationSelectorProps = {
         destinations: destinations,
         destination: destination,
-        selectDestination: selectDestination
+        selectDestination: selectDestination,
+        deliveryTypes: deliveryTypes,
+        deliveryType: deliveryType,
+        selectDeliveryType: selectDeliveryType,
+        homeAddress: homeAddress,
+        onHomeAddressChange: onHomeAddressChange
     }
 
     const actionsRowProps = {
@@ -68,15 +77,17 @@ export function ShippingForm(props: ShippingFormProps) {
     function handleShipping() {
         const order: Repository.Order = generateOrder({
             cart,
+            deliveryType,
+            homeAddress,
             destination: destination,
             customer: fullName,
             phone: phoneNumber
         })
 
         createOrderApi({ order, orderId: order.header.id }).then((res) => {
-            dispatch(updateOrderId(order.header.id))
-            dispatch(setCart([]))
-            setOrderId(order.header.id)
+        dispatch(updateOrderId(order.header.id))
+        dispatch(setCart([]))
+        setOrderId(order.header.id)
         })
 
     }
@@ -90,8 +101,10 @@ export function ShippingForm(props: ShippingFormProps) {
     return (
         <Container sx={formStyle}>
             <DisplayTypography text="Shipping Informations" />
-            <AppTextField {...fullNameFieldProps} />
-            <AppTextField {...phoneFieldProps} />
+            <Box className="flex flex-row w-full">
+                <AppTextField {...fullNameFieldProps} />
+                <AppTextField {...phoneFieldProps} />
+            </Box>
 
             <DestinationSelector {...destinationSelectorProps} />
 
@@ -135,9 +148,9 @@ export function ShippingDialog() {
             onClose={onClose}>
 
             {
-                cart.length === 0 ? <DisplayTypography text="Cart is empty" />
+                cart.length !== 0 ? <DisplayTypography text="Cart is empty" />
                     : <Box sx={contentStyle}>
-                        <ShippingForm cart={cart} totalPrice={totalPrice}/>
+                        <ShippingForm cart={cart} totalPrice={totalPrice} />
                     </Box>
             }
 

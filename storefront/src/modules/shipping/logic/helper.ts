@@ -1,19 +1,21 @@
-import { EOrderStatus, Repository } from "@vinstacore";
+import { EOrderStatus, Repository,Destination ,DeliveryType} from "@vinstacore";
 import { v4 as uuidv4 } from 'uuid';
 
 
 interface GenerateOrderOptions {
     cart: Repository.OrderItem[],
-    destination: Repository.Destination,
+    destination: Destination,
     customer: string,
     phone: string,
+    deliveryType: DeliveryType,
+    homeAddress?: string
 
 
 
 }
 export function generateOrder(options: GenerateOrderOptions): Repository.Order {
 
-    const { cart, destination, phone, customer } = options
+    const { cart, destination, phone, customer,homeAddress,deliveryType } = options
 
     const header: Repository.OrderHeader = {
         id: uuidv4(),
@@ -22,8 +24,10 @@ export function generateOrder(options: GenerateOrderOptions): Repository.Order {
         total: cart.length
     }
 
+    const address = deliveryType.isDeliverHome ? `${destination.name} ${homeAddress}` : destination.name
+
     const shipping: Repository.Contacts = {
-        city: destination.name,
+        city: address,
         customer,
         phone
     }
