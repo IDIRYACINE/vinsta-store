@@ -30,8 +30,19 @@ const theme = createTheme({
         },
       },
     },
-  }
-},);
+    MuiContainer: {
+      variants: [
+        {
+          props: { color: 'filled' },
+          style: {
+            backgroundColor: brown[300],
+          },
+        },
+      ],
+    }
+  },
+},
+);
 
 
 export {

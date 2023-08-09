@@ -1,6 +1,8 @@
 
 "use client";
 
+export const dynamic = 'force-dynamic'
+
 import { HomePage } from "@storefront";
 import { loadCategoriesApi } from "adminapp/src";
 import { mockCategoryRows } from "adminapp/src/modules/categories/table";

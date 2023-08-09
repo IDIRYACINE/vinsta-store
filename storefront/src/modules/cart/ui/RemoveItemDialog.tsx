@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Modal, Typography,Button } from "@mui/material";
+import { Box, Modal, Typography,Button,Card } from "@mui/material";
 import { useAppSelector,useAppDispatch,closeItemDialog,removeItem } from "@storefront/store";
 
 
@@ -8,7 +8,7 @@ import { useAppSelector,useAppDispatch,closeItemDialog,removeItem } from "@store
 interface RemoveItemDialogProps {
 }
 
-function RemoveItemDialog(props: RemoveItemDialogProps) {
+function RemoveCartItemDialog(props: RemoveItemDialogProps) {
     const dispatch = useAppDispatch()
     const isModalOpen = useAppSelector(state => state.orders.isModalOpen)
 
@@ -21,20 +21,20 @@ function RemoveItemDialog(props: RemoveItemDialogProps) {
     }
 
     return (
-        <Modal open={isModalOpen}
+        <Modal className="flex flex-col justify-center items-center" open={isModalOpen}
             onClose={onClose}>
 
-            <Box className="flex flex-col justify-between items-center">
+            <Card className="flex flex-col justify-between items-center p-2" sx={{backgroundColor:"white"}}>
                 <Typography variant="h6">Remove Item</Typography>
 
                 <Box className="flex flex-row justify-between items-center">
                     <Button className="mr-2" onClick={onClose} >Cancel</Button>
                     <Button onClick={onConfirm} >Confirm</Button>
                 </Box>
-            </Box>
+            </Card>
 
         </Modal>
     )
 }
 
-export { RemoveItemDialog }
+export { RemoveCartItemDialog }

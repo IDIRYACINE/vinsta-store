@@ -20,7 +20,8 @@ export function CategoryGrid() {
         "justifyContent": "center",
         "alignItems" : "center",
         "height" : "100vh",
-        "width" : "100vw"
+        "width" : "100vw",
+        padding : "2rem"
     }
 
 

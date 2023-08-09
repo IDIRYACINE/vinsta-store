@@ -18,7 +18,7 @@ interface UpdateOrderApiOptions {
 }
 interface CreateOrderApiOptions {
     order: Repository.Order;
-    orderId : string | number;
+    orderId: string | number;
 }
 
 interface LoadOrderApiOptions {
@@ -42,6 +42,7 @@ export async function findOrderApi(props: LoadOrderApiOptions): Promise<Reposito
 export async function loadOrdersApi(): Promise<Repository.Order[]> {
     let response = await fetch(baseUrl, {
         method: "GET",
+        cache: 'no-store',
     });
 
     let json = await response.json();

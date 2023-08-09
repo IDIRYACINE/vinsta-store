@@ -1,6 +1,6 @@
 "use client"
 
-import { CartView, ShippingDialog, useAppSelector, setCart, AppBody, RemoveItemDialog } from "@storefront"
+import { CartView, ShippingDialog, useAppSelector, setCart, AppBody, RemoveCartItemDialog } from "@storefront"
 import { loadCartApi } from "adminapp/src/api/cartApi"
 import { useAppDispatch } from "adminapp/src/store/clientHooks"
 
@@ -17,7 +17,7 @@ export default function Page() {
     return (
         <AppBody>
             <CartView totalPrice={totalPrice} items={items}></CartView>
-            <RemoveItemDialog />
+            <RemoveCartItemDialog />
             <ShippingDialog />
         </AppBody>
     )

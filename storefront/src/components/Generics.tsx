@@ -34,13 +34,13 @@ export function DisplayImageRoster(props: DisplayImageRosterProps) {
     const [selectedImage, selectImage] = useState(images[0])
 
     const featuredSize = {
-        height: "40vh",
+        height: "60vh",
         width: "40vw"
     }
 
     const miniSize = {
-        height: "20vh",
-        width: "20vw"
+        height: "10vh",
+        width: "10vw"
     }
 
     const featuredProps = {
@@ -55,14 +55,16 @@ export function DisplayImageRoster(props: DisplayImageRosterProps) {
     }
 
     return (
-        <Box>
-            <DisplayImage {...featuredProps} />
+        <Box sx={{ display: 'flex', flexDirection: "row" }}>
 
-            <Box sx={{ flexDirection: "row" }}>
+            <Box sx={{ display: 'flex', flexDirection: "column" }}>
                 {images.map(image => {
                     return <DisplayImage image={image} {...previewProps} key={image.id} />
                 })}
             </Box>
+
+            <DisplayImage {...featuredProps} />
+
 
         </Box>
     )

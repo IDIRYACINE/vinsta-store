@@ -1,4 +1,4 @@
-import { Container, Typography } from "@mui/material"
+import { Container, SxProps, Theme, Typography } from "@mui/material"
 
 interface PriceDisplayProps {
     currency: string,
@@ -20,14 +20,15 @@ export function PriceDisplay(props: PriceDisplayProps) {
 
 interface DisplayTypographyProps {
     text: string,
-    color?: string
+    color?: string,
+    sx ?: SxProps<Theme>
 }
 
 export function DisplayTypography(props: DisplayTypographyProps) {
-    const { text, color } = props
+    const { text, color,sx } = props
 
 
-    return <Typography variant="h2" color={color}>{text}</Typography>
+    return <Typography sx={sx} variant="h2" color={color}>{text}</Typography>
 }
 
 

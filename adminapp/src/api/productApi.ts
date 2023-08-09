@@ -53,7 +53,7 @@ export async function deleteProductApi(options: DeleteProductApiOptions) {
 
 export async function loadProductsApi(options: LoadProductsApiOptions): Promise<Repository.Product[]> {
   if(Boolean(process.env.IS_TEST_MODE)){
-    const resTest =  (await fetch("http://localhost:3000/testData/products.json"));
+    const resTest =  (await fetch("http://localhost:3000/testData/products.json",{ cache: 'no-store' }));
     const temp = await resTest.json()
     return temp.results
   }
