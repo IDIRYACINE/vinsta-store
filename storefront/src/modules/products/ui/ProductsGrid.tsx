@@ -20,8 +20,7 @@ export function ProductGrid(props:ProductGridProps) {
         "flexDirection": "row",
         "justifyContent": "center",
         "alignItems": "center",
-        "height": "100vh",
-        "width": "100vw",
+        
         "padding":"2rem"
     }
 

@@ -1,8 +1,45 @@
+import { AppTextField } from "./Components"
+import { Box, Button, Typography } from "@mui/material"
+import { useState } from "react"
+import { findOrderApi } from "../../../../../adminapp/src/api/orderApi"
+import { Repository } from "@vinstacore"
 
 
+export function DeliveryTracker() {
 
-export function DeliveryTracker(){
+    const [order, setOrder] = useState<Repository.Order | null>(null)
+    const [orderId, setOrderId] = useState("")
 
 
-    return (<></>)
+    function onOrderIdChange(value: string) {
+        setOrderId(value)
+    }
+
+    function onTrackOrder() {
+        findOrderApi({
+
+        }).then((order) => {
+            setOrder(order)
+        })
+    }
+
+
+    const trackerFieldProps = {
+        label: "Order Number",
+        value: orderId,
+        onChange: onOrderIdChange
+    }
+
+
+    return (<Box>
+
+        <Typography >ID : {order?.header.id}</Typography>
+        <Typography className="mb-2">Status : {order?.header.status}</Typography>
+
+        <Box className="flex flex-row justify-between">
+            <AppTextField {...trackerFieldProps} />
+            <Button onClick={onTrackOrder}>Track</Button>
+
+        </Box>
+    </Box>)
 }

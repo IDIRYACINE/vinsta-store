@@ -1,3 +1,5 @@
+"use client"
+
 import { Box } from "@mui/material";
 import { CategoryGrid } from "@storefront/modules/categories/ui/CategoryGrid";
 import { useEffect } from "react";

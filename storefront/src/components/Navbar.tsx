@@ -1,8 +1,9 @@
 'use client';
 
 
-import { AppBar, IconButton, Typography, Toolbar, Tooltip, Badge } from '@mui/material';
+import { AppBar, IconButton, Typography, Toolbar, Tooltip, Box, Badge } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import DeliveryIcon from '@mui/icons-material/DeliveryDining';
 import { ClientRoutes } from '@vinstacore';
 import { useRouter } from 'next/navigation';
 import { cartItemsCountSelector, useAppSelector } from '@storefront/store';
@@ -39,6 +40,21 @@ function AppCartButton(props: AppCartButtonProps) {
 }
 
 
+interface AppDeliveryButtonProps {
+    onClick: () => void,
+}
+function AppDeliveryButton(props: AppDeliveryButtonProps) {
+    const { onClick } = props
+
+
+
+    return <IconButton onClick={onClick}>
+
+        <DeliveryIcon color="secondary" />
+    </IconButton>
+}
+
+
 export function Navbar() {
 
     const router = useRouter()
@@ -59,13 +75,21 @@ export function Navbar() {
 
     }
 
+    function navigateToDelivery() {
+        router.replace(ClientRoutes.delivery)
+    }
+
     return (
         <AppBar position="fixed">
             <Toolbar color="white" sx={appBarStyle}>
                 <IconButton onClick={navigateToHome}>
                     <Logo />
                 </IconButton>
-                <AppCartButton onClick={navigateToCart} cartItemsCount={cartItemsCount} />
+                <Box className="flex flex-row justify-evenly">
+                    <AppDeliveryButton onClick={navigateToDelivery} />
+                    <AppCartButton onClick={navigateToCart} cartItemsCount={cartItemsCount} />
+
+                </Box>
             </Toolbar>
         </AppBar>
 
