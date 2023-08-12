@@ -3,7 +3,8 @@
 
 
 import { FirebaseApp } from "@firebase/app";
-import { OrderMapper, OrderServicePort, } from "@vinstacore/index";
+import { OrderMapper, } from "@vinstacore/domains/orders";
+import { OrderServicePort } from "@vinstacore/infrastructure/ports";
 import { getDatabase } from "firebase/database";
 import { FirebaseOrderRepository } from "../orders-service/OrderRepostiroy";
 import { FirebaseOrderService } from "../orders-service/OrderService";

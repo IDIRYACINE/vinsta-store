@@ -1,7 +1,7 @@
 import { UpdatedField } from "@vinstacore/commons/api.base"
 import { CategoryId } from "@vinstacore/domains/category"
 import { ProductEntity, ProductId, ProductMapper } from "@vinstacore/domains/product"
-import { Repository } from "../IRepositories"
+import { FindResponse, Repository } from "../IRepositories"
 
 
 export interface IProductRepository {
@@ -83,7 +83,7 @@ export interface DeleteProductResponse { }
 export interface LoadProductResponse { }
 
 
-export interface FindProductResponse {
+export interface FindProductResponse extends FindResponse{
     product?: ProductEntity
 }
 export interface FindProductResponse {

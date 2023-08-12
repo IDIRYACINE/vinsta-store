@@ -1,5 +1,5 @@
 import {createApi, fetchBaseQuery } from '@reduxjs/toolkit/query'
-import {Repository} from "@vinstacore";
+import {Repository} from "@vinstastore/vinstacore";
 
 
 const baseUrl = "http://localhost:3000/api/"

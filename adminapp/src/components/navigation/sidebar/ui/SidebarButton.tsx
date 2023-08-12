@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "@adminapp/store/clientHooks";
 import { Button } from "@mui/material"
 import clsx from "clsx";
 import { useRouter } from 'next/navigation';
-import { Panel } from "@vinstacore";
+import { Panel } from "@vinstastore/vinstacore";
 
 
 

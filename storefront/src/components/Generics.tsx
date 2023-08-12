@@ -1,6 +1,6 @@
 import { Box, Card, CardActionArea, CardMedia, Container, Button, Typography } from "@mui/material"
 import { useState, ReactNode } from "react"
-import { Repository } from "@vinstacore"
+import { Repository } from "@vinstastore/vinstacore"
 
 interface DisplayImageProps {
     image: Repository.Image,

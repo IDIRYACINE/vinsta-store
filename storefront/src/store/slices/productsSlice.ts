@@ -1,6 +1,6 @@
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { Repository } from "@vinstacore";
+import { Repository } from "@vinstastore/vinstacore";
 
 export interface ProductTreasure {
     categoryId: number | string,

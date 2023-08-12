@@ -1,4 +1,4 @@
-import { Panel, PanelId, PanelName, PanelPath } from "@vinstacore";
+import { Panel, PanelId, PanelName, PanelPath } from "@vinstastore/vinstacore";
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 

@@ -1,4 +1,4 @@
-import { Repository } from "@vinstacore"
+import { Repository } from "@vinstastore/vinstacore"
 import { Typography, ToggleButton, ToggleButtonGroup, Box, CardMedia, Card, CardActionArea } from "@mui/material";
 import { useState } from "react";
 

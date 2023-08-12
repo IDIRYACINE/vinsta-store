@@ -1,4 +1,4 @@
-import { EOrderStatus, Repository,Destination ,DeliveryType} from "@vinstacore";
+import { EOrderStatus, Repository,Destination ,DeliveryType} from "@vinstastore/vinstacore";
 import { v4 as uuidv4 } from 'uuid';
 
 

@@ -1,7 +1,7 @@
 import { OrderStatus, orderStatusfromString } from "@adminapp/modules/orders/domain/OrderStatus";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { Repository } from "@vinstacore";
+import { Repository } from "@vinstastore/vinstacore";
 
 export interface OrdersState {
     orders: Repository.Order[];

@@ -1,5 +1,5 @@
 import { Button, Card, CardActions, CardMedia, Container,IconButton, Typography } from "@mui/material"
-import { Repository } from "@vinstacore"
+import { Repository } from "@vinstastore/vinstacore"
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useAppDispatch,openItemDialog, openModel } from "@storefront/store";
 

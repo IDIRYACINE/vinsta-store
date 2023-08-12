@@ -1,8 +1,8 @@
 import { AppTextField } from "./Components"
 import { Box, Button, Typography } from "@mui/material"
 import { useState } from "react"
-import { findOrderApi } from "../../../../../adminapp/src/api/orderApi"
-import { Repository } from "@vinstacore"
+import { findOrderApi } from "@vinstastore/vinstaadmin"
+import { Repository } from "@vinstastore/vinstacore"
 
 
 export function DeliveryTracker() {

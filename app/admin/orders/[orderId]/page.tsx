@@ -1,4 +1,4 @@
-import { OrderDetaills } from "@adminapp"
+import { OrderDetaills } from "@vinstastore/vinstaadmin";
 
 function OrderDetaillsPage() {
 

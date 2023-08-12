@@ -1,8 +1,8 @@
 "use client"
 
-import { CartView, ShippingDialog, useAppSelector, setCart, AppBody, RemoveCartItemDialog } from "@storefront"
-import { loadCartApi } from "adminapp/src/api/cartApi"
-import { useAppDispatch } from "adminapp/src/store/clientHooks"
+import { CartView, ShippingDialog, useAppSelector, setCart, AppBody, RemoveCartItemDialog } from "@vinstastore/storefront";
+import { loadCartApi } from "@vinstastore/vinstaadmin";
+import { useAppDispatch } from "@vinstastore/vinstaadmin";
 
 
 export default function Page() {

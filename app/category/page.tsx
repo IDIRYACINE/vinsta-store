@@ -3,10 +3,10 @@
 import { Box } from "@mui/material";
 import { loadProductsApi } from "adminapp/src";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { ProductFilterSearch } from "storefront/src/components/Filters";
-import { ProductGrid } from "storefront/src/modules/products";
-import { categoryProductsSelector, setProducts, useAppDispatch, useAppSelector } from "storefront/src/store";
-import { IProductFilter } from "vinstacore/src";
+import { ProductFilterSearch } from "@vinstastore/storefront";
+import { ProductGrid } from "@vinstastore/storefront";
+import { categoryProductsSelector, setProducts, useAppDispatch, useAppSelector } from "@vinstastore/storefront";
+import { IProductFilter } from "@vinstastore/vinstacore";
 
 
 

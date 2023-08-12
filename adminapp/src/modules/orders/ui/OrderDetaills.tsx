@@ -2,7 +2,7 @@
 
 import { Box } from "@mui/material"
 import clsx from "clsx"
-import { Repository } from "@vinstacore"
+import { Repository } from "@vinstastore/vinstacore"
 import ShippingCard from "../components/shipping/ShippingCard"
 
 interface OrderDetaillsProps {

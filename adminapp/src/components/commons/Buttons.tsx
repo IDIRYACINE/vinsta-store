@@ -3,7 +3,7 @@
 import { OrderStatus } from "@adminapp/modules/orders/domain/OrderStatus";
 import { Button, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import clsx from "clsx";
-import { Repository } from "vinstacore/src";
+import { Repository } from "@vinstastore/vinstacore";
 
 interface BaseContainedButtonProps {
     className?: string;

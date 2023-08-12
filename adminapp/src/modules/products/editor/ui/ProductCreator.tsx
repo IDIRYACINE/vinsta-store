@@ -15,7 +15,7 @@ import { CreatorActions } from "./Actions"
 import { useRouter } from "next/navigation"
 import { createProductApi } from "@adminapp/api/productApi";
 import { CategoriesSelector } from "@adminapp/components/commons/Buttons";
-import { Repository } from "@vinstacore";
+import { Repository } from "@vinstastore/vinstacore";
 
 interface ProductCreatorProps {
     categories: Repository.Category[]

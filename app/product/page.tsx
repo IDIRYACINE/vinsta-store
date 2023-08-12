@@ -1,7 +1,7 @@
 'use client'
 
 import { Container } from "@mui/material"
-import { ProductDetaills } from "storefront/src/modules/products"
+import { ProductDetaills } from "@vinstastore/storefront"
 
 
 

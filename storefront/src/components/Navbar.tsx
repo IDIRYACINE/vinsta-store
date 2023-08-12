@@ -4,7 +4,7 @@
 import { AppBar, IconButton, Typography, Toolbar, Tooltip, Box, Badge } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import DeliveryIcon from '@mui/icons-material/DeliveryDining';
-import { ClientRoutes } from '@vinstacore';
+import { ClientRoutes } from '@vinstastore/vinstacore';
 import { useRouter } from 'next/navigation';
 import { cartItemsCountSelector, useAppSelector } from '@storefront/store';
 

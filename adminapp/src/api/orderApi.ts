@@ -1,4 +1,4 @@
-import { Repository } from "vinstacore/src";
+import { Repository } from "@vinstastore/vinstacore";
 
 interface DeleteOrderApiOptions {
     orderId: string | number;

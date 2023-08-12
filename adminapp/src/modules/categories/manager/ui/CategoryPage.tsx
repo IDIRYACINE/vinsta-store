@@ -7,7 +7,7 @@ import CategoryManagerHeader from "./CategoryManagerHeader"
 import { CategoryTable } from "../../table/"
 
 import { DeleteCategoryDialog } from "./DeleteCategoryDialog"
-import { Repository } from "vinstacore/src"
+import { Repository } from "@vinstastore/vinstacore"
 
 
 import { RootState, AppDispatch, } from "@adminapp/store";

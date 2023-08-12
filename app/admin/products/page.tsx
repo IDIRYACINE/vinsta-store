@@ -1,4 +1,4 @@
-import { ProductPage } from "@adminapp"
+import { ProductPage } from "@vinstastore/vinstaadmin";
 
 function Page(){
 

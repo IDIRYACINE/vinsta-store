@@ -1,4 +1,4 @@
-import { loadOrdersApi, OrdersPage, panels, setOrders, store } from "@adminapp"
+import { loadOrdersApi, OrdersPage, panels, setOrders, store } from "@vinstastore/vinstaadmin";
 import Preloader from "adminapp/src/store/Preloader"
 
 async function Page() {

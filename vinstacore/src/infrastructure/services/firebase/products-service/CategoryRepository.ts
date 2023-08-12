@@ -1,4 +1,4 @@
-import { LoadProps, Repository } from "@vinstacore/index";
+import { LoadProps, Repository } from "@vinstacore/infrastructure/ports";
 import { CreateCategoryProps, CreateCategoryResponse, DeleteCategoryProps, DeleteCategoryResponse, FindCategoryProps, ICategoryRepostiroy, LoadCategoryResponse, UpdateCategoryProps, UpdateCategoryResponse } from "@vinstacore/infrastructure/ports/services/CategoryServicePort";
 
 import { Firestore, getDoc, doc, collection, getDocs, setDoc, updateDoc, deleteDoc } from "firebase/firestore";

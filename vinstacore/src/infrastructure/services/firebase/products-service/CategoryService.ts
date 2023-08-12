@@ -1,6 +1,6 @@
 import { UpdatedField } from "@vinstacore/commons/api.base";
 import { ImageUrl } from "@vinstacore/commons/value-objects.base";
-import { CategoryId, CategoryImage, CategoryMapper, CategoryName } from "@vinstacore/index";
+import { CategoryId, CategoryImage, CategoryMapper, CategoryName } from "@vinstacore/domains/category";
 import { CategoryServicePort, CreateCategoryRawProps, CreateCategoryResponse, DeleteCategoryRawProps, DeleteCategoryResponse, FindCategoryRawProps, FindCategoryResponse, LoadCategoryRawProps, LoadCategoryResponse, UpdateCategoryRawProps, UpdateCategoryResponse } from "@vinstacore/infrastructure/ports/services/CategoryServicePort";
 import { CategoryRepostiroy } from "./CategoryRepository";
 

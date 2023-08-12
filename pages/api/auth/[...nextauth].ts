@@ -3,7 +3,7 @@ import NextAuth from "next-auth"
 import { FirestoreAdapter } from "@next-auth/firebase-adapter";
 import GoogleProvider from "next-auth/providers/google";
 import * as firestoreFunction from "firebase/firestore";
-import { FirebaseAdapter } from "@vinstacore";
+import { FirebaseAdapter } from "@vinstastore/vinstacore";
 
 
 export const authOptions =

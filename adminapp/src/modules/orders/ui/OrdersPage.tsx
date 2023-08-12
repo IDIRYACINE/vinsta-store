@@ -1,7 +1,7 @@
 'use client';
 
 import clsx from "clsx"
-import {  Repository } from "@vinstacore"
+import {  Repository } from "@vinstastore/vinstacore"
 import OrdersTable from "../components/table/ui/OrdersTable"
 import { useAppSelector } from "@adminapp/store/clientHooks";
 import { UpdateOrderStatusDialog } from "../components/common/UpdateOrderStatusDialog";

@@ -4,7 +4,7 @@ import { FirebaseApp } from "@firebase/app";
 import { Auth, getAuth } from "@firebase/auth";
 import { getFirestore } from "@firebase/firestore";
 import { UserMapper } from "@vinstacore/domains/users";
-import { UserServicePort } from "@vinstacore/index";
+import { UserServicePort } from "@vinstacore/infrastructure/ports";
 import { FirebaseUserRepository } from "../user-service/UserRepository";
 import { FirebaseUserService } from "../user-service/UserService";
 

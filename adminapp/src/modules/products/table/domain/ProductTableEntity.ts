@@ -1,4 +1,4 @@
-import { Repository } from "@vinstacore"
+import { Repository } from "@vinstastore/vinstacore"
 
  async function mockProductRows() : Promise<Repository.Product[]> {
 

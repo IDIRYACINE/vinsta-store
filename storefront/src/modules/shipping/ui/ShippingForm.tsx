@@ -3,10 +3,10 @@
 import { Container, Modal, Box, Button, Typography } from "@mui/material"
 import { ActionsRow, DisplayTypography } from "@storefront/components"
 import { useState } from "react"
-import { Destination, Repository, DeliveryType, destinations } from "@vinstacore"
+import { Destination, Repository, DeliveryType, destinations } from "@vinstastore/vinstacore"
 import { AppTextField, DestinationSelector } from "./Components"
 import { useAppDispatch, closeModel, useAppSelector, updateOrderId, setCart } from "@storefront/store"
-import { createOrderApi } from "../../../../../adminapp/src/api/orderApi"
+import { createOrderApi } from "@vinstastore/vinstaadmin"
 import { generateOrder } from "../logic/helper"
 
 

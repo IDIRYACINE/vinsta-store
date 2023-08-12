@@ -1,5 +1,6 @@
 import { UpdatedField } from "@vinstacore/commons/api.base";
-import { CategoryId, IRepository, ProductId, ProductMapper } from "@vinstacore/index";
+import { CategoryId } from "@vinstacore/domains/category";
+import { ProductId,ProductMapper } from "@vinstacore/domains/product";
 import { CreateProductRawProps, CreateProductResponse, DeleteProductRawProps, DeleteProductResponse, FindProductRawProps, FindProductResponse, LoadProductRawProps, LoadProductResponse, ProductServicePort, UpdateProductRawProps, UpdateProductResponse } from "@vinstacore/infrastructure/ports/services/ProductServicePort";
 import { ProductRepostiroy } from "./ProductRepository";
 

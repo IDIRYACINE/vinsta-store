@@ -1,5 +1,5 @@
 
-import { Repository ,navigateReplace,AdminRoutes} from "@vinstacore";
+import { Repository ,navigateReplace,AdminRoutes} from "@vinstastore/vinstacore";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
 
 

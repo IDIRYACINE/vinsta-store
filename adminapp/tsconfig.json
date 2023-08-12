@@ -7,26 +7,24 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": false,
+    "declaration": true,
+    "rootDir": "./src",
+    "baseUrl": "./src",
+    "outDir": "./dist",
+    "composite": false,
+    "declarationMap": true,
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
+    "resolveJsonModule": false,
+    "isolatedModules": false,
     "jsx": "preserve",
     "incremental": true,
-    "outDir": "./dist/declarations",
-    "composite": true,
-    "baseUrl": ".",
-    "rootDir": "../",
     "paths": {
-      "@adminapp/*": ["./src/*"],
-      "@vinstacore": ["../vinstacore/src/"],
-      "@pages/*" :["../old_pages/*"]
+      "@adminapp/*": ["*"],
     },
   },
-  "references": [
-    { "path": "../vinstacore" },
-  ],
-  "include": [ "**/*.ts", "**/*.tsx", "../vinstacore/src/application/PanelEntity.ts", "../vinstacore/src/application/router.ts"],
-  "exclude": ["node_modules"]
+  
+  "include": [ "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules","dist"]
 }

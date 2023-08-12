@@ -1,5 +1,6 @@
 import { UpdatedField } from "@vinstacore/commons/api.base";
-import { CategoryServicePort, OrderId, OrderMapper, ProductServicePort, Repository } from "@vinstacore/index";
+import {  OrderId, OrderMapper,  } from "@vinstacore/domains/orders";
+import { CategoryServicePort,ProductServicePort } from "@vinstacore/infrastructure/ports";
 import { CancelOrderProps, CancelOrderResponse, CreateOrderRawProps, CreateOrderResponse, DeleteOrderRawProps, DeleteOrderResponse, FindOrderRawProps, FindOrderResponse, LoadOrderRawProps, LoadOrderResponse, OrderServicePort, UpdateOrderRawProps, UpdateOrderResponse } from "@vinstacore/infrastructure/ports/services/OrdersServicePort";
 import { FirebaseOrderRepository } from "./OrderRepostiroy";
 

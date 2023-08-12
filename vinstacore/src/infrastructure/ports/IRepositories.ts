@@ -77,7 +77,11 @@ export interface FindProps {
 }
 
 export interface FindResponse {
-
+    data? : any,
+    error? : {
+        name: string,
+        message: string
+    }
 }
 
 

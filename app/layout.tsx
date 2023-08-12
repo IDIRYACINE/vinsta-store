@@ -1,8 +1,8 @@
 'use client'
 
 import './globals.css';
-import { StoreLayout } from '@storefront';
-import { AdminLayout } from '@adminapp';
+import { StoreLayout } from '@vinstastore/storefront';
+import { AdminLayout } from '@vinstastore/vinstaadmin';
 import { usePathname, } from 'next/navigation';
 
 interface RootLayoutProps {

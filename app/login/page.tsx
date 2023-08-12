@@ -1,4 +1,4 @@
-import { AdminLoginPage } from "@adminapp"
+import { AdminLoginPage } from "@vinstastore/vinstaadmin";
 
 
 export default function LoginPage (){

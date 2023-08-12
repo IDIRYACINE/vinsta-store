@@ -1,6 +1,6 @@
 import { Box, Button, Container, Slider, FormControl, InputLabel, MenuItem, Popover, Select, SelectChangeEvent, Typography } from "@mui/material"
 import React from "react"
-import { FilterType, IProductFilter, ProductPriceFilter } from "vinstacore/src"
+import { FilterType, IProductFilter, ProductPriceFilter } from "@vinstastore/vinstacore"
 
 interface FilterButtonProps<T> {
     name: string,

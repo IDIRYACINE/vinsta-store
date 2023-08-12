@@ -8,15 +8,16 @@
     "forceConsistentCasingInFileNames": true,
     "noEmit": false,
     "declaration": true,
+    "rootDir": "./src",
     "baseUrl": "./src",
     "outDir": "./dist",
-    "composite": true,
+    "composite": false,
     "declarationMap": true,
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
+    "resolveJsonModule": false,
+    "isolatedModules": false,
     "jsx": "preserve",
     "incremental": true,
     "paths": {
@@ -24,5 +25,5 @@
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules","dist"]
 }

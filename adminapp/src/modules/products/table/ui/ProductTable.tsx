@@ -6,7 +6,7 @@ import TableHead from "@mui/material/TableHead";
 import Paper from "@mui/material/Paper";
 import { ProductHeader, ProductRow } from "./ProductRow";
 import { Box } from "@mui/material";
-import { Repository } from "@vinstacore";
+import { Repository } from "@vinstastore/vinstacore";
 
 interface TableProps {
   headersData: string[];

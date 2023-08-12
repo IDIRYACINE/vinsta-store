@@ -1,6 +1,6 @@
 import { orderStatusfromString } from "@adminapp/modules/orders/domain/OrderStatus";
 import { TableCell, TableRow, Typography } from "@mui/material"
-import { Repository } from "@vinstacore";
+import { Repository } from "@vinstastore/vinstacore";
 import { OrderStatusLabel } from "./OrderStatus"
 
 interface OrderTableCellProps {

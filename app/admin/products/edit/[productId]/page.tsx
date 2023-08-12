@@ -1,5 +1,5 @@
-import { ProductEditor } from "@adminapp"
-import { store ,loadCategoriesApi} from "@adminapp"
+import { ProductEditor } from "@vinstastore/vinstaadmin";
+import { store ,loadCategoriesApi} from "@vinstastore/vinstaadmin";
 
 
 async function EditProductPage(){

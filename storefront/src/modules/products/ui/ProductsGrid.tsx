@@ -1,7 +1,7 @@
 "use client"
 
 import { Grid, Typography, Box } from "@mui/material";
-import { Repository } from "@vinstacore";
+import { Repository } from "@vinstastore/vinstacore";
 import { ProductCard } from "./ProductCard";
 
 

@@ -1,4 +1,5 @@
-import { CreateResponse, DeleteResponse, FindResponse, IRepository, LoadResponse, ProductMapper, Repository, UpdateProps, UpdateResponse } from "@vinstacore/index";
+import { ProductMapper } from "@vinstacore/domains/product";
+import { CreateResponse, DeleteResponse, FindResponse, IRepository, LoadResponse, Repository, UpdateProps, UpdateResponse } from "@vinstacore/infrastructure/ports";
 import { CreateProductProps, DeleteProductProps, FindProductProps, LoadProductProps, UpdateProductProps } from "@vinstacore/infrastructure/ports/services/ProductServicePort";
 
 import { Database, get, ref, remove, set, update } from "firebase/database";

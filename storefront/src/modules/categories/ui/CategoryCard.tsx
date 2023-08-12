@@ -1,6 +1,6 @@
 import { Card, CardActionArea, CardContent, CardMedia, Typography } from "@mui/material";
 import { setDisplayedCategory, useAppDispatch } from "@storefront/store";
-import { Repository } from "@vinstacore";
+import { Repository } from "@vinstastore/vinstacore";
 import { useRouter } from "next/navigation";
 
 

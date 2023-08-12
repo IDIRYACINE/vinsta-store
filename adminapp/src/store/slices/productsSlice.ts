@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { Repository } from "@vinstacore";
+import { Repository } from "@vinstastore/vinstacore";
 
 export interface ProductsState {
     products: Repository.Product[];

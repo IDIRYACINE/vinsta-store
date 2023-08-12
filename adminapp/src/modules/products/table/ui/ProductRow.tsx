@@ -6,7 +6,7 @@ import {
     Box, Button
 } from "@mui/material";
 
-import { Repository } from "@vinstacore"
+import { Repository } from "@vinstastore/vinstacore"
 
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';

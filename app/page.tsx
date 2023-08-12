@@ -3,11 +3,8 @@
 
 export const dynamic = 'force-dynamic'
 
-import { HomePage } from "@storefront";
-import { loadCategoriesApi } from "adminapp/src";
-import { mockCategoryRows } from "adminapp/src/modules/categories/table";
-import { setCategories, useAppDispatch } from "storefront/src/store";
-import Preloader from "storefront/src/store/Preloader";
+import { loadCategoriesApi } from '@vinstastore/vinstaadmin';
+import { setCategories, useAppDispatch,Preloader,HomePage } from "@vinstastore/storefront";
 
 export default function Home() {
     const dispatch = useAppDispatch()

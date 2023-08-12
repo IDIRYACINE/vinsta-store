@@ -1,4 +1,4 @@
-import { Repository } from "@vinstacore";
+import { Repository } from "@vinstastore/vinstacore";
 
 
 export async function loadCartApi(): Promise<Repository.OrderItem[]> {

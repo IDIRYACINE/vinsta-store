@@ -1,4 +1,4 @@
-import { CategoryPage } from "@adminapp"
+import { CategoryPage } from "@vinstastore/vinstaadmin";
 import { panels, setCategories, store } from "adminapp/src/store"
 import Preloader from "adminapp/src/store/Preloader"
 

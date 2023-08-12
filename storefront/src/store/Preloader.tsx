@@ -1,6 +1,6 @@
 "use client";
 
-import { Repository, Panel } from "@vinstacore";
+import { Repository, Panel } from "@vinstastore/vinstacore";
 import { setCategories, useAppDispatch } from ".";
 
 
@@ -10,7 +10,7 @@ interface PreloaderProps {
     panels?: Panel[],
 }
 
-function Preloader({ categories, products, panels }: PreloaderProps) {
+ function Preloader({ categories, products, panels }: PreloaderProps) {
 
 
     const dispatch = useAppDispatch();
@@ -24,4 +24,5 @@ function Preloader({ categories, products, panels }: PreloaderProps) {
     return null;
 }
 
-export default Preloader;
+export {Preloader}
+

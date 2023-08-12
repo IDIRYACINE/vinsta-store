@@ -1,4 +1,4 @@
-import { CategoryCreator } from "@adminapp"
+import { CategoryCreator } from "@vinstastore/vinstaadmin";
 
 
 function CreateCategoryPage(){

@@ -3,7 +3,7 @@
 import { Button, Card, Box, CardMedia, CardContent, TextField } from "@mui/material"
 import clsx from "clsx";
 import { useState } from "react";
-import { UserEmail, UserPassword } from "vinstacore/src";
+import { UserEmail, UserPassword } from "@vinstastore/vinstacore";
 import { signIn } from "next-auth/react"
 
 function LoginForm() {

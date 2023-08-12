@@ -1,4 +1,4 @@
-import { Repository } from "@vinstacore";
+import { Repository } from "@vinstastore/vinstacore";
 import mockOrders from "../../../tests/MockOrders";
 
 interface RowData {

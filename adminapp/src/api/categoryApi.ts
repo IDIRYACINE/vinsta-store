@@ -1,4 +1,4 @@
-import { Repository } from "vinstacore/src";
+import { Repository } from "@vinstastore/vinstacore";
 import {isTest} from "./config"
 
 

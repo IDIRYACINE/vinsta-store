@@ -1,5 +1,5 @@
-import { ProductCreator } from "@adminapp"
-import { store ,loadCategoriesApi} from "@adminapp"
+import { ProductCreator } from "@vinstastore/vinstaadmin";
+import { store ,loadCategoriesApi} from "@vinstastore/vinstaadmin";
 
 
 async function CreateProductPage() {

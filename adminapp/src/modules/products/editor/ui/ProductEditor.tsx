@@ -7,7 +7,7 @@ import { EditorActions } from "./Actions"
 import { useState } from "react"
 import { ImageManager } from "@adminapp/components/commons/Images"
 import { goBack, ProductEditorController } from "../logic/Controller"
-import { Repository } from "@vinstacore"
+import { Repository } from "@vinstastore/vinstacore"
 import { useRouter } from "next/navigation"
 
 

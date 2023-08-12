@@ -1,5 +1,5 @@
 {
-  "name": "vinsta-store",
+  "name": "vinstastore",
   "version": "1.0.0",
   "description": "e-commerce for small buisness",
   "main": "index.ts",
@@ -9,16 +9,13 @@
   "workspaces": [
     "adminapp",
     "storefront",
-    "vinstacore",
-    "storeapp"
+    "vinstacore"
   ],
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "core-build": "cd vinstacore && yarn build",
-    "admin-build": "cd admin-panel && yarn build"
+    "lint": "next lint"
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",
@@ -29,11 +26,14 @@
     "@types/node": "18.15.11",
     "@types/react": "18.0.35",
     "@types/react-dom": "18.0.11",
+    "@vinstastore/storefront": "^0.1.0",
+    "@vinstastore/vinstaadmin": "^0.1.0",
+    "@vinstastore/vinstacore": "^1.0.0",
     "autoprefixer": "10.4.14",
     "clsx": "^1.2.1",
     "eslint": "8.38.0",
     "eslint-config-next": "^13.4.4",
-    "firebase-admin": "^11.8.0",
+    "firebase-admin": "^11.10.1",
     "next": "^13.4.13",
     "next-auth": "^4.22.1",
     "postcss": "8.4.21",
@@ -44,10 +44,5 @@
     "tailwindcss": "3.3.1",
     "typescript": "5.0.4",
     "webpack": "^5.88.2"
-  },
-  "devDependencies": {
-    "encoding": "^0.1.13",
-    "oidc-token-hash": "^5.0.3",
-    "request": "^2.88.2"
   }
 }

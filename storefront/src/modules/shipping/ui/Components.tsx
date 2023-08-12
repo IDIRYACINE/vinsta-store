@@ -1,5 +1,5 @@
 import { FormControl, Box, Select, InputLabel, Typography, MenuItem, SelectChangeEvent, TextField } from "@mui/material";
-import { Destination, DeliveryType, DeliveryTypeEnum, calculateDeliveryPrice } from "@vinstacore";
+import { Destination, DeliveryType, DeliveryTypeEnum, calculateDeliveryPrice } from "@vinstastore/vinstacore";
 import { ChangeEvent, useState } from "react";
 
 interface DestinationSelectorProps {

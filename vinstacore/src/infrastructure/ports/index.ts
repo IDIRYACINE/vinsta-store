@@ -1,0 +1,6 @@
+export * from "./services/CategoryServicePort"
+export * from "./services/OrdersServicePort"
+export * from "./services/UserServicePort"
+export * from "./services/ProductServicePort"
+export * from "./IAdapters"
+export * from "./IRepositories"

@@ -1,4 +1,4 @@
-import { CategoryEditor } from "@adminapp"
+import { CategoryEditor } from "@vinstastore/vinstaadmin";
 
 
 function EditCategoryPage(){
