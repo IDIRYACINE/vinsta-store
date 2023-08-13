@@ -8,6 +8,8 @@ interface createProductOptions {
     description?: string,
     imageUrls: string[],
     code: string,
+    color: {id:number,color:string},
+    size:{id:number,size:string},
     price: number,
     quantity: number
 }
@@ -27,6 +29,8 @@ export class ProductEditorController {
             name: options.name,
             price: options.price,
             quantity: options.quantity,
+            color : options.color,
+            size : options.size,
             description: options.description,
             imageUrls: options.imageUrls.map((url, index) => {
                 return {
@@ -47,6 +51,8 @@ export class ProductEditorController {
             id: options.code,
             name: options.name,
             price: options.price,
+            size :options.size,
+            color:options.color,
             quantity: options.quantity,
             description: options.description,
             imageUrls: options.imageUrls.map((url, index) => {

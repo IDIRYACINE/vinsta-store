@@ -21,11 +21,11 @@ export default function SidebarButton(props: SidebarButtonProps) {
     const router = useRouter()
 
     const activeClassName = clsx([
-        'w-full bg-purple-500 text-white'
+        'w-full  text-white'
     ])
 
     const passiveClassName = clsx([
-        'w-full text-purple-500 hover:text-white'
+        'w-full hover:text-white'
     ])
 
 

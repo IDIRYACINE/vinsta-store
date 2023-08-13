@@ -10,8 +10,8 @@ import { DeleteCategoryDialog } from "./DeleteCategoryDialog"
 import { Repository } from "@vinstastore/vinstacore"
 
 
-import { RootState, AppDispatch, } from "@adminapp/store";
-import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
+import { RootState } from "@adminapp/store";
+import { useSelector, TypedUseSelectorHook } from "react-redux";
 
 
  const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
@@ -20,8 +20,11 @@ interface CategoryPageProps {
     data: Repository.Category[]
 }
 
-function CategoryPage(props: CategoryPageProps) {
+function CategoryPage() {
+
+
     const categories = useAppSelector(state => state.categories.categories)
+
 
     const headersData = ["Category Name", "Category Id", "Description", "Action"]
 

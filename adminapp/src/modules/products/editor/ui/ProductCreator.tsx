@@ -84,6 +84,8 @@ function ProductCreator(props:ProductCreatorProps) {
         let product = controller.createProduct({
             name, imageUrls, description,
             code: productId,
+            color : {id: 1, color: "red"},
+            size : {id:0,size:"S"},
             price: parseFloat(price),
             quantity: parseInt(quantity)
         })

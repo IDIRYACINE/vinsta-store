@@ -1,5 +1,4 @@
-import { CategoryPage } from "@vinstastore/vinstaadmin";
-import { panels, setCategories, store } from "adminapp/src/store"
+import { CategoryPage, loadCategoriesApi } from "@vinstastore/vinstaadmin";
 import Preloader from "adminapp/src/store/Preloader"
 
 
@@ -7,24 +6,17 @@ import Preloader from "adminapp/src/store/Preloader"
 async function Page() {
 
 
-    const categories = await fetch("http://localhost:3000/api/category")
-
-    const data = (await categories.json()).data
-
-    store.dispatch(setCategories(data))
+    const categories = await loadCategoriesApi()
 
 
     const preloaderProps = {
-        categories: data,
-        products: [],
-        orders: [],
-        panels: panels,
+        categories: categories,
     }
 
     return (
         <div>
             <Preloader {...preloaderProps} />
-            <CategoryPage data={data} />
+            <CategoryPage  />
         </div>
     )
 }

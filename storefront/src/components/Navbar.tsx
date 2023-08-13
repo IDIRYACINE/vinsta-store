@@ -80,18 +80,22 @@ export function Navbar() {
     }
 
     return (
-        <AppBar position="fixed">
-            <Toolbar color="white" sx={appBarStyle}>
-                <IconButton onClick={navigateToHome}>
-                    <Logo />
-                </IconButton>
-                <Box className="flex flex-row justify-evenly">
-                    <AppDeliveryButton onClick={navigateToDelivery} />
-                    <AppCartButton onClick={navigateToCart} cartItemsCount={cartItemsCount} />
+        <div>
+            <AppBar position="fixed">
+                <Toolbar color="white" sx={appBarStyle}>
+                    <IconButton onClick={navigateToHome}>
+                        <Logo />
+                    </IconButton>
+                    <Box className="flex flex-row justify-evenly">
+                        <AppDeliveryButton onClick={navigateToDelivery} />
+                        <AppCartButton onClick={navigateToCart} cartItemsCount={cartItemsCount} />
 
-                </Box>
-            </Toolbar>
-        </AppBar>
+                    </Box>
+                </Toolbar>
+            </AppBar>
+
+            <Toolbar />
+        </div>
 
     )
 }

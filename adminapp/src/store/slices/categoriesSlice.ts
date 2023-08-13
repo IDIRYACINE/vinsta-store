@@ -13,6 +13,7 @@ const initialState: CategoriesState = {
     categories: [],
     editedCategory: null,
     isModalOpen: false,
+
 };
 
 const categoriesSlice = createSlice({
@@ -29,8 +30,8 @@ const categoriesSlice = createSlice({
             state.categories.push(action.payload);
         },
         deleteCategory(state, action: PayloadAction<Repository.Category | null>) {
-            const targetCategory = state.editedCategory?? action.payload;
-            if(!targetCategory) return;
+            const targetCategory = state.editedCategory ?? action.payload;
+            if (!targetCategory) return;
 
             state.categories = state.categories.filter((category) => category.id !== targetCategory.id);
             state.editedCategory = null;
@@ -48,11 +49,9 @@ const categoriesSlice = createSlice({
         },
         closeDeleteCategoryDialog(state) {
             state.isModalOpen = false;
-        }
-        
-
+        },
     }
-});
+},);
 
 
 export const { setCategories, setEditedCategory, addCategory, deleteCategory, updateCategory } = categoriesSlice.actions;

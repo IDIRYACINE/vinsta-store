@@ -23,7 +23,7 @@ interface ProductEditorProps {
 function ProductEditor(props:ProductEditorProps) {
     const {categories} = props
 
-    let product = useAppSelector(state => state.products.editedProduct)!
+    let product:Repository.Product = useAppSelector(state => state.products.editedProduct)!
     const categoryId = useAppSelector(state => state.products.editedCategoryId)!
 
     const [name, setName] = useState<string>(product.name)
@@ -86,6 +86,8 @@ function ProductEditor(props:ProductEditorProps) {
         let product = controller.updateProduct({
             name, imageUrls, description,
             code: productId,
+            color : {id: 1, color: "red"},
+            size : {id:0,size:"S"},
             price: parseFloat(price),
             quantity: parseInt(quantity)
         })

@@ -12,7 +12,7 @@ interface BaseContainedButtonProps {
 }
 
 function BaseContainedButton(props: BaseContainedButtonProps) {
-    const className = clsx([props.className, "bg-purple-500"])
+    const className = clsx([props.className])
 
     return (
         <Button className={className} onClick={props.onClick} variant="contained">
