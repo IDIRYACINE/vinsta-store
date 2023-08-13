@@ -6,6 +6,14 @@
             "price": "122",
             "description": "description",
             "quantity": "3",
+            "color": {
+                "id": 2,
+                "color": "white"
+            },
+            "size": {
+                "id": 0,
+                "size": "S"
+            },
             "imageUrls": [
                 {
                     "id": "1",
@@ -19,6 +27,14 @@
             "price": "122",
             "description": "description",
             "quantity": "3",
+            "color": {
+                "id": 2,
+                "color": "white"
+            },
+            "size": {
+                "id": 0,
+                "size": "S"
+            },
             "imageUrls": [
                 {
                     "id": "2",
@@ -32,6 +48,14 @@
             "price": "122",
             "description": "description",
             "quantity": "3",
+            "color": {
+                "id": 1,
+                "color": "black"
+            },
+            "size": {
+                "id": 1,
+                "size": "M"
+            },
             "imageUrls": [
                 {
                     "id": "1",
@@ -45,6 +69,14 @@
             "price": "122",
             "description": "description",
             "quantity": "3",
+            "color": {
+                "id": 1,
+                "color": "black"
+            },
+            "size": {
+                "id": 1,
+                "size": "M"
+            },
             "imageUrls": [
                 {
                     "id": "2",

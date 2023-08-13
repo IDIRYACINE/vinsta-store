@@ -24,7 +24,7 @@ export default function Page() {
         return products.filter((product) => {
             let shouldDisplay = true
             filters.forEach((filter) => {
-                shouldDisplay = filter.compare(product)
+                shouldDisplay = shouldDisplay && filter.compare(product)
             })
 
             if (shouldDisplay) {
@@ -48,12 +48,23 @@ export default function Page() {
         setFilters(newFilters)
     }
 
+    const productFilterProps = {
+        onFilterChange : onFilterChange,
+        className : "flex-initial w-80",
+        filters:filters,
+    }
+
+    const productGridProps = {
+        products : filteredProducts,
+        className : "flex-1 p-2" 
+    }
+
 
     return (
-        <Box className="flex flex-col h-screen justify-center items-center">
-            <ProductFilterSearch onFilterChange={onFilterChange} />
+        <Box className="flex flex-row h-screen justify-center items-center">
+            <ProductFilterSearch {...productFilterProps} />
 
-            <ProductGrid products={filteredProducts} ></ProductGrid>
+            <ProductGrid {...productGridProps} />
 
         </Box>
     )

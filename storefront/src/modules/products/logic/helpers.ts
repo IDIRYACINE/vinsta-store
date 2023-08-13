@@ -12,6 +12,8 @@ export function convertProductToCartItem(product : Repository.Product,categoryId
         quantity: product.quantity,
         price: product.price,
         categoryId: categoryId,
+        color :product.color,
+        size : product.size,
         name: product.name,
         images: product.imageUrls?.map(image => image.url) ?? []
     }

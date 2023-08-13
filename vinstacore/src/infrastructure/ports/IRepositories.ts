@@ -26,6 +26,11 @@ export module Repository {
         id: number
     }
 
+    export interface Color{
+        color :string,
+        id:number
+    }
+
     export interface Image {
         id: number,
         url: string
@@ -37,6 +42,8 @@ export module Repository {
         price: number,
         quantity: number,
         description?: string,
+        size : Size,
+        color : Color,
         imageUrls: Image[]
     }
 
@@ -55,6 +62,8 @@ export module Repository {
 
     export interface OrderItem {
         productId: string,
+        color : Color,
+        size:Size,
         quantity: number,
         categoryId: string,
         name: string,

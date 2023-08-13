@@ -3,10 +3,11 @@
 import { Grid, Typography, Box } from "@mui/material";
 import { Repository } from "@vinstastore/vinstacore";
 import { ProductCard } from "./ProductCard";
-
+import clsx from "clsx"
 
 interface ProductGridProps{
-    products : Repository.Product[]
+    products : Repository.Product[],
+    className? : string
 }
 
 export function ProductGrid(props:ProductGridProps) {
@@ -14,20 +15,16 @@ export function ProductGrid(props:ProductGridProps) {
     let maxHorizontalCards = 2;
 
     
-
-    const continerStyle = {
-        "display": "flex",
-        "flexDirection": "row",
-        "justifyContent": "center",
-        "alignItems": "center",
-        
-        "padding":"2rem"
-    }
+    const className = clsx([
+        "flex flex-row justify-center items-center p-2",
+        props.className
+    ])
+   
 
 
     if (products.length === 0) {
         return (
-            <Box sx={continerStyle}>
+            <Box className={className}>
                 <Typography variant="h4">No products found</Typography>
             </Box>
         )
@@ -36,7 +33,7 @@ export function ProductGrid(props:ProductGridProps) {
 
 
     return (
-        <Grid sx={continerStyle} container spacing={maxHorizontalCards}>
+        <Grid className={className} container spacing={maxHorizontalCards}>
             {
                 products.map(product => {
                     return (

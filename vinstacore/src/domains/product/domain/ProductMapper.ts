@@ -1,6 +1,8 @@
 import { MapperBase } from "@vinstacore/commons/mappers.base";
 import { Repository, } from "@vinstacore/infrastructure/ports/IRepositories";
+import { ColorEntity } from "./ColorEntity";
 import { ProductEntity } from "./ProductEntity";
+import { SizeEntity } from "./SizeEntity";
 import { ProductId, ProductName, ProductPrice, ProductDescription, ProductQuantity, ProductImage } from "./ValueObjects";
 
 
@@ -19,7 +21,9 @@ export class ProductMapper implements MapperBase<ProductEntity, Repository.Produ
                 id: new ProductId(raw.id),
                 quantity: new ProductQuantity(raw.quantity),
                 price: new ProductPrice(raw.price),
-                imageUrls: images
+                imageUrls: images,
+                size : SizeEntity.fromRaw(raw.size),
+                color : ColorEntity.fromRaw(raw.color)
             }
         )
     }
@@ -38,7 +42,9 @@ export class ProductMapper implements MapperBase<ProductEntity, Repository.Produ
             description: domain.description.value,
             price: domain.price.value,
             quantity: domain.quantity.value,
-            imageUrls: images
+            imageUrls: images,
+            color : domain.color.toRaw(),
+            size : domain.size.toRaw()
         }
     }
 

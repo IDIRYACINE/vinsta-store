@@ -1,3 +1,5 @@
+import { ColorEntity, SizeEntity } from '@vinstacore/domains/product'
+import { IOrderRepostiroy } from '@vinstacore/infrastructure/ports'
 import { Repository } from '@vinstacore/infrastructure/ports/IRepositories'
 
 
@@ -37,6 +39,9 @@ export class OrderItem {
         public readonly categoryId: string,
         public readonly price: number,
         public readonly name: string,
+        public readonly color :Repository.Color,
+        public readonly size :Repository.Size,
+
     ) { }
 
     static OrderItemFromPersistence(persistence: Repository.OrderItem): OrderItem {
@@ -45,7 +50,10 @@ export class OrderItem {
             persistence.quantity,
             persistence.categoryId,
             persistence.price,
-            persistence.name
+            persistence.name,
+            persistence.color,
+            persistence.size
+
         )
     }
 }

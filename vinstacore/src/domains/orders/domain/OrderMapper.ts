@@ -40,7 +40,10 @@ export class OrderMapper implements MapperBase<OrderEntity, Repository.Order>{
                 quantity: item.quantity,
                 price: item.price,
                 categoryId: item.categoryId,
-                name: item.name
+                name: item.name,
+                size : item.size,
+                color :item.color
+                
             }
         })
         return {

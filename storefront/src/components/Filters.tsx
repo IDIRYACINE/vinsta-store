@@ -1,6 +1,59 @@
-import { Box, Button, Container, Slider, FormControl, InputLabel, MenuItem, Popover, Select, SelectChangeEvent, Typography } from "@mui/material"
+import { Box, Grid, ToggleButtonGroup, ToggleButton, Container, Slider, FormControl, InputLabel, MenuItem, Popover, Select, SelectChangeEvent, Typography,  } from "@mui/material"
 import React from "react"
-import { FilterType, IProductFilter, ProductPriceFilter } from "@vinstastore/vinstacore"
+import { FilterType, IProductFilter, ProductPriceFilter, sizes, SizeEntity, ProductSizeFilter, ColorEntity, ProductColorFilter,colors } from "@vinstastore/vinstacore"
+import clsx from "clsx"
+
+
+interface ToggleFilterProps<T> {
+    items: T[],
+    extractItemName: (item: T) => string,
+    extractItemId: (item: T) => string,
+    updateFilter: (items: T[]) => void,
+}
+
+function ToggleFilterGroup<T>(props: ToggleFilterProps<T>) {
+
+    const { items, extractItemId, extractItemName, updateFilter } = props
+    const [selections, setSelections] = React.useState<string[]>(() => []);
+
+
+    function handleChange(event: React.MouseEvent<HTMLElement>,
+        newSelections: string[],) {
+        setSelections(newSelections)
+
+        const targetItems = items.filter((item) =>
+        newSelections.includes(extractItemId(item))
+        )
+
+        updateFilter(targetItems)
+
+    }
+
+
+
+    return (
+        <ToggleButtonGroup
+            size="small"
+            sx={{
+                display: "grid",
+                gridTemplateColumns: "auto auto auto auto",
+                gridGap: "0.5rem",
+                padding: "1rem",
+              }}
+            value={selections}
+            onChange={handleChange}
+        >
+            {
+                items.map((item) => {
+                    const id = extractItemId(item)
+
+                    return <ToggleButton key={id} value={id}>{extractItemName(item)} </ToggleButton>
+                })
+            }
+        </ToggleButtonGroup>
+
+    )
+}
 
 interface FilterButtonProps<T> {
     name: string,
@@ -59,74 +112,54 @@ interface FilterRangeButtonProps {
 
 function FilterRangeButton(props: FilterRangeButtonProps) {
     const { min, max, name, onChange, } = props
-    const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
     const [range, setRange] = React.useState<number[]>([min, max]);
 
-    const id = `filter-range-button-${name}`
 
     const updateFilter = (event: Event, newValue: number | number[]) => {
         onChange(newValue as number[]);
         setRange(newValue as number[])
     };
 
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
 
     function valuetext(value: number) {
         return `${value} Da`
     }
 
-    const open = Boolean(anchorEl);
 
     return (
 
-        <Container className="mr-2">
 
-            <Button aria-describedby={id} variant="contained" onClick={handleClick}>
-                {name}
-            </Button>
-
-            <Popover sx={{ width: "30%", height: "20%" }}
-                id={id}
-                open={open}
-                anchorEl={anchorEl}
-                onClose={handleClose}
-                anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left',
-                }}
-
-            >
-                <Container sx={{ width: "20rem", height: "5rem", display: "flex", justifyContent: "center", alignItems: "center" }}
-                >
-                    <Slider
-                        getAriaLabel={() => name}
-                        value={range}
-                        min={min}
-                        max={max}
-                        onChange={updateFilter}
-                        valueLabelDisplay="auto"
-                        getAriaValueText={valuetext}
-                    />
-                </Container>
-            </Popover>
+        <Container className=" flex flex-col justify-center items-center ">
+            <Typography id="range-slider" >Filter Price</Typography>
+            <Slider
+                getAriaLabel={() => name}
+                value={range}
+                min={min}
+                max={max}
+                onChange={updateFilter}
+                valueLabelDisplay="auto"
+                getAriaValueText={valuetext}
+            />
         </Container>
+
     )
 
 }
 
 
 interface ProductFilterSearchProps {
-    onFilterChange: (filters: IProductFilter[]) => void
+    onFilterChange: (filters: IProductFilter[]) => void,
+    className?: string,
+    filters : IProductFilter[]
 }
 export function ProductFilterSearch(props: ProductFilterSearchProps) {
     const { onFilterChange } = props
-    const filters: IProductFilter[] = []
+    let filters = [...props.filters]
+
+    const className = clsx([
+        "flex flex-col justify-evenly items-center",
+        props.className
+    ])
 
 
     function setPriceFilter(value: number[]) {
@@ -136,11 +169,53 @@ export function ProductFilterSearch(props: ProductFilterSearchProps) {
 
         if (priceFilterIndex !== -1) {
             filters[priceFilterIndex] = priceFilter
-            return
         }
-        filters.push(priceFilter)
+        else {
+            filters.push(priceFilter)
+        }
 
         onFilterChange([...filters])
+    }
+
+    function setSizeFilter(items: SizeEntity[]) {
+        const sizeFilterIndex = filters.findIndex(filter => filter.id === FilterType.Size)
+
+        const sizeFilter = ProductSizeFilter(items)
+
+        if (sizeFilter.remove) {
+            filters = filters.filter((_, index) => index !== sizeFilterIndex)
+        }
+
+        else if (sizeFilterIndex !== -1) {
+            filters[sizeFilterIndex] = sizeFilter
+        }
+        else {
+            filters.push(sizeFilter)
+        }
+
+        onFilterChange([...filters])
+
+    }
+
+
+    function setColorFilter(items: ColorEntity[]) {
+        const colorFilterIndex = filters.findIndex(filter => filter.id === FilterType.Color)
+
+        const colorFilter = ProductColorFilter(items)
+
+        if (colorFilter.remove) {
+            filters = filters.filter((_, index) => index !== colorFilterIndex)
+        }
+
+        else if (colorFilterIndex !== -1) {
+            filters[colorFilterIndex] = colorFilter
+        }
+        else {
+            filters.push(colorFilter)
+        }
+
+        onFilterChange([...filters])
+
     }
 
     const priceFilterProps = {
@@ -150,7 +225,24 @@ export function ProductFilterSearch(props: ProductFilterSearchProps) {
         max: 2000
     }
 
-    return (<Box className="flex flex-row justify-evenly w-full">
+    const sizeFilterProps = {
+        items: sizes,
+        extractItemName: (item: SizeEntity) => item.size.value,
+        extractItemId: (item: SizeEntity) => item.id.value.toString(),
+        updateFilter: setSizeFilter,
+    }
+
+    const colorFilterProps = {
+        items: colors,
+        extractItemName: (item: ColorEntity) => item.color.value,
+        extractItemId: (item: ColorEntity) => item.id.value.toString(),
+        updateFilter: setColorFilter,
+    }
+
+    return (<Box className={className}>
         <FilterRangeButton {...priceFilterProps} />
+        <ToggleFilterGroup {...sizeFilterProps} />
+        <ToggleFilterGroup {...colorFilterProps} />
+
     </Box>)
 }

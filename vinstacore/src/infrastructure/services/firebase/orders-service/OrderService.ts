@@ -38,7 +38,9 @@ export class FirebaseOrderService implements OrderServicePort {
                     quantity: product.quantity,
                     name: product.name,
                     price: product.price,
-                    imageUrls: images
+                    imageUrls: images,
+                    size :product.size,
+                    color : product.color
                 }
             })
         })
