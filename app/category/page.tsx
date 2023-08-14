@@ -1,6 +1,6 @@
 "use client";
 
-import { Box } from "@mui/material";
+import { Box, useMediaQuery, useTheme } from "@mui/material";
 import { loadProductsApi } from "adminapp/src";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { ProductFilterSearch } from "@vinstastore/storefront";
@@ -19,6 +19,9 @@ export default function Page() {
     const products = useAppSelector(state => categoryProductsSelector(state))
 
     const [filters, setFilters] = useState<IProductFilter[]>([]);
+
+    const theme = useTheme()
+    const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'))
 
     const filteredProducts = useMemo(() => {
         return products.filter((product) => {
@@ -49,20 +52,23 @@ export default function Page() {
     }
 
     const productFilterProps = {
-        onFilterChange : onFilterChange,
-        className : "flex-initial w-80",
-        filters:filters,
+        onFilterChange: onFilterChange,
+        className: "flex-initial w-80 fixed left-0 bottom-0",
+        filters: filters,
     }
 
     const productGridProps = {
-        products : filteredProducts,
-        className : "flex-1 p-2" 
+        products: filteredProducts,
+        className: "flex-1 p-2 h-full ml-0 md:ml-80"
     }
 
 
     return (
-        <Box className="flex flex-row h-screen justify-center items-center">
-            <ProductFilterSearch {...productFilterProps} />
+        <Box className="flex flex-row h-screen justify-center items-center relative">
+            {
+                isSmallScreen ? null : <ProductFilterSearch {...productFilterProps} />
+
+            }
 
             <ProductGrid {...productGridProps} />
 

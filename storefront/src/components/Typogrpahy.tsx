@@ -21,14 +21,15 @@ export function PriceDisplay(props: PriceDisplayProps) {
 interface DisplayTypographyProps {
     text: string,
     color?: string,
-    sx ?: SxProps<Theme>
+    sx ?: SxProps<Theme>,
+    className? : string
 }
 
 export function DisplayTypography(props: DisplayTypographyProps) {
-    const { text, color,sx } = props
+    const { text, color,sx ,className} = props
 
 
-    return <Typography sx={sx} variant="h2" color={color}>{text}</Typography>
+    return <Typography textAlign="center" className={className} sx={sx} variant="h2" color={color}>{text}</Typography>
 }
 
 

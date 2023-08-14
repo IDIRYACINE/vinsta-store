@@ -6,8 +6,8 @@
   "scripts": {
     "build": "tsc "
   },
-  "files": ["src/**"],
-  "main": "src/index.ts",
+  "files": ["dist/**"],
+  "main": "dist/index.js",
 
   "devDependencies": {
     "typescript": "^5.0.4"

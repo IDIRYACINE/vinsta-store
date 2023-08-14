@@ -1,5 +1,6 @@
-import { Box, Container } from "@mui/material";
+import { Box, Container,Paper } from "@mui/material";
 import { DisplayTypography } from "@storefront/components";
+import clsx from "clsx";
 
 
 
@@ -8,31 +9,32 @@ export function HeroSection() {
     const boxStyle = {
         "backgroundImage": "url('images/heroBackground.jpg')",
         "backgroundSize": "cover",
-        "height": "100vh",
-        "width": "100vw",
-        flex: 2,
-        "marginTop": "2rem",
-        marginRight: "2rem",
     }
 
-    const containerStyle = {
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "center",
-        alignItems: "center",
-        width: "100vw",
-        maxWidth: "100vw",
-        margin: "0",
-        padding: "0",
-    }
+    const boxClassName = clsx([
+        "flex-1 mt-2 mr-0 w-full h-full absolute z-0 opacity-10 ",
+        "md:mr-2 md:relative md:opacity-100 md:z-1 "
+    ])
+
+
+    const containerClassName = clsx([
+        "flex flex-row justify-center items-center  ",
+        "h-screen p-0 m-0 relative",
+        
+    ])
+
+
+    const paperClassName = clsx([
+        "flex h-full justify-center items-center",
+    ])
 
     return (
-        <Container maxWidth={false} color="filled" sx={containerStyle}>
-            <Box sx={boxStyle} />
+        <Box className={containerClassName} >
+            <Box className={boxClassName} sx={boxStyle} />
 
-            <DisplayTypography sx={{ flex: 1 }} color="white" text="Welcome to XXinstaverse" />
-
-
-        </Container>
+            <Paper className={paperClassName} color="primary">
+                <DisplayTypography  color="white" text="Welcome to XXinstaverse" />
+            </Paper>
+        </Box>
     )
 }

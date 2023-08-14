@@ -7,20 +7,20 @@ import { theme } from "./StoreTheme";
 
 interface LayoutProps {
     children: ReactNode;
-  }
-  
-function StoreLayout({children} :LayoutProps){
+}
+
+function StoreLayout({ children }: LayoutProps) {
     return (
-        <>
+
         <ThemeProvider theme={theme}>
             <Provider store={store}>
-            <Navbar />
-            {children}
+                    <Navbar />
+                    {children}
 
             </Provider>
-            </ThemeProvider>
-        </>
+        </ThemeProvider>
+
     )
 }
 
-export {StoreLayout }
+export { StoreLayout }

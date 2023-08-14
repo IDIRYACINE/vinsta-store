@@ -30,6 +30,7 @@ const theme = createTheme({
         },
       },
     },
+
     MuiContainer: {
       variants: [
         {
@@ -39,7 +40,22 @@ const theme = createTheme({
           },
         },
       ],
+    },
+    // Paper
+
+    MuiPaper: {
+      variants: [
+        {
+          props: { color: 'primary' },
+          style: {
+          backgroundColor: brown[300],
+
+        }
+      }
+      ]
     }
+
+    //
   },
 },
 );

@@ -1,4 +1,4 @@
-import { Box, Grid, ToggleButtonGroup, ToggleButton, Container, Slider, FormControl, InputLabel, MenuItem, Popover, Select, SelectChangeEvent, Typography,  } from "@mui/material"
+import { Box, Grid,Paper, ToggleButtonGroup, ToggleButton, Container, Slider, FormControl, InputLabel, MenuItem, Popover, Select, SelectChangeEvent, Typography,  } from "@mui/material"
 import React from "react"
 import { FilterType, IProductFilter, ProductPriceFilter, sizes, SizeEntity, ProductSizeFilter, ColorEntity, ProductColorFilter,colors } from "@vinstastore/vinstacore"
 import clsx from "clsx"
@@ -157,7 +157,7 @@ export function ProductFilterSearch(props: ProductFilterSearchProps) {
     let filters = [...props.filters]
 
     const className = clsx([
-        "flex flex-col justify-evenly items-center",
+        "flex flex-col justify-evenly items-center h-full",
         props.className
     ])
 
@@ -239,10 +239,10 @@ export function ProductFilterSearch(props: ProductFilterSearchProps) {
         updateFilter: setColorFilter,
     }
 
-    return (<Box className={className}>
+    return (<Paper className={className}>
         <FilterRangeButton {...priceFilterProps} />
         <ToggleFilterGroup {...sizeFilterProps} />
         <ToggleFilterGroup {...colorFilterProps} />
 
-    </Box>)
+    </Paper>)
 }

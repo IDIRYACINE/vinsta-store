@@ -1,7 +1,6 @@
 
 "use client";
 
-export const dynamic = 'force-dynamic'
 
 import { loadCategoriesApi } from '@vinstastore/vinstaadmin';
 import { setCategories, useAppDispatch,Preloader,HomePage } from "@vinstastore/storefront";
