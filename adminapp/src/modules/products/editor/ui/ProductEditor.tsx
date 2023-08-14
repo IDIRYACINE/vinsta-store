@@ -7,13 +7,14 @@ import { EditorActions } from "./Actions"
 import { useState } from "react"
 import { ImageManager } from "@adminapp/components/commons/Images"
 import { goBack, ProductEditorController } from "../logic/Controller"
-import { Repository } from "@vinstastore/vinstacore"
+import { Repository, sizes,colors } from "@vinstastore/vinstacore"
 import { useRouter } from "next/navigation"
 
 
 import { addProduct, updateProduct, } from "@adminapp/store";
 import { updateProductApi } from "@adminapp/api/productApi"
 import { useAppDispatch, useAppSelector } from "@adminapp/store/clientHooks";
+import { SizesSelector, ColorsSelector } from "@adminapp/components/commons/Buttons"
 
 
 interface ProductEditorProps {
@@ -24,7 +25,7 @@ function ProductEditor(props:ProductEditorProps) {
     const {categories} = props
 
     let product:Repository.Product = useAppSelector(state => state.products.editedProduct)!
-    const categoryId = useAppSelector(state => state.products.editedCategoryId)!
+    const categoryId = useAppSelector(state => state.products.displayedCategoryId)!
 
     const [name, setName] = useState<string>(product.name)
     const [previewImageUrl, setPreviewImageUrl] = useState<string>("")
@@ -33,6 +34,8 @@ function ProductEditor(props:ProductEditorProps) {
     const [imageUrls, setImageUrls] = useState<string[]>([])
     const [price, setPrice] = useState<string>("0")
     const [quantity, setQuantity] = useState<string>("0")
+    const [colorId, setColorId] = useState<string>("")
+    const [sizeId, setSizeId] = useState<string>("")
 
     let controller = new ProductEditorController()
 
@@ -65,8 +68,23 @@ function ProductEditor(props:ProductEditorProps) {
     }
 
 
+    const sizesSelectorProps = {
+        onChange: setSizeId,
+        className: "w-full mr-2",
+
+        sizes
+    }
+
+    const colorsSelectorProps = {
+        onChange: setColorId,
+        className: "w-full",
+
+        colors
+    }
+
     const priceProps = {
         label: "Price",
+        
         value: price,
         onChange: (value: string) => setPrice(value),
         className: "w-full"
@@ -138,6 +156,11 @@ function ProductEditor(props:ProductEditorProps) {
                 <Box className="flex flex-row my-2 w-full">
                     <AppTextField {...quantityProps} />
                     <AppTextField {...priceProps} />
+                </Box>
+
+                <Box className="flex flex-row my-2 w-full justify-evenly">
+                    <SizesSelector {...sizesSelectorProps} />
+                    <ColorsSelector {...colorsSelectorProps} />
                 </Box>
 
                 <AppTextArea {...descriptionProps} />

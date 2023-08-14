@@ -2,8 +2,8 @@
   "name": "@vinstastore/storefront",
   "version": "0.1.2",
   "private": true,
-  "files": ["dist/**"],
-  "main": "dist/index.js",
+  "files": ["src/**"],
+  "main": "src/index.ts",
   "scripts": {
     "build": "tsc",
     "watch-turbo": "turbopack watch",

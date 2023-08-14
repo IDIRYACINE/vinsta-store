@@ -61,7 +61,7 @@ function ImageManager(props: ImageManagerProps) {
         onDeleteImage(id)
     }
 
-    const className = clsx([props.className, "w-full"])
+    const className = clsx([props.className, "w-full mr-2"])
 
     return (
         <Box>

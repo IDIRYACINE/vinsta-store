@@ -5,7 +5,7 @@ import clsx from "clsx"
 import ProductManagerHeader from "./ProductManagerHeader"
 import { ProductTable } from "../../table"
 
-import { RootState, AppDispatch, } from "@adminapp/store";
+import { RootState, AppDispatch, setProducts, } from "@adminapp/store";
 import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
 
 
@@ -13,6 +13,8 @@ const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
 
 import { DeleteProductDialog } from "./DeleteProductDialog"
+import { useAppDispatch } from "@adminapp/store/clientHooks"
+import { loadProductsApi } from "@adminapp/api/productApi"
 
 
 
@@ -25,7 +27,13 @@ function ProductPage() {
 
     const products = useAppSelector(state => state.products.products)
 
+    const categoryId = useAppSelector(state => state.products.displayedCategoryId)!
 
+    const dispatch = useAppDispatch()
+    
+    loadProductsApi({categoryId}).then(
+        (products) => dispatch(setProducts(products))
+    )
 
 
     return (

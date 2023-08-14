@@ -1,24 +1,22 @@
 "use client"
 
+import { setDisplayedCategory } from "@adminapp/store";
+import { useAppDispatch } from "@adminapp/store/clientHooks";
 import { Card, CardActionArea, CardContent, CardMedia, Typography } from "@mui/material";
-import { setDisplayedCategory, useAppDispatch } from "@storefront/store";
 import { Repository } from "@vinstastore/vinstacore";
-import { useRouter } from "next/navigation";
 
 
 interface CategoryCardProps {
     category: Repository.Category
 }
 
-export function CategoryCard(props: CategoryCardProps) {
+export default function CategoryCard(props: CategoryCardProps) {
 
     const { category } = props
-    const router = useRouter()
     const dispatch = useAppDispatch()
 
     function navigateToCategory() {
         dispatch(setDisplayedCategory(category.id))
-        router.replace(`/category`)
     }
 
 

@@ -1,11 +1,22 @@
-import { ProductPage } from "@vinstastore/vinstaadmin";
+import { ProductManagerPage,loadCategoriesApi } from "@vinstastore/vinstaadmin";
+import Preloader from "adminapp/src/store/Preloader";
 
-function Page(){
+async function Page(){
 
 
+    const categories = await loadCategoriesApi()
+
+
+    const preloaderProps = {
+        categories: categories,
+    }
 
     return (
-        <ProductPage/>
+        <div>
+            <Preloader {...preloaderProps} />
+        <ProductManagerPage/>
+        </div>
+
     )
 }
 

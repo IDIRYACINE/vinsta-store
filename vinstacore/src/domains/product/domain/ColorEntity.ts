@@ -4,25 +4,18 @@ import { colorsRaw } from "../data/ColorsRaw";
 import { ColorId, ColorName } from "./ValueObjects";
 
 
-interface ColorEntityProps{
-    id : ColorId,
-    color:ColorName
+interface ColorEntityProps {
+    id: ColorId,
+    color: ColorName
 }
 
 
 export class ColorEntity implements EntityBase<ColorEntity> {
-    toRaw(): Repository.Color {
-        throw new Error("Method not implemented.");
-    }
     
-    equalsRaw(color: Repository.Color): boolean {
-        return this.id.value === color.id
-    }
+    public readonly id: ColorId
+    public readonly color: ColorName
 
-    public readonly id:ColorId
-    public readonly color:ColorName
-    
-    constructor (props:ColorEntityProps){
+    constructor(props: ColorEntityProps) {
         this.id = props.id
         this.color = props.color
     }
@@ -31,10 +24,26 @@ export class ColorEntity implements EntityBase<ColorEntity> {
         return this.id.value === other.id.value
     }
 
-    static fromRaw(raw:Repository.Color){
+    equalsById(colorId: string): boolean {
+        return this.id.value === parseInt(colorId)
+    }
+
+    toRaw(): Repository.Color {
+        return {
+            id: this.id.value,
+            color: this.color.value
+        }
+    }
+
+    equalsRaw(color: Repository.Color): boolean {
+        return this.id.value === color.id
+    }
+
+
+    static fromRaw(raw: Repository.Color) {
         return new ColorEntity({
-            id:ColorId.fromValue(raw.id),
-            color:ColorName.fromValue(raw.color)
+            id: ColorId.fromValue(raw.id),
+            color: ColorName.fromValue(raw.color)
         })
 
     }

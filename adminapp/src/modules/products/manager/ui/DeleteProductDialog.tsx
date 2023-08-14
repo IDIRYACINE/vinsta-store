@@ -15,7 +15,7 @@ function DeleteProductDialog(props: DeleteProductDialogProps) {
     const dispatch = useAppDispatch()
     const isModalOpen = useAppSelector(state => state.products.isModalOpen)
 
-    const categoryId = useAppSelector(state => state.products.editedCategoryId)!
+    const categoryId = useAppSelector(state => state.products.displayedCategoryId)!
     const productId = useAppSelector(state => state.products.editedProduct?.id)!
 
     function onClose() {

@@ -5,8 +5,8 @@ import { ImageManager } from "@adminapp/components/commons/Images"
 import { Card, Box } from "@mui/material"
 
 
-import {  addProduct, } from "@adminapp/store";
-import { useAppDispatch, useAppSelector } from "@adminapp/store/clientHooks";
+import { addProduct, } from "@adminapp/store";
+import { useAppDispatch } from "@adminapp/store/clientHooks";
 
 
 import { useState } from "react"
@@ -14,16 +14,16 @@ import { goBack, ProductEditorController } from "../logic/Controller"
 import { CreatorActions } from "./Actions"
 import { useRouter } from "next/navigation"
 import { createProductApi } from "@adminapp/api/productApi";
-import { CategoriesSelector } from "@adminapp/components/commons/Buttons";
-import { Repository } from "@vinstastore/vinstacore";
+import { CategoriesSelector, ColorsSelector, SizesSelector } from "@adminapp/components/commons/Buttons";
+import { Repository, sizes, colors, ColorEntity, SizeEntity } from "@vinstastore/vinstacore";
 
 interface ProductCreatorProps {
     categories: Repository.Category[]
 }
 
-function ProductCreator(props:ProductCreatorProps) {
+function ProductCreator(props: ProductCreatorProps) {
 
-    const {categories} = props
+    const { categories } = props
 
 
     const [name, setName] = useState<string>("")
@@ -34,6 +34,8 @@ function ProductCreator(props:ProductCreatorProps) {
     const [price, setPrice] = useState<string>("0")
     const [quantity, setQuantity] = useState<string>("0")
     const [categoryId, setCategoryId] = useState<string>("")
+    const [colorId, setColorId] = useState<string>("")
+    const [sizeId, setSizeId] = useState<string>("")
 
     const controller = new ProductEditorController()
 
@@ -81,18 +83,23 @@ function ProductCreator(props:ProductCreatorProps) {
 
     function onSave() {
 
+        const color = colors.find((el) => el.equalsById(colorId))
+
+        const size = sizes.find((el) => el.equalsById(sizeId))
+
         let product = controller.createProduct({
             name, imageUrls, description,
             code: productId,
-            color : {id: 1, color: "red"},
-            size : {id:0,size:"S"},
+            color: (color as ColorEntity).toRaw(),
+            size: (size as SizeEntity).toRaw(),
             price: parseFloat(price),
             quantity: parseInt(quantity)
         })
 
         dispatch(addProduct(product))
+
         createProductApi({ product, categoryId, productId: product.id }).then((res) => {
-            // goBack(router)
+            goBack(router)
         })
 
 
@@ -129,6 +136,18 @@ function ProductCreator(props:ProductCreatorProps) {
         onChange: setCategoryId
     }
 
+    const sizesSelectorProps = {
+        onChange: setSizeId,
+        className: "w-full mr-2",
+        sizes
+    }
+
+    const colorsSelectorProps = {
+        onChange: setColorId,
+        className: "w-full",
+        colors
+    }
+
     return (
         <Box className="w-full h-full flex flex-col justify-center items-center p-8 ">
             <Card className="flex flex-col p-4 w-full">
@@ -141,6 +160,11 @@ function ProductCreator(props:ProductCreatorProps) {
                     <AppTextField {...priceProps} />
                 </Box>
                 <CategoriesSelector {...categoriesSelectorProps} />
+
+                <Box className="flex flex-row my-2 w-full justify-evenly">
+                    <SizesSelector {...sizesSelectorProps} />
+                    <ColorsSelector {...colorsSelectorProps} />
+                </Box>
 
                 <AppTextArea {...descriptionProps} />
                 <ImageManager {...imageProps} />

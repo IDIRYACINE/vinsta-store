@@ -5,7 +5,7 @@ import { Repository } from "@vinstastore/vinstacore";
 export interface ProductsState {
     products: Repository.Product[];
     editedProduct: Repository.Product | null;
-    editedCategoryId : number | null,
+    displayedCategoryId : number | null | string,
     isModalOpen: boolean;
 }
 
@@ -13,7 +13,7 @@ export interface ProductsState {
 const initialState: ProductsState = {
     products: [],
     editedProduct: null,
-    editedCategoryId : null,
+    displayedCategoryId : null,
     isModalOpen: false,
 };
 
@@ -41,6 +41,9 @@ const productsSlice = createSlice({
                 state.products[index] = action.payload;
             }
         },
+        setDisplayedCategory(state ,action:PayloadAction<number |string| null>){
+            state.displayedCategoryId = action.payload;
+        },
         openDeleteProductDialog(state, action: PayloadAction<Repository.Product>) {
             state.editedProduct = action.payload;
             state.isModalOpen = true;
@@ -51,6 +54,6 @@ const productsSlice = createSlice({
     }
 });
 
-export const { setProducts, setEditedProduct, addProduct, deleteProduct, updateProduct } = productsSlice.actions;
+export const { setProducts, setEditedProduct, addProduct, deleteProduct, setDisplayedCategory,updateProduct } = productsSlice.actions;
 export const { openDeleteProductDialog, closeDeleteProductDialog } = productsSlice.actions;
 export default productsSlice.reducer;

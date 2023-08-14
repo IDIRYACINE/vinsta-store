@@ -35,6 +35,11 @@ export class SizeEntity implements EntityBase<SizeEntity> {
         }
     }
 
+
+    equalsById(sizeId:string) :boolean {
+        return this.id.value === parseInt(sizeId)
+    }
+
     static fromRaw(raw: Repository.Size) {
         return new SizeEntity({
             id: SizeId.fromValue(raw.id),

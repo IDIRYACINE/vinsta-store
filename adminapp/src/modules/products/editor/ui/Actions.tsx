@@ -35,7 +35,7 @@ function EditorActions(props: EditorActionsProps) {
     ])
     return (
         <Box className={className}>
-            <BaseContainedButton className="mr-2 bg-purple-500" onClick={props.onCancel} >Cancel</BaseContainedButton>
+            <BaseContainedButton className="mr-2 " onClick={props.onCancel} >Cancel</BaseContainedButton>
             <BaseContainedButton onClick={props.onSave} >Save</BaseContainedButton>
         </Box>
     )
