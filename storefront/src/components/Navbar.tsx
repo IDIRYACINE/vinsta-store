@@ -1,14 +1,75 @@
 'use client';
 
 
-import { AppBar, IconButton, Typography, Toolbar, Tooltip, Box, Badge } from '@mui/material';
+import { AppBar, IconButton, Divider, Typography, Toolbar, Drawer, Tooltip, Box, Badge, useMediaQuery, useTheme, styled } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import DeliveryIcon from '@mui/icons-material/DeliveryDining';
-import { ClientRoutes } from '@vinstastore/vinstacore';
+import MenuIcon from '@mui/icons-material/Menu';
+import { ClientRoutes, IProductFilter } from '@vinstastore/vinstacore';
 import { useRouter } from 'next/navigation';
-import { cartItemsCountSelector, useAppSelector } from '@storefront/store';
+import { cartItemsCountSelector, useAppSelector, useAppDispatch, setProductFilters } from '@storefront/store';
+import { useState } from 'react';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import { ProductFilterSearch } from './Filters';
+
+interface AppDrawerProps {
+    open: boolean,
+    toggleDrawer: () => void,
+
+}
+function AppDrawer(props: AppDrawerProps) {
+
+    const { open, toggleDrawer } = props
+    const drawerWidth = "100%";
+
+    const dispatch = useAppDispatch()
 
 
+    const filters = useAppSelector(state => state.products.filters)
+
+    function onFilterChange(newFilters: IProductFilter[]) {
+        dispatch(setProductFilters(newFilters))
+    }
+
+    const productFilterProps = {
+        onFilterChange: onFilterChange,
+        className: "flex-initial w-full left-0 bottom-0",
+        filters: filters,
+    }
+
+    return (
+        <Drawer
+            sx={{
+                width: drawerWidth,
+                flexShrink: 0,
+                '& .MuiDrawer-paper': {
+                    width: drawerWidth,
+                    boxSizing: 'border-box',
+                },
+            }}
+            variant="persistent"
+            anchor="left"
+            open={open}
+        >
+            <DrawerHeader>
+            <IconButton onClick={toggleDrawer}>
+                <ChevronLeftIcon />
+            </IconButton>
+            </DrawerHeader>
+            <Divider />
+
+            <ProductFilterSearch {...productFilterProps} />
+        </Drawer>
+    )
+}
+
+const DrawerHeader = styled('div')(({ theme }) => ({
+    display: 'flex',
+    alignItems: 'center',
+    padding: theme.spacing(0, 1),
+    ...theme.mixins.toolbar,
+    justifyContent: 'flex-end',
+}));
 
 export function Logo() {
 
@@ -59,6 +120,10 @@ export function Navbar() {
 
     const router = useRouter()
     const cartItemsCount = useAppSelector(state => cartItemsCountSelector(state))
+    const [openDrawer, setDrawerState] = useState(false);
+
+    const theme = useTheme()
+    const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"))
 
     const appBarStyle = {
         "display": "flex",
@@ -79,10 +144,27 @@ export function Navbar() {
         router.replace(ClientRoutes.delivery)
     }
 
+    const toggleDrawer = () => {
+        setDrawerState(!openDrawer);
+    };
+
+
+
     return (
         <div>
             <AppBar position="fixed">
                 <Toolbar color="white" sx={appBarStyle}>
+                    {isSmallScreen ?
+                        <IconButton
+                            color="inherit"
+                            onClick={toggleDrawer}
+                            edge="start"
+                            sx={{ mr: 2}}
+                        >
+                            <MenuIcon />
+                        </IconButton> : null
+                    }
+
                     <IconButton onClick={navigateToHome}>
                         <Logo />
                     </IconButton>
@@ -95,6 +177,7 @@ export function Navbar() {
             </AppBar>
 
             <Toolbar />
+            <AppDrawer open={openDrawer} toggleDrawer={toggleDrawer}/>
         </div>
 
     )

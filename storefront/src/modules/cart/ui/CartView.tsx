@@ -49,7 +49,6 @@ export function CartView(props: CartViewProps) {
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-evenly",
-        paddings: "1rem",
         height: "80vh",
         width: "100%",
         overflowY: "scroll"

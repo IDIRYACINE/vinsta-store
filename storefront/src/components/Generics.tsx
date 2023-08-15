@@ -5,11 +5,11 @@ import { Repository } from "@vinstastore/vinstacore"
 interface DisplayImageProps {
     image: Repository.Image,
     handleClick: (image: Repository.Image) => void,
-    size: { height: string | number, width: string | number }
+    className : string
 }
 
 function DisplayImage(props: DisplayImageProps) {
-    const { image, size } = props
+    const { image, className } = props
 
     function handleClick() {
         props.handleClick(image)
@@ -18,7 +18,7 @@ function DisplayImage(props: DisplayImageProps) {
     return (
         <Card>
             <CardActionArea onClick={handleClick} sx={{ padding: "0.5rem" }}>
-                <CardMedia image={image.url} sx={size} />
+                <CardMedia image={image.url} className={className} />
             </CardActionArea>
         </Card>
     )
@@ -33,24 +33,18 @@ export function DisplayImageRoster(props: DisplayImageRosterProps) {
 
     const [selectedImage, selectImage] = useState(images[0])
 
-    const featuredSize = {
-        height: "60vh",
-        width: "40vw"
-    }
+    const featuredSize = "w-96 h-96"
 
-    const miniSize = {
-        height: "10vh",
-        width: "10vw"
-    }
+    const miniSize = "w-10 h-10"
 
     const featuredProps = {
         image: selectedImage,
-        size: featuredSize,
+        className: featuredSize,
         handleClick: selectImage
     }
 
     const previewProps = {
-        size: miniSize,
+        className: miniSize,
         handleClick: selectImage
     }
 

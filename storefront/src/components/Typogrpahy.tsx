@@ -2,16 +2,20 @@ import { Container, SxProps, Theme, Typography } from "@mui/material"
 
 interface PriceDisplayProps {
     currency: string,
-    price: number | string
+    price: number | string,
+    inverted : boolean 
 }
 
 export function PriceDisplay(props: PriceDisplayProps) {
 
-    const { price, currency } = props
+    const { price, currency,inverted } = props
+
+    const bgColor = inverted ? "burlywood" : "white"
+    const textColor = inverted ? "white" : "burlywood"
 
     return (
-        <Container sx={{ backgroundColor: "white", display: "flex", justifyContent: "center" }}>
-            <Typography color="burlywood" variant="h4">
+        <Container sx={{ backgroundColor: bgColor, display: "flex", justifyContent: "center" }}>
+            <Typography color={textColor} variant="h4">
                 {price} {currency}
             </Typography>
         </Container>

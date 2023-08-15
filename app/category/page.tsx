@@ -3,7 +3,7 @@
 import { Box, useMediaQuery, useTheme } from "@mui/material";
 import { loadProductsApi } from "adminapp/src";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { ProductFilterSearch } from "@vinstastore/storefront";
+import { ProductFilterSearch, setProductFilters } from "@vinstastore/storefront";
 import { ProductGrid } from "@vinstastore/storefront";
 import { categoryProductsSelector, setProducts, useAppDispatch, useAppSelector } from "@vinstastore/storefront";
 import { IProductFilter } from "@vinstastore/vinstacore";
@@ -18,7 +18,7 @@ export default function Page() {
 
     const products = useAppSelector(state => categoryProductsSelector(state))
 
-    const [filters, setFilters] = useState<IProductFilter[]>([]);
+    const filters = useAppSelector(state => state.products.filters)
 
     const theme = useTheme()
     const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'))
@@ -48,7 +48,7 @@ export default function Page() {
     }
 
     function onFilterChange(newFilters: IProductFilter[]) {
-        setFilters(newFilters)
+        dispatch(setProductFilters(newFilters))
     }
 
     const productFilterProps = {

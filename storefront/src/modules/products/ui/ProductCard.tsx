@@ -35,7 +35,7 @@ export function ProductCard(props: ProductCardProps) {
                     </Typography>
 
                     <Typography variant="body2" color="text.secondary">
-                        {product.description}
+                        {product.price} DA
                     </Typography>
 
                 </CardContent>

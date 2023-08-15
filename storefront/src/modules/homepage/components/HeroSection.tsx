@@ -12,8 +12,8 @@ export function HeroSection() {
     }
 
     const boxClassName = clsx([
-        "flex-1 mt-2 mr-0 w-full h-full absolute z-0 opacity-10 ",
-        "md:mr-2 md:relative md:opacity-100 md:z-1 "
+        "flex-1 mt-2 w-full h-full absolute z-0 opacity-10 ",
+        "md:relative md:opacity-100 md:z-1 md:min-w-screen-half"
     ])
 
 
@@ -25,7 +25,7 @@ export function HeroSection() {
 
 
     const paperClassName = clsx([
-        "flex h-full justify-center items-center",
+        "flex h-full justify-center items-center p-0 md:p-2 ",
     ])
 
     return (

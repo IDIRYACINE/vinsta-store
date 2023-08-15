@@ -1,6 +1,6 @@
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { Repository } from "@vinstastore/vinstacore";
+import { IProductFilter, Repository } from "@vinstastore/vinstacore";
 
 export interface ProductTreasure {
     categoryId: number | string,
@@ -13,6 +13,7 @@ export interface ProductsState {
     displayedProduct: Repository.Product | null;
     displayedCategory: number |string| null,
     isModalOpen: boolean;
+    filters : IProductFilter[]
 }
 
 
@@ -23,6 +24,7 @@ const initialState: ProductsState = {
     displayedProduct: null,
     displayedCategory: null,
     isModalOpen: false,
+    filters : []
 };
 
 const productsSlice = createSlice({
@@ -44,10 +46,13 @@ const productsSlice = createSlice({
         },
         setDisplayedCategory(state, action: PayloadAction<number | null|string>) {
             state.displayedCategory = action.payload;
+        },
+        setProductFilters(state ,action:PayloadAction<IProductFilter[]>){
+            state.filters = action.payload
         }
 
     }
 });
 
-export const { setProducts, setDisplayedProduct, setCategories, setDisplayedCategory } = productsSlice.actions;
+export const { setProductFilters,setProducts, setDisplayedProduct, setCategories, setDisplayedCategory } = productsSlice.actions;
 export default productsSlice.reducer;

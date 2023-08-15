@@ -9,7 +9,10 @@ module.exports = {
   ],
   theme: {
     extend: {
-      
+      minWidth : {
+        "screen-half" : "50vw",
+        "screen-3/4" : "40vw"
+      }
     },
   },
   plugins: [],

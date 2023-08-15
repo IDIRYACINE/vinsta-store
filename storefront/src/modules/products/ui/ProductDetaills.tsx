@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { convertProductToCartItem, goBack } from "../logic/helpers";
 import {useAppSelector, useAppDispatch, addItem } from "@storefront/store";
 import { DisplayImageRoster, PriceDisplay, SandwichTypography,} from "@storefront/components";
-
+import clsx from "clsx"
 
 
 
@@ -16,7 +16,7 @@ export function ProductDetaills() {
     const dispatch = useAppDispatch()
     const router = useRouter()
 
-    const textColor = "white"
+    const textColor = "black"
 
     if (product == null) {
         return (<Typography>
@@ -37,23 +37,20 @@ export function ProductDetaills() {
         addToCart: handleAddToCart
     }
 
-    const infosBoxStyle = {
-        backgroundColor: "burlywood",
-        padding: "0.5rem",
-        width: "40vw",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        alignItems: "center"
-    }
+    const infosBoxClassName = clsx([
+        "flex flex-col justify-between items-center p-1 min-w-screen",
+        "md:min-w-screen-3/4"
+    ]) 
+
+    const mainBoxClassName = "flex flex-col md:flex-row"
 
     return (
-        <Box sx={{ display: "flex", flexDirection: "row" }}>
+        <Box className={mainBoxClassName}>
             <DisplayImageRoster images={product.imageUrls} />
 
-            <Box sx={infosBoxStyle}>
+            <Box className={infosBoxClassName}>
                 <Typography variant="h2" color={textColor}>{product.name}</Typography>
-                <PriceDisplay currency="DA" price={product.price} />
+                <PriceDisplay inverted={true} currency="DA" price={product.price} />
 
                 <SandwichTypography color={textColor} text="Description" />
 
@@ -70,25 +67,16 @@ interface ActionsRowProps {
     goBack: () => void,
 }
 function ActionsRow(props: ActionsRowProps) {
-    const { addToCart, goBack } = props
+    const { addToCart } = props
 
-    const cartButtonSx= {
-        flex : 2,
-    }
-
-    const backButtonSx = {
-        flex : 1,
-    }
 
     return (
-        <Box sx={{ displayDirection: "row", display: "flex" }}>
-            <Button sx={cartButtonSx} onClick={addToCart}>
-                <Box>
+            <Button className="h-20 w-60" onClick={addToCart}>
+                <Box className="flex flex-row justify-evenly items-center w-full">
                     <Typography variant="body1">Add to cart</Typography>
                     <ShoppingCartIcon />
                 </Box>
             </Button>
-            <Button sx={backButtonSx} onClick={goBack}>Go back</Button>
-        </Box>
+            
     )
 }
