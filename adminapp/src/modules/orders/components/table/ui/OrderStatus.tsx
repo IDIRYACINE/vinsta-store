@@ -28,18 +28,19 @@ interface OrderStatusTabProps {
     statusList: OrderStatus[]
 }
 function OrderStatusTab(props: OrderStatusTabProps) {
-    const [value, setValue] = useState(0);
+    const [orderStatus, setOrderStatus] = useState<string>(props.statusList[0].name);
     const dispatch = useAppDispatch()
 
-    const handleChange = (event: SyntheticEvent, newValue: number) => {
+    const handleChange = (event: SyntheticEvent, newValue: string) => {
+        const newOrderStauts = props.statusList.find(el => el.name === newValue)!
 
-        dispatch(setSelectedOrderStatus(props.statusList[newValue]))
-        setValue(newValue);
+        dispatch(setSelectedOrderStatus(newOrderStauts))
+        setOrderStatus(newValue);
     };
 
     return (
         <Card className="mb-1">
-            <Tabs value={value} onChange={handleChange} aria-label="order status tab">
+            <Tabs value={orderStatus} onChange={handleChange} aria-label="order status tab">
                 {
                     props.statusList.map((status) => {
                         return <Tab key={`tab-${status.name}`} value={status.name} label={status.name} />

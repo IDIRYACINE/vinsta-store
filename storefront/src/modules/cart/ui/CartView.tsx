@@ -1,4 +1,4 @@
-import { Button, Card, CardActions, CardMedia, Container,IconButton, Typography } from "@mui/material"
+import { Button, Card, CardActions, CardMedia,Box, Container,IconButton, Typography } from "@mui/material"
 import { Repository } from "@vinstastore/vinstacore"
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useAppDispatch,openItemDialog, openModel } from "@storefront/store";
@@ -45,21 +45,7 @@ export function CartView(props: CartViewProps) {
     const dispatch = useAppDispatch()
 
 
-    const containerStyle = {
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-evenly",
-        height: "80vh",
-        width: "100%",
-        overflowY: "scroll"
-    }
-
-    const actionBarStyle = {
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "end",
-
-    }
+    
 
 
     function handleRemoveItem(item:Repository.OrderItem){
@@ -73,18 +59,19 @@ export function CartView(props: CartViewProps) {
 
     return (
 
-        <Container>
-            <Container sx={containerStyle}>
+        <Container className="flex flex-col h-max items-center justify-end">
+            <Box className="flex flex-col p-2 justify-center items-center flex-2">
 
                 {
+                    items.length === 0 ? <Typography variant="h4">No items</Typography>:
                     items.map(item => {
                         return <CartItemCard onDelete={handleRemoveItem} item={item} key={item.productId} />
                     })
                 }
 
-            </Container>
+            </Box>
 
-            <Container sx={actionBarStyle}>
+            <Container className="flex flex-row justify-end">
                 <Button onClick={handleShipOrder}>Ship Order</Button>
                 <Button variant="contained" color="primary">Total Price : {totalPrice} Da</Button>
             </Container>

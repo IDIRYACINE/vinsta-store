@@ -32,7 +32,7 @@ export default function OrdersTable(props: TableProps) {
     <Box>
       <OrderStatusTab statusList={orderStatusList} />
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 700 }} aria-label="customized table">
+        <Table sx={{ minWidth: 700 }} aria-label="orders table">
           <TableHead>
             <OrderHeader headers={props.headersData} />
           </TableHead>

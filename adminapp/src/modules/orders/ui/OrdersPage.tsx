@@ -5,6 +5,7 @@ import {  Repository } from "@vinstastore/vinstacore"
 import OrdersTable from "../components/table/ui/OrdersTable"
 import { useAppSelector } from "@adminapp/store/clientHooks";
 import { UpdateOrderStatusDialog } from "../components/common/UpdateOrderStatusDialog";
+import { orderHeaderSelector } from "@adminapp/store/selectors";
 
 
 interface OrderPageProps {
@@ -12,11 +13,8 @@ interface OrderPageProps {
 }
 
 function OrdersPage() {
-    const orderStatus = useAppSelector(state => state.orders.selectedOrderStatus)
 
-    const ordersHeaders = useAppSelector(state => state.orders.orders
-        .filter(order => order.header.status === orderStatus.name)
-        .map(order => order.header))
+    const ordersHeaders = useAppSelector(state => orderHeaderSelector(state))
 
     const headersData = ["Order ID", "Order Date", "Status", "Totale"]
 

@@ -44,7 +44,7 @@ export function DestinationSelector(props: DestinationSelectorProps) {
 
     return (
 
-        <Box >
+        <Box className="w-full">
             <FormControl fullWidth className="mb-2">
                 <InputLabel id="delivery-type-label">Delivery Type</InputLabel>
                 <Select
@@ -63,7 +63,7 @@ export function DestinationSelector(props: DestinationSelectorProps) {
                     }
                 </Select>
             </FormControl>
-            <Box className="flex flex-row w-full mb-2">
+            <Box className="flex flex-row w-full mt-2 justify-center items-center">
 
                 <FormControl fullWidth className="mr-2">
                     <InputLabel id="destination-select-label">Destination</InputLabel>

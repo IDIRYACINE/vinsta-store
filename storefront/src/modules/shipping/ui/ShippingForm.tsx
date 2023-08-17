@@ -148,7 +148,7 @@ export function ShippingDialog() {
             onClose={onClose}>
 
             {
-                cart.length !== 0 ? <DisplayTypography text="Cart is empty" />
+                cart.length === 0 ? <DisplayTypography text="Cart is empty" />
                     : <Box sx={contentStyle}>
                         <ShippingForm cart={cart} totalPrice={totalPrice} />
                     </Box>
