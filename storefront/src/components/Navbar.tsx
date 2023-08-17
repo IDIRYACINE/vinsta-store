@@ -1,7 +1,8 @@
 'use client';
 
 
-import { AppBar, IconButton, Divider, Typography, Toolbar, Drawer, Tooltip, Box, Badge, useMediaQuery, useTheme, styled } from '@mui/material';
+import { AppBar, IconButton, Divider, Typography, Toolbar, Drawer, Box, Badge, useMediaQuery } from '@mui/material';
+import { useTheme,styled } from "@mui/material/styles";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import DeliveryIcon from '@mui/icons-material/DeliveryDining';
 import MenuIcon from '@mui/icons-material/Menu';

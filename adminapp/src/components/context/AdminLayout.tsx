@@ -4,7 +4,9 @@ import clsx from 'clsx';
 import { ReactNode, } from 'react';
 import Navbar from '@adminapp/components/navigation/appbar/Navbar';
 import Sidebar from '@adminapp/components/navigation/sidebar/ui/Sidebar';
-import { Box, ThemeProvider } from '@mui/material';
+import { Box } from '@mui/material';
+import { ThemeProvider } from '@mui/material/styles';
+
 import { theme } from './AdminTheme';
 import { Provider } from 'react-redux';
 import { store } from '@adminapp/store';

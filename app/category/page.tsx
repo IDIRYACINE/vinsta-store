@@ -1,8 +1,10 @@
 "use client";
 
-import { Box, useMediaQuery, useTheme } from "@mui/material";
+import { Box, useMediaQuery  } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+
 import { loadProductsApi } from "adminapp/src";
-import { useEffect, useMemo, useRef, useState } from "react";
+import {  useMemo } from "react";
 import { ProductFilterSearch, setProductFilters } from "@vinstastore/storefront";
 import { ProductGrid } from "@vinstastore/storefront";
 import { categoryProductsSelector, setProducts, useAppDispatch, useAppSelector } from "@vinstastore/storefront";

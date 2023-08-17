@@ -13,7 +13,7 @@
   ],
   "scripts": {
     "devturbo": "next dev --turbo",
-    "dev":"next dev",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -46,4 +46,5 @@
     "typescript": "5.0.4",
     "webpack": "^5.88.2"
   }
+  
 }
