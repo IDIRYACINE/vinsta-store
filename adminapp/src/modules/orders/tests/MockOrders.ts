@@ -18,6 +18,8 @@ const mockOrders  = [
                 "price": 200,
                 "color": {"color":"red" , "id":1},
                 "size": {"size":"M","id":1},
+                "shipingPrice": 100,
+                "shipingType": "home",
                 "categoryId": "something",
                 "name" : "idir",
                 "images" : ["https://images.freeimages.com/images/large-previews/bb0/cat-in-window-1218032.jpg"]

@@ -3,7 +3,7 @@
 import { Container, Modal, Box, Button, Typography } from "@mui/material"
 import { ActionsRow, DisplayTypography } from "@storefront/components"
 import { useState } from "react"
-import { Destination, Repository, DeliveryType, destinations } from "@vinstastore/vinstacore"
+import { Destination, Repository, DeliveryType, destinations, calculateDeliveryPrice } from "@vinstastore/vinstacore"
 import { AppTextField, DestinationSelector } from "./Components"
 import { useAppDispatch, closeModel, useAppSelector, updateOrderId, setCart } from "@storefront/store"
 import { createOrderApi } from "@vinstastore/vinstaadmin"
@@ -27,6 +27,8 @@ export function ShippingForm(props: ShippingFormProps) {
     const [phoneNumber, updatePhone] = useState<string>("")
     const [homeAddress, onHomeAddressChange] = useState<string>("")
     const [deliveryType, selectDeliveryType] = useState<DeliveryType>(deliveryTypes[0])
+
+    const deliveryPrice = calculateDeliveryPrice(deliveryType,destination)
 
 
     const formStyle = {
@@ -56,6 +58,7 @@ export function ShippingForm(props: ShippingFormProps) {
     const destinationSelectorProps = {
         destinations: destinations,
         destination: destination,
+        deliveryPrice,
         selectDestination: selectDestination,
         deliveryTypes: deliveryTypes,
         deliveryType: deliveryType,
@@ -78,10 +81,11 @@ export function ShippingForm(props: ShippingFormProps) {
         const order: Repository.Order = generateOrder({
             cart,
             deliveryType,
+            deliveryPrice,
             homeAddress,
             destination: destination,
             customer: fullName,
-            phone: phoneNumber
+            phone: phoneNumber,
         })
 
         createOrderApi({ order, orderId: order.header.id }).then((res) => {

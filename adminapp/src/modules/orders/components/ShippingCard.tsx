@@ -10,6 +10,8 @@ interface ShippingCardProps {
 function ShippingCard({ address,status }: ShippingCardProps) {
     const className = "p-4 flex flex-col justify-center items-start w-96"
 
+    const shipingPrice = `${address.shipingPrice} Da`
+
 
     return (
         <Card className={className}>
@@ -34,10 +36,10 @@ function ShippingCard({ address,status }: ShippingCardProps) {
             </div>
 
             <div className="flex flex-row justify-between w-full">
-                <TextField className="mr-1" id="outlined-shipping-method" label="Shipping Method" variant="outlined" defaultValue="Standard" InputProps={{
+                <TextField className="mr-1" id="outlined-shipping-method" label="Shipping Method" variant="outlined" defaultValue={address.shipingType} InputProps={{
                     readOnly: true,
                 }} />
-                <TextField id="outlined-cost-shipping" label="Shipping Cost" variant="outlined" defaultValue="1600 Da" InputProps={{
+                <TextField id="outlined-cost-shipping" label="Shipping Cost" variant="outlined" defaultValue={shipingPrice} InputProps={{
                     readOnly: true,
                 }} />
 

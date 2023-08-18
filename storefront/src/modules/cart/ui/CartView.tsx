@@ -1,15 +1,15 @@
-import { Button, Card, CardActions, CardMedia,Box, Container,IconButton, Typography } from "@mui/material"
+import { Button, Card, CardActions, CardMedia, Box, Container, IconButton, Typography } from "@mui/material"
 import { Repository } from "@vinstastore/vinstacore"
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useAppDispatch,openItemDialog, openModel } from "@storefront/store";
+import { useAppDispatch, openItemDialog, openModel } from "@storefront/store";
 
 
 interface CartItemCardProps {
     item: Repository.OrderItem,
-    onDelete : (item:Repository.OrderItem) => void
+    onDelete: (item: Repository.OrderItem) => void
 }
 function CartItemCard(props: CartItemCardProps) {
-    const { item ,onDelete} = props
+    const { item, onDelete } = props
 
     const imageStyle = {
         height: "10vh",
@@ -17,42 +17,44 @@ function CartItemCard(props: CartItemCardProps) {
     }
 
     const boxStyle = {
-        display:"flex",
-        flexDirection:"row",
-        justifyContent : "space-between",
-        alignItems : "center"
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center"
     }
 
-    return (<Card sx = {boxStyle}>
-        <CardMedia sx={imageStyle} image={item.images![0]} />
-        <Typography variant="body1">
-            {item.name}
-        </Typography>
-        <CardActions>
-            <IconButton onClick={() => onDelete(item)}><DeleteIcon/></IconButton>
-        </CardActions>
-    </Card>)
+    return (
+        <Card sx={boxStyle}>
+            <CardMedia sx={imageStyle} image={item.images![0]} />
+            <Typography variant="body1">
+                {item.name}
+            </Typography>
+            <CardActions>
+                <IconButton onClick={() => onDelete(item)}><DeleteIcon /></IconButton>
+            </CardActions>
+        </Card>
+    )
 }
 
 
 interface CartViewProps {
     items: Repository.OrderItem[],
-    totalPrice : number
+    totalPrice: number
 }
 
 export function CartView(props: CartViewProps) {
-    const { items,totalPrice } = props
+    const { items, totalPrice } = props
     const dispatch = useAppDispatch()
 
 
-    
 
 
-    function handleRemoveItem(item:Repository.OrderItem){
+
+    function handleRemoveItem(item: Repository.OrderItem) {
         dispatch(openItemDialog(item))
     }
 
-    function handleShipOrder(){
+    function handleShipOrder() {
         dispatch(openModel())
 
     }
@@ -63,10 +65,10 @@ export function CartView(props: CartViewProps) {
             <Box className="flex flex-col p-2 justify-center items-center flex-2">
 
                 {
-                    items.length === 0 ? <Typography variant="h4">No items</Typography>:
-                    items.map(item => {
-                        return <CartItemCard onDelete={handleRemoveItem} item={item} key={item.productId} />
-                    })
+                    items.length === 0 ? <Typography variant="h4">No items</Typography> :
+                        items.map(item => {
+                            return <CartItemCard onDelete={handleRemoveItem} item={item} key={item.productId} />
+                        })
                 }
 
             </Box>

@@ -8,14 +8,15 @@ interface GenerateOrderOptions {
     customer: string,
     phone: string,
     deliveryType: DeliveryType,
-    homeAddress?: string
-
+    homeAddress?: string,
+    deliveryPrice: number
 
 
 }
 export function generateOrder(options: GenerateOrderOptions): Repository.Order {
 
-    const { cart, destination, phone, customer,homeAddress,deliveryType } = options
+    const { cart, destination, phone, customer,homeAddress,deliveryType,deliveryPrice } = options
+
 
     const header: Repository.OrderHeader = {
         id: uuidv4(),
@@ -29,7 +30,9 @@ export function generateOrder(options: GenerateOrderOptions): Repository.Order {
     const shipping: Repository.Contacts = {
         city: address,
         customer,
-        phone
+        phone,
+        shipingPrice: deliveryPrice,
+        shipingType: deliveryType.name
     }
 
 

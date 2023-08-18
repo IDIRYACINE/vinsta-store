@@ -10,12 +10,13 @@ interface DestinationSelectorProps {
     deliveryType: DeliveryType,
     selectDeliveryType: (deliveryType: DeliveryType) => void,
     homeAddress: string ,
-    onHomeAddressChange: (value: string) => void
+    onHomeAddressChange: (value: string) => void,
+    deliveryPrice: number,
 }
 
 export function DestinationSelector(props: DestinationSelectorProps) {
     const { destinations, destination, selectDestination } = props
-    const { deliveryTypes, deliveryType, selectDeliveryType } = props
+    const { deliveryTypes, deliveryType,deliveryPrice, selectDeliveryType } = props
     const { homeAddress, onHomeAddressChange } = props
 
 
@@ -25,7 +26,6 @@ export function DestinationSelector(props: DestinationSelectorProps) {
         const newDestination = destinations.find(element => element.name === targetName)
         if (newDestination !== undefined) {
             selectDestination(newDestination);
-
         }
     }
 
@@ -84,7 +84,7 @@ export function DestinationSelector(props: DestinationSelectorProps) {
                     </Select>
                 </FormControl>
 
-                <Typography className="w-full" variant="h6">Delivery Price : {calculateDeliveryPrice(deliveryType, destination)}</Typography>
+                <Typography className="w-full" variant="h6">Delivery Price : {deliveryPrice}</Typography>
 
             </Box>
             {

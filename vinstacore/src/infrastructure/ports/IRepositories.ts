@@ -58,6 +58,8 @@ export module Repository {
         city: string,
         customer : string,
         phone:string,
+        shipingPrice : number,
+        shipingType : string,
     }
 
     export interface OrderItem {
