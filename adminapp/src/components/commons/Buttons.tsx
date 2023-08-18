@@ -155,8 +155,8 @@ function OrderStatusSelector(props: OrderStatusSelectorProps) {
     return (
 
         <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
+            labelId="status-select-label"
+            id="order-status-select"
             label="OrderStatus"
             onChange={handleChange}
         >
