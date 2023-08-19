@@ -35,15 +35,11 @@ export class FirebaseProductService implements ProductServicePort {
     }
     update(options: UpdateProductRawProps): Promise<UpdateProductResponse> {
 
-        const updatedFields = options.updatedFields.map((field: any) => {
-            return new UpdatedField(field.fieldName, field.newValue)
-        })
-
         return this.productsRepo.update(
             {
                 categoryId: new CategoryId(options.categoryId),
                 productId: new ProductId(options.productId),
-                updatedFields: updatedFields
+                product: options.product
             }
         )
     }

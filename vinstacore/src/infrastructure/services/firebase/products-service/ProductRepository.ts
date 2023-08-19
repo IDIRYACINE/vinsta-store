@@ -55,10 +55,9 @@ export class ProductRepostiroy implements IRepository {
     async update(options: UpdateProductProps): Promise<UpdateResponse> {
         const productRef = ref(this.db, `${this.productCollection}/${options.categoryId.value}/${options.productId.value}`)
 
-        const updateData: Partial<Repository.Product> = options.updatedFields;
 
 
-        return update(productRef, updateData).then(() => ({}));
+        return update(productRef, options.product).then(() => ({}));
     }
 
     async delete(options: DeleteProductProps): Promise<DeleteResponse> {

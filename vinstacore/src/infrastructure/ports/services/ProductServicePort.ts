@@ -32,7 +32,7 @@ export interface CreateProductProps {
 export interface UpdateProductProps {
     productId: ProductId,
     categoryId: CategoryId,
-    updatedFields: Partial<Repository.Product>
+    product: Partial<Repository.Product>
 }
 
 export interface DeleteProductProps {
@@ -60,7 +60,7 @@ export interface CreateProductRawProps {
 export interface UpdateProductRawProps {
     productId: string,
     categoryId: string,
-    updatedFields: any
+    product: Repository.Product;
 }
 
 export interface DeleteProductRawProps {

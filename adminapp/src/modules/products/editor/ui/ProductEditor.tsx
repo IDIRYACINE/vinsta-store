@@ -11,7 +11,7 @@ import { Repository, sizes,colors } from "@vinstastore/vinstacore"
 import { useRouter } from "next/navigation"
 
 
-import { addProduct, updateProduct, } from "@adminapp/store";
+import {  updateProduct, } from "@adminapp/store";
 import { updateProductApi } from "@adminapp/api/productApi"
 import { useAppDispatch, useAppSelector } from "@adminapp/store/clientHooks";
 import { SizesSelector, ColorsSelector } from "@adminapp/components/commons/Buttons"
