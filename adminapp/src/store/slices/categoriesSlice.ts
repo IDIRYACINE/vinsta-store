@@ -6,6 +6,7 @@ export interface CategoriesState {
     categories: Repository.Category[];
     editedCategory: Repository.Category | null;
     isModalOpen: boolean;
+    isLoaded: boolean;
 }
 
 
@@ -13,7 +14,7 @@ const initialState: CategoriesState = {
     categories: [],
     editedCategory: null,
     isModalOpen: false,
-
+    isLoaded: false,
 };
 
 const categoriesSlice = createSlice({
@@ -22,6 +23,7 @@ const categoriesSlice = createSlice({
     reducers: {
         setCategories(state, action: PayloadAction<Repository.Category[]>) {
             state.categories = action.payload;
+            state.isLoaded = true;
         },
         setEditedCategory(state, action: PayloadAction<Repository.Category | null>) {
             state.editedCategory = action.payload;

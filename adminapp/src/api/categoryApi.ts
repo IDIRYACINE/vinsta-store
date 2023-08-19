@@ -48,7 +48,7 @@ export async function loadCategoriesApi(): Promise<Repository.Category[]> {
 
 
   let response = await fetch(`${baseUrl}/category`, {
-    next: { revalidate: 1800 },
+    cache: 'no-store',
     method: "GET",
   });
 

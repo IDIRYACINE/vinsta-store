@@ -1,3 +1,5 @@
+export const revalidate = 1800
+
 import { ProductManagerPage,loadCategoriesApi } from "@vinstastore/vinstaadmin";
 import Preloader from "adminapp/src/store/Preloader";
 

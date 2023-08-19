@@ -52,11 +52,10 @@ export class CategoryRepostiroy implements ICategoryRepostiroy {
     async update(options: UpdateCategoryProps): Promise<UpdateCategoryResponse> {
         const categoryDoc = doc(this.firestore, this.categoryCollection, options.id.value);
 
-        const updateData: Partial<Repository.Category> = {};
 
 
 
-        return updateDoc(categoryDoc, updateData).then(() => ({}));
+        return updateDoc(categoryDoc, options.updatedFields).then(() => ({}));
     }
 
     async delete(options: DeleteCategoryProps): Promise<DeleteCategoryResponse> {

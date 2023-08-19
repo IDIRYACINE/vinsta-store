@@ -31,7 +31,7 @@ export interface CreateCategoryProps {
 
 export interface UpdateCategoryProps {
     id: CategoryId,
-    updatedFields: UpdatedField
+    updatedFields: Partial<Repository.Category>
 }
 export interface DeleteCategoryProps {
     id: CategoryId

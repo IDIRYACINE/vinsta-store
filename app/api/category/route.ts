@@ -32,6 +32,7 @@ export async function POST(request: Request) {
 export async function PUT(request: Request) {
   const options = await request.json();
 
+  console.log(options);
 
   const response = await categoryService.update(options);
 

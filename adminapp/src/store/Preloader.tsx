@@ -8,6 +8,7 @@ import { setProducts } from "./slices/productsSlice";
 import { setCategories } from "./slices/categoriesSlice";
 import { setPanels } from "./slices/navigationSlice";
 import { orderStatusfromString } from "@adminapp/modules/orders/domain/OrderStatus";
+import { useAppSelector } from "./clientHooks";
 
 
 interface PreloaderProps {
@@ -21,9 +22,10 @@ function Preloader({ categories, products, orders, panels }: PreloaderProps) {
 
 
 
-  const loaded = useRef(false);
+  const loaded = useAppSelector(state => state.categories.isLoaded)
 
-  if (!loaded.current) {
+
+  if (!loaded) {
 
     if (categories !== undefined) store.dispatch(setCategories(categories));
     if (products !== undefined) store.dispatch(setProducts(products));
@@ -34,7 +36,6 @@ function Preloader({ categories, products, orders, panels }: PreloaderProps) {
     }
     if (panels !== undefined) store.dispatch(setPanels(panels));
 
-    loaded.current = true;
   }
 
   return null;

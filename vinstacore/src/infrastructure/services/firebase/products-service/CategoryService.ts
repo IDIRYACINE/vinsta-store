@@ -26,14 +26,11 @@ export class FirebaseCategoryService implements CategoryServicePort {
     }
     async update(options: UpdateCategoryRawProps): Promise<UpdateCategoryResponse> {
 
-        const updatedFields = options.updatedFields.map((field: any) => {
-            return new UpdatedField(field.fieldName, field.newValue)
-        })
 
         return this.categoryRepo.update(
             {
                 id: new CategoryId(options.id),
-                updatedFields: updatedFields
+                updatedFields: options
             }
         )
     }

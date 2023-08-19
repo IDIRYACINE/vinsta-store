@@ -1,18 +1,21 @@
 'use client'
 
 import TextField from '@mui/material/TextField';
-import { useState, ChangeEvent } from 'react';
+import {  ChangeEvent } from 'react';
 
 interface AppTextFieldProps {
     label: string;
     value: string;
     onChange: (value: string) => void;
     className?: string;
+    readOnly?: boolean;
 
 }
 
 function AppTextField(props: AppTextFieldProps) {
     const { onChange, label, value,className } = props
+
+    const readOnly = props.readOnly ?? false
 
     function handleChange(event: ChangeEvent<HTMLInputElement>) {
         onChange(event.target.value)
@@ -20,6 +23,9 @@ function AppTextField(props: AppTextFieldProps) {
 
     return (
         <TextField
+        InputProps={{
+            readOnly,
+          }}
             className={className}
             label={label}
             value={value}

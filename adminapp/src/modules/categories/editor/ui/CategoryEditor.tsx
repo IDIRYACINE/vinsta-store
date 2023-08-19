@@ -40,7 +40,8 @@ function CategoryEditor() {
         label: "Code",
         value: categoryId,
         onChange: (value: string) => setCategoryId(value),
-        className: "w-full"
+        className: "w-full",
+        readOnly : true
 
 
     }

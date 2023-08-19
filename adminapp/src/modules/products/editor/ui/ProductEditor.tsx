@@ -56,7 +56,8 @@ function ProductEditor(props:ProductEditorProps) {
         label: "Code",
         value: productId,
         onChange: (value: string) => setProductId(value),
-        className: "w-full"
+        className: "w-full",
+        readOnly : true
 
 
     }

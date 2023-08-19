@@ -19,7 +19,6 @@ export function DeliveryTracker() {
         findOrderApi({
 
         }).then((order) => {
-            console.log(order)
             setOrder(order)
         })
     }
