@@ -21,6 +21,7 @@ interface AppDrawerProps {
 function AppDrawer(props: AppDrawerProps) {
 
     const { open, toggleDrawer } = props
+
     const drawerWidth = "100%";
 
     const dispatch = useAppDispatch()
@@ -126,11 +127,7 @@ export function Navbar() {
     const theme = useTheme()
     const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"))
 
-    const appBarStyle = {
-        "display": "flex",
-        "flexDirection": "row",
-        "justifyContent": "space-between",
-    }
+   
 
     function navigateToCart() {
         router.replace(ClientRoutes.cart)
@@ -154,7 +151,7 @@ export function Navbar() {
     return (
         <div>
             <AppBar position="fixed">
-                <Toolbar color="white" sx={appBarStyle}>
+                <Toolbar color="white" className="flex flex-row justify-between">
                     {isSmallScreen ?
                         <IconButton
                             color="inherit"

@@ -1,28 +1,32 @@
-import { Box, Grid,Paper, ToggleButtonGroup, ToggleButton, Container, Slider, FormControl, InputLabel, MenuItem, Popover, Select, SelectChangeEvent, Typography,  } from "@mui/material"
-import React from "react"
-import { FilterType, IProductFilter, ProductPriceFilter, sizes, SizeEntity, ProductSizeFilter, ColorEntity, ProductColorFilter,colors } from "@vinstastore/vinstacore"
-import clsx from "clsx"
+"use client"
 
+import { Box, Grid,Toolbar, Paper, ToggleButtonGroup, ToggleButton, Container, Slider, FormControl, InputLabel, MenuItem, Popover, Select, SelectChangeEvent, Typography, } from "@mui/material"
+import { useState, MouseEvent } from "react"
+import { FilterType, IProductFilter, ProductPriceFilter, sizes, SizeEntity, ProductSizeFilter, ColorEntity, ProductColorFilter, colors } from "@vinstastore/vinstacore"
+import clsx from "clsx"
+import { usePathname, } from "next/navigation"
+import { CategoryNavigation } from "@storefront/modules/categories/ui/CategoryNavigation"
 
 interface ToggleFilterProps<T> {
     items: T[],
     extractItemName: (item: T) => string,
     extractItemId: (item: T) => string,
     updateFilter: (items: T[]) => void,
+    name: string
 }
 
 function ToggleFilterGroup<T>(props: ToggleFilterProps<T>) {
 
-    const { items, extractItemId, extractItemName, updateFilter } = props
-    const [selections, setSelections] = React.useState<string[]>(() => []);
+    const { items, extractItemId, extractItemName, name, updateFilter } = props
+    const [selections, setSelections] = useState<string[]>(() => []);
 
 
-    function handleChange(event: React.MouseEvent<HTMLElement>,
+    function handleChange(event: MouseEvent<HTMLElement>,
         newSelections: string[],) {
         setSelections(newSelections)
 
         const targetItems = items.filter((item) =>
-        newSelections.includes(extractItemId(item))
+            newSelections.includes(extractItemId(item))
         )
 
         updateFilter(targetItems)
@@ -32,25 +36,30 @@ function ToggleFilterGroup<T>(props: ToggleFilterProps<T>) {
 
 
     return (
-        <ToggleButtonGroup
-            size="small"
-            sx={{
-                display: "grid",
-                gridTemplateColumns: "auto auto auto auto",
-                gridGap: "0.5rem",
-                padding: "1rem",
-              }}
-            value={selections}
-            onChange={handleChange}
-        >
-            {
-                items.map((item) => {
-                    const id = extractItemId(item)
+        <div className="flex flex-col justify-center items-start w-full p-2">
+            <Typography>{name}</Typography>
+            <ToggleButtonGroup
+                size="small"
+                sx={{
+                    width : "100%",
+                    display: "grid",
+                    gridTemplateColumns: "auto auto auto auto",
+                    gridGap: "0.5rem",
+                    padding: "1rem",
+                }}
+                value={selections}
+                onChange={handleChange}
+            >
+                {
+                    items.map((item) => {
+                        const id = extractItemId(item)
 
-                    return <ToggleButton key={id} value={id}>{extractItemName(item)} </ToggleButton>
-                })
-            }
-        </ToggleButtonGroup>
+                        return <ToggleButton key={id} value={id}>{extractItemName(item)} </ToggleButton>
+                    })
+                }
+            </ToggleButtonGroup>
+        </div>
+
 
     )
 }
@@ -112,7 +121,7 @@ interface FilterRangeButtonProps {
 
 function FilterRangeButton(props: FilterRangeButtonProps) {
     const { min, max, name, onChange, } = props
-    const [range, setRange] = React.useState<number[]>([min, max]);
+    const [range, setRange] = useState<number[]>([min, max]);
 
 
     const updateFilter = (event: Event, newValue: number | number[]) => {
@@ -129,8 +138,9 @@ function FilterRangeButton(props: FilterRangeButtonProps) {
     return (
 
 
-        <Container className=" flex flex-col justify-center items-center ">
-            <Typography id="range-slider" >Filter Price</Typography>
+        <Container className=" flex flex-col justify-center items-start w-full p-2 ">
+            <Typography id="range-slider" >Price</Typography>
+            <div className="flex flex-row justify-center items-center px-3 w-full">
             <Slider
                 getAriaLabel={() => name}
                 value={range}
@@ -140,6 +150,7 @@ function FilterRangeButton(props: FilterRangeButtonProps) {
                 valueLabelDisplay="auto"
                 getAriaValueText={valuetext}
             />
+            </div>
         </Container>
 
     )
@@ -150,14 +161,16 @@ function FilterRangeButton(props: FilterRangeButtonProps) {
 interface ProductFilterSearchProps {
     onFilterChange: (filters: IProductFilter[]) => void,
     className?: string,
-    filters : IProductFilter[]
+    filters: IProductFilter[]
 }
 export function ProductFilterSearch(props: ProductFilterSearchProps) {
     const { onFilterChange } = props
     let filters = [...props.filters]
+    const isInProductPage = usePathname().match("category");
+
 
     const className = clsx([
-        "flex flex-col justify-evenly items-center h-full",
+        "flex flex-col justify-start items-center h-full py-2 overflow-y-scroll overflow-x-hidden",
         props.className
     ])
 
@@ -226,6 +239,7 @@ export function ProductFilterSearch(props: ProductFilterSearchProps) {
     }
 
     const sizeFilterProps = {
+        name: "Size",
         items: sizes,
         extractItemName: (item: SizeEntity) => item.size.value,
         extractItemId: (item: SizeEntity) => item.id.value.toString(),
@@ -233,16 +247,25 @@ export function ProductFilterSearch(props: ProductFilterSearchProps) {
     }
 
     const colorFilterProps = {
+        name : "Color",
         items: colors,
         extractItemName: (item: ColorEntity) => item.color.value,
         extractItemId: (item: ColorEntity) => item.id.value.toString(),
         updateFilter: setColorFilter,
     }
 
-    return (<Paper className={className}>
-        <FilterRangeButton {...priceFilterProps} />
-        <ToggleFilterGroup {...sizeFilterProps} />
-        <ToggleFilterGroup {...colorFilterProps} />
+    return (
+        <Paper className={className}>
+            <Toolbar/>
+            <CategoryNavigation />
 
-    </Paper>)
+            {isInProductPage ? <FilterRangeButton {...priceFilterProps} />
+                : null}
+            {isInProductPage ? <ToggleFilterGroup {...sizeFilterProps} />
+                : null}
+            {isInProductPage ? <ToggleFilterGroup {...colorFilterProps} />
+                : null}
+
+
+        </Paper>)
 }

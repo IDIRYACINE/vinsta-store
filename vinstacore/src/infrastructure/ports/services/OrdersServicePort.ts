@@ -9,6 +9,8 @@ export interface OrderServicePort {
     delete(options: DeleteOrderRawProps): Promise<DeleteOrderResponse>
     load(options: LoadOrderRawProps): Promise<LoadOrderResponse>
     cancel(options: CancelOrderRawProps): Promise<CancelOrderResponse>
+    find(options: FindOrderRawProps): Promise<FindOrderResponse> 
+
 }
 
 export interface CreateOrderProps {

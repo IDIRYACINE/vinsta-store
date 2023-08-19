@@ -29,7 +29,7 @@ const baseUrl = `http://localhost:3000/api/order`
 
 
 export async function findOrderApi(props: LoadOrderApiOptions): Promise<Repository.Order> {
-    const targetUrl = `${baseUrl}?OrderId=${props.orderId}`
+    const targetUrl = `${baseUrl}/${props.orderId}`
     let response = await fetch(targetUrl, {
         method: "GET",
     });

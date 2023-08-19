@@ -18,7 +18,6 @@ export default function Sidebar() {
 
     return (
         <aside className={className}>
-            <ActionButton />
             {
                 panels.map((item, index) => {
                     return (<SidebarButton panel={item} key={index}  ></SidebarButton>)

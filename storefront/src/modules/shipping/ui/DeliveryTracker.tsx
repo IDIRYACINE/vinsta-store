@@ -19,6 +19,7 @@ export function DeliveryTracker() {
         findOrderApi({
 
         }).then((order) => {
+            console.log(order)
             setOrder(order)
         })
     }
@@ -33,8 +34,8 @@ export function DeliveryTracker() {
 
     return (<Box>
 
-        <Typography >ID : {order?.header.id}</Typography>
-        <Typography className="mb-2">Status : {order?.header.status}</Typography>
+        <Typography >ID : {order?.header?.id}</Typography>
+        <Typography className="mb-2">Status : {order?.header?.status}</Typography>
 
         <Box className="flex flex-row justify-between">
             <AppTextField {...trackerFieldProps} />
