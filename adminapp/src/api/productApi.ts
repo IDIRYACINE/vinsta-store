@@ -66,6 +66,8 @@ export async function loadProductsApi(options: LoadProductsApiOptions): Promise<
 
   let response = await fetch(`${baseUrl}?categoryId=${options.categoryId}`, {
     method: "GET",
+    next: { revalidate: 1800 },
+
   });
 
 

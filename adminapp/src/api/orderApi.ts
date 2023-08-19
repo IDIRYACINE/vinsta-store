@@ -32,6 +32,8 @@ export async function findOrderApi(props: LoadOrderApiOptions): Promise<Reposito
     const targetUrl = `${baseUrl}/${props.orderId}`
     let response = await fetch(targetUrl, {
         method: "GET",
+        next: { revalidate: 1800 },
+
     });
 
     let json = await response.json();
@@ -42,7 +44,7 @@ export async function findOrderApi(props: LoadOrderApiOptions): Promise<Reposito
 export async function loadOrdersApi(): Promise<Repository.Order[]> {
     let response = await fetch(baseUrl, {
         method: "GET",
-        cache: 'no-store',
+        next: { revalidate: 1800 },
     });
 
     let json = await response.json();

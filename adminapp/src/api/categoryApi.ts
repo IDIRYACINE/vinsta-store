@@ -2,6 +2,7 @@ import { Repository } from "@vinstastore/vinstacore";
 import {isTest} from "./config"
 
 
+
 const baseUrl = "http://localhost:3000/api";
 
 export async function createCategoryApi(options: Repository.Category) {
@@ -40,13 +41,14 @@ export async function deleteCategoryApi(categoryId: string | undefined) {
 
 export async function loadCategoriesApi(): Promise<Repository.Category[]> {
   if(isTest){
-    const resTest =  (await fetch("http://localhost:3000/testData/categories.json",{ cache: 'no-store' }));
+    const resTest =  (await fetch("http://localhost:3000/testData/categories.json",{ cache: 'no-store', }));
     const temp = await resTest.json()
     return temp.results
   }
 
 
   let response = await fetch(`${baseUrl}/category`, {
+    next: { revalidate: 1800 },
     method: "GET",
   });
 

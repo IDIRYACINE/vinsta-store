@@ -5,7 +5,6 @@ import { getAuth, connectAuthEmulator, Auth } from 'firebase/auth';
 
 import { firebaseConfig } from '../firebaseConfig'
 
-
 let app: FirebaseApp
 let auth: Auth
 let firestore: Firestore
@@ -17,7 +16,7 @@ export function buildFirebaseApp(): FirebaseApp {
         return app
     }
 
-    const isTestMode = false
+    const isTestMode = process.env.IS_TEST_MODE
     const emulatorHost = "http://localhost"
 
     if (isTestMode) {

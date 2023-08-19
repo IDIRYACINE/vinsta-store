@@ -28,7 +28,7 @@
     "@types/react": "18.0.35",
     "@types/react-dom": "18.0.11",
     "@vinstastore/storefront": "^0.1.0",
-    "@vinstastore/vinstaadmin": "^0.1.0",
+    "@vinstastore/vinstaadmin": "^0.1.2",
     "@vinstastore/vinstacore": "^1.0.0",
     "autoprefixer": "10.4.14",
     "clsx": "^1.2.1",

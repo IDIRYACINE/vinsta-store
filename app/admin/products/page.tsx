@@ -12,7 +12,7 @@ async function Page(){
     }
 
     return (
-        <div>
+        <div className="flex justify-center items-center">
             <Preloader {...preloaderProps} />
         <ProductManagerPage/>
         </div>
