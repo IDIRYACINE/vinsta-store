@@ -1,13 +1,13 @@
 {
   "name": "@vinstastore/vinstacore",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "license": "MIT",
   "private": true,
   "scripts": {
     "build": "tsc "
   },
-  "files": ["src/**"],
-  "main": "src/index.ts",
+  "files": ["dist/**"],
+  "main": "dist/index.js",
 
   "devDependencies": {
     "typescript": "^5.0.4"

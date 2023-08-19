@@ -19,7 +19,9 @@ export class OrderMapper implements MapperBase<OrderEntity, Repository.Order>{
         const shipping = new Contact(
             City.fromString(raw.shipping.city),
             new UserPhone(raw.shipping.phone),
-            new UserName(raw.shipping.customer)
+            new UserName(raw.shipping.customer),
+            raw.shipping.shipingPrice,
+            raw.shipping.shipingType
         )
 
         const items = raw.items.map(item => {
@@ -57,6 +59,8 @@ export class OrderMapper implements MapperBase<OrderEntity, Repository.Order>{
                 city: domain.shipping.city.value,
                 customer: domain.shipping.customer.value,
                 phone: domain.shipping.phone.value,
+                shipingPrice: domain.shipping.shipingPrice,
+                shipingType: domain.shipping.shipingType
             },
             items: items
         }

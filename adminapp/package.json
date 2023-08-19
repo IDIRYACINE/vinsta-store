@@ -5,8 +5,8 @@
   "scripts": {
     "build": "tsc"
   },
-  "files": ["src/**"],
-  "main": "src/index.ts",
+  "files": ["dist/**"],
+  "main": "dist/index.js",
   
   "dependencies": {
     "@emotion/react": "^11.11.0",

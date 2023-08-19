@@ -1,8 +1,6 @@
 "use client"
 
 import { CartView, ShippingDialog, useAppSelector, setCart, AppBody, RemoveCartItemDialog } from "@vinstastore/storefront";
-import { loadCartApi } from "@vinstastore/vinstaadmin";
-import { useAppDispatch } from "@vinstastore/vinstaadmin";
 
 
 export default function Page() {

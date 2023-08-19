@@ -1,4 +1,4 @@
-import NextAuth from "next-auth"
+import NextAuth, { NextAuthOptions } from "next-auth"
 
 import { FirestoreAdapter } from "@next-auth/firebase-adapter";
 import GoogleProvider from "next-auth/providers/google";
@@ -6,7 +6,7 @@ import * as firestoreFunction from "firebase/firestore";
 import { FirebaseAdapter } from "@vinstastore/vinstacore";
 
 
-export const authOptions =
+export const authOptions : NextAuthOptions =
 {
     adapter: FirestoreAdapter(),
     secret: process.env.NEXTJS_SECRET,
@@ -29,10 +29,7 @@ export const authOptions =
 
     ],
     callbacks: {
-        authorized({ req, token }) {
-            if (token) return true
-        },
-
+        
         async signIn({ user, account, profile }) {
             FirebaseAdapter.userService()
             return true
@@ -40,9 +37,7 @@ export const authOptions =
 
 
         async session({ session, user, token }) {
-            session.role = "customer"
             session.user = user
-            session.token = token
 
             return session
         },
@@ -50,7 +45,6 @@ export const authOptions =
         async jwt({ user, token, account, profile }) {
             if (account) {
                 token.accessToken = account.access_token
-                token.id = profile.id
             }
             return token
         },

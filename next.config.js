@@ -1,11 +1,15 @@
 const path = require('path')
 
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+})
 
 const nextConfig = { 
+  
   webpack(config){
-  config.resolve.alias['@adminapp'] = path.join(__dirname, './adminapp/src');
-  config.resolve.alias['@vinstacore'] = path.join(__dirname, './vinstacore/src');
-  config.resolve.alias['@storefront'] = path.join(__dirname, './storefront/src');
+  config.resolve.alias['@adminapp'] = path.join(__dirname, '/adminapp/src');
+  config.resolve.alias['@vinstacore'] = path.join(__dirname, '/vinstacore/src');
+  config.resolve.alias['@storefront'] = path.join(__dirname, '/storefront/src');
   return config;
 },
   transpilePackages : ["@vinstastore/storefront","@vinstastore/vinstaadmin","@vinstastore/vinstacore"],
@@ -20,6 +24,7 @@ const nextConfig = {
    
   },
 
+
   reactStrictMode: true,
   images: {
     domains: ['images.freeimages.com'],
@@ -27,4 +32,4 @@ const nextConfig = {
 
 }
 
-module.exports = (nextConfig)
+module.exports = withBundleAnalyzer(nextConfig)

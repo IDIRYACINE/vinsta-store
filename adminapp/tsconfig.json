@@ -8,9 +8,11 @@
     "forceConsistentCasingInFileNames": true,
     "noEmit": false,
     "declaration": true,
-    "rootDir": "./src",
     "baseUrl": "./src",
     "outDir": "./dist",
+    "paths": {
+      "@adminapp/*": [ "./*" ]
+    },
     "composite": false,
     "declarationMap": true,
     "esModuleInterop": true,
@@ -20,11 +22,9 @@
     "isolatedModules": false,
     "jsx": "preserve",
     "incremental": true,
-    "paths": {
-      "@adminapp/*": ["*"],
-    },
+    
   },
   
-  "include": [ "**/*.ts", "**/*.tsx"],
+  "include": ["src/**/*",],
   "exclude": ["node_modules","dist"]
 }

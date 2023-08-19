@@ -1,12 +1,11 @@
-import { NextResponse } from 'next/server';
-import { NextApiRequest } from 'next';
+import { NextResponse,NextRequest } from 'next/server';
 import { OrderServicePort, FirebaseAdapter } from '@vinstastore/vinstacore';
 
 
 const orderService: OrderServicePort = FirebaseAdapter.ordersService();
 
 export async function GET(
-  request: NextApiRequest, { params }: { params: { orderId: string } }) {
+  request: NextRequest, { params }: { params: { orderId: string } }) {
 
   const { orderId } = params
 
