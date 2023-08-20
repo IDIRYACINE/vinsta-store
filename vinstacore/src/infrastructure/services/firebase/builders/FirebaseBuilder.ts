@@ -1,22 +1,20 @@
 
 import { getFirestore, connectFirestoreEmulator, Firestore } from '@firebase/firestore';
 import { FirebaseApp, initializeApp } from 'firebase/app';
-import { getAuth, connectAuthEmulator, Auth } from 'firebase/auth';
 
-import { firebaseConfig } from '../firebaseConfig'
 
 let app: FirebaseApp
-let auth: Auth
 let firestore: Firestore
 
 
 export function buildFirebaseApp(): FirebaseApp {
-
     if (app !== undefined) {
         return app
     }
 
-    const isTestMode = process.env.IS_TEST_MODE
+    const firebaseConfig = JSON.parse(process.env.FIREBASE_CONFIG!)
+
+    const isTestMode = Boolean(process.env.IS_TEST_MODE)
     const emulatorHost = "http://localhost"
 
     if (isTestMode) {
@@ -28,10 +26,8 @@ export function buildFirebaseApp(): FirebaseApp {
     app = initializeApp(firebaseConfig);
 
     firestore = getFirestore(app)
-    auth = getAuth(app)
 
     if (isTestMode) {
-        connectAuthEmulator(auth, `${emulatorHost}:9099`)
         connectFirestoreEmulator(firestore, "localhost", 8080)
     }
 
@@ -39,4 +35,4 @@ export function buildFirebaseApp(): FirebaseApp {
 
 }
 
-export { app, firestore, auth }
+export { app, firestore,  }

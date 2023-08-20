@@ -6,16 +6,14 @@
   "scripts": {
     "build": "tsc "
   },
-  "files": ["src/**"],
+  "files": [
+    "src/**"
+  ],
   "main": "src/index.ts",
-
   "devDependencies": {
     "typescript": "^5.0.4"
   },
   "dependencies": {
-    "@firebase/app": "^0.9.15",
-    "@firebase/auth": "^1.1.0",
-    "@firebase/firestore": "^4.1.0",
-    "firebase": "^10.1.0"
+    "firebase": "^10.2.0"
   }
 }

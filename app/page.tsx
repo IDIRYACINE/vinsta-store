@@ -3,7 +3,7 @@
 
 
 import { loadCategoriesApi } from '@vinstastore/vinstaadmin';
-import { setCategories, useAppDispatch,Preloader,HomePage } from "@vinstastore/storefront";
+import { setCategories, useAppDispatch, Preloader, HomePage } from "@vinstastore/storefront";
 
 export default function Home() {
     const dispatch = useAppDispatch()
@@ -11,11 +11,11 @@ export default function Home() {
     loadCategoriesApi().then((categories) => {
         dispatch(setCategories(categories))
     })
-     
+
     return (
         <>
-        <Preloader  />
-        <HomePage />
+            <Preloader />
+            <HomePage />
         </>
 
     )

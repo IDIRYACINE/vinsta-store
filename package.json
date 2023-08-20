@@ -16,38 +16,44 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "stats" : "whybundled analyze/webpack-stats.json > analyze/whybundeled.txt",
+    "statsby": "whybundled by analyze/webpack-stats.json"
   },
   "dependencies": {
+    "@auth0/nextjs-auth0": "^3.1.0",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@mui/material": "^5.12.0",
     "@next-auth/firebase-adapter": "^2.0.1",
     "@reduxjs/toolkit": "^1.9.5",
-    "@types/node": "18.15.11",
-    "@types/react": "18.0.35",
-    "@types/react-dom": "18.0.11",
     "@vinstastore/storefront": "^0.1.0",
     "@vinstastore/vinstaadmin": "^0.1.2",
     "@vinstastore/vinstacore": "^1.0.0",
-    "autoprefixer": "10.4.14",
     "clsx": "^1.2.1",
-    "eslint": "8.38.0",
-    "eslint-config-next": "^13.4.4",
-    "firebase-admin": "^11.10.1",
     "next": "^13.4.19",
     "next-auth": "^4.22.1",
-    "postcss": "8.4.21",
     "react": "18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.7",
     "redux": "^4.2.1",
-    "tailwindcss": "3.3.1",
-    "typescript": "5.0.4",
-    "webpack": "^5.88.2"
+    "tailwindcss": "3.3.1"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^13.4.19",
-    "babel-plugin-module-resolver": "^5.0.0"
+    "@types/node": "18.15.11",
+    "@types/react": "18.0.35",
+    "@types/react-dom": "18.0.11",
+    "autoprefixer": "10.4.14",
+    "babel-plugin-module-resolver": "^5.0.0",
+    "eslint": "8.38.0",
+    "eslint-config-next": "^13.4.4",
+    "postcss": "8.4.21",
+    "typescript": "5.0.4",
+    "webpack": "^5.88.2",
+    "webpack-stats-plugin": "^1.1.3",
+    "webpack-visualizer-plugin": "^0.1.11",
+    "webpack-visualizer-plugin2": "^1.0.0",
+    "whybundled": "^2.0.0"
   }
 }

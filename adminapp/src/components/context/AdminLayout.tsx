@@ -10,6 +10,7 @@ import { theme } from './AdminTheme';
 import { Provider } from 'react-redux';
 import { store } from '@adminapp/store';
 import { useState } from "react";
+import { UserProvider } from '@auth0/nextjs-auth0/client';
 
 
 interface LayoutProps {
@@ -45,6 +46,8 @@ function AdminLayout({ children }: LayoutProps) {
 
 
     return (
+        <UserProvider>
+
         <ThemeProvider theme={theme}>
             <Provider store={store}>
                 <Box className={className}>
@@ -57,6 +60,8 @@ function AdminLayout({ children }: LayoutProps) {
                 </Box>
             </Provider>
         </ThemeProvider>
+        </UserProvider>
+
     );
 };
 
