@@ -1,5 +1,5 @@
 import { NextResponse,NextRequest } from 'next/server';
-import {  OrderServicePort, FirebaseAdapter } from '@vinstastore/vinstacore';
+import {  OrderServicePort, FirebaseAdapter } from '@vinstacore/index';
  
 
 const orderService:OrderServicePort = FirebaseAdapter.ordersService();

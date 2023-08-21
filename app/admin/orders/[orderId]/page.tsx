@@ -1,4 +1,6 @@
-import { OrderDetaills } from "@vinstastore/vinstaadmin";
+export const dynamic = 'force-dynamic'
+
+import { OrderDetaills } from "@adminapp/index";
 
 function OrderDetaillsPage() {
 

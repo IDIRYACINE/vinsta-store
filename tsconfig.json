@@ -22,9 +22,9 @@
     "composite": true,
     "baseUrl": ".",
     "paths": {
-      "@adminapp/*": [ "./adminapp/src/*" ],
-      "@vinstacore/*": [ "./vinstacore/src/*" ],
-      "@storefront/*": [ "./storefront/src/*" ]
+      "@adminapp/*": [ "src/adminapp/*" ],
+      "@vinstacore/*": [ "src/vinstacore/*" ],
+      "@storefront/*": [ "src/storefront/*" ]
     },
     "plugins": [
       {
@@ -32,18 +32,6 @@
       }
     ]
   },
-  "references": [
-    {
-      "path": "./vinstacore"
-    },
-    {
-      "path": "./storefront"
-    },
-    {
-      "path": "./adminapp"
-    }
-  
-  ],
 
   "include": [
     "next-env.d.ts",

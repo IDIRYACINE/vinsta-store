@@ -3,12 +3,12 @@
 import { Box, useMediaQuery  } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
-import { loadProductsApi } from "@vinstastore/vinstacore";
+import { loadProductsApi } from "@vinstacore/index";
 import {  useMemo } from "react";
-import { ProductFilterSearch, setProductFilters } from "@vinstastore/storefront";
-import { ProductGrid } from "@vinstastore/storefront";
-import { categoryProductsSelector, setProducts, useAppDispatch, useAppSelector } from "@vinstastore/storefront";
-import { IProductFilter } from "@vinstastore/vinstacore";
+import { ProductFilterSearch, setProductFilters } from "@storefront/index";
+import { ProductGrid } from "@storefront/index";
+import { categoryProductsSelector, setProducts, useAppDispatch, useAppSelector } from "@storefront/index";
+import { IProductFilter } from "@vinstacore/index";
 
 
 

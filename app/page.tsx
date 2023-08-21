@@ -1,9 +1,12 @@
+export const dynamic = 'force-dynamic'
 
 "use client";
 
 
-import { loadCategoriesApi } from '@vinstastore/vinstacore';
-import { setCategories, useAppDispatch, Preloader, HomePage } from "@vinstastore/storefront";
+
+import { HomePage } from '@storefront/index';
+import { Preloader, setCategories, useAppDispatch } from '@storefront/store';
+import { loadCategoriesApi } from '@vinstacore/index';
 
 export default function Home() {
     const dispatch = useAppDispatch()

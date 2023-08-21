@@ -1,5 +1,7 @@
-import { store ,ProductEditor } from "@vinstastore/vinstaadmin";
-import { loadCategoriesApi} from "@vinstastore/vinstacore";
+export const dynamic = 'force-dynamic'
+
+import { store ,ProductEditor } from "@adminapp/index";
+import { loadCategoriesApi} from "@vinstacore/index";
 
 
 async function EditProductPage(){

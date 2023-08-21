@@ -1,4 +1,6 @@
-import { CategoryCreator } from "@vinstastore/vinstaadmin";
+export const dynamic = 'force-dynamic'
+
+import { CategoryCreator } from "@adminapp/index";
 
 
 function CreateCategoryPage(){

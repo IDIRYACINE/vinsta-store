@@ -1,8 +1,9 @@
 export const revalidate = 0
+export const dynamic = 'force-dynamic'
 
-import { CategoryPage } from "@vinstastore/vinstaadmin";
-import {loadCategoriesApi } from "@vinstastore/vinstacore";
-import Preloader from "adminapp/src/store/Preloader"
+import { CategoryPage } from "@adminapp/index";
+import {loadCategoriesApi } from "@vinstacore/index";
+import  Preloader from "@adminapp/store/Preloader"
 
 
 

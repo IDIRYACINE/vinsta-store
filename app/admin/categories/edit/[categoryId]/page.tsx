@@ -1,4 +1,6 @@
-import { CategoryEditor } from "@vinstastore/vinstaadmin";
+export const dynamic = 'force-dynamic'
+
+import { CategoryEditor } from "@adminapp/index";
 
 
 function EditCategoryPage(){

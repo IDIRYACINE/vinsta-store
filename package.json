@@ -6,11 +6,6 @@
   "author": "IDIRYACINE <idiryacinesp@gmail.com>",
   "license": "MIT",
   "private": true,
-  "workspaces": [
-    "adminapp",
-    "storefront",
-    "vinstacore"
-  ],
   "scripts": {
     "devturbo": "next dev --turbo",
     "dev": "next dev",
@@ -22,14 +17,12 @@
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^3.1.0",
+    "firebase": "^10.2.0",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@mui/material": "^5.12.0",
     "@next-auth/firebase-adapter": "^2.0.1",
     "@reduxjs/toolkit": "^1.9.5",
-    "@vinstastore/storefront": "^0.1.0",
-    "@vinstastore/vinstaadmin": "^0.1.2",
-    "@vinstastore/vinstacore": "^1.0.0",
     "clsx": "^1.2.1",
     "next": "^13.4.19",
     "next-auth": "^4.22.1",

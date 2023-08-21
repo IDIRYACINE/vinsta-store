@@ -1,5 +1,7 @@
-import { store,ProductCreator } from "@vinstastore/vinstaadmin";
-import { loadCategoriesApi} from "@vinstastore/vinstacore";
+export const dynamic = 'force-dynamic'
+
+import { store,ProductCreator } from "@adminapp/index";
+import { loadCategoriesApi} from "@vinstacore/index";
 
 
 async function CreateProductPage() {

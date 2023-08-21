@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { CategoryServicePort, FirebaseAdapter } from '@vinstastore/vinstacore';
+import { CategoryServicePort, FirebaseAdapter } from '@vinstacore/index';
 
 
 const categoryService: CategoryServicePort = FirebaseAdapter.categoryService();

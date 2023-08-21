@@ -1,9 +1,10 @@
 export const revalidate = 1800
+export const dynamic = 'force-dynamic'
 
-import { ProductManagerPage } from "@vinstastore/vinstaadmin";
-import { loadCategoriesApi  } from "@vinstastore/vinstacore";
+import { ProductManagerPage } from "@adminapp/index";
+import { loadCategoriesApi  } from "@vinstacore/index";
 
-import Preloader from "adminapp/src/store/Preloader";
+import  Preloader from "@adminapp/store/Preloader"
 
 async function Page(){
 

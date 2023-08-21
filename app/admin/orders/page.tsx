@@ -1,9 +1,11 @@
-import {  OrdersPage,  } from "@vinstastore/vinstaadmin";
-import { loadOrdersApi  } from "@vinstastore/vinstacore";
 
-import Preloader from "adminapp/src/store/Preloader"
-
+export const dynamic = 'force-dynamic'
 export const revalidate = 1800
+
+import {  OrdersPage,  } from "@adminapp/index";
+import { loadOrdersApi  } from "@vinstacore/index";
+
+import  Preloader from "@adminapp/store/Preloader"
 
 async function Page() {
 
