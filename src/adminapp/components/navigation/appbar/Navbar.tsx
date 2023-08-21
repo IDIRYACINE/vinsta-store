@@ -1,6 +1,6 @@
 'use client'
 
-import { useAppSelector } from "@adminapp/store/clientHooks";
+import { useAppSelector } from "@vinstacore/store/clientHooks";
 import { AppBar, Typography, Toolbar,  IconButton, Divider, Drawer } from '@mui/material';
 import {  styled } from "@mui/material/styles";
 import {ChevronLeft,Menu} from '@mui/icons-material';
@@ -13,7 +13,7 @@ interface NavbarProps {
     isSmallScreen: boolean,
 }
 export default function Navbar({openDrawer,toggleDrawer,isSmallScreen}: NavbarProps) {
-    const panel = useAppSelector(state => state.navigation.selectedPanel)
+    const panel = useAppSelector(state => state.adminNavigation.selectedPanel)
     
 
 

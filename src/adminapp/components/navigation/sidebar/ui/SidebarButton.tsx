@@ -1,7 +1,7 @@
 "use client";
 
-import { setActivePanel } from "@adminapp/store";
-import { useAppDispatch, useAppSelector } from "@adminapp/store/clientHooks";
+import { setActivePanel } from "@vinstacore/store/admin/slices/navigationSlice";
+import { useAppDispatch, useAppSelector } from "@vinstacore/store/clientHooks";
 import { Button } from "@mui/material"
 import clsx from "clsx";
 import { useRouter } from 'next/navigation';
@@ -15,7 +15,7 @@ interface SidebarButtonProps {
 
 
 export default function SidebarButton(props: SidebarButtonProps) {
-    const selectedPanelId = useAppSelector(state => state.navigation.selectedId)
+    const selectedPanelId = useAppSelector(state => state.adminNavigation.selectedId)
     const dispatch = useAppDispatch()
 
     const router = useRouter()

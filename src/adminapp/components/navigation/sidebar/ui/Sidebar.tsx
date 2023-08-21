@@ -3,12 +3,12 @@
 import clsx from "clsx"
 import SidebarButton from "./SidebarButton"
 import ActionButton from "./ActionButton"
-import { useAppSelector } from "@adminapp/store/clientHooks"
+import { useAppSelector } from "@vinstacore/store/clientHooks"
 
 
 export default function Sidebar() {
 
-    const panels = useAppSelector(state => state.navigation.panels)
+    const panels = useAppSelector(state => state.adminNavigation.panels)
 
     const className = clsx([
         'flex flex-col items-center justify-between p-4 ',

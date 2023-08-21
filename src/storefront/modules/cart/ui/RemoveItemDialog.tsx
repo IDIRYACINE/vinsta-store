@@ -1,7 +1,8 @@
 "use client";
 
 import { Box, Modal, Typography,Button,Card } from "@mui/material";
-import { useAppSelector,useAppDispatch,closeItemDialog,removeItem } from "@storefront/store";
+import { useAppSelector,useAppDispatch, } from "@vinstacore/store/clientHooks";
+import { closeItemDialog, removeItem } from "@vinstacore/store/customer/slices/cartSlice";
 
 
 
@@ -10,7 +11,7 @@ interface RemoveItemDialogProps {
 
 function RemoveCartItemDialog(props: RemoveItemDialogProps) {
     const dispatch = useAppDispatch()
-    const isModalOpen = useAppSelector(state => state.orders.isModalOpen)
+    const isModalOpen = useAppSelector(state => state.customerOrders.isModalOpen)
 
     function onClose() {
         dispatch(closeItemDialog())

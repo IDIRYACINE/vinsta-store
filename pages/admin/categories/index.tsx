@@ -1,8 +1,8 @@
 
 import { loadCategoriesApi } from "@vinstacore/index";
-import { useAppDispatch, useAppSelector } from "@adminapp/store/clientHooks";
+import { useAppDispatch, useAppSelector } from "@vinstacore/store/clientHooks";
 import { CategoryPage } from "@adminapp/modules/categories/manager/ui/CategoryPage";
-import { setCategories } from "@adminapp/store/slices/categoriesSlice";
+import { setCategories } from "@vinstacore/store/admin/slices/categoriesSlice";
 
 
 export default function Page() {

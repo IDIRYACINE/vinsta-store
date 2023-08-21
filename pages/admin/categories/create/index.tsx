@@ -7,11 +7,11 @@ import { Card, Box } from "@mui/material"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 
-import {  addCategory, } from "@adminapp/store";
+import {  addCategory, } from "@vinstacore/store/admin/slices/categoriesSlice";
 import { createCategoryApi } from "@vinstacore/api/categoryApi";
 
 
-import { useAppDispatch } from "@adminapp/store/clientHooks";
+import { useAppDispatch } from "@vinstacore/store/clientHooks";
 import { CategoryEditorController, goBack } from "@adminapp/modules/categories/editor/logic/Controller"
 import { CreatorActions } from "@adminapp/modules/categories/editor/ui/Actions"
 

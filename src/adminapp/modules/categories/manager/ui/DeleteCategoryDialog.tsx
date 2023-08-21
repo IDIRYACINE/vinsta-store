@@ -3,18 +3,18 @@
 import { BaseContainedButton } from "src/adminapp/components/commons/Buttons";
 import { Box, Modal, Typography,Card } from "@mui/material";
 
-import {   closeDeleteCategoryDialog, deleteCategory } from "@adminapp/store";
-import { useAppDispatch, useAppSelector } from "@adminapp/store/clientHooks";
+import {   closeDeleteCategoryDialog, deleteCategory } from "@vinstacore/store/admin/slices/categoriesSlice";
+import { useAppDispatch, useAppSelector } from "@vinstacore/store/clientHooks";
 import { deleteCategoryApi } from "@vinstacore/index";
-
+import {selectAdminEditCategory} from "@vinstacore/store/selectors"
 
 interface DeleteCategoryDialogProps {
 }
 
 function DeleteCategoryDialog(props: DeleteCategoryDialogProps) {
     const dispatch = useAppDispatch()
-    const isModalOpen = useAppSelector(state => state.categories.isModalOpen)
-    const categoryId = useAppSelector(state => state.categories.editedCategory?.id)
+    const isModalOpen = useAppSelector(state => state.adminCategories.isModalOpen)
+    const categoryId = useAppSelector(state => selectAdminEditCategory(state)?.id)
 
     function onClose() {
         dispatch(closeDeleteCategoryDialog())

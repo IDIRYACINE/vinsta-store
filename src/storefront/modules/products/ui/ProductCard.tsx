@@ -1,5 +1,6 @@
 import { Card, CardActionArea, CardContent, CardMedia, Typography } from "@mui/material";
-import { setDisplayedProduct, useAppDispatch } from "@storefront/store";
+import {  useAppDispatch } from "@vinstacore/store/clientHooks";
+import { setDisplayedProduct } from "@vinstacore/store/customer/slices/productsSlice";
 import { Repository } from "@vinstacore/index";
 import { useRouter } from "next/navigation";
 

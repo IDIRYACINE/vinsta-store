@@ -1,9 +1,9 @@
 "use client"
 
-import { useAppSelector } from "@adminapp/store/clientHooks";
+import { useAppSelector } from "@vinstacore/store/clientHooks";
 import { Grid, Typography, Box } from "@mui/material";
 import  CategoryCard  from "./CategoryCard";
-
+import { selectAdminAllCategories } from "@vinstacore/store/selectors";
 
 
 export default function CategoryGrid() {
@@ -11,7 +11,7 @@ export default function CategoryGrid() {
 
     const categories = useAppSelector(
         state =>
-        state.categories.categories
+        selectAdminAllCategories(state)
     );
 
     const className = "flex flex-row justify-center items-center p-2 w-screen h-screen"

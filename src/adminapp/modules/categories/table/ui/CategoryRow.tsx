@@ -11,8 +11,8 @@ import Image from "next/image";
 import {useRouter} from "next/navigation"
 
 
-import {   openDeleteCategoryDialog, setEditedCategory, } from "@adminapp/store";
-import { useAppDispatch, useAppSelector } from "@adminapp/store/clientHooks";
+import {   openDeleteCategoryDialog, setEditedCategory, } from "@vinstacore/store/admin/slices/categoriesSlice";
+import { useAppDispatch, useAppSelector } from "@vinstacore/store/clientHooks";
 
 
 interface CategoryActionsCellProps {

@@ -2,14 +2,13 @@
 import { loadOrdersApi } from "@vinstacore/api/orderApi";
 
 import clsx from "clsx"
-import { useAppSelector, useAppDispatch } from "@adminapp/store/clientHooks";
-import { orderHeaderSelector } from "@adminapp/store/selectors";
+import { useAppSelector, useAppDispatch } from "@vinstacore/store/clientHooks";
+import { orderHeaderSelector } from "@vinstacore/store/selectors";
 import OrdersTable from "@adminapp/modules/orders/components/table/ui/OrdersTable";
-import { setOrders } from "@adminapp/store/slices/ordersSlice";
+import { setOrders } from "@vinstacore/store/admin/slices/ordersSlice";
 
 export default function Page() {
 
-    const orders = useAppSelector(state => state.orders.orders)
     const ordersHeaders = useAppSelector(state => orderHeaderSelector(state))
 
     const dispatch = useAppDispatch()

@@ -5,15 +5,10 @@ import clsx from "clsx"
 import ProductManagerHeader from "./ProductManagerHeader"
 import { ProductTable } from "../../table"
 
-import { RootState, AppDispatch, setProducts, } from "@adminapp/store";
-import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
-
-
-const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
-
+import { setProducts, } from "@vinstacore/store/admin/slices/productsSlice";
 
 import { DeleteProductDialog } from "./DeleteProductDialog"
-import { useAppDispatch } from "@adminapp/store/clientHooks"
+import { useAppDispatch, useAppSelector } from "@vinstacore/store/clientHooks"
 import { loadProductsApi } from "@vinstacore/index"
 
 
@@ -23,11 +18,12 @@ function ProductPage() {
     const headersData = ["Product Name", "Product Id", "Description", "Action"]
 
 
+
     const className = clsx(["p-4 flex flex-col justify-center items-center"])
 
-    const products = useAppSelector(state => state.products.products)
+    const products = useAppSelector(state => state.adminProducts.products)
 
-    const categoryId = useAppSelector(state => state.products.displayedCategoryId)!
+    const categoryId = useAppSelector(state => state.adminProducts.displayedCategoryId)!
 
     const dispatch = useAppDispatch()
     

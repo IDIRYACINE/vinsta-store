@@ -12,8 +12,8 @@ import { Edit, Delete } from '@mui/icons-material';
 import Image from "next/image";
 
 
-import { openDeleteProductDialog, setEditedProduct, } from "@adminapp/store";
-import { useAppDispatch, useAppSelector } from "@adminapp/store/clientHooks";
+import { openDeleteProductDialog, setEditedProduct, } from "@vinstacore/store/admin/slices/productsSlice";
+import { useAppDispatch, useAppSelector } from "@vinstacore/store/clientHooks";
 
 
 import { useRouter } from "next/navigation";

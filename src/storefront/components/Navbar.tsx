@@ -6,7 +6,9 @@ import { useTheme, styled } from "@mui/material/styles";
 import { ShoppingCart, Menu, DeliveryDining, ChevronLeft } from '@mui/icons-material';
 import { ClientRoutes, IProductFilter } from '@vinstacore/index';
 import { useRouter } from 'next/navigation';
-import { cartItemsCountSelector, useAppSelector, useAppDispatch, setProductFilters } from '@storefront/store';
+import { useAppSelector, useAppDispatch,  } from '@vinstacore/store/clientHooks';
+import { setProductFilters } from '@vinstacore/store/customer/slices/productsSlice';
+import {cartItemsCountSelector} from '@vinstacore/store/selectors'
 import { useState } from 'react';
 import { ProductFilterSearch } from './Filters';
 
@@ -24,7 +26,7 @@ function AppDrawer(props: AppDrawerProps) {
     const dispatch = useAppDispatch()
 
 
-    const filters = useAppSelector(state => state.products.filters)
+    const filters = useAppSelector(state => state.customerProducts.filters)
 
     function onFilterChange(newFilters: IProductFilter[]) {
         dispatch(setProductFilters(newFilters))

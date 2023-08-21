@@ -9,14 +9,15 @@ import { useRouter } from "next/navigation"
 
 
 import { updateCategoryApi } from "@vinstacore/api/categoryApi";
-import {   updateCategory, } from "@adminapp/store/slices/categoriesSlice";
+import {   updateCategory, } from "@vinstacore/store/admin/slices/categoriesSlice";
+import {   selectAdminEditCategory, } from "@vinstacore/store/selectors";
 
-import { useAppDispatch, useAppSelector } from "@adminapp/store/clientHooks";
+import { useAppDispatch, useAppSelector } from "@vinstacore/store/clientHooks";
 
 
 function CategoryEditorPage() {
 
-    let category = useAppSelector(state => state.categories.editedCategory)!
+    let category = useAppSelector(state => selectAdminEditCategory(state))!
     const dispatch = useAppDispatch()
 
     const [name, setName] = useState<string>(category.name)

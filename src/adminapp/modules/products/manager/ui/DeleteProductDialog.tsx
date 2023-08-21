@@ -3,8 +3,8 @@
 import { BaseContainedButton } from "src/adminapp/components/commons/Buttons";
 import { Box, Modal, Typography } from "@mui/material";
 
-import { closeDeleteProductDialog, deleteProduct} from "@adminapp/store";
-import { useAppDispatch, useAppSelector } from "@adminapp/store/clientHooks";
+import { closeDeleteProductDialog, deleteProduct} from "@vinstacore/store/admin/slices/productsSlice";
+import { useAppDispatch, useAppSelector } from "@vinstacore/store/clientHooks";
 import { deleteProductApi } from "@vinstacore/index";
 
 
@@ -13,10 +13,10 @@ interface DeleteProductDialogProps {
 
 function DeleteProductDialog(props: DeleteProductDialogProps) {
     const dispatch = useAppDispatch()
-    const isModalOpen = useAppSelector(state => state.products.isModalOpen)
+    const isModalOpen = useAppSelector(state => state.adminProducts.isModalOpen)
 
-    const categoryId = useAppSelector(state => state.products.displayedCategoryId)!
-    const productId = useAppSelector(state => state.products.editedProduct?.id)!
+    const categoryId = useAppSelector(state => state.adminProducts.displayedCategoryId)!
+    const productId = useAppSelector(state => state.adminProducts.editedProduct?.id)!
 
     function onClose() {
         dispatch(closeDeleteProductDialog())

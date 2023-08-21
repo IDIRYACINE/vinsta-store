@@ -1,7 +1,9 @@
 import { Button, Card, CardActions, CardMedia, Box, Container, IconButton, Typography } from "@mui/material"
 import { Repository } from "@vinstacore/index"
 import {Delete} from '@mui/icons-material';
-import { useAppDispatch, openItemDialog, openModel } from "@storefront/store";
+import { useAppDispatch } from "@vinstacore/store/clientHooks";
+import { openModel } from "@vinstacore/store/customer/slices/navigationSlice";
+import { openItemDialog } from "@vinstacore/store/customer/slices/cartSlice";
 
 
 interface CartItemCardProps {

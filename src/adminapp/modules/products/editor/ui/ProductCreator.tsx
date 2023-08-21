@@ -5,8 +5,8 @@ import { ImageManager } from "src/adminapp/components/commons/Images"
 import { Card, Box } from "@mui/material"
 
 
-import { addProduct, } from "@adminapp/store";
-import { useAppDispatch } from "@adminapp/store/clientHooks";
+import { addProduct, } from "@vinstacore/store/admin/slices/productsSlice";
+import { useAppDispatch } from "@vinstacore/store/clientHooks";
 
 
 import { useState } from "react"

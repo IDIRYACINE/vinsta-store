@@ -5,17 +5,21 @@ import { ActionsRow, DisplayTypography } from "src/storefront/components"
 import { useState } from "react"
 import { Destination, Repository, DeliveryType, destinations, calculateDeliveryPrice } from "@vinstacore/index"
 import { AppTextField, DestinationSelector } from "./Components"
-import { useAppDispatch, closeModel, useAppSelector, updateOrderId, setCart } from "@storefront/store"
+import { useAppDispatch,  useAppSelector } from "@vinstacore/store/clientHooks"
+import { selectCustomerCartItems,  selectCustomerCartPrice } from "@vinstacore/store/selectors"
+
 import { createOrderApi } from "@vinstacore/index"
 import { generateOrder } from "../logic/helper"
+import { setCart, updateOrderId } from "@vinstacore/store/customer/slices/cartSlice"
 
 
 interface ShippingFormProps {
     cart: Repository.OrderItem[],
-    totalPrice: number
+    totalPrice: number,
+    onClose: () => void
 }
 export function ShippingForm(props: ShippingFormProps) {
-    const { cart } = props
+    const { cart,onClose } = props
     const dispatch = useAppDispatch()
     const [orderId, setOrderId] = useState<string | null>(null)
 
@@ -74,7 +78,7 @@ export function ShippingForm(props: ShippingFormProps) {
 
 
     function handleCancel() {
-        dispatch(closeModel())
+        onClose()
     }
 
     function handleShipping() {
@@ -121,13 +125,14 @@ export function ShippingForm(props: ShippingFormProps) {
 
 export function ShippingDialog() {
     const dispatch = useAppDispatch()
-    const isModalOpen = useAppSelector(state => state.navigation.isModalOpen)
-    const cart = useAppSelector(state => state.orders.cart)
-    const totalPrice = useAppSelector(state => state.orders.totalPrice)
+    const [isModalOpen,closeModel] = useState(false)
+
+    const cart = useAppSelector(state => selectCustomerCartItems(state))
+    const totalPrice = useAppSelector(state => selectCustomerCartPrice(state))
 
 
     function onClose() {
-        dispatch(closeModel())
+        closeModel(false)
     }
 
     const contentStyle = {
@@ -154,7 +159,7 @@ export function ShippingDialog() {
             {
                 cart.length === 0 ? <DisplayTypography text="Cart is empty" />
                     : <Box sx={contentStyle}>
-                        <ShippingForm cart={cart} totalPrice={totalPrice} />
+                        <ShippingForm cart={cart} totalPrice={totalPrice} onClose={onClose}/>
                     </Box>
             }
 

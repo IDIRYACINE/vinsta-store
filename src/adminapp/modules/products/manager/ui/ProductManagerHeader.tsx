@@ -1,9 +1,9 @@
 import { BaseContainedButton } from "src/adminapp/components/commons/Buttons";
-import { useAppDispatch } from "@adminapp/store/clientHooks";
+import { useAppDispatch } from "@vinstacore/store/clientHooks";
 import { Box, Typography } from "@mui/material";
 import { ProductRoutes } from "@vinstacore/index";
 import { useRouter } from "next/navigation";
-import { setDisplayedCategory } from "@adminapp/store";
+import { setDisplayedCategory } from "@vinstacore/store/admin/slices/productsSlice";
 
 
 function ProductManagerHeader() {

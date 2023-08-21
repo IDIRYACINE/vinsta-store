@@ -4,8 +4,8 @@ import { OrderStatus } from "@adminapp/modules/orders/domain/OrderStatus"
 import { Typography, Card, Tab, Tabs } from "@mui/material"
 import { useState, SyntheticEvent } from "react"
 
-import { setSelectedOrderStatus, } from "@adminapp/store";
-import { useAppDispatch, useAppSelector } from "@adminapp/store/clientHooks";
+import { setSelectedOrderStatus, } from "@vinstacore/store/admin/slices/ordersSlice";
+import { useAppDispatch, useAppSelector } from "@vinstacore/store/clientHooks";
 
 
 interface OrderStatusLabelProps {

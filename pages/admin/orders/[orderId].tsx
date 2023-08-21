@@ -2,8 +2,8 @@
 import { Box, Typography } from "@mui/material"
 import clsx from "clsx"
 import { useParams } from 'next/navigation'
-import { useAppSelector } from "@adminapp/store/clientHooks"
-import { orderSelector } from "@adminapp/store/selectors"
+import { useAppSelector } from "@vinstacore/store/clientHooks"
+import { orderSelector } from "@vinstacore/store/selectors"
 import ShippingCard from "@adminapp/modules/orders/components/ShippingCard"
 import ItemsList from "@adminapp/modules/orders/components/ItemsList"
 

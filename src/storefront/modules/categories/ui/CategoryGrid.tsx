@@ -1,7 +1,9 @@
 "use client"
 
 import { Grid, Typography, Box } from "@mui/material";
-import { activeCategorySelector, useAppSelector } from "@storefront/store";
+import {  useAppSelector } from "@vinstacore/store/clientHooks";
+import {  activeCategorySelector } from "@vinstacore/store/selectors";
+
 import { CategoryCard } from "./CategoryCard";
 
 

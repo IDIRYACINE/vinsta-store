@@ -7,6 +7,8 @@ import { StoreLayout } from '@storefront/context/StoreLayout';
 import { UserProvider } from '@auth0/nextjs-auth0/client';
 
 import './globals.css';
+import { Provider } from 'react-redux';
+import { store } from '@vinstacore/store/store';
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
     getLayout?: (page: ReactElement) => ReactNode
@@ -24,11 +26,16 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
     const Layout = isAdminPath ? AdminLayout : StoreLayout;
 
     return (
-        <Layout>
+        <Provider store={store}>
+
             <UserProvider>
-            <Component {...pageProps} />
+                <Layout>
+
+                    <Component {...pageProps} />
+                </ Layout >
+
             </UserProvider>
-        </ Layout >
+        </Provider>
     )
 
 

@@ -1,9 +1,10 @@
 "use client"
 
 import { Card, CardActionArea, CardContent, CardMedia, Typography } from "@mui/material";
-import { setDisplayedCategory, useAppDispatch } from "@storefront/store";
+import {  useAppDispatch } from "@vinstacore/store/clientHooks";
 import { Repository } from "@vinstacore/index";
 import { useRouter } from "next/navigation";
+import { setDisplayedCategory } from "@vinstacore/store/customer/slices/productsSlice";
 
 
 interface CategoryCardProps {

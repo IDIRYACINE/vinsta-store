@@ -3,8 +3,8 @@
 import { OrderStatusSelector, BaseContainedButton } from "src/adminapp/components/commons/Buttons";
 import { Box, Modal, Typography,Paper } from "@mui/material";
 
-import { useAppDispatch, useAppSelector } from "@adminapp/store/clientHooks";
-import { closeUpdateOrderStatusModal, updateOrderStatus } from "@adminapp/store";
+import { useAppDispatch, useAppSelector } from "@vinstacore/store/clientHooks";
+import { closeUpdateOrderStatusModal, updateOrderStatus } from "@vinstacore/store/admin/slices/ordersSlice";
 import { updateOrderApi } from "@vinstacore/index";
 import { OrderStatus, orderStatusList } from "../domain/OrderStatus";
 import { useRef, useState } from "react";
@@ -18,7 +18,7 @@ interface UpdateOrderStatusDialogProps {
 function UpdateOrderStatusDialog(props: UpdateOrderStatusDialogProps) {
     const dispatch = useAppDispatch()
     const { isOpen, onClose } = props
-    const orderId = useAppSelector(state => state.orders.editedOrder?.header.id)!
+    const orderId = useAppSelector(state => state.adminOrders.editedOrder?.header.id)!
 
     const newOrderStatus = useRef<OrderStatus>(orderStatusList[0])
 

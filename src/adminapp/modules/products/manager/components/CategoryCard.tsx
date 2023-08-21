@@ -1,7 +1,7 @@
 "use client"
 
-import { setDisplayedCategory } from "@adminapp/store";
-import { useAppDispatch } from "@adminapp/store/clientHooks";
+import { setDisplayedCategory } from "@vinstacore/store/admin/slices/productsSlice";
+import { useAppDispatch } from "@vinstacore/store/clientHooks";
 import { Card, CardActionArea, CardContent, CardMedia, Typography } from "@mui/material";
 import { Repository } from "@vinstacore/index";
 

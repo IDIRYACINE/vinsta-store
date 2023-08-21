@@ -11,9 +11,9 @@ import { Repository, sizes,colors } from "@vinstacore/index"
 import { useRouter } from "next/navigation"
 
 
-import {  updateProduct, } from "@adminapp/store";
+import {  updateProduct, } from "@vinstacore/store/admin/slices/productsSlice";
 import { updateProductApi } from "@vinstacore/index"
-import { useAppDispatch, useAppSelector } from "@adminapp/store/clientHooks";
+import { useAppDispatch, useAppSelector } from "@vinstacore/store/clientHooks";
 import { SizesSelector, ColorsSelector } from "src/adminapp/components/commons/Buttons"
 
 
@@ -24,8 +24,8 @@ interface ProductEditorProps {
 function ProductEditor(props:ProductEditorProps) {
     const {categories} = props
 
-    let product:Repository.Product = useAppSelector(state => state.products.editedProduct)!
-    const categoryId = useAppSelector(state => state.products.displayedCategoryId)!
+    let product:Repository.Product = useAppSelector(state => state.adminProducts.editedProduct)!
+    const categoryId = useAppSelector(state => state.adminProducts.displayedCategoryId)!
 
     const [name, setName] = useState<string>(product.name)
     const [previewImageUrl, setPreviewImageUrl] = useState<string>("")

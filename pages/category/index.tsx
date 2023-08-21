@@ -2,13 +2,13 @@
 import { Box, useMediaQuery  } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
-import { loadProductsApi } from "@vinstacore/index";
+import { loadProductsApi } from "@vinstacore/api/productApi";
 import {  useMemo } from "react";
-import {  setProductFilters } from "@storefront/index";
+import {  setProductFilters } from  "@vinstacore/store/customer/slices/productsSlice";
 import { ProductGrid } from "@storefront/index";
-import {  setProducts,  } from "@storefront/store/slices/productsSlice";
-import {   useAppDispatch, useAppSelector } from "@storefront/store/clientHooks";
-import { categoryProductsSelector,  } from "@storefront/store/slices/selectors";
+import {  setProducts,  } from "@vinstacore/store/customer/slices/productsSlice";
+import {   useAppDispatch, useAppSelector } from "@vinstacore/store/clientHooks";
+import { categoryProductsSelector,  } from "@vinstacore/store/selectors";
 
 import { IProductFilter } from "@vinstacore/index";
 import { ProductFilterSearch } from "@storefront/components/Filters";
@@ -19,11 +19,11 @@ export default function Page() {
 
     const dispatch = useAppDispatch()
 
-    const displayedCategoryId = useAppSelector(state => state.products.displayedCategory)!
+    const displayedCategoryId = useAppSelector(state => state.customerProducts.displayedCategory)!
 
     const products = useAppSelector(state => categoryProductsSelector(state))
 
-    const filters = useAppSelector(state => state.products.filters)
+    const filters = useAppSelector(state => state.customerProducts.filters)
 
     const theme = useTheme()
     const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'))

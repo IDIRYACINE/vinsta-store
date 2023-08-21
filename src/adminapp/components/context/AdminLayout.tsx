@@ -7,8 +7,6 @@ import { Box,useMediaQuery } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 
 import { theme } from './AdminTheme';
-import { Provider } from 'react-redux';
-import { store } from '@adminapp/store';
 import { useState } from "react";
 import { UserProvider } from '@auth0/nextjs-auth0/client';
 
@@ -49,7 +47,6 @@ function AdminLayout({ children }: LayoutProps) {
         <UserProvider>
 
         <ThemeProvider theme={theme}>
-            <Provider store={store}>
                 <Box className={className}>
                     <Box className={contentClassName}>
                         <Navbar {...navbarProps} />
@@ -58,7 +55,6 @@ function AdminLayout({ children }: LayoutProps) {
                         </Box>
                     </Box>
                 </Box>
-            </Provider>
         </ThemeProvider>
         </UserProvider>
 

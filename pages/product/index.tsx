@@ -3,8 +3,8 @@ import { Container } from "@mui/material"
 
 import { Typography, Box } from "@mui/material";
 import { useRouter } from "next/navigation";
-import { useAppSelector, useAppDispatch,  } from "@storefront/store/clientHooks";
-import {  addItem } from "@storefront/store/slices/cartSlice";
+import { useAppSelector, useAppDispatch,  } from "@vinstacore/store/clientHooks";
+import {  addItem } from "@vinstacore/store/customer/slices/cartSlice";
 
 import { DisplayImageRoster, PriceDisplay, SandwichTypography, } from "src/storefront/components";
 import clsx from "clsx"
@@ -24,8 +24,8 @@ export default function Page() {
         "width": "100vw"
     }
 
-    const product = useAppSelector(state => state.products.displayedProduct)
-    const categoryId = useAppSelector(state => state.products.displayedCategory!)
+    const product = useAppSelector(state => state.customerProducts.displayedProduct)
+    const categoryId = useAppSelector(state => state.customerProducts.displayedCategory!)
     const dispatch = useAppDispatch()
     const router = useRouter()
 
