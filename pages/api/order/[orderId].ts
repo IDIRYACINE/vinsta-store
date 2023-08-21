@@ -20,7 +20,7 @@ const orderService: OrderServicePort = FirebaseAdapter.ordersService();
 
 
 
-  return NextResponse.json({ data: response });
+  return res.status(200).json({ data: response });
 }
 
 export default handler

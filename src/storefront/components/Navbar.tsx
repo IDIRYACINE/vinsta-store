@@ -148,7 +148,7 @@ export function Navbar() {
 
 
     return (
-        <div>
+        <div id="appbar-container">
             <AppBar position="fixed">
                 <Toolbar color="white" className="flex flex-row justify-between">
                     {isSmallScreen ?

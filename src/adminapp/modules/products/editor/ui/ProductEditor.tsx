@@ -24,13 +24,13 @@ interface ProductEditorProps {
 function ProductEditor(props:ProductEditorProps) {
     const {categories} = props
 
-    let product:Repository.Product = useAppSelector(state => state.adminProducts.editedProduct)!
-    const categoryId = useAppSelector(state => state.adminProducts.displayedCategoryId)!
+    let product = useAppSelector(state => state.adminProducts.editedProduct)
+    const categoryId = useAppSelector(state => state.adminProducts.displayedCategoryId)
 
-    const [name, setName] = useState<string>(product.name)
+    const [name, setName] = useState<string>(product?.name ?? "")
     const [previewImageUrl, setPreviewImageUrl] = useState<string>("")
-    const [productId, setProductId] = useState<string>(product.id)
-    const [description, setDescription] = useState<string>(product.description ?? "")
+    const [productId, setProductId] = useState<string>(product?.id?? "")
+    const [description, setDescription] = useState<string>(product?.description ?? "")
     const [imageUrls, setImageUrls] = useState<string[]>([])
     const [price, setPrice] = useState<string>("0")
     const [quantity, setQuantity] = useState<string>("0")
@@ -102,11 +102,16 @@ function ProductEditor(props:ProductEditorProps) {
 
     function onSave() {
 
+        if(!categoryId || !productId) return ;
+
+        const color = colors.find(color => color.equalsById(colorId)  )!.toRaw()
+        const size = sizes.find(size => size.equalsById(sizeId))!.toRaw()
+
         let product = controller.updateProduct({
             name, imageUrls, description,
             code: productId,
-            color : {id: 1, color: "red"},
-            size : {id:0,size:"S"},
+            color :color,
+            size : size,
             price: parseFloat(price),
             quantity: parseInt(quantity)
         })

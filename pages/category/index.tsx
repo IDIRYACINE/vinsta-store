@@ -3,7 +3,7 @@ import { Box, useMediaQuery  } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
 import { loadProductsApi } from "@vinstacore/api/productApi";
-import {  useMemo } from "react";
+import {  useMemo, useRef,useEffect } from "react";
 import {  setProductFilters } from  "@vinstacore/store/customer/slices/productsSlice";
 import { ProductGrid } from "@storefront/index";
 import {  setProducts,  } from "@vinstacore/store/customer/slices/productsSlice";
@@ -25,6 +25,8 @@ export default function Page() {
 
     const filters = useAppSelector(state => state.customerProducts.filters)
 
+    const mounted = useRef(false)
+
     const theme = useTheme()
     const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'))
 
@@ -41,8 +43,9 @@ export default function Page() {
         })
     }, [products, filters])
 
-    if (products.length === 0) {
+    if ((products.length === 0) && mounted.current) {
         loadProductsApi({ categoryId: displayedCategoryId }).then((loadedProducts) => {
+            if(loadedProducts.length === 0) return
             dispatch(setProducts(
                 {
                     categoryId: displayedCategoryId,
@@ -51,6 +54,10 @@ export default function Page() {
             ))
         })
     }
+
+    useEffect(() => {
+        mounted.current = true
+    },[])
 
     function onFilterChange(newFilters: IProductFilter[]) {
         dispatch(setProductFilters(newFilters))

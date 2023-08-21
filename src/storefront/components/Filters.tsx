@@ -1,7 +1,7 @@
 "use client"
 
 import { Box, Grid,Toolbar, Paper, ToggleButtonGroup, ToggleButton, Container, Slider, FormControl, InputLabel, MenuItem, Popover, Select, SelectChangeEvent, Typography, } from "@mui/material"
-import { useState, MouseEvent } from "react"
+import { useState, MouseEvent, useEffect, useRef } from "react"
 import { FilterType, IProductFilter, ProductPriceFilter, sizes, SizeEntity, ProductSizeFilter, ColorEntity, ProductColorFilter, colors } from "@vinstacore/index"
 import clsx from "clsx"
 import { usePathname, } from "next/navigation"
@@ -166,7 +166,14 @@ interface ProductFilterSearchProps {
 export function ProductFilterSearch(props: ProductFilterSearchProps) {
     const { onFilterChange } = props
     let filters = [...props.filters]
-    const isInProductPage = usePathname().match("category");
+
+    const pathName = usePathname()
+
+    const isInProductPage = useRef(false)
+
+    useEffect(() => {
+        isInProductPage.current = pathName.includes("category")
+    },[pathName, isInProductPage])
 
 
     const className = clsx([
@@ -259,11 +266,11 @@ export function ProductFilterSearch(props: ProductFilterSearchProps) {
             <Toolbar/>
             <CategoryNavigation />
 
-            {isInProductPage ? <FilterRangeButton {...priceFilterProps} />
+            {isInProductPage.current ? <FilterRangeButton {...priceFilterProps} />
                 : null}
-            {isInProductPage ? <ToggleFilterGroup {...sizeFilterProps} />
+            {isInProductPage.current ? <ToggleFilterGroup {...sizeFilterProps} />
                 : null}
-            {isInProductPage ? <ToggleFilterGroup {...colorFilterProps} />
+            {isInProductPage.current ? <ToggleFilterGroup {...colorFilterProps} />
                 : null}
 
 

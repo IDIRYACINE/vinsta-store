@@ -1,6 +1,6 @@
 import { Button, Card, CardActions, CardMedia, Box, Container, IconButton, Typography } from "@mui/material"
 import { Repository } from "@vinstacore/index"
-import {Delete} from '@mui/icons-material';
+import { Delete } from '@mui/icons-material';
 import { useAppDispatch } from "@vinstacore/store/clientHooks";
 import { openModel } from "@vinstacore/store/customer/slices/navigationSlice";
 import { openItemDialog } from "@vinstacore/store/customer/slices/cartSlice";
@@ -63,7 +63,7 @@ export function CartView(props: CartViewProps) {
 
     return (
 
-        <Container className="flex flex-col h-max items-center justify-end">
+        <Container className="flex flex-col h-full items-center justify-end">
             <Box className="flex flex-col p-2 justify-center items-center flex-2">
 
                 {
@@ -74,11 +74,13 @@ export function CartView(props: CartViewProps) {
                 }
 
             </Box>
+            {
+                items.length === 0 ? null : <Container className="flex flex-row justify-end">
+                    <Button onClick={handleShipOrder}>Ship Order</Button>
+                    <Button variant="contained" color="primary">Total Price : {totalPrice} Da</Button>
+                </Container>
+            }
 
-            <Container className="flex flex-row justify-end">
-                <Button onClick={handleShipOrder}>Ship Order</Button>
-                <Button variant="contained" color="primary">Total Price : {totalPrice} Da</Button>
-            </Container>
 
         </Container >)
 }

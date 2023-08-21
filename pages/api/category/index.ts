@@ -2,18 +2,18 @@ import { NextResponse } from 'next/server';
 import { NextApiRequest, NextApiResponse } from 'next'
 import { FirebaseAdapter } from '@vinstacore/infrastructure/services/firebase';
 import { CategoryServicePort } from '@vinstacore/infrastructure/ports/services/CategoryServicePort';
- 
+
 const handler = (req: NextApiRequest, res: NextApiResponse) => {
 
-  switch(req.method){
-    case "GET": GET(req,res)
-    break;
-    case "POST": POST(req,res)
-    break;
-    case "PUT": PUT(req,res)
-    break;
-    case "DELETE": DELETE(req,res)
-    break;
+  switch (req.method) {
+    case "GET": GET(req, res)
+      break;
+    case "POST": POST(req, res)
+      break;
+    case "PUT": PUT(req, res)
+      break;
+    case "DELETE": DELETE(req, res)
+      break;
   }
 }
 
@@ -29,11 +29,11 @@ async function GET(req: NextApiRequest, res: NextApiResponse) {
   })).data
 
 
-  const response = NextResponse.json({ data: rawData });
-  response.headers.set('Cache-Control', 'no-store');
 
 
-  return res;
+  return res.status(200).json({ data: rawData });
+
+
 }
 
 async function POST(req: NextApiRequest, res: NextApiResponse) {
@@ -42,18 +42,17 @@ async function POST(req: NextApiRequest, res: NextApiResponse) {
 
   const response = await categoryService.create(options);
 
-  return NextResponse.json({ data: response });
+  return res.status(200).json({ data: response });
 }
 
 
 async function PUT(req: NextApiRequest, res: NextApiResponse) {
   const options = req.body
 
-  console.log(options);
 
   const response = await categoryService.update(options);
 
-  return NextResponse.json({ data: response });
+  return res.status(200).json({ data: response });
 }
 
 async function DELETE(req: NextApiRequest, res: NextApiResponse) {
@@ -63,7 +62,7 @@ async function DELETE(req: NextApiRequest, res: NextApiResponse) {
     id: categoryId
   });
 
-  return NextResponse.json({ data: response });
+  return res.status(200).json({ data: response });
 }
 
 export default handler

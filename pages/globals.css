@@ -4,3 +4,25 @@
 @tailwind components;
 @tailwind utilities;
 
+#__next {
+    display:flex;
+    flex: 1;
+    flex-grow: 1;
+    flex-direction : column;
+    justify-content: center;
+    align-items: center;
+}
+
+#app-content{
+    flex : 1;
+    flex-grow: 1;
+    width : 100%;
+    display:flex;
+    flex-direction : column;
+    justify-content: center;
+    align-items: center;
+}
+
+#appbar-container{
+    width : 100%;
+}

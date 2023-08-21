@@ -33,18 +33,18 @@ export default function DeliveryPage() {
     }
 
     return (
-    <Container className="flex flex-col justify-center items-center h-screen w-screen">
+        <Container className="flex flex-col justify-center items-center ">
 
 
-        <Typography >ID : {order?.header?.id}</Typography>
-        <Typography className="mb-2">Status : {order?.header?.status}</Typography>
+            <Typography >ID : {order?.header?.id}</Typography>
+            <Typography className="mb-2">Status : {order?.header?.status}</Typography>
 
-        <Box className="flex flex-row justify-between">
-            <AppTextField {...trackerFieldProps} />
-            <Button onClick={onTrackOrder}>Track</Button>
+            <Box className="flex flex-row justify-between">
+                <AppTextField {...trackerFieldProps} />
+                <Button onClick={onTrackOrder}>Track</Button>
 
 
-        </Box>   
-         </Container>
-        )
+            </Box>
+        </Container>
+    )
 }

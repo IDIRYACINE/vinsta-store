@@ -6,11 +6,19 @@ import { useAppSelector } from "@vinstacore/store/clientHooks"
 import { orderSelector } from "@vinstacore/store/selectors"
 import ShippingCard from "@adminapp/modules/orders/components/ShippingCard"
 import ItemsList from "@adminapp/modules/orders/components/ItemsList"
+import { useEffect, useRef } from "react"
 
 function OrderDetaillsPage() {
-    const orderId = useParams().orderId as string
 
-    const order = useAppSelector(state => orderSelector({ ...state, orderId }))
+    const param = useParams()
+
+    let orderId = useRef<string>("")
+
+    useEffect(() => {
+        orderId.current = param.orderId as string
+    },[param,orderId])
+
+    const order = useAppSelector(state => orderSelector({ ...state, orderId:orderId.current }))
 
 
     const className = clsx([

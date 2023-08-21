@@ -17,18 +17,23 @@ import { useAppDispatch, useAppSelector } from "@vinstacore/store/clientHooks";
 
 function CategoryEditorPage() {
 
-    let category = useAppSelector(state => selectAdminEditCategory(state))!
+    let category = useAppSelector(state => selectAdminEditCategory(state))
     const dispatch = useAppDispatch()
 
-    const [name, setName] = useState<string>(category.name)
-    const [imageUrl, setImageUrl] = useState<string>(category.imageUrl)
-    const [categoryId, setCategoryId] = useState<string>(category.id)
-    const [description, setDescription] = useState<string>(category.description ?? "")
+
+    const [name, setName] = useState<string>(category?.name ?? "")
+    const [imageUrl, setImageUrl] = useState<string>(category?.imageUrl ?? "")
+    const [categoryId, setCategoryId] = useState<string>(category?.id ?? "")
+    const [description, setDescription] = useState<string>(category?.description ?? "")
 
 
     const router = useRouter()
 
 
+    if (!category) {
+        return (<div></div>)
+    }
+    
     const nameProps = {
         label: "Name",
         value: name,

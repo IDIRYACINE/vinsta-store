@@ -10,7 +10,8 @@ const selectAdminAllCategories = (state: RootState) => state.adminCategories.cat
 const selectAdminEditCategory = (state: RootState) => state.adminCategories.editedCategory
 
 const orderSelector = createSelector([selectAdminAllOrders ,selectAdminOrderId], (orders,orderId) => {
-
+    if(!orderId) return undefined
+    
     return orders.find(order => order.header.id === orderId)
 })
 

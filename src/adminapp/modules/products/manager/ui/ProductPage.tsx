@@ -10,6 +10,7 @@ import { setProducts, } from "@vinstacore/store/admin/slices/productsSlice";
 import { DeleteProductDialog } from "./DeleteProductDialog"
 import { useAppDispatch, useAppSelector } from "@vinstacore/store/clientHooks"
 import { loadProductsApi } from "@vinstacore/index"
+import { useEffect } from "react"
 
 
 
@@ -23,13 +24,18 @@ function ProductPage() {
 
     const products = useAppSelector(state => state.adminProducts.products)
 
-    const categoryId = useAppSelector(state => state.adminProducts.displayedCategoryId)!
+    const categoryId = useAppSelector(state => state.adminProducts.displayedCategoryId)
 
     const dispatch = useAppDispatch()
-    
-    loadProductsApi({categoryId}).then(
-        (products) => dispatch(setProducts(products))
-    )
+
+    useEffect(() => {
+        if (!categoryId) return
+        
+        loadProductsApi({ categoryId }).then(
+            (products) => dispatch(setProducts(products))
+        )
+
+    }, [dispatch,categoryId])
 
 
     return (

@@ -30,8 +30,9 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 
             <UserProvider>
                 <Layout>
-
-                    <Component {...pageProps} />
+                    <div id="app-content">
+                        <Component {...pageProps} />
+                    </div>
                 </ Layout >
 
             </UserProvider>

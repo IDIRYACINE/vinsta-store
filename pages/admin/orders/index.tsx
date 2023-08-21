@@ -6,6 +6,7 @@ import { useAppSelector, useAppDispatch } from "@vinstacore/store/clientHooks";
 import { orderHeaderSelector } from "@vinstacore/store/selectors";
 import OrdersTable from "@adminapp/modules/orders/components/table/ui/OrdersTable";
 import { setOrders } from "@vinstacore/store/admin/slices/ordersSlice";
+import { useEffect } from "react";
 
 export default function Page() {
 
@@ -14,9 +15,12 @@ export default function Page() {
     const dispatch = useAppDispatch()
 
 
-    loadOrdersApi().then((res) => {
-        dispatch(setOrders(res))
-    })
+    useEffect(() => {
+        loadOrdersApi().then((res) => {
+            dispatch(setOrders(res))
+        })
+    
+    },[dispatch])
 
 
 

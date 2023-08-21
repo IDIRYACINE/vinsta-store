@@ -11,14 +11,17 @@ import { CategoryRepostiroy } from "../products-service/CategoryRepository";
 import { FirebaseCategoryService } from "../products-service/CategoryService";
 import { ProductRepostiroy } from "../products-service/ProductRepository";
 import { FirebaseProductService } from "../products-service/ProductService";
+import { getApp } from "firebase/app";
+import { buildFirebaseApp } from "./FirebaseBuilder";
 
 let productService: FirebaseProductService;
 let categoryService: FirebaseCategoryService;
 
-export function buildProductService(firebaseApp: FirebaseApp): ProductServicePort {
+export function buildProductService(): ProductServicePort {
     if (productService !== undefined) {
         return productService;
     }
+    const firebaseApp = getApp()
 
     const db = getDatabase(firebaseApp)
     const productMapper = new ProductMapper();
@@ -35,11 +38,12 @@ export function buildProductService(firebaseApp: FirebaseApp): ProductServicePor
 
 
 
-export function buildCategoryService(firebaseApp: FirebaseApp): CategoryServicePort {
+export function buildCategoryService(): CategoryServicePort {
     if (categoryService !== undefined) {
         return categoryService;
     }
 
+    const firebaseApp = buildFirebaseApp()
     const firestore = getFirestore(firebaseApp)
 
     const categoryRepo = new CategoryRepostiroy(firestore);

@@ -30,7 +30,7 @@ async function GET(req: NextApiRequest, res: NextApiResponse) {
   })
 
 
-  return NextResponse.json({ data: response });
+  return res.status(200).json({ data: response });
 }
 
 
@@ -40,7 +40,7 @@ async function POST(req: NextApiRequest, res: NextApiResponse) {
 
   const response = await productService.create(options);
 
-  return NextResponse.json({ data: response });
+  return res.status(200).json({ data: response });
 }
 
 
@@ -50,7 +50,7 @@ async function PUT(req: NextApiRequest, res: NextApiResponse) {
 
   const response = await productService.update(options);
 
-  return NextResponse.json({ data: response });
+  return res.status(200).json({ data: response });
 }
 
 async function DELETE(req: NextApiRequest, res: NextApiResponse) {
@@ -62,5 +62,5 @@ async function DELETE(req: NextApiRequest, res: NextApiResponse) {
     categoryId, productId
   });
 
-  return NextResponse.json({ data: response });
+  return res.status(200).json({ data: response });
 }
