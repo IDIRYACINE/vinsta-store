@@ -1,8 +1,8 @@
 "use client"
 
 import { Box, List, ListItemButton, ListItemText, Typography } from "@mui/material"
-import { Repository } from "@vinstacore/index"
 import { setDisplayedCategory, useAppDispatch, useAppSelector ,activeCategorySelector} from "@storefront/store"
+import { Repository } from "@vinstacore/infrastructure/ports/IRepositories"
 
 
 export function CategoryNavigation() {

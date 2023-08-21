@@ -2,9 +2,9 @@
 module.exports = {
   
   content: [
-    './storefront/**/*.tsx',
-    './adminapp/**/*.tsx',
-    './app/**/*.tsx'
+    './src/storefront/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/adminapp/**/*.{js,ts,jsx,tsx,mdx}',
+    './pages/**/*.{js,ts,jsx,tsx,mdx}'
 
   ],
   theme: {

@@ -3,7 +3,7 @@ import {baseUrl, isTest} from "./config"
 
 
 
-const baseApi = `${baseUrl}/api/category}`
+export const baseApi = `${baseUrl}/api/category`
 
 export async function createCategoryApi(options: Repository.Category) {
   const response = await fetch(baseApi, {
@@ -48,7 +48,7 @@ export async function loadCategoriesApi(): Promise<Repository.Category[]> {
 
 
   let response = await fetch(baseApi, {
-    cache: 'no-cache',
+    cache: 'no-store',
     method: "GET",
   });
 

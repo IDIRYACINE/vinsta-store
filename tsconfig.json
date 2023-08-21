@@ -18,7 +18,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "incremental": true,
+    "incremental": false,
     "composite": true,
     "baseUrl": ".",
     "paths": {
@@ -38,7 +38,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-  ],
+, "pages/api/auth/[...auth0].ts", "..middleware.ts"  ],
   "exclude": [
     "node_modules"
   ]

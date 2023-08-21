@@ -1,6 +1,7 @@
 import { Repository } from "@vinstacore/index"
-import { Typography, ToggleButton, ToggleButtonGroup, Box, CardMedia, Card, CardActionArea } from "@mui/material";
+import { Typography, ToggleButton, ToggleButtonGroup, Box, CardMedia, Card, CardActionArea, Button } from "@mui/material";
 import { useState } from "react";
+import {ShoppingCart} from '@mui/icons-material';
 
 interface SizeViewProps {
     size: Repository.Size
@@ -45,3 +46,22 @@ export function SizesView(props: SizesViewProps) {
 }
 
 
+
+interface ActionsRowProps {
+    addToCart: () => void,
+    goBack: () => void,
+}
+export function ActionsRow(props: ActionsRowProps) {
+    const { addToCart } = props
+
+
+    return (
+            <Button className="h-20 w-60" onClick={addToCart}>
+                <Box className="flex flex-row justify-evenly items-center w-full">
+                    <Typography variant="body1">Add to cart</Typography>
+                    <ShoppingCart />
+                </Box>
+            </Button>
+            
+    )
+}
