@@ -1,2 +1,2 @@
 
-export * from "./ui/HomePage"
+export * from "./components/HeroSection"

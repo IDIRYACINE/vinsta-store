@@ -1,6 +1,6 @@
 import { Button, Card, CardActions, CardMedia, Box, Container, IconButton, Typography } from "@mui/material"
 import { Repository } from "@vinstacore/index"
-import DeleteIcon from '@mui/icons-material/Delete';
+import {Delete} from '@mui/icons-material';
 import { useAppDispatch, openItemDialog, openModel } from "@storefront/store";
 
 
@@ -30,7 +30,7 @@ function CartItemCard(props: CartItemCardProps) {
                 {item.name}
             </Typography>
             <CardActions>
-                <IconButton onClick={() => onDelete(item)}><DeleteIcon /></IconButton>
+                <IconButton onClick={() => onDelete(item)}><Delete /></IconButton>
             </CardActions>
         </Card>
     )

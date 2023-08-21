@@ -1,7 +1,6 @@
 
 
 
-export * from "./modules/auth"
 export * from "./modules/orders"
 export * from "./modules/products"
 export * from "./modules/categories"

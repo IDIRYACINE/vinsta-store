@@ -48,7 +48,7 @@ export async function loadCategoriesApi(): Promise<Repository.Category[]> {
 
 
   let response = await fetch(baseApi, {
-    cache: 'no-store',
+    cache: 'no-cache',
     method: "GET",
   });
 

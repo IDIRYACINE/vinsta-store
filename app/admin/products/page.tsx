@@ -1,5 +1,5 @@
-export const revalidate = 1800
 export const dynamic = 'force-dynamic'
+export const revalidate = 1800
 
 import { ProductManagerPage } from "@adminapp/index";
 import { loadCategoriesApi  } from "@vinstacore/index";

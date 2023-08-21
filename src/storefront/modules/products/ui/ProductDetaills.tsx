@@ -1,6 +1,6 @@
 
 import { Typography, Box, Button } from "@mui/material";
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import {ShoppingCart} from '@mui/icons-material';
 import { useRouter } from "next/navigation";
 import { convertProductToCartItem, goBack } from "../logic/helpers";
 import {useAppSelector, useAppDispatch, addItem } from "@storefront/store";
@@ -74,7 +74,7 @@ function ActionsRow(props: ActionsRowProps) {
             <Button className="h-20 w-60" onClick={addToCart}>
                 <Box className="flex flex-row justify-evenly items-center w-full">
                     <Typography variant="body1">Add to cart</Typography>
-                    <ShoppingCartIcon />
+                    <ShoppingCart />
                 </Box>
             </Button>
             

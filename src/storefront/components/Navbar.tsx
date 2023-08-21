@@ -2,15 +2,12 @@
 
 
 import { AppBar, IconButton, Divider, Typography, Toolbar, Drawer, Box, Badge, useMediaQuery } from '@mui/material';
-import { useTheme,styled } from "@mui/material/styles";
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import DeliveryIcon from '@mui/icons-material/DeliveryDining';
-import MenuIcon from '@mui/icons-material/Menu';
+import { useTheme, styled } from "@mui/material/styles";
+import { ShoppingCart, Menu, DeliveryDining, ChevronLeft } from '@mui/icons-material';
 import { ClientRoutes, IProductFilter } from '@vinstacore/index';
 import { useRouter } from 'next/navigation';
 import { cartItemsCountSelector, useAppSelector, useAppDispatch, setProductFilters } from '@storefront/store';
 import { useState } from 'react';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { ProductFilterSearch } from './Filters';
 
 interface AppDrawerProps {
@@ -54,9 +51,9 @@ function AppDrawer(props: AppDrawerProps) {
             open={open}
         >
             <DrawerHeader>
-            <IconButton onClick={toggleDrawer}>
-                <ChevronLeftIcon />
-            </IconButton>
+                <IconButton onClick={toggleDrawer}>
+                    <ChevronLeft />
+                </IconButton>
             </DrawerHeader>
             <Divider />
 
@@ -97,7 +94,7 @@ function AppCartButton(props: AppCartButtonProps) {
     return <IconButton onClick={onClick}>
         <Badge badgeContent={String(cartItemsCount)} color="error">
 
-            <ShoppingCartIcon color="secondary" />
+            <ShoppingCart color="secondary" />
         </Badge>
     </IconButton>
 }
@@ -113,7 +110,7 @@ function AppDeliveryButton(props: AppDeliveryButtonProps) {
 
     return <IconButton onClick={onClick}>
 
-        <DeliveryIcon color="secondary" />
+        <DeliveryDining color="secondary" />
     </IconButton>
 }
 
@@ -127,7 +124,7 @@ export function Navbar() {
     const theme = useTheme()
     const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"))
 
-   
+
 
     function navigateToCart() {
         router.replace(ClientRoutes.cart)
@@ -157,9 +154,9 @@ export function Navbar() {
                             color="inherit"
                             onClick={toggleDrawer}
                             edge="start"
-                            sx={{ mr: 2}}
+                            sx={{ mr: 2 }}
                         >
-                            <MenuIcon />
+                            <Menu />
                         </IconButton> : null
                     }
 
@@ -175,7 +172,7 @@ export function Navbar() {
             </AppBar>
 
             <Toolbar />
-            <AppDrawer open={openDrawer} toggleDrawer={toggleDrawer}/>
+            <AppDrawer open={openDrawer} toggleDrawer={toggleDrawer} />
         </div>
 
     )

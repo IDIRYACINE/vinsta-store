@@ -1,12 +1,10 @@
 'use client'
 
 import { useAppSelector } from "@adminapp/store/clientHooks";
-import { AppBar, Typography, Toolbar, useMediaQuery, IconButton, Divider, Drawer } from '@mui/material';
+import { AppBar, Typography, Toolbar,  IconButton, Divider, Drawer } from '@mui/material';
 import {  styled } from "@mui/material/styles";
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import MenuIcon from '@mui/icons-material/Menu';
+import {ChevronLeft,Menu} from '@mui/icons-material';
 import Sidebar from "../sidebar/ui/Sidebar";
-import { useState } from "react";
 
 
 interface NavbarProps {
@@ -35,7 +33,7 @@ export default function Navbar({openDrawer,toggleDrawer,isSmallScreen}: NavbarPr
                             edge="start"
                             sx={{ mr: 2 }}
                         >
-                            <MenuIcon />
+                            <Menu />
                         </IconButton> 
                     <Typography variant="h6" >{panel.name.value}</Typography>
                     <div/>
@@ -78,7 +76,7 @@ function AppDrawer(props: AppDrawerProps) {
         >
             <DrawerHeader>
                 <IconButton onClick={toggleDrawer}>
-                    <ChevronLeftIcon />
+                    <ChevronLeft />
                 </IconButton>
             </DrawerHeader>
             <Divider />

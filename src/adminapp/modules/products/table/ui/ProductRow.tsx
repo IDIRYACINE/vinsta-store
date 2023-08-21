@@ -8,8 +8,7 @@ import {
 
 import { Repository } from "@vinstacore/index"
 
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
+import { Edit, Delete } from '@mui/icons-material';
 import Image from "next/image";
 
 
@@ -31,8 +30,8 @@ function ProductActionsCell(props: ProductActionsCellProps) {
     return (
         <TableCell>
             <Box className="flex flex-row justify-start ">
-                <Button className="mr-1" onClick={props.onDelete}><DeleteIcon /></Button>
-                <Button onClick={props.onEdit}><EditIcon /></Button>
+                <Button className="mr-1" onClick={props.onDelete}><Delete /></Button>
+                <Button onClick={props.onEdit}><Edit /></Button>
             </Box>
         </TableCell>
     );
