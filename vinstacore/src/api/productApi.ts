@@ -1,5 +1,5 @@
-import { Repository } from "@vinstastore/vinstacore";
-import {isTest} from "./config"
+import { Repository } from "..";
+import {baseUrl, isTest} from "./config"
 
 interface DeleteProductApiOptions {
   productId: string;
@@ -16,11 +16,11 @@ interface LoadProductsApiOptions {
   categoryId: string | number
 }
 
-const baseUrl = "/api/product";
+const baseApi = `${baseUrl}/api/product`;
 
 
 export async function createProductApi(options: CreateProductApiOptions) {
-  const response = await fetch(baseUrl, {
+  const response = await fetch(baseApi, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -32,7 +32,7 @@ export async function createProductApi(options: CreateProductApiOptions) {
 }
 
 export async function updateProductApi(options: CreateProductApiOptions) {
-  const response = await fetch(baseUrl, {
+  const response = await fetch(baseApi, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -44,7 +44,7 @@ export async function updateProductApi(options: CreateProductApiOptions) {
 }
 
 export async function deleteProductApi(options: DeleteProductApiOptions) {
-  const response = await fetch(`${baseUrl}?productId=${options.productId}cateoryId=${options.categoryId}`, {
+  const response = await fetch(`${baseApi}?productId=${options.productId}cateoryId=${options.categoryId}`, {
     method: "DELETE",
   });
 
@@ -64,9 +64,9 @@ export async function loadProductsApi(options: LoadProductsApiOptions): Promise<
 
    
 
-  let response = await fetch(`${baseUrl}?categoryId=${options.categoryId}`, {
+  let response = await fetch(`${baseApi}?categoryId=${options.categoryId}`, {
     method: "GET",
-    next: { revalidate: 1800 },
+
 
   });
 

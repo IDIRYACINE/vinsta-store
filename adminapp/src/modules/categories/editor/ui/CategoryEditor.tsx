@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation"
 
 
 import { RootState, AppDispatch, updateCategory, } from "@adminapp/store";
-import { updateCategoryApi } from "@adminapp/api/categoryApi"
+import { updateCategoryApi } from "@vinstastore/vinstacore"
 
 import { useAppDispatch, useAppSelector } from "@adminapp/store/clientHooks";
 

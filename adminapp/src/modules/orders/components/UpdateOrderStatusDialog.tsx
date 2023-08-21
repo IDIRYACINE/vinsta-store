@@ -5,7 +5,7 @@ import { Box, Modal, Typography,Paper } from "@mui/material";
 
 import { useAppDispatch, useAppSelector } from "@adminapp/store/clientHooks";
 import { closeUpdateOrderStatusModal, updateOrderStatus } from "@adminapp/store";
-import { updateOrderApi } from "@adminapp/api/orderApi";
+import { updateOrderApi } from "@vinstastore/vinstacore";
 import { OrderStatus, orderStatusList } from "../domain/OrderStatus";
 import { useRef, useState } from "react";
 

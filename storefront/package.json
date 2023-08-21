@@ -2,8 +2,11 @@
   "name": "@vinstastore/storefront",
   "version": "0.1.3",
   "private": true,
-  "files": ["src/**"],
-  "main": "src/index.ts",
+  
+  "files": [
+    "dist/**"
+  ],
+  "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
     "watch-turbo": "turbopack watch",
@@ -12,15 +15,8 @@
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
-    "@types/node": "18.15.11",
-    "@types/react": "18.0.35",
-    "@types/react-dom": "18.0.11",
-    "@vinstastore/vinstacore": "file:../vinstacore",
-    "autoprefixer": "10.4.14",
-    "eslint": "8.38.0",
-    "eslint-config-next": "13.3.0",
+    "@vinstastore/vinstacore": "^1.0.3",
     "mobx": "^6.9.0",
-    "postcss": "8.4.21",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "tailwindcss": "3.3.1",
@@ -28,6 +24,13 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "@types/uuid": "^9.0.2"
+    "@types/uuid": "^9.0.2",
+    "@types/node": "18.15.11",
+    "autoprefixer": "10.4.14",
+    "postcss": "8.4.21",
+    "eslint": "8.38.0",
+    "eslint-config-next": "13.3.0",
+    "@types/react": "18.0.35",
+    "@types/react-dom": "18.0.11"
   }
 }

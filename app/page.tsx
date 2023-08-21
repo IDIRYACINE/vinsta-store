@@ -2,7 +2,7 @@
 "use client";
 
 
-import { loadCategoriesApi } from '@vinstastore/vinstaadmin';
+import { loadCategoriesApi } from '@vinstastore/vinstacore';
 import { setCategories, useAppDispatch, Preloader, HomePage } from "@vinstastore/storefront";
 
 export default function Home() {

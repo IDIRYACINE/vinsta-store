@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation"
 
 
 import {  updateProduct, } from "@adminapp/store";
-import { updateProductApi } from "@adminapp/api/productApi"
+import { updateProductApi } from "@vinstastore/vinstacore"
 import { useAppDispatch, useAppSelector } from "@adminapp/store/clientHooks";
 import { SizesSelector, ColorsSelector } from "@adminapp/components/commons/Buttons"
 

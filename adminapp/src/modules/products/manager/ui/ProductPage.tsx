@@ -14,7 +14,7 @@ const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
 import { DeleteProductDialog } from "./DeleteProductDialog"
 import { useAppDispatch } from "@adminapp/store/clientHooks"
-import { loadProductsApi } from "@adminapp/api/productApi"
+import { loadProductsApi } from "@vinstastore/vinstacore"
 
 
 

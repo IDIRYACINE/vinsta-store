@@ -3,7 +3,7 @@
 import { Box, useMediaQuery  } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
-import { loadProductsApi } from "adminapp/src";
+import { loadProductsApi } from "@vinstastore/vinstacore";
 import {  useMemo } from "react";
 import { ProductFilterSearch, setProductFilters } from "@vinstastore/storefront";
 import { ProductGrid } from "@vinstastore/storefront";

@@ -1,12 +1,12 @@
-import { Repository } from "@vinstastore/vinstacore";
-import {isTest} from "./config"
+import { Repository } from "..";
+import {baseUrl, isTest} from "./config"
 
 
 
-const baseUrl = "http://localhost:3000/api";
+const baseApi = `${baseUrl}/api/category}`
 
 export async function createCategoryApi(options: Repository.Category) {
-  const response = await fetch("/api/category", {
+  const response = await fetch(baseApi, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -18,7 +18,7 @@ export async function createCategoryApi(options: Repository.Category) {
 }
 
 export async function updateCategoryApi(options: Repository.Category) {
-  const response = await fetch("/api/category", {
+  const response = await fetch(baseApi, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -32,7 +32,7 @@ export async function updateCategoryApi(options: Repository.Category) {
 export async function deleteCategoryApi(categoryId: string | undefined) {
   if (!categoryId) return;
 
-  const response = await fetch(`/api/category?categoryId=${categoryId}`, {
+  const response = await fetch(`${baseApi}?categoryId=${categoryId}`, {
     method: "DELETE",
   });
 
@@ -47,7 +47,7 @@ export async function loadCategoriesApi(): Promise<Repository.Category[]> {
   }
 
 
-  let response = await fetch(`${baseUrl}/category`, {
+  let response = await fetch(baseApi, {
     cache: 'no-store',
     method: "GET",
   });

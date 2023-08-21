@@ -5,7 +5,7 @@ import { Box, Modal, Typography } from "@mui/material";
 
 import { closeDeleteProductDialog, deleteProduct} from "@adminapp/store";
 import { useAppDispatch, useAppSelector } from "@adminapp/store/clientHooks";
-import { deleteProductApi } from "@adminapp/api/productApi";
+import { deleteProductApi } from "@vinstastore/vinstacore";
 
 
 interface DeleteProductDialogProps {

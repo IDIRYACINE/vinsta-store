@@ -5,7 +5,7 @@ import { Box, Modal, Typography,Card } from "@mui/material";
 
 import {   closeDeleteCategoryDialog, deleteCategory } from "@adminapp/store";
 import { useAppDispatch, useAppSelector } from "@adminapp/store/clientHooks";
-import { deleteCategoryApi } from "@adminapp/api/categoryApi";
+import { deleteCategoryApi } from "@vinstastore/vinstacore";
 
 
 interface DeleteCategoryDialogProps {

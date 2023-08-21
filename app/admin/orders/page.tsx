@@ -1,4 +1,6 @@
-import { loadOrdersApi, OrdersPage,  } from "@vinstastore/vinstaadmin";
+import {  OrdersPage,  } from "@vinstastore/vinstaadmin";
+import { loadOrdersApi  } from "@vinstastore/vinstacore";
+
 import Preloader from "adminapp/src/store/Preloader"
 
 export const revalidate = 1800

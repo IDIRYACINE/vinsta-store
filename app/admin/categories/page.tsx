@@ -1,6 +1,7 @@
 export const revalidate = 0
 
-import { CategoryPage, loadCategoriesApi } from "@vinstastore/vinstaadmin";
+import { CategoryPage } from "@vinstastore/vinstaadmin";
+import {loadCategoriesApi } from "@vinstastore/vinstacore";
 import Preloader from "adminapp/src/store/Preloader"
 
 

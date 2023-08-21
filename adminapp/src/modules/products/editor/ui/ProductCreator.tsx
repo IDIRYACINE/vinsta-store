@@ -13,7 +13,7 @@ import { useState } from "react"
 import { goBack, ProductEditorController } from "../logic/Controller"
 import { CreatorActions } from "./Actions"
 import { useRouter } from "next/navigation"
-import { createProductApi } from "@adminapp/api/productApi";
+import { createProductApi } from "@vinstastore/vinstacore";
 import { CategoriesSelector, ColorsSelector, SizesSelector } from "@adminapp/components/commons/Buttons";
 import { Repository, sizes, colors, ColorEntity, SizeEntity } from "@vinstastore/vinstacore";
 

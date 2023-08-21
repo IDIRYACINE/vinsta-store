@@ -1,4 +1,5 @@
-import { Repository } from "@vinstastore/vinstacore";
+import { Repository } from "..";
+import { baseUrl } from "./config";
 
 interface DeleteOrderApiOptions {
     orderId: string | number;
@@ -25,14 +26,13 @@ interface LoadOrderApiOptions {
     orderId?: string | number;
 }
 
-const baseUrl = `http://localhost:3000/api/order`
+const baseApi = `${baseUrl}/api/order`
 
 
 export async function findOrderApi(props: LoadOrderApiOptions): Promise<Repository.Order> {
-    const targetUrl = `${baseUrl}/${props.orderId}`
+    const targetUrl = `${baseApi}/${props.orderId}`
     let response = await fetch(targetUrl, {
         method: "GET",
-        next: { revalidate: 1800 },
 
     });
 
@@ -42,9 +42,8 @@ export async function findOrderApi(props: LoadOrderApiOptions): Promise<Reposito
 }
 
 export async function loadOrdersApi(): Promise<Repository.Order[]> {
-    let response = await fetch(baseUrl, {
+    let response = await fetch(baseApi, {
         method: "GET",
-        next: { revalidate: 1800 },
     });
 
     let json = await response.json();
@@ -54,7 +53,7 @@ export async function loadOrdersApi(): Promise<Repository.Order[]> {
 
 
 export async function createOrderApi(options: CreateOrderApiOptions) {
-    const response = await fetch(baseUrl, {
+    const response = await fetch(baseApi, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -66,7 +65,7 @@ export async function createOrderApi(options: CreateOrderApiOptions) {
 }
 
 export async function updateOrderApi(options: UpdateOrderApiOptions) {
-    const response = await fetch(baseUrl, {
+    const response = await fetch(baseApi, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
@@ -78,7 +77,7 @@ export async function updateOrderApi(options: UpdateOrderApiOptions) {
 }
 
 export async function deleteOrderApi(options: DeleteOrderApiOptions) {
-    const response = await fetch(`/api/Order?OrderId=${options.orderId}`, {
+    const response = await fetch(`${baseApi}?OrderId=${options.orderId}`, {
         method: "DELETE",
     });
 

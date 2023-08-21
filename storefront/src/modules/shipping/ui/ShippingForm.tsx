@@ -6,7 +6,7 @@ import { useState } from "react"
 import { Destination, Repository, DeliveryType, destinations, calculateDeliveryPrice } from "@vinstastore/vinstacore"
 import { AppTextField, DestinationSelector } from "./Components"
 import { useAppDispatch, closeModel, useAppSelector, updateOrderId, setCart } from "@storefront/store"
-import { createOrderApi } from "@vinstastore/vinstaadmin"
+import { createOrderApi } from "@vinstastore/vinstacore"
 import { generateOrder } from "../logic/helper"
 
 

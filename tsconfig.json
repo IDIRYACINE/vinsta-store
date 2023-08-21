@@ -32,6 +32,19 @@
       }
     ]
   },
+  "references": [
+    {
+      "path": "./vinstacore"
+    },
+    {
+      "path": "./storefront"
+    },
+    {
+      "path": "./adminapp"
+    }
+  
+  ],
+
   "include": [
     "next-env.d.ts",
     "**/*.ts",

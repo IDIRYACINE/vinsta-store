@@ -11,7 +11,7 @@ import { CreatorActions } from "./Actions"
 import { useRouter } from "next/navigation"
 
 import { AppDispatch, addCategory, } from "@adminapp/store";
-import { createCategoryApi } from "@adminapp/api/categoryApi"
+import { createCategoryApi } from "@vinstastore/vinstacore"
 
 
 import { useAppDispatch } from "@adminapp/store/clientHooks";
