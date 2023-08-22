@@ -63,7 +63,7 @@ export function CartView(props: CartViewProps) {
 
     return (
 
-        <Container className="flex flex-col h-full items-center justify-end">
+        <Container className="flex flex-col h-full items-center justify-end ">
             <Box className="flex flex-col p-2 justify-center items-center flex-2">
 
                 {

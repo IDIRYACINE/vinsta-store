@@ -16,31 +16,22 @@ export function CategoryGrid() {
         activeCategorySelector(state)
     );
 
-    const continerStyle = {
-        "display": "flex",
-        "flexDirection": "row",
-        "justifyContent": "center",
-        "alignItems" : "center",
-        "height" : "100vh",
-        "width" : "100vw",
-        padding : "2rem"
-    }
-
+    const className = "flex flex-row justify-center items-center h-full w-full p-4 m-0"
 
     if (categories.length === 0) {
         return (
-            <Box sx={continerStyle}>
+            <Box className={className}>
                 <Typography variant="h4">No categories found</Typography>
             </Box>
         )
     }
 
     return (
-        <Grid sx={continerStyle} container spacing={maxHorizontalCards}>
+        <Grid className={className} container spacing={maxHorizontalCards}>
             {
                 categories.map(category => {
                     return (
-                        <Grid item key={category.id} xs={12} sm={6} md={4} lg={3} xl={2}>
+                        <Grid item key={category.id} xs={12} sm={6} lg={4} >
                             <CategoryCard category={category} />
                         </Grid>
                     )

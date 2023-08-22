@@ -6,14 +6,11 @@ import { CategoryServicePort } from '@vinstacore/infrastructure/ports/services/C
 const handler = (req: NextApiRequest, res: NextApiResponse) => {
 
   switch (req.method) {
-    case "GET": GET(req, res)
-      break;
-    case "POST": POST(req, res)
-      break;
-    case "PUT": PUT(req, res)
-      break;
-    case "DELETE": DELETE(req, res)
-      break;
+    case "GET": return GET(req, res)
+      
+    case "POST": return POST(req, res)
+    case "PUT": return PUT(req, res)
+    case "DELETE": return DELETE(req, res)
   }
 }
 

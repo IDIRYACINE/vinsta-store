@@ -1,11 +1,10 @@
-import { NextResponse } from 'next/server';
 import { NextApiRequest, NextApiResponse } from 'next'
 import { OrderServicePort } from '@vinstacore/infrastructure/ports/services/OrdersServicePort';
 import { FirebaseAdapter } from '@vinstacore/infrastructure/services/firebase';
 
 
 const handler = (req: NextApiRequest, res: NextApiResponse) => {
-   GET(req,res)
+  return GET(req,res)
   
 }
 const orderService: OrderServicePort = FirebaseAdapter.ordersService();

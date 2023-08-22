@@ -1,6 +1,6 @@
 "use client"
 
-import { Box, Grid,Toolbar, Paper, ToggleButtonGroup, ToggleButton, Container, Slider, FormControl, InputLabel, MenuItem, Popover, Select, SelectChangeEvent, Typography, } from "@mui/material"
+import { Box, Grid, Toolbar, Paper, ToggleButtonGroup, ToggleButton, Container, Slider, FormControl, InputLabel, MenuItem, Popover, Select, SelectChangeEvent, Typography, } from "@mui/material"
 import { useState, MouseEvent, useEffect, useRef } from "react"
 import { FilterType, IProductFilter, ProductPriceFilter, sizes, SizeEntity, ProductSizeFilter, ColorEntity, ProductColorFilter, colors } from "@vinstacore/index"
 import clsx from "clsx"
@@ -41,7 +41,7 @@ function ToggleFilterGroup<T>(props: ToggleFilterProps<T>) {
             <ToggleButtonGroup
                 size="small"
                 sx={{
-                    width : "100%",
+                    width: "100%",
                     display: "grid",
                     gridTemplateColumns: "auto auto auto auto",
                     gridGap: "0.5rem",
@@ -141,15 +141,15 @@ function FilterRangeButton(props: FilterRangeButtonProps) {
         <Container className=" flex flex-col justify-center items-start w-full p-2 ">
             <Typography id="range-slider" >Price</Typography>
             <div className="flex flex-row justify-center items-center px-3 w-full">
-            <Slider
-                getAriaLabel={() => name}
-                value={range}
-                min={min}
-                max={max}
-                onChange={updateFilter}
-                valueLabelDisplay="auto"
-                getAriaValueText={valuetext}
-            />
+                <Slider
+                    getAriaLabel={() => name}
+                    value={range}
+                    min={min}
+                    max={max}
+                    onChange={updateFilter}
+                    valueLabelDisplay="auto"
+                    getAriaValueText={valuetext}
+                />
             </div>
         </Container>
 
@@ -169,11 +169,12 @@ export function ProductFilterSearch(props: ProductFilterSearchProps) {
 
     const pathName = usePathname()
 
-    const isInProductPage = useRef(false)
+    const [isInProductPage, enableFilters] = useState(false)
 
     useEffect(() => {
-        isInProductPage.current = pathName.includes("category")
-    },[pathName, isInProductPage])
+        enableFilters(pathName.includes("category"))
+
+    }, [pathName, isInProductPage])
 
 
     const className = clsx([
@@ -254,7 +255,7 @@ export function ProductFilterSearch(props: ProductFilterSearchProps) {
     }
 
     const colorFilterProps = {
-        name : "Color",
+        name: "Color",
         items: colors,
         extractItemName: (item: ColorEntity) => item.color.value,
         extractItemId: (item: ColorEntity) => item.id.value.toString(),
@@ -263,14 +264,15 @@ export function ProductFilterSearch(props: ProductFilterSearchProps) {
 
     return (
         <Paper className={className}>
-            <Toolbar/>
+            <Toolbar />
+
             <CategoryNavigation />
 
-            {isInProductPage.current ? <FilterRangeButton {...priceFilterProps} />
+            {isInProductPage ? <FilterRangeButton {...priceFilterProps} />
                 : null}
-            {isInProductPage.current ? <ToggleFilterGroup {...sizeFilterProps} />
+            {isInProductPage ? <ToggleFilterGroup {...sizeFilterProps} />
                 : null}
-            {isInProductPage.current ? <ToggleFilterGroup {...colorFilterProps} />
+            {isInProductPage ? <ToggleFilterGroup {...colorFilterProps} />
                 : null}
 
 

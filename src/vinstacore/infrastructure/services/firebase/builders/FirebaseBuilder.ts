@@ -15,7 +15,7 @@ export function buildFirebaseApp(): FirebaseApp {
     const firebaseConfig = JSON.parse(process.env.FIREBASE_CONFIG!)
 
 
-    const isTestMode = Boolean(process.env.IS_TEST_MODE)
+    const isTestMode = process.env.IS_TEST_MODE === 'true'
     const emulatorHost = "http://localhost"
 
     if (isTestMode) {

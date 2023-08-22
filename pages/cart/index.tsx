@@ -16,10 +16,10 @@ export default function Page() {
 
 
     return (
-        <AppBody>
+        <div>
             <CartView totalPrice={totalPrice} items={items}></CartView>
             <RemoveCartItemDialog />
             <ShippingDialog />
-        </AppBody>
+        </div>
     )
 }

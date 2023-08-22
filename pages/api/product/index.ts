@@ -4,15 +4,12 @@ import { ProductServicePort } from '@vinstacore/infrastructure/ports/services/Pr
 import { FirebaseAdapter } from '@vinstacore/infrastructure/services/firebase';
  
 const handler = (req: NextApiRequest, res: NextApiResponse) => {
-  switch(req.method){
-    case "GET": GET(req,res)
-    break;
-    case "POST": POST(req,res)
-    break;
-    case "PUT": PUT(req,res)
-    break;
-    case "DELETE": DELETE(req,res)
-    break;
+  switch (req.method) {
+    case "GET": return GET(req, res)
+      
+    case "POST": return POST(req, res)
+    case "PUT": return PUT(req, res)
+    case "DELETE": return DELETE(req, res)
   }
 }
  

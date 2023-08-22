@@ -1,7 +1,7 @@
 'use client';
 
 
-import { AppBar, IconButton, Divider, Typography, Toolbar, Drawer, Box, Badge, useMediaQuery } from '@mui/material';
+import { AppBar, IconButton, Divider, Typography, Toolbar, Drawer, Box, Badge, useMediaQuery,  } from '@mui/material';
 import { useTheme, styled } from "@mui/material/styles";
 import { ShoppingCart, Menu, DeliveryDining, ChevronLeft } from '@mui/icons-material';
 import { ClientRoutes, IProductFilter } from '@vinstacore/index';
@@ -64,7 +64,7 @@ function AppDrawer(props: AppDrawerProps) {
     )
 }
 
-const DrawerHeader = styled('div')(({ theme }) => ({
+export const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
     padding: theme.spacing(0, 1),
@@ -124,7 +124,7 @@ export function Navbar() {
     const [openDrawer, setDrawerState] = useState(false);
 
     const theme = useTheme()
-    const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"))
+    const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"))
 
 
 
@@ -148,7 +148,8 @@ export function Navbar() {
 
 
     return (
-        <div id="appbar-container">
+        <>
+
             <AppBar position="fixed">
                 <Toolbar color="white" className="flex flex-row justify-between">
                     {isSmallScreen ?
@@ -173,9 +174,10 @@ export function Navbar() {
                 </Toolbar>
             </AppBar>
 
-            <Toolbar />
             <AppDrawer open={openDrawer} toggleDrawer={toggleDrawer} />
-        </div>
+            <Toolbar/>
+
+        </>
 
     )
 }

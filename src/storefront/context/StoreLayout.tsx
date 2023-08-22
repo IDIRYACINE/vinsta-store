@@ -1,5 +1,5 @@
 import { ThemeProvider } from "@emotion/react";
-import { Navbar } from "@storefront/components/Navbar";
+import {  Navbar } from "@storefront/components/Navbar";
 import { ReactNode } from "react";
 import { theme } from "./StoreTheme";
 
@@ -12,6 +12,7 @@ function StoreLayout({ children }: LayoutProps) {
 
         <ThemeProvider theme={theme}>
             <Navbar />
+           
             {children}
 
         </ThemeProvider>

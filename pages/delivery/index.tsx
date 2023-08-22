@@ -39,7 +39,7 @@ export default function DeliveryPage() {
             <Typography >ID : {order?.header?.id}</Typography>
             <Typography className="mb-2">Status : {order?.header?.status}</Typography>
 
-            <Box className="flex flex-row justify-between">
+            <Box className="flex flex-row justify-start items-center max-w-fit">
                 <AppTextField {...trackerFieldProps} />
                 <Button onClick={onTrackOrder}>Track</Button>
 

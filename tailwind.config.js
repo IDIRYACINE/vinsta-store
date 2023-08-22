@@ -12,6 +12,9 @@ module.exports = {
       minWidth : {
         "screen-half" : "50vw",
         "screen-3/4" : "40vw"
+      },
+      minHeight : {
+        "h-96" : "24rem"
       }
     },
   },

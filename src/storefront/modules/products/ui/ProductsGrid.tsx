@@ -37,7 +37,7 @@ export function ProductGrid(props:ProductGridProps) {
             {
                 products.map(product => {
                     return (
-                        <Grid item key={product.id} xs={12} sm={6} md={4} lg={3} xl={2}>
+                        <Grid item key={product.id} xs={12} sm={6} lg={4}>
                             <ProductCard product={product} />
                         </Grid>
                     )

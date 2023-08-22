@@ -71,12 +71,12 @@ export default function Page() {
 
     const productGridProps = {
         products: filteredProducts,
-        className: "flex-1 p-2 h-full ml-0 md:ml-80"
+        className: "flex-1 p-2 h-full w-full ml-0 md:ml-80"
     }
 
 
     return (
-        <Box className="flex flex-row h-screen justify-center items-center relative">
+        <Box className="flex flex-row h-full w-full justify-center items-center relative">
             {
                 isSmallScreen ? null : <ProductFilterSearch {...productFilterProps} />
 
