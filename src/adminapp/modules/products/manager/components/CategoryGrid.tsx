@@ -14,7 +14,7 @@ export default function CategoryGrid() {
         selectAdminAllCategories(state)
     );
 
-    const className = "flex flex-row justify-center items-center p-2 w-screen h-screen"
+    const className = "flex flex-row justify-center items-center p-2 w-full h-full"
 
 
     if (categories.length === 0) {
@@ -30,7 +30,7 @@ export default function CategoryGrid() {
             {
                 categories.map(category => {
                     return (
-                        <Grid item key={category.id} xs={12} sm={6} md={4} lg={3} xl={2}>
+                        <Grid item key={category.id} xs={12} sm={6} lg={4} >
                             <CategoryCard category={category} />
                         </Grid>
                     )

@@ -15,7 +15,7 @@ function CategoryManagerHeader() {
     }
 
     return (
-        <Box className="flex flex-row justify-between w-full">
+        <Box className="flex flex-row justify-between w-full mb-2">
             <Typography variant="h6"> Categories List </Typography>
             <BaseContainedButton onClick={navigateToCategoryCreator} >Add Category</BaseContainedButton>
         </Box>

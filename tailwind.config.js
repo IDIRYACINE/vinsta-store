@@ -1,6 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  
+  important : true,
+  corePlugins: {
+    preflight: true,
+  },
   content: [
     './src/storefront/**/*.{js,ts,jsx,tsx,mdx}',
     './src/adminapp/**/*.{js,ts,jsx,tsx,mdx}',

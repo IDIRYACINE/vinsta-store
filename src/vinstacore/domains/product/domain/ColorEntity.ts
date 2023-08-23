@@ -24,8 +24,11 @@ export class ColorEntity implements EntityBase<ColorEntity> {
         return this.id.value === other.id.value
     }
 
-    equalsById(colorId: string): boolean {
-        return this.id.value === parseInt(colorId)
+    equalsById(colorId: string|number): boolean {
+        if(typeof colorId === 'string') {
+            return this.id.value === parseInt(colorId)
+        }
+        return this.id.value === colorId
     }
 
     toRaw(): Repository.Color {

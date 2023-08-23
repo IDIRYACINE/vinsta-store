@@ -1,7 +1,7 @@
 import { UpdatedField } from "@vinstacore/commons/api.base";
 import { ImageUrl } from "@vinstacore/commons/value-objects.base";
 import { CategoryId, CategoryImage, CategoryMapper, CategoryName } from "@vinstacore/domains/category";
-import { CategoryServicePort, CreateCategoryRawProps, CreateCategoryResponse, DeleteCategoryRawProps, DeleteCategoryResponse, FindCategoryRawProps, FindCategoryResponse, LoadCategoryRawProps, LoadCategoryResponse, UpdateCategoryRawProps, UpdateCategoryResponse } from "@vinstacore/infrastructure/ports/services/CategoryServicePort";
+import { CategoryServicePort, CreateCategoryRawProps, CreateCategoryResponse, DeleteCategoryRawProps, DeleteCategoryResponse, FindCategoryRawProps, FindCategoryResponse, IncrementCategoryRawProps, IncrementCategoryResponse, LoadCategoryRawProps, LoadCategoryResponse, UpdateCategoryRawProps, UpdateCategoryResponse } from "@vinstacore/infrastructure/ports/services/CategoryServicePort";
 import { CategoryRepostiroy } from "./CategoryRepository";
 
 
@@ -12,6 +12,9 @@ export class FirebaseCategoryService implements CategoryServicePort {
         private readonly categoryMapper: CategoryMapper
     ) {
 
+    }
+    async increment(options: IncrementCategoryRawProps): Promise<IncrementCategoryResponse> {
+        return this.categoryRepo.increment({...options})
     }
 
     async create(options: CreateCategoryRawProps): Promise<CreateCategoryResponse> {

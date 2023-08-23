@@ -1,11 +1,10 @@
 'use client'
 
 import TextField from '@mui/material/TextField';
-import {  ChangeEvent } from 'react';
+import {  ChangeEvent, useState } from 'react';
 
 interface AppTextFieldProps {
     label: string;
-    value: string;
     onChange: (value: string) => void;
     className?: string;
     readOnly?: boolean;
@@ -13,12 +12,14 @@ interface AppTextFieldProps {
 }
 
 function AppTextField(props: AppTextFieldProps) {
-    const { onChange, label, value,className } = props
+    const { onChange, label, className } = props
+    const [value, setValue] = useState<string>("")
 
     const readOnly = props.readOnly ?? false
 
     function handleChange(event: ChangeEvent<HTMLInputElement>) {
         onChange(event.target.value)
+        setValue(event.target.value)
     }
 
     return (
@@ -37,7 +38,7 @@ function AppTextField(props: AppTextFieldProps) {
 
 interface AppTextAreaProps {
     label: string;
-    value: string;
+    value?: string;
     onChange: (value: string) => void;
     rowCount: number;
     className?: string;
@@ -45,10 +46,12 @@ interface AppTextAreaProps {
 
 
 function AppTextArea(props: AppTextAreaProps) {
-    const { onChange, label, value, rowCount,className } = props
+    const { onChange, label,  rowCount,className } = props
+    const [value, setValue] = useState<string>(props.value??"")
 
     function handleChange(event: ChangeEvent<HTMLInputElement>) {
         onChange(event.target.value)
+        setValue(event.target.value)
     }
 
     return (

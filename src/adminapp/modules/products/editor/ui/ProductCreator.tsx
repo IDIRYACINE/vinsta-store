@@ -9,7 +9,7 @@ import { addProduct, } from "@vinstacore/store/admin/slices/productsSlice";
 import { useAppDispatch } from "@vinstacore/store/clientHooks";
 
 
-import { useState } from "react"
+import { useRef,  useState } from "react"
 import { goBack, ProductEditorController } from "../logic/Controller"
 import { CreatorActions } from "./Actions"
 import { useRouter } from "next/navigation"
@@ -26,16 +26,15 @@ function ProductCreator(props: ProductCreatorProps) {
     const { categories } = props
 
 
-    const [name, setName] = useState<string>("")
-    const [previewImageUrl, setPreviewImageUrl] = useState<string>("")
-    const [productId, setProductId] = useState<string>("")
-    const [description, setDescription] = useState<string>("")
-    const [imageUrls, setImageUrls] = useState<string[]>([])
-    const [price, setPrice] = useState<string>("0")
-    const [quantity, setQuantity] = useState<string>("0")
-    const [categoryId, setCategoryId] = useState<string>("")
-    const [colorId, setColorId] = useState<string>("")
-    const [sizeId, setSizeId] = useState<string>("")
+    const name = useRef<string>("")
+    const productId = useRef<string>("")
+    const description = useRef<string>("")
+    const imageUrls = useRef<string[]>([])
+    const price = useRef<string>("")
+    const quantity = useRef<string>("")
+    const categoryId = useRef<string>("")
+    const colorId = useRef<string>("")
+    const sizeId = useRef<string>("")
 
     const controller = new ProductEditorController()
 
@@ -45,75 +44,67 @@ function ProductCreator(props: ProductCreatorProps) {
 
     const nameProps = {
         label: "Name",
-        value: name,
-        onChange: (value: string) => setName(value),
+        value: name.current,
+        onChange: (value: string) => name.current = value,
         className: "mr-2 w-full"
     }
 
     const codeProps = {
         label: "Code",
-        value: productId,
-        onChange: (value: string) => setProductId(value),
+        value: productId.current,
+        onChange: (value: string) => productId.current = value,
         className: "w-full"
     }
 
     const descriptionProps = {
         label: "Description",
-        value: description,
-        onChange: (value: string) => setDescription(value),
+        value: description.current,
+        onChange: (value: string) => description.current = value,
         rowCount: 4,
         className: "my-2"
     }
 
     const priceProps = {
         label: "Price",
-        value: price,
-        onChange: (value: string) => setPrice(value),
+        value: price.current,
+        onChange: (value: string) => price.current = value,
         className: "w-full"
     }
 
     const quantityProps = {
         label: "Quantity",
-        value: quantity,
-        onChange: (value: string) => setQuantity(value),
+        value: quantity.current,
+        onChange: (value: string) => quantity.current = value,
         className: "mr-2 w-full"
     }
 
 
 
     function onSave() {
+        const color = colors.find((el) => el.equalsById(colorId.current))
 
-        const color = colors.find((el) => el.equalsById(colorId))
-
-        const size = sizes.find((el) => el.equalsById(sizeId))
+        const size = sizes.find((el) => el.equalsById(sizeId.current))
 
         let product = controller.createProduct({
-            name, imageUrls, description,
-            code: productId,
+            name: name.current,
+            imageUrls: imageUrls.current, description: description.current,
+            code: productId.current,
             color: (color as ColorEntity).toRaw(),
             size: (size as SizeEntity).toRaw(),
-            price: parseFloat(price),
-            quantity: parseInt(quantity)
+            price: parseFloat(price.current),
+            quantity: parseInt(quantity.current)
         })
 
         dispatch(addProduct(product))
 
-        createProductApi({ product, categoryId, productId: product.id }).then((res) => {
+        createProductApi({ product, categoryId:categoryId.current, productId: product.id }).then((res) => {
             goBack(router)
         })
 
 
     }
 
-    function deleteImage(id: number) {
-        let newImageUrls = imageUrls.filter((url, index) => index !== id)
-        setImageUrls(newImageUrls)
-    }
-
-    function addPreviewImage() {
-        setImageUrls([...imageUrls, previewImageUrl])
-        setPreviewImageUrl("")
-    }
+   
 
     const actionsProps = {
         onSave: onSave,
@@ -123,27 +114,24 @@ function ProductCreator(props: ProductCreatorProps) {
 
     const imageProps = {
         label: "Image Url",
-        value: previewImageUrl,
-        onChange: (value: string) => setPreviewImageUrl(value),
+        onChange: (value: string[]) => imageUrls.current = value,
         className: "my-2",
-        onAdd: addPreviewImage,
         images: imageUrls,
-        onDeleteImage: deleteImage,
     }
 
     const categoriesSelectorProps = {
         categories: categories,
-        onChange: setCategoryId
+        onChange: (value: string) => categoryId.current = value,
     }
 
     const sizesSelectorProps = {
-        onChange: setSizeId,
+        onChange: (value: string) => sizeId.current = value,
         className: "w-full mr-2",
         sizes
     }
 
     const colorsSelectorProps = {
-        onChange: setColorId,
+        onChange: (value: string) => colorId.current = value,
         className: "w-full",
         colors
     }

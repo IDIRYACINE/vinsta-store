@@ -3,7 +3,7 @@
 import { Box, TextField } from "@mui/material";
 import clsx from "clsx";
 import Image from "next/image";
-import { ChangeEvent } from "react";
+import { ChangeEvent, useState } from "react";
 import { BaseContainedButton } from "src/adminapp/components/commons/Buttons";
 
 
@@ -42,23 +42,35 @@ function SingleImageField(props: SingleImageFieldProps) {
 
 interface ImageManagerProps {
     label: string;
-    value: string;
-    onChange: (value: string) => void;
+    onChange: (value: string[]) => void;
     className?: string;
-    onAdd: () => void;
-    images: string[];
-    onDeleteImage: (index: number) => void;
 }
 
 function ImageManager(props: ImageManagerProps) {
-    const { onChange, label, value, onDeleteImage, images, onAdd } = props
+
+    const [preview, setPreview] = useState<string>("https://images.freeimages.com/images/large-previews/bb0/cat-in-window-1218032.jpg")
+    const [images, setImages] = useState<string[]>([])
+
+    const { onChange, label,   } = props
+
+
+
 
     function handleChange(event: ChangeEvent<HTMLInputElement>) {
-        onChange(event.target.value)
+        setPreview(event.target.value)
+    }
+
+    function handleAdd() {
+        const newImages = [...images, preview]
+        onChange(newImages)
+        setImages(newImages)
+
     }
 
     function handleDelete(id: number) {
-        onDeleteImage(id)
+        let newImageUrls = images.filter((url, index) => index !== id)
+        onChange(newImageUrls)
+        setImages(newImageUrls)
     }
 
     const className = clsx([props.className, "w-full mr-2"])
@@ -70,16 +82,16 @@ function ImageManager(props: ImageManagerProps) {
                 <TextField
                     className={className}
                     label={label}
-                    value={value}
+                    value={preview}
                     onChange={handleChange}
                 />
 
-                <BaseContainedButton onClick={onAdd} >Add</BaseContainedButton>
+                <BaseContainedButton onClick={handleAdd} >Add</BaseContainedButton>
 
             </Box>
 
             <Box >
-                <Image height="200" width="200" src={value} alt="preview" />
+                <Image height="200" width="200" src={preview} alt="preview" />
 
                 <Box className="flex flex-row justify-center overflow-x-auto">
                     {images.map((image, index) => {

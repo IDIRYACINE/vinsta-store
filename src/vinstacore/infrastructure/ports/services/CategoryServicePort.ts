@@ -1,7 +1,5 @@
-import { LimitProp, PageProp, UpdatedField } from "@vinstacore/commons/api.base"
-import { OperationStatus } from "@vinstacore/commons/operation-status.base"
+import { LimitProp, PageProp } from "@vinstacore/commons/api.base"
 import { ImageUrl } from "@vinstacore/commons/value-objects.base"
-import { CategoryEntity } from "@vinstacore/domains/category/domain/CategoryEntity"
 import { CategoryId, CategoryName } from "@vinstacore/domains/category/domain/ValueObjects"
 import { Repository } from "../IRepositories"
 
@@ -12,7 +10,13 @@ export interface CategoryServicePort {
     delete(options: DeleteCategoryRawProps): Promise<DeleteCategoryResponse>
     load(options: LoadCategoryRawProps): Promise<LoadCategoryResponse>
     find(options: FindCategoryRawProps): Promise<FindCategoryResponse>
+    increment(options: IncrementCategoryRawProps): Promise<IncrementCategoryResponse>
 
+}
+
+export interface IncrementCategoryRawProps {
+    id: string,
+    quantity: number 
 }
 
 export interface ICategoryRepostiroy {
@@ -21,6 +25,12 @@ export interface ICategoryRepostiroy {
     delete(deleteProps: DeleteCategoryProps): Promise<DeleteCategoryResponse>
     load(loadProps: LoadCategoryProps): Promise<LoadCategoryResponse>
     find(findProps: FindCategoryProps): Promise<Repository.Category>
+    increment(incrementProps: IncrementCategoryProps): Promise<IncrementCategoryResponse>
+}
+
+export interface IncrementCategoryProps {
+    id: string,
+    quantity: number
 }
 
 export interface CreateCategoryProps {
@@ -89,6 +99,10 @@ export interface LoadCategoryResponse {
 export interface FindCategoryResponse {
     // data: CategoryEntity,
     // status: OperationStatus
+
+}
+
+export interface IncrementCategoryResponse {
 
 }
 

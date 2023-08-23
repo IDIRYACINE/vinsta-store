@@ -4,38 +4,44 @@
 import { AppTextField, AppTextArea } from "src/adminapp/components/commons/Fields"
 import { Card, Box } from "@mui/material"
 import { EditorActions } from "./Actions"
-import { useState } from "react"
-import { ImageManager } from "src/adminapp/components/commons/Images"
+import { useRef, } from "react"
+import { ImageManager } from "@adminapp/components/commons/Images"
 import { goBack, ProductEditorController } from "../logic/Controller"
-import { Repository, sizes,colors } from "@vinstacore/index"
+import { Repository, sizes, colors, SizeEntity, ColorEntity } from "@vinstacore/index"
 import { useRouter } from "next/navigation"
 
 
-import {  updateProduct, } from "@vinstacore/store/admin/slices/productsSlice";
+import { updateProduct, } from "@vinstacore/store/admin/slices/productsSlice";
 import { updateProductApi } from "@vinstacore/index"
 import { useAppDispatch, useAppSelector } from "@vinstacore/store/clientHooks";
-import { SizesSelector, ColorsSelector } from "src/adminapp/components/commons/Buttons"
+import { SizesSelector, ColorsSelector } from "@adminapp/components/commons/Buttons"
 
 
 interface ProductEditorProps {
     categories: Repository.Category[]
 }
 
-function ProductEditor(props:ProductEditorProps) {
-    const {categories} = props
+function ProductEditor(props: ProductEditorProps) {
 
     let product = useAppSelector(state => state.adminProducts.editedProduct)
     const categoryId = useAppSelector(state => state.adminProducts.displayedCategoryId)
+    const name = useRef<string>(product?.name ?? "")
+    const productId = useRef<string>(product?.id ?? "")
+    const description = useRef<string>(product?.description ?? "")
 
-    const [name, setName] = useState<string>(product?.name ?? "")
-    const [previewImageUrl, setPreviewImageUrl] = useState<string>("")
-    const [productId, setProductId] = useState<string>(product?.id?? "")
-    const [description, setDescription] = useState<string>(product?.description ?? "")
-    const [imageUrls, setImageUrls] = useState<string[]>([])
-    const [price, setPrice] = useState<string>("0")
-    const [quantity, setQuantity] = useState<string>("0")
-    const [colorId, setColorId] = useState<string>("")
-    const [sizeId, setSizeId] = useState<string>("")
+    const imageUrlsProduct = () => {
+        if (!product) return []
+
+        return product.imageUrls.map(el => el.url)
+
+    }
+
+    const imageUrls = useRef<string[]>(imageUrlsProduct())
+
+    const price = useRef<string>(product?.price.toString() ?? "0")
+    const quantity = useRef<string>(product?.quantity.toString() ?? "0")
+    const colorId = useRef<string>(product?.color.id.toString() ?? "0")
+    const sizeId = useRef<string>(product?.size.id.toString() ?? "0")
 
     let controller = new ProductEditorController()
 
@@ -47,37 +53,37 @@ function ProductEditor(props:ProductEditorProps) {
 
     const nameProps = {
         label: "Name",
-        value: name,
-        onChange: (value: string) => setName(value),
+        value: name.current,
+        onChange: (value: string) => name.current = value,
         className: "mr-2 w-full"
     }
 
     const codeProps = {
         label: "Code",
-        value: productId,
-        onChange: (value: string) => setProductId(value),
+        value: productId.current,
+        onChange: (value: string) => productId.current = value,
         className: "w-full",
-        readOnly : true
+        readOnly: true
 
 
     }
     const descriptionProps = {
         label: "Description",
-        value: description,
-        onChange: (value: string) => setDescription(value),
+        value: description.current,
+        onChange: (value: string) => description.current = value,
         rowCount: 4
     }
 
 
     const sizesSelectorProps = {
-        onChange: setSizeId,
+        onChange: (value: string) => sizeId.current = value,
         className: "w-full mr-2",
 
         sizes
     }
 
     const colorsSelectorProps = {
-        onChange: setColorId,
+        onChange: (value: string) => colorId.current = value,
         className: "w-full",
 
         colors
@@ -85,53 +91,45 @@ function ProductEditor(props:ProductEditorProps) {
 
     const priceProps = {
         label: "Price",
-        
-        value: price,
-        onChange: (value: string) => setPrice(value),
+
+        value: price.current,
+        onChange: (value: string) => price.current = value,
         className: "w-full"
     }
 
     const quantityProps = {
         label: "Quantity",
-        value: quantity,
-        onChange: (value: string) => setQuantity(value),
-        className: "mr-2 w-full"
+        value: quantity.current,
+        onChange: (value: string) => quantity.current = value,
+        className: "mr-2 w-full",
+        readOnly: true
     }
 
 
 
     function onSave() {
 
-        if(!categoryId || !productId) return ;
+        if (!categoryId || !productId) return;
 
-        const color = colors.find(color => color.equalsById(colorId)  )!.toRaw()
-        const size = sizes.find(size => size.equalsById(sizeId))!.toRaw()
+        const color = colors.find((el) => el.equalsById(colorId.current))
+        const size = sizes.find((el) => el.equalsById(sizeId.current))
 
         let product = controller.updateProduct({
-            name, imageUrls, description,
-            code: productId,
-            color :color,
-            size : size,
-            price: parseFloat(price),
-            quantity: parseInt(quantity)
+            name: name.current,
+            imageUrls: imageUrls.current, description: description.current,
+            code: productId.current,
+            color: (color as ColorEntity).toRaw(),
+            size: (size as SizeEntity).toRaw(),
+            price: parseFloat(price.current),
+            quantity: parseInt(quantity.current)
         })
 
         dispatch(updateProduct(product))
-        updateProductApi({ product, categoryId, productId: product.id }).then ((res) => {
+        updateProductApi({ product, categoryId, productId: product.id }).then((res) => {
             goBack(router)
         })
 
 
-    }
-
-    function deleteImage(id: number) {
-        let newImageUrls = imageUrls.filter((url, index) => index !== id)
-        setImageUrls(newImageUrls)
-    }
-
-    function addPreviewImage() {
-        setImageUrls([...imageUrls, previewImageUrl])
-        setPreviewImageUrl("")
     }
 
     const actionsProps = {
@@ -143,12 +141,9 @@ function ProductEditor(props:ProductEditorProps) {
 
     const imageProps = {
         label: "Image Url",
-        value: previewImageUrl,
-        onChange: (value: string) => setPreviewImageUrl(value),
+        onChange: (value: string[]) => imageUrls.current = value,
         className: "my-2",
-        onAdd: addPreviewImage,
         images: imageUrls,
-        onDeleteImage: deleteImage,
     }
 
 

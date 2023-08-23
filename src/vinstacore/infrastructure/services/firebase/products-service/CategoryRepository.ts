@@ -1,12 +1,13 @@
 import { LoadProps, Repository } from "@vinstacore/infrastructure/ports";
-import { CreateCategoryProps, CreateCategoryResponse, DeleteCategoryProps, DeleteCategoryResponse, FindCategoryProps, ICategoryRepostiroy, LoadCategoryResponse, UpdateCategoryProps, UpdateCategoryResponse } from "@vinstacore/infrastructure/ports/services/CategoryServicePort";
+import { CreateCategoryProps, CreateCategoryResponse, DeleteCategoryProps, DeleteCategoryResponse, FindCategoryProps, ICategoryRepostiroy, IncrementCategoryProps, IncrementCategoryResponse, LoadCategoryResponse, UpdateCategoryProps, UpdateCategoryResponse } from "@vinstacore/infrastructure/ports/services/CategoryServicePort";
 
-import { Firestore, getDoc, doc, collection, getDocs, setDoc, updateDoc, deleteDoc } from "firebase/firestore";
+import { Firestore, getDoc, doc, collection, getDocs, setDoc, updateDoc, deleteDoc, increment, FieldValue } from "firebase/firestore";
 
 export class CategoryRepostiroy implements ICategoryRepostiroy {
     categoryCollection = "categories";
 
     public constructor(private readonly firestore: Firestore) { }
+
 
     async find(options: FindCategoryProps): Promise<Repository.Category> {
 
@@ -31,7 +32,7 @@ export class CategoryRepostiroy implements ICategoryRepostiroy {
         });
 
 
-        return {data:results}
+        return { data: results }
 
     }
 
@@ -53,9 +54,20 @@ export class CategoryRepostiroy implements ICategoryRepostiroy {
         const categoryDoc = doc(this.firestore, this.categoryCollection, options.id.value);
 
 
-
-
         return updateDoc(categoryDoc, options.updatedFields).then(() => ({}));
+    }
+
+
+    async increment(options: IncrementCategoryProps): Promise<IncrementCategoryResponse> {
+        const categoryDoc = doc(this.firestore, this.categoryCollection, options.id);
+
+        const incFiledValue = increment(options.quantity)
+
+        const updatedFields = {
+            productCount: incFiledValue
+        }
+
+        return updateDoc(categoryDoc, updatedFields).then(() => ({}));
     }
 
     async delete(options: DeleteCategoryProps): Promise<DeleteCategoryResponse> {

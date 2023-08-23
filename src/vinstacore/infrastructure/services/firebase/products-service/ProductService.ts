@@ -1,6 +1,6 @@
-import { UpdatedField } from "@vinstacore/commons/api.base";
 import { CategoryId } from "@vinstacore/domains/category";
-import { ProductId,ProductMapper } from "@vinstacore/domains/product";
+import { ProductId, ProductMapper } from "@vinstacore/domains/product";
+import { CategoryServicePort } from "@vinstacore/infrastructure/ports/services/CategoryServicePort";
 import { CreateProductRawProps, CreateProductResponse, DeleteProductRawProps, DeleteProductResponse, FindProductRawProps, FindProductResponse, LoadProductRawProps, LoadProductResponse, ProductServicePort, UpdateProductRawProps, UpdateProductResponse } from "@vinstacore/infrastructure/ports/services/ProductServicePort";
 import { ProductRepostiroy } from "./ProductRepository";
 
@@ -8,7 +8,10 @@ import { ProductRepostiroy } from "./ProductRepository";
 export class FirebaseProductService implements ProductServicePort {
 
 
-    constructor(private readonly productsRepo: ProductRepostiroy, private readonly productMapper: ProductMapper) {
+    constructor(private readonly productsRepo: ProductRepostiroy, 
+        private readonly productMapper: ProductMapper,
+        private readonly categoryService: CategoryServicePort,
+        ) {
 
     }
     find(options: FindProductRawProps): Promise<FindProductResponse> {
@@ -23,6 +26,10 @@ export class FirebaseProductService implements ProductServicePort {
 
     async create(options: CreateProductRawProps): Promise<CreateProductResponse> {
 
+        this.updateProductListings({
+            categoryId: options.categoryId,
+            quantity: 1
+        });
 
         return this.productsRepo.create(
             {
@@ -35,6 +42,7 @@ export class FirebaseProductService implements ProductServicePort {
     }
     update(options: UpdateProductRawProps): Promise<UpdateProductResponse> {
 
+
         return this.productsRepo.update(
             {
                 categoryId: new CategoryId(options.categoryId),
@@ -44,6 +52,12 @@ export class FirebaseProductService implements ProductServicePort {
         )
     }
     delete(options: DeleteProductRawProps): Promise<DeleteProductResponse> {
+
+        this.updateProductListings({
+            categoryId: options.categoryId,
+            quantity: -1
+        });
+
         return this.productsRepo.delete(
             {
                 categoryId: new CategoryId(options.categoryId),
@@ -59,4 +73,21 @@ export class FirebaseProductService implements ProductServicePort {
         )
     }
 
+
+    private async updateProductListings(options: UpdateCategoryListingProps) {
+
+        const { categoryId, quantity } = options;
+
+        this.categoryService.increment({
+            id: categoryId,
+            quantity,
+        });
+
+    }
+
+}
+
+interface UpdateCategoryListingProps {
+    categoryId: string;
+    quantity: number
 }

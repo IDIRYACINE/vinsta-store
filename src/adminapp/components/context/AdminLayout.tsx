@@ -18,7 +18,7 @@ interface LayoutProps {
 
 function AdminLayout({ children }: LayoutProps) {
 
-    const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"))
+    const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"))
     const [openDrawer, setDrawerState] = useState(isSmallScreen? false : true);
 
     const className = clsx([

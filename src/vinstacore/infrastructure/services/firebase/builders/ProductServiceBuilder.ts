@@ -1,6 +1,5 @@
 
 
-import { FirebaseApp } from "@firebase/app";
 import { getFirestore } from "@firebase/firestore";
 import { CategoryMapper } from "@vinstacore/domains/category";
 import { ProductMapper } from "@vinstacore/domains/product";
@@ -14,8 +13,8 @@ import { FirebaseProductService } from "../products-service/ProductService";
 import { getApp } from "firebase/app";
 import { buildFirebaseApp } from "./FirebaseBuilder";
 
-let productService: FirebaseProductService;
-let categoryService: FirebaseCategoryService;
+let productService: ProductServicePort;
+let categoryService: CategoryServicePort;
 
 export function buildProductService(): ProductServicePort {
     if (productService !== undefined) {
@@ -28,9 +27,12 @@ export function buildProductService(): ProductServicePort {
 
     const productRepo = new ProductRepostiroy(db, productMapper);
 
+    categoryService = buildCategoryService()
+
     productService = new FirebaseProductService(
         productRepo,
-        productMapper
+        productMapper,
+        categoryService
     );
 
     return productService;
@@ -52,7 +54,7 @@ export function buildCategoryService(): CategoryServicePort {
     categoryService = new FirebaseCategoryService(
         categoryRepo,
         categoryMapper
-        
+
 
     );
 

@@ -4,25 +4,25 @@ import { ProductServicePort } from '@vinstacore/infrastructure/ports/services/Pr
 import { FirebaseAdapter } from '@vinstacore/infrastructure/services/firebase';
  
 const handler = (req: NextApiRequest, res: NextApiResponse) => {
+  const productService: ProductServicePort = FirebaseAdapter.productService();
+  
+
   switch (req.method) {
-    case "GET": return GET(req, res)
-      
-    case "POST": return POST(req, res)
-    case "PUT": return PUT(req, res)
-    case "DELETE": return DELETE(req, res)
+    case "GET": return GET(req, res,productService)
+    case "POST": return POST(req, res,productService)
+    case "PUT": return PUT(req, res,productService)
+    case "DELETE": return DELETE(req, res,productService)
   }
 }
  
 export default handler
 
-const productService: ProductServicePort = FirebaseAdapter.productService();
-
-async function GET(req: NextApiRequest, res: NextApiResponse) {
+async function GET(req: NextApiRequest, res: NextApiResponse,service:ProductServicePort) {
 
 
   const categoryId = req.query.categoryId as string;
 
-  const response = await productService.load({
+  const response = await service.load({
     categoryId: categoryId
   })
 
@@ -31,31 +31,31 @@ async function GET(req: NextApiRequest, res: NextApiResponse) {
 }
 
 
-async function POST(req: NextApiRequest, res: NextApiResponse) {
+async function POST(req: NextApiRequest, res: NextApiResponse,service:ProductServicePort) {
 
   const options = req.body;
 
-  const response = await productService.create(options);
+  const response = await service.create(options);
 
   return res.status(200).json({ data: response });
 }
 
 
-async function PUT(req: NextApiRequest, res: NextApiResponse) {
+async function PUT(req: NextApiRequest, res: NextApiResponse,service:ProductServicePort) {
   const options = req.body
 
 
-  const response = await productService.update(options);
+  const response = await service.update(options);
 
   return res.status(200).json({ data: response });
 }
 
-async function DELETE(req: NextApiRequest, res: NextApiResponse) {
+async function DELETE(req: NextApiRequest, res: NextApiResponse,service:ProductServicePort) {
 
   const categoryId = req.query.categoryId as string;
   const productId = req.query.productId as string;
 
-  const response = await productService.delete({
+  const response = await service.delete({
     categoryId, productId
   });
 

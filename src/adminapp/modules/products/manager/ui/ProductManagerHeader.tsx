@@ -20,8 +20,8 @@ function ProductManagerHeader() {
 
     return (
         <Box className="flex flex-row justify-between w-full mb-2">
-            <Typography variant="h6"> Products List </Typography>
-            <Box>
+            <Typography variant="h6" sx={{flex:"3"}}> Products List </Typography>
+            <Box className="flex flex-row w-full justify-between" sx={{flex:"2"}}>
             <BaseContainedButton className="mr-2" onClick={navigateToCategoriesSelection} >Catalogue</BaseContainedButton>
 
             <BaseContainedButton onClick={navigateToProductCreator} >Add Product</BaseContainedButton>
