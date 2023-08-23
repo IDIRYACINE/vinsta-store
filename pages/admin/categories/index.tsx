@@ -1,27 +1,42 @@
 
-import { loadCategoriesApi } from "@vinstacore/index";
-import { useAppDispatch } from "@vinstacore/store/clientHooks";
-import { CategoryPage } from "@adminapp/modules/categories/manager/ui/CategoryPage";
-import { setCategories } from "@vinstacore/store/admin/slices/categoriesSlice";
 
-import { useEffect } from 'react';
+import { Box } from "@mui/material"
+import clsx from "clsx"
+
+
+import { useAppSelector } from "@vinstacore/store/clientHooks"
+import {selectAdminAllCategories} from "@vinstacore/store/selectors"
+import { useLoadDispatchCategories } from "@vinstacore/hooks/useCategory"
+import { CategoryTable } from "@adminapp/modules/categories/table"
+import CategoryManagerHeader from "@adminapp/modules/categories/manager/ui/CategoryManagerHeader"
+import { DeleteCategoryDialog } from "@adminapp/modules/categories/manager/ui/DeleteCategoryDialog"
+
 
 export default function Page() {
 
-    const dispatch = useAppDispatch()
+    useLoadDispatchCategories(true);
 
-    useEffect(() => {
 
-        loadCategoriesApi().then((categories) => {
-            dispatch(setCategories(categories))
-        })
-    }, [dispatch])
+    const categories = useAppSelector(state => selectAdminAllCategories(state))
+
+
+    const headersData = ["Category Name", "Category Id", "Description", "Action"]
+
+
+    const className = clsx(["p-4 flex flex-col justify-center items-center"])
+        
+
 
 
     return (
-        <div>
-            <CategoryPage />
-        </div>
+        <Box className={className}>
+            <CategoryManagerHeader />
+            <CategoryTable headersData={headersData} rowsData={categories} />
+            <DeleteCategoryDialog />
+        </Box>
+
+
+    
     )
 }
 

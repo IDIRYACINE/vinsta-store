@@ -31,7 +31,6 @@ function ProductCreator(props: ProductCreatorProps) {
     const description = useRef<string>("")
     const imageUrls = useRef<string[]>([])
     const price = useRef<string>("")
-    const quantity = useRef<string>("")
     const categoryId = useRef<string>("")
     const colorId = useRef<string>("")
     const sizeId = useRef<string>("")
@@ -71,12 +70,7 @@ function ProductCreator(props: ProductCreatorProps) {
         className: "w-full"
     }
 
-    const quantityProps = {
-        label: "Quantity",
-        value: quantity.current,
-        onChange: (value: string) => quantity.current = value,
-        className: "mr-2 w-full"
-    }
+  
 
 
 
@@ -92,7 +86,7 @@ function ProductCreator(props: ProductCreatorProps) {
             color: (color as ColorEntity).toRaw(),
             size: (size as SizeEntity).toRaw(),
             price: parseFloat(price.current),
-            quantity: parseInt(quantity.current)
+            quantity: 1
         })
 
         dispatch(addProduct(product))
@@ -144,7 +138,6 @@ function ProductCreator(props: ProductCreatorProps) {
                     <AppTextField {...codeProps} />
                 </Box>
                 <Box className="flex flex-row my-2 w-full">
-                    <AppTextField {...quantityProps} />
                     <AppTextField {...priceProps} />
                 </Box>
                 <CategoriesSelector {...categoriesSelectorProps} />

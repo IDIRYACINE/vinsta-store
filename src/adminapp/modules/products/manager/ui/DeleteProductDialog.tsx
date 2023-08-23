@@ -1,7 +1,7 @@
 "use client";
 
 import { BaseContainedButton } from "src/adminapp/components/commons/Buttons";
-import { Box, Modal, Typography } from "@mui/material";
+import { Box, Card, Modal, Typography } from "@mui/material";
 
 import { closeDeleteProductDialog, deleteProduct} from "@vinstacore/store/admin/slices/productsSlice";
 import { useAppDispatch, useAppSelector } from "@vinstacore/store/clientHooks";
@@ -23,23 +23,23 @@ function DeleteProductDialog(props: DeleteProductDialogProps) {
     }
 
     function onConfirm() {
-        dispatch(deleteProduct(null))
         deleteProductApi({categoryId,productId})
+        dispatch(deleteProduct(null))
 
     }
 
     return (
-        <Modal open={isModalOpen}
+        <Modal open={isModalOpen} className="flex flex-col justify-between items-center"
             onClose={onClose}>
 
-            <Box className="flex flex-col justify-between items-center">
+            <Card className="flex flex-col justify-between items-center bg-white p-4">
                 <Typography variant="h6">Delete Product</Typography>
 
                 <Box className="flex flex-row justify-between items-center">
                     <BaseContainedButton className="mr-2" onClick={onClose} >Cancel</BaseContainedButton>
                     <BaseContainedButton onClick={onConfirm} >Confirm</BaseContainedButton>
                 </Box>
-            </Box>
+            </Card>
 
         </Modal>
     )

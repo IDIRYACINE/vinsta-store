@@ -3,7 +3,7 @@ import { AppTextField, AppTextArea } from "src/adminapp/components/commons/Field
 import { Card, Box } from "@mui/material"
 import { EditorActions } from "@adminapp/modules/categories/editor/ui/Actions"
 import { CategoryEditorController, goBack } from "@adminapp/modules/categories/editor/logic/Controller"
-import { useState } from "react"
+import { useRef } from "react"
 import { SingleImageField } from "src/adminapp/components/commons/Images"
 import { useRouter } from "next/navigation"
 
@@ -21,10 +21,10 @@ function CategoryEditorPage() {
     const dispatch = useAppDispatch()
 
 
-    const [name, setName] = useState<string>(category?.name ?? "")
-    const [imageUrl, setImageUrl] = useState<string>(category?.imageUrl ?? "")
-    const [categoryId, setCategoryId] = useState<string>(category?.id ?? "")
-    const [description, setDescription] = useState<string>(category?.description ?? "")
+    const name = useRef(category?.name ?? "")
+    const imageUrl = useRef(category?.imageUrl ?? "")
+    const categoryId = useRef(category?.id ?? "")
+    const description= useRef(category?.description ?? "")
 
 
     const router = useRouter()
@@ -36,15 +36,15 @@ function CategoryEditorPage() {
     
     const nameProps = {
         label: "Name",
-        value: name,
-        onChange: (value: string) => setName(value),
+        value: name.current,
+        onChange: (value: string) => name.current = value,
         className: "mr-2 w-full"
     }
 
     const codeProps = {
         label: "Code",
-        value: categoryId,
-        onChange: (value: string) => setCategoryId(value),
+        value: categoryId.current,
+        onChange: (value: string) => categoryId.current = value,
         className: "w-full",
         readOnly : true
 
@@ -52,8 +52,8 @@ function CategoryEditorPage() {
     }
     const descriptionProps = {
         label: "Description",
-        value: description,
-        onChange: (value: string) => setDescription(value),
+        value: description.current,
+        onChange: (value: string) => description.current = value,
         rowCount: 4
     }
 
@@ -63,8 +63,10 @@ function CategoryEditorPage() {
     function onSave() {
 
         let category = controller.updateCategory({
-            name, imageUrl, description,
-            code: categoryId,
+            name: name.current,
+            imageUrl: imageUrl.current,
+            description: description.current,
+            code: categoryId.current,
         })
         
         dispatch(updateCategory(category))
@@ -86,8 +88,8 @@ function CategoryEditorPage() {
 
     const imageProps = {
         label: "Image Url",
-        value: imageUrl,
-        onChange: (value: string) => setImageUrl(value),
+        value: imageUrl.current,
+        onChange: (value: string) => imageUrl.current = value,
         className: "my-2"
     }
 

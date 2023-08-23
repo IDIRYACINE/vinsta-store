@@ -16,10 +16,11 @@ export function buildFirebaseApp(): FirebaseApp {
 
 
     const isTestMode = process.env.IS_TEST_MODE === 'true'
-    const emulatorHost = "http://localhost"
+    const emulatorHost = "http://127.0.0.1"
+
 
     if (isTestMode) {
-        firebaseConfig.databaseURL = `${emulatorHost}:9000`
+        firebaseConfig.databaseURL = `${emulatorHost}:9000/?ns=online-order-client-default-rtdb`
 
     }
 

@@ -39,7 +39,6 @@ function ProductEditor(props: ProductEditorProps) {
     const imageUrls = useRef<string[]>(imageUrlsProduct())
 
     const price = useRef<string>(product?.price.toString() ?? "0")
-    const quantity = useRef<string>(product?.quantity.toString() ?? "0")
     const colorId = useRef<string>(product?.color.id.toString() ?? "0")
     const sizeId = useRef<string>(product?.size.id.toString() ?? "0")
 
@@ -97,13 +96,6 @@ function ProductEditor(props: ProductEditorProps) {
         className: "w-full"
     }
 
-    const quantityProps = {
-        label: "Quantity",
-        value: quantity.current,
-        onChange: (value: string) => quantity.current = value,
-        className: "mr-2 w-full",
-        readOnly: true
-    }
 
 
 
@@ -121,7 +113,7 @@ function ProductEditor(props: ProductEditorProps) {
             color: (color as ColorEntity).toRaw(),
             size: (size as SizeEntity).toRaw(),
             price: parseFloat(price.current),
-            quantity: parseInt(quantity.current)
+            quantity: 1
         })
 
         dispatch(updateProduct(product))
@@ -155,7 +147,6 @@ function ProductEditor(props: ProductEditorProps) {
                     <AppTextField {...codeProps} />
                 </Box>
                 <Box className="flex flex-row my-2 w-full">
-                    <AppTextField {...quantityProps} />
                     <AppTextField {...priceProps} />
                 </Box>
 

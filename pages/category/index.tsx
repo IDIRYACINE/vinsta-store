@@ -1,17 +1,16 @@
 
-import { Box, useMediaQuery  } from "@mui/material";
+import { Box, useMediaQuery } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
-import { loadProductsApi } from "@vinstacore/api/productApi";
-import {  useMemo, useRef,useEffect } from "react";
-import {  setProductFilters } from  "@vinstacore/store/customer/slices/productsSlice";
+import { useMemo} from "react";
+import { setProductFilters } from "@vinstacore/store/customer/slices/productsSlice";
 import { ProductGrid } from "@storefront/index";
-import {  setProducts,  } from "@vinstacore/store/customer/slices/productsSlice";
-import {   useAppDispatch, useAppSelector } from "@vinstacore/store/clientHooks";
-import { categoryProductsSelector,  } from "@vinstacore/store/selectors";
+import { useAppDispatch, useAppSelector } from "@vinstacore/store/clientHooks";
+import { categoryProductsSelector, } from "@vinstacore/store/selectors";
 
 import { IProductFilter } from "@vinstacore/index";
 import { ProductFilterSearch } from "@storefront/components/Filters";
+import { useLoadDispatchProducts } from "@vinstacore/hooks/useProduct";
 
 
 
@@ -19,13 +18,11 @@ export default function Page() {
 
     const dispatch = useAppDispatch()
 
-    const displayedCategoryId = useAppSelector(state => state.customerProducts.displayedCategory)!
 
     const products = useAppSelector(state => categoryProductsSelector(state))
 
     const filters = useAppSelector(state => state.customerProducts.filters)
 
-    const mounted = useRef(false)
 
     const theme = useTheme()
     const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'))
@@ -43,21 +40,9 @@ export default function Page() {
         })
     }, [products, filters])
 
-    if ((products.length === 0) && mounted.current) {
-        loadProductsApi({ categoryId: displayedCategoryId }).then((loadedProducts) => {
-            if(loadedProducts.length === 0) return
-            dispatch(setProducts(
-                {
-                    categoryId: displayedCategoryId,
-                    products: loadedProducts
-                }
-            ))
-        })
-    }
 
-    useEffect(() => {
-        mounted.current = true
-    },[])
+    useLoadDispatchProducts()
+   
 
     function onFilterChange(newFilters: IProductFilter[]) {
         dispatch(setProductFilters(newFilters))

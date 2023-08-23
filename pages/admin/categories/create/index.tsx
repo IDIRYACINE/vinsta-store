@@ -4,10 +4,10 @@ import { AppTextField, AppTextArea } from "src/adminapp/components/commons/Field
 import { SingleImageField } from "src/adminapp/components/commons/Images"
 import { Card, Box } from "@mui/material"
 
-import { useState } from "react"
+import { useRef } from "react"
 import { useRouter } from "next/navigation"
 
-import {  addCategory, } from "@vinstacore/store/admin/slices/categoriesSlice";
+import { addCategory, } from "@vinstacore/store/admin/slices/categoriesSlice";
 import { createCategoryApi } from "@vinstacore/api/categoryApi";
 
 
@@ -18,31 +18,29 @@ import { CreatorActions } from "@adminapp/modules/categories/editor/ui/Actions"
 
 function CategoryCreatorPage() {
 
-    const [name, setName] = useState<string>("")
-    const [imageUrl, setImageUrl] = useState<string>("")
-    const [categoryId, setCategoryId] = useState<string>("")
-    const [description, setDescription] = useState<string>("")
+    const name = useRef("")
+    const imageUrl = useRef("")
+    const categoryId = useRef("")
+    const description = useRef("")
 
     const controller = new CategoryEditorController()
 
     const dispatch = useAppDispatch()
-
-
-
     const router = useRouter()
+
 
 
     const nameProps = {
         label: "Name",
-        value: name,
-        onChange: (value: string) => setName(value),
+        value: name.current,
+        onChange: (value: string) => name.current = value,
         className: "mr-2 w-full"
     }
 
     const codeProps = {
         label: "Code",
-        value: categoryId,
-        onChange: (value: string) => setCategoryId(value),
+        value: categoryId.current,
+        onChange: (value: string) => categoryId.current = value,
         className: "w-full"
 
 
@@ -50,8 +48,8 @@ function CategoryCreatorPage() {
 
     const descriptionProps = {
         label: "Description",
-        value: description,
-        onChange: (value: string) => setDescription(value),
+        value: description.current,
+        onChange: (value: string) => description.current = value,
         rowCount: 4,
         className: "my-2"
     }
@@ -59,8 +57,10 @@ function CategoryCreatorPage() {
     function onSave() {
 
         let category = controller.createCategory({
-            name, imageUrl, description,
-            code: categoryId,
+            name: name.current,
+            imageUrl: imageUrl.current,
+            description: description.current,
+            code: categoryId.current,
         })
 
         dispatch(addCategory(category))
@@ -78,8 +78,7 @@ function CategoryCreatorPage() {
 
     const imageProps = {
         label: "Image Url",
-        value: imageUrl,
-        onChange: (value: string) => setImageUrl(value),
+        onChange: (value: string) => imageUrl.current = value,
         className: "my-2"
     }
 

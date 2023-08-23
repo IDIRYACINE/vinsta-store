@@ -1,24 +1,17 @@
 
 import { Box, Typography } from "@mui/material"
 import clsx from "clsx"
-import { useParams } from 'next/navigation'
 import { useAppSelector } from "@vinstacore/store/clientHooks"
 import { orderSelector } from "@vinstacore/store/selectors"
 import ShippingCard from "@adminapp/modules/orders/components/ShippingCard"
 import ItemsList from "@adminapp/modules/orders/components/ItemsList"
-import { useEffect, useRef } from "react"
+import { useLoadOrderIdParam } from "@vinstacore/hooks/useOrder"
 
 function OrderDetaillsPage() {
 
-    const param = useParams()
+    const {orderId} = useLoadOrderIdParam() 
 
-    let orderId = useRef<string>("")
-
-    useEffect(() => {
-        orderId.current = param.orderId as string
-    },[param,orderId])
-
-    const order = useAppSelector(state => orderSelector({ ...state, orderId:orderId.current }))
+    const order = useAppSelector(state => orderSelector({ ...state, orderId:orderId }))
 
 
     const className = clsx([

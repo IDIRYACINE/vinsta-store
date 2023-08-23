@@ -1,7 +1,7 @@
 "use client"
 
 import { Card, CardActionArea, CardContent, CardMedia, Typography } from "@mui/material";
-import {  useAppDispatch } from "@vinstacore/store/clientHooks";
+import { useAppDispatch } from "@vinstacore/store/clientHooks";
 import { Repository } from "@vinstacore/index";
 import { useRouter } from "next/navigation";
 import { setDisplayedCategory } from "@vinstacore/store/customer/slices/productsSlice";
@@ -24,22 +24,25 @@ export function CategoryCard(props: CategoryCardProps) {
 
 
     return (
-        <Card>
-            <CardActionArea onClick={navigateToCategory}>
-                <CardMedia
+        <Card >
+            <CardActionArea className="relative" onClick={navigateToCategory}>
+                <CardMedia className=""
                     sx={{ height: "50vh", width: "100%" }}
                     image={category.imageUrl}
                     title={category.name}
                 />
 
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                        {category.name}
+                <CardContent className="flex flex-col justify-end items-start absolute top-0 left-0 w-full h-full backdrop-brightness-50">
+
+                    <div className="border-2 border-white flex flex-row p-1">
+                    <Typography  className="mr-2" variant="body2" color="white">
+                        logo
                     </Typography>
 
-                    <Typography variant="body2" color="text.secondary">
-                        {category.description}
+                    <Typography color="white" gutterBottom variant="h5" component="div">
+                        {category.name}
                     </Typography>
+                    </div>
 
                 </CardContent>
             </CardActionArea>

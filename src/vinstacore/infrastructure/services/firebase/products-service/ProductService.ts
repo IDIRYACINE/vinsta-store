@@ -52,7 +52,6 @@ export class FirebaseProductService implements ProductServicePort {
         )
     }
     delete(options: DeleteProductRawProps): Promise<DeleteProductResponse> {
-
         this.updateProductListings({
             categoryId: options.categoryId,
             quantity: -1

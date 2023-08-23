@@ -44,7 +44,7 @@ export async function updateProductApi(options: CreateProductApiOptions) {
 }
 
 export async function deleteProductApi(options: DeleteProductApiOptions) {
-  const response = await fetch(`${baseApi}?productId=${options.productId}cateoryId=${options.categoryId}`, {
+  const response = await fetch(`${baseApi}?productId=${options.productId}&&categoryId=${options.categoryId}`, {
     method: "DELETE",
   });
 

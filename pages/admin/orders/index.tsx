@@ -1,26 +1,14 @@
-
-import { loadOrdersApi } from "@vinstacore/api/orderApi";
-
 import clsx from "clsx"
-import { useAppSelector, useAppDispatch } from "@vinstacore/store/clientHooks";
+import { useAppSelector,  } from "@vinstacore/store/clientHooks";
 import { orderHeaderSelector } from "@vinstacore/store/selectors";
 import OrdersTable from "@adminapp/modules/orders/components/table/ui/OrdersTable";
-import { setOrders } from "@vinstacore/store/admin/slices/ordersSlice";
-import { useEffect } from "react";
+import { useLoadDispatchOrders } from "@vinstacore/hooks/useOrder";
 
 export default function Page() {
 
     const ordersHeaders = useAppSelector(state => orderHeaderSelector(state))
 
-    const dispatch = useAppDispatch()
-
-
-    useEffect(() => {
-        loadOrdersApi().then((res) => {
-            dispatch(setOrders(res))
-        })
-    
-    },[dispatch])
+    useLoadDispatchOrders()
 
 
 

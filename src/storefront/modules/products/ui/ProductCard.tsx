@@ -1,5 +1,5 @@
 import { Card, CardActionArea, CardContent, CardMedia, Typography } from "@mui/material";
-import {  useAppDispatch } from "@vinstacore/store/clientHooks";
+import { useAppDispatch } from "@vinstacore/store/clientHooks";
 import { setDisplayedProduct } from "@vinstacore/store/customer/slices/productsSlice";
 import { Repository } from "@vinstacore/index";
 import { useRouter } from "next/navigation";
@@ -23,22 +23,24 @@ export function ProductCard(props: ProductCardProps) {
 
     return (
         <Card>
-            <CardActionArea onClick={navigateToProduct}>
+            <CardActionArea className="relative" onClick={navigateToProduct}>
                 <CardMedia
                     sx={{ height: "40vh", width: "100%" }}
                     image={product.imageUrls[0].url}
                     title={product.name}
                 />
 
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                        {product.name}
-                    </Typography>
+                <CardContent className="flex flex-col justify-end items-start absolute top-0 left-0 w-full h-full backdrop-brightness-50">
 
-                    <Typography variant="body2" color="text.secondary">
-                        {product.price} DA
-                    </Typography>
+                    <div className="border-2 border-white flex flex-row p-1">
+                        <Typography color="white" gutterBottom variant="h5" component="div">
+                            {product.name}
+                        </Typography>
 
+                        <Typography color="white" variant="body2" >
+                            {product.price} DA
+                        </Typography>
+                    </div>
                 </CardContent>
             </CardActionArea>
         </Card>

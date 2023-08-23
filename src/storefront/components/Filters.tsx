@@ -1,11 +1,12 @@
 "use client"
 
-import { Box, Grid, Toolbar, Paper, ToggleButtonGroup, ToggleButton, Container, Slider, FormControl, InputLabel, MenuItem, Popover, Select, SelectChangeEvent, Typography, } from "@mui/material"
-import { useState, MouseEvent, useEffect, useRef } from "react"
+import {  Toolbar, Paper, ToggleButtonGroup, ToggleButton, Container, Slider, FormControl, InputLabel, MenuItem, Popover, Select, SelectChangeEvent, Typography, } from "@mui/material"
+import { useState, MouseEvent, useEffect,  } from "react"
 import { FilterType, IProductFilter, ProductPriceFilter, sizes, SizeEntity, ProductSizeFilter, ColorEntity, ProductColorFilter, colors } from "@vinstacore/index"
 import clsx from "clsx"
 import { usePathname, } from "next/navigation"
 import { CategoryNavigation } from "@storefront/modules/categories/ui/CategoryNavigation"
+import { useInPage } from "@vinstacore/hooks/useUtility"
 
 interface ToggleFilterProps<T> {
     items: T[],
@@ -167,14 +168,8 @@ export function ProductFilterSearch(props: ProductFilterSearchProps) {
     const { onFilterChange } = props
     let filters = [...props.filters]
 
-    const pathName = usePathname()
-
-    const [isInProductPage, enableFilters] = useState(false)
-
-    useEffect(() => {
-        enableFilters(pathName.includes("category"))
-
-    }, [pathName, isInProductPage])
+    
+    const isInProductPage = useInPage('category')
 
 
     const className = clsx([

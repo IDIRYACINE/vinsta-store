@@ -9,16 +9,18 @@ import { BaseContainedButton } from "src/adminapp/components/commons/Buttons";
 
 interface SingleImageFieldProps {
     label: string;
-    value: string;
+    value?: string;
     onChange: (value: string) => void;
     className?: string;
 }
 
 function SingleImageField(props: SingleImageFieldProps) {
-    const { onChange, label, value } = props
+    const { onChange, label } = props
+    const [value, setValue] = useState(props.value ?? "https://images.freeimages.com/images/large-previews/bb0/cat-in-window-1218032.jpg")
 
     function handleChange(event: ChangeEvent<HTMLInputElement>) {
         onChange(event.target.value)
+        setValue(event.target.value)
     }
 
     const className = clsx([props.className, "w-full"])

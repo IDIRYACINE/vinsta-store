@@ -22,21 +22,25 @@ export default function CategoryCard(props: CategoryCardProps) {
 
     return (
         <Card>
-            <CardActionArea onClick={navigateToCategory}>
+            <CardActionArea className="relative" onClick={navigateToCategory}>
                 <CardMedia
                     sx={{ height: "50vh", width: "100%" }}
                     image={category.imageUrl}
                     title={category.name}
                 />
 
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                        {category.name}
-                    </Typography>
 
-                    <Typography variant="body2" color="text.secondary">
-                        {category.description}
-                    </Typography>
+                <CardContent className="flex flex-col justify-end items-start absolute top-0 left-0 w-full h-full backdrop-brightness-50">
+
+                    <div className="border-2 border-white flex flex-row p-1">
+                        <Typography className="mr-2" variant="body2" color="white">
+                            logo
+                        </Typography>
+
+                        <Typography color="white" gutterBottom variant="h5" component="div">
+                            {category.name}
+                        </Typography>
+                    </div>
 
                 </CardContent>
             </CardActionArea>

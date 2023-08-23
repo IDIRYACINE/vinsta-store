@@ -32,6 +32,7 @@ const productsSlice = createSlice({
         },
         deleteProduct(state, action: PayloadAction<Repository.Product | null>) {
             const targetProduct = state.editedProduct ?? action.payload;
+            state.isModalOpen = false;
             if (!targetProduct) return;
             state.products = state.products.filter((product) => product.id !== targetProduct.id);
         },
