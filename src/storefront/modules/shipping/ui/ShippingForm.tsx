@@ -5,8 +5,8 @@ import { ActionsRow, DisplayTypography } from "src/storefront/components"
 import { useState } from "react"
 import { Destination, Repository, DeliveryType, destinations, calculateDeliveryPrice } from "@vinstacore/index"
 import { AppTextField, DestinationSelector } from "./Components"
-import { useAppDispatch,  useAppSelector } from "@vinstacore/store/clientHooks"
-import { selectCustomerCartItems,  selectCustomerCartPrice } from "@vinstacore/store/selectors"
+import { useAppDispatch, useAppSelector } from "@vinstacore/store/clientHooks"
+import { selectCustomerCartItems, selectCustomerCartPrice } from "@vinstacore/store/selectors"
 
 import { createOrderApi } from "@vinstacore/index"
 import { generateOrder } from "../logic/helper"
@@ -19,7 +19,7 @@ interface ShippingFormProps {
     onClose: () => void
 }
 export function ShippingForm(props: ShippingFormProps) {
-    const { cart,onClose } = props
+    const { cart, onClose } = props
     const dispatch = useAppDispatch()
     const [orderId, setOrderId] = useState<string | null>(null)
 
@@ -32,7 +32,7 @@ export function ShippingForm(props: ShippingFormProps) {
     const [homeAddress, onHomeAddressChange] = useState<string>("")
     const [deliveryType, selectDeliveryType] = useState<DeliveryType>(deliveryTypes[0])
 
-    const deliveryPrice = calculateDeliveryPrice(deliveryType,destination)
+    const deliveryPrice = calculateDeliveryPrice(deliveryType, destination)
 
 
     const formStyle = {
@@ -49,7 +49,7 @@ export function ShippingForm(props: ShippingFormProps) {
         label: "FullName",
         value: fullName,
         onChange: updateFullName,
-        className :"mr-2"
+        className: "mr-2"
     }
 
 
@@ -92,10 +92,11 @@ export function ShippingForm(props: ShippingFormProps) {
             phone: phoneNumber,
         })
 
+
         createOrderApi({ order, orderId: order.header.id }).then((res) => {
-        dispatch(updateOrderId(order.header.id))
-        dispatch(setCart([]))
-        setOrderId(order.header.id)
+            dispatch(updateOrderId(order.header.id))
+            dispatch(setCart([]))
+            setOrderId(order.header.id)
         })
 
     }
@@ -122,17 +123,19 @@ export function ShippingForm(props: ShippingFormProps) {
     )
 }
 
-
-export function ShippingDialog() {
-    const dispatch = useAppDispatch()
-    const [isModalOpen,closeModel] = useState(false)
+interface ShippingDialogProps {
+    isModalOpen: boolean,
+    closeModel: () => void
+}
+export function ShippingDialog(props:ShippingDialogProps) {
+    const {closeModel,isModalOpen} = props
 
     const cart = useAppSelector(state => selectCustomerCartItems(state))
     const totalPrice = useAppSelector(state => selectCustomerCartPrice(state))
 
 
     function onClose() {
-        closeModel(false)
+        closeModel()
     }
 
     const contentStyle = {
@@ -159,7 +162,7 @@ export function ShippingDialog() {
             {
                 cart.length === 0 ? <DisplayTypography text="Cart is empty" />
                     : <Box sx={contentStyle}>
-                        <ShippingForm cart={cart} totalPrice={totalPrice} onClose={onClose}/>
+                        <ShippingForm cart={cart} totalPrice={totalPrice} onClose={onClose} />
                     </Box>
             }
 

@@ -79,6 +79,11 @@ export module Repository {
         items: OrderItem[]
     }
 
+    export interface OrderTreasure{
+        id : string,
+        orders : Order[]
+    }
+
 
 }
 

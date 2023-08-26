@@ -1,6 +1,6 @@
 import { UpdatedField } from "@vinstacore/commons/api.base";
-import {  OrderId, OrderMapper,  } from "@vinstacore/domains/orders";
-import { CategoryServicePort,ProductServicePort } from "@vinstacore/infrastructure/ports";
+import { OrderId, OrderMapper, } from "@vinstacore/domains/orders";
+import { CategoryServicePort, ProductServicePort } from "@vinstacore/infrastructure/ports";
 import { CancelOrderProps, CancelOrderResponse, CreateOrderRawProps, CreateOrderResponse, DeleteOrderRawProps, DeleteOrderResponse, FindOrderRawProps, FindOrderResponse, LoadOrderRawProps, LoadOrderResponse, OrderServicePort, UpdateOrderRawProps, UpdateOrderResponse } from "@vinstacore/infrastructure/ports/services/OrdersServicePort";
 import { FirebaseOrderRepository } from "./OrderRepostiroy";
 
@@ -39,8 +39,8 @@ export class FirebaseOrderService implements OrderServicePort {
                     name: product.name,
                     price: product.price,
                     imageUrls: images,
-                    size :product.size,
-                    color : product.color
+                    size: product.size,
+                    color: product.color
                 }
             })
         })
@@ -96,14 +96,11 @@ export class FirebaseOrderService implements OrderServicePort {
 
         for (const categoryId in updatedCategories) {
             const category = updatedCategories[categoryId];
-            this.categoryService.update({
+            this.categoryService.increment({
                 id: categoryId,
-                updatedFields: [
-                    {
-                        "fieldName" : "productCount",
-                        "newValue" : category.total,
-                    }
-                ]
+                quantity:category.total,
+
+
             });
 
             category.items.forEach(productId => this.productService.delete({

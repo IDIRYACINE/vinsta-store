@@ -69,7 +69,7 @@ export interface DeleteOrderResponse { }
 export interface CancelOrderResponse { }
 
 export interface LoadOrderResponse {
-    data:  Repository.Order[],
+    data:  Repository.OrderTreasure[],
     
 }
 

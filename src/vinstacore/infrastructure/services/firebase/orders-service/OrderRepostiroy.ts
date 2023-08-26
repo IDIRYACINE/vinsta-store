@@ -8,6 +8,7 @@ import { Database, get, ref, remove, set, update } from "firebase/database";
 export class FirebaseOrderRepository implements IOrderRepostiroy {
 
     orderCollection = "orders"
+    statusCollection = "ordersStatus"
 
     public constructor(private readonly db: Database,
         private readonly mapper: OrderMapper,
@@ -23,7 +24,7 @@ export class FirebaseOrderRepository implements IOrderRepostiroy {
         const ordersRef = ref(this.db, `${this.orderCollection}/${options.orderId.value}`);
 
         const order: Repository.Order = (await get(ordersRef)) as unknown as Repository.Order
-        
+
         return {
             data: order
         }
@@ -32,16 +33,38 @@ export class FirebaseOrderRepository implements IOrderRepostiroy {
         const ordersRef = ref(this.db, `${this.orderCollection}`)
 
         return get(ordersRef).then((snapshot) => {
-            const results: Repository.Order[] = [];
+
+            const result: Repository.OrderTreasure[] = []
+
 
             snapshot.forEach((childSnapshot) => {
-                const data = childSnapshot.val() as Repository.Order;
-                results.push(data);
+                const orders: Repository.Order[] = []
+                const data = childSnapshot.val() as Map<string, object>
+
+                try {
+
+                    const iterable = Object.entries(data);
+
+                    for (const entry of iterable) {
+                        orders.push(entry[1] as Repository.Order)
+                    }
+
+                }
+                catch (e) {
+                    console.log(e)
+                }
+
+                const treasure = {
+                    id: childSnapshot.key,
+                    orders: orders
+                }
+
+                result.push(treasure);
             });
 
             return {
                 data:
-                    results,
+                    result,
 
             };
         });
@@ -49,13 +72,22 @@ export class FirebaseOrderRepository implements IOrderRepostiroy {
 
     async create(options: CreateOrderProps): Promise<CreateResponse> {
 
-
-        const orderRef = ref(this.db, `${this.orderCollection}/${options.orderId.value}`)
+        const dateId = options.order.dateId()
+        const orderRef = ref(this.db, `${this.orderCollection}/${dateId}/${options.orderId.value}`)
 
         const order: Repository.Order = this.mapper.toPersistence(options.order)
 
         return set(orderRef, order).then(() => {
+
+            const statusRef = ref(this.db, `${this.statusCollection}/${options.orderId.value}`)
+            const status = {
+                status: order.header.status,
+            }
+
+            set(statusRef, status)
+
             return {}
+
         })
 
     }

@@ -4,8 +4,9 @@ import { OrderStatus } from "@adminapp/modules/orders/domain/OrderStatus"
 import { Typography, Card, Tab, Tabs } from "@mui/material"
 import { useState, SyntheticEvent } from "react"
 
-import { setSelectedOrderStatus, } from "@vinstacore/store/admin/slices/ordersSlice";
+import { setOrderDateId, setSelectedOrderStatus, } from "@vinstacore/store/admin/slices/ordersSlice";
 import { useAppDispatch, useAppSelector } from "@vinstacore/store/clientHooks";
+import { BaseContainedButton } from "@adminapp/components/commons/Buttons";
 
 
 interface OrderStatusLabelProps {
@@ -38,16 +39,23 @@ function OrderStatusTab(props: OrderStatusTabProps) {
         setOrderStatus(newValue);
     };
 
+    const navigateToOrdersRoot = () => {
+        dispatch(setOrderDateId(null))
+    }
+
     return (
-        <Card className="mb-1">
-            <Tabs value={orderStatus} onChange={handleChange} aria-label="order status tab">
-                {
-                    props.statusList.map((status) => {
-                        return <Tab key={`tab-${status.name}`} value={status.name} label={status.name} />
-                    })
-                }
-            </Tabs>
-        </Card>
+        <div className="flex flex-row w-full items-center justify-between">
+            <Card className="mb-1">
+                <Tabs value={orderStatus} onChange={handleChange} aria-label="order status tab">
+                    {
+                        props.statusList.map((status) => {
+                            return <Tab key={`tab-${status.name}`} value={status.name} label={status.name} />
+                        })
+                    }
+                </Tabs>
+            </Card>
+        <BaseContainedButton onClick={navigateToOrdersRoot}>Back</BaseContainedButton>
+        </div>
     )
 }
 

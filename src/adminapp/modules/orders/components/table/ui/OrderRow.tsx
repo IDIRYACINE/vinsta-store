@@ -27,7 +27,6 @@ function OrderRow(props: OrderRowProps) {
     return (
         <TableRow onClick={handleClick}>
             <OrderTableCell value={props.item.id} />
-            <OrderTableCell value={props.item.createdAt} />
             <TableCell><OrderStatusLabel status={orderStatus} /></TableCell>
             <OrderTableCell value={props.item.total.toString()} />
         </TableRow>

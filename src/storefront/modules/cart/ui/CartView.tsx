@@ -2,13 +2,12 @@ import { Button, Card, CardActions, CardMedia, Box, Container, IconButton, Typog
 import { Repository } from "@vinstacore/index"
 import { Delete } from '@mui/icons-material';
 import { useAppDispatch } from "@vinstacore/store/clientHooks";
-import { openModel } from "@vinstacore/store/customer/slices/navigationSlice";
 import { openItemDialog } from "@vinstacore/store/customer/slices/cartSlice";
 
 
 interface CartItemCardProps {
     item: Repository.OrderItem,
-    onDelete: (item: Repository.OrderItem) => void
+    onDelete: (item: Repository.OrderItem) => void,
 }
 function CartItemCard(props: CartItemCardProps) {
     const { item, onDelete } = props
@@ -18,15 +17,8 @@ function CartItemCard(props: CartItemCardProps) {
         width: "10vw",
     }
 
-    const boxStyle = {
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center"
-    }
-
     return (
-        <Card sx={boxStyle}>
+        <Card className="flex flex-row justify-between items-center w-full h-full">
             <CardMedia sx={imageStyle} image={item.images![0]} />
             <Typography variant="body1">
                 {item.name}
@@ -41,30 +33,27 @@ function CartItemCard(props: CartItemCardProps) {
 
 interface CartViewProps {
     items: Repository.OrderItem[],
-    totalPrice: number
+    totalPrice: number,
+    onShipOrder: () => void
+
 }
 
 export function CartView(props: CartViewProps) {
-    const { items, totalPrice } = props
+    const { items, totalPrice,onShipOrder } = props
+
+
     const dispatch = useAppDispatch()
-
-
-
 
 
     function handleRemoveItem(item: Repository.OrderItem) {
         dispatch(openItemDialog(item))
     }
 
-    function handleShipOrder() {
-        dispatch(openModel())
-
-    }
 
     return (
 
         <Container className="flex flex-col h-full items-center justify-end ">
-            <Box className="flex flex-col p-2 justify-center items-center flex-2">
+            <Box className="flex flex-col p-2  w-full h-full justify-center items-center flex-2">
 
                 {
                     items.length === 0 ? <Typography variant="h4">No items</Typography> :
@@ -76,7 +65,7 @@ export function CartView(props: CartViewProps) {
             </Box>
             {
                 items.length === 0 ? null : <Container className="flex flex-row justify-end">
-                    <Button onClick={handleShipOrder}>Ship Order</Button>
+                    <Button onClick={onShipOrder}>Ship Order</Button>
                     <Button variant="contained" color="primary">Total Price : {totalPrice} Da</Button>
                 </Container>
             }

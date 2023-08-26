@@ -8,7 +8,7 @@ export const useInPage = (pattern: string) => {
     const [isInProductPage, enableFilters] = useState(false)
 
     useEffect(() => {
-        enableFilters(pathName.includes(pattern))
+        enableFilters(pathName?.includes(pattern) ?? false)
 
     }, [pathName, isInProductPage, pattern])
 

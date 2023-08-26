@@ -15,7 +15,7 @@ function OrderDetaillsPage() {
 
 
     const className = clsx([
-        "p-4 flex flex-col justify-evenly items-center h-screen md:flex-row"
+        "p-4 flex flex-col w-full justify-evenly items-center h-screen md:flex-row"
     ])
 
     if (order === undefined) {

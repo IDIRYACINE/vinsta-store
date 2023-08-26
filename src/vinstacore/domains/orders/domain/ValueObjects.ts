@@ -65,6 +65,19 @@ export class OrderDate {
         return new OrderDate(new Date(value))
     }
 
+    dateId():string{
+        const date = this.value;
+        function padTo2Digits(num: number) {
+            return num.toString().padStart(2, '0');
+        }
+    
+        return [
+            padTo2Digits(date.getDate()),
+            padTo2Digits(date.getMonth() + 1),
+            date.getFullYear(),
+        ].join('');
+    }
+
 }
 
 export class OrderTotalPrice {

@@ -5,18 +5,32 @@ import { RootState } from "./store"
 const selectAdminAllOrders = (state: RootState) => state.adminOrders.orders
 const selectAdminOrderId = (param : {orderId :string}) => param.orderId
 const selectAdminDisplayedOrderStatus = (state: RootState) => state.adminOrders.selectedOrderStatus
+const selectDisplayedDateId = (state: RootState) => state.adminOrders.displayedDateId
 
 const selectAdminAllCategories = (state: RootState) => state.adminCategories.categories
 const selectAdminEditCategory = (state: RootState) => state.adminCategories.editedCategory
 
-const orderSelector = createSelector([selectAdminAllOrders ,selectAdminOrderId], (orders,orderId) => {
-    if(!orderId) return undefined
+const orderSelector = createSelector([selectAdminAllOrders ,selectAdminOrderId,selectDisplayedDateId],
+     (orders,orderId,dateId) => {
+    if(!orderId || !dateId) {
+        return undefined
+    }
+
     
-    return orders.find(order => order.header.id === orderId)
+    return orders[dateId].find(order => order.header.id === orderId)
 })
 
-const orderHeaderSelector = createSelector([selectAdminAllOrders,selectAdminDisplayedOrderStatus],(orders,orderStatus) => {
-    return orders
+const orderDatesSelector = createSelector([selectAdminAllOrders], (orders) => {
+    return Object.keys(orders)
+})
+
+const orderHeaderSelector = createSelector(
+    [selectAdminAllOrders,selectAdminDisplayedOrderStatus,selectDisplayedDateId],
+    (orders,orderStatus,dateId) => {
+
+    if(!dateId) return []
+
+    return orders[dateId]
     .filter(order => order.header.status === orderStatus.name)
     .map(order => order.header)
 })
@@ -53,5 +67,5 @@ const cartItemsCountSelector = createSelector([selectCustomerCartItems], (cartIt
 })
 
 export { categoryProductsSelector,cartItemsCountSelector, activeCategorySelector, displayedProductsSelector }
-export {selectCustomerCartItems}
+export {selectCustomerCartItems,orderDatesSelector}
 export {orderSelector,selectCustomerCartPrice,orderHeaderSelector,selectAdminAllCategories,selectAdminEditCategory}

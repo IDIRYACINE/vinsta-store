@@ -9,12 +9,12 @@ import { CategoryCard } from "./CategoryCard";
 
 
 export function CategoryGrid() {
-    let maxHorizontalCards = 2;
 
     const categories = useAppSelector(
         state =>
         activeCategorySelector(state)
     );
+    let maxHorizontalCards = 2;
 
     const className = "flex flex-row justify-center items-center h-full w-full p-4 m-0"
 

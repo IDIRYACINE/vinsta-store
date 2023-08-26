@@ -1,7 +1,6 @@
 import { Repository } from "@vinstacore/index"
 import { List, ListItemButton, ListItemText, Typography,Card ,Avatar,ListItemAvatar} from "@mui/material"
 
-import {Fragment} from 'react'
 
 interface ItemsListProps {
     items: Repository.OrderItem[]
@@ -30,6 +29,15 @@ function ItemsList(props: ItemsListProps) {
             <Typography variant="body1">color : {item.color.color}</Typography>
         </div>)
     }
+    
+
+    const image = (item: Repository.OrderItem) => {
+        if(!item.images){
+            return ""
+        }
+
+        return item.images[0]
+    }
 
     return (
         <Card className="w-96">
@@ -38,7 +46,7 @@ function ItemsList(props: ItemsListProps) {
                     props.items.map((item, index) => (
                         <ListItemButton key={index}>
                             <ListItemAvatar > 
-                                <Avatar src={item.images![0]} />
+                                <Avatar src={image(item)} />
                             </ListItemAvatar>
                             <ListItemText primary={<ItemPrimaryText item={item}/>} secondary={<ItemSecondaryText item={item}/>}/>
                         </ListItemButton>

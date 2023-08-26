@@ -41,7 +41,7 @@ export async function findOrderApi(props: LoadOrderApiOptions): Promise<Reposito
     return json.data;
 }
 
-export async function loadOrdersApi(): Promise<Repository.Order[]> {
+export async function loadOrdersApi(): Promise<Repository.OrderTreasure[]> {
     let response = await fetch(baseApi, {
         method: "GET",
     });

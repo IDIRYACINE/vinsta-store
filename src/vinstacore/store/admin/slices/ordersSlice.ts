@@ -1,19 +1,21 @@
 import { OrderStatus, orderStatusfromString } from "@adminapp/modules/orders/domain/OrderStatus";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { Repository } from "@vinstacore/index";
+import { orderDateIdFromDate, Repository } from "@vinstacore/index";
 
 export interface OrdersState {
-    orders: Repository.Order[];
+    orders: {[key:string] : Repository.Order[]};
     editedOrder: Repository.Order | null;
+    displayedDateId: string|null;
     selectedOrderStatus: OrderStatus;
     isModalOpen: boolean;
 }
 
 
 const initialState: OrdersState = {
-    orders: [],
+    orders: {},
     editedOrder: null,
+    displayedDateId: null,
     isModalOpen: false,
     selectedOrderStatus: orderStatusfromString("confirmed")
 };
@@ -22,8 +24,13 @@ const ordersSlice = createSlice({
     name: "orders",
     initialState,
     reducers: {
-        setOrders(state, action: PayloadAction<Repository.Order[]>) {
-            state.orders = action.payload;
+        setOrders(state, action: PayloadAction<Repository.OrderTreasure[]>) {
+            const orders = {};
+            action.payload.forEach((treasure) => {
+                orders[treasure.id] = treasure.orders;
+            })
+
+            state.orders = orders
         },
         setEditedOrder(state, action: PayloadAction<Repository.Order | null>) {
             state.editedOrder = action.payload;
@@ -33,16 +40,21 @@ const ordersSlice = createSlice({
         }
         ,
         addOrder(state, action: PayloadAction<Repository.Order>) {
-            state.orders.push(action.payload);
+            const orderDateId = orderDateIdFromDate(action.payload.header.createdAt);
+            state.orders[orderDateId].push(action.payload);
         }
         ,
         removeOrder(state, action: PayloadAction<Repository.Order>) {
-            state.orders = state.orders.filter((order) => order.header.id !== action.payload.header.id);
+            const orderDateId = orderDateIdFromDate(action.payload.header.createdAt);
+
+            state.orders[orderDateId]  = state.orders[orderDateId].filter((order) => order.header.id !== action.payload.header.id);
         },
         updateOrder(state, action: PayloadAction<Repository.Order>) {
-            const index = state.orders.findIndex((order) => order.header.id === action.payload.header.id);
+            const orderDateId = orderDateIdFromDate(action.payload.header.createdAt);
+
+            const index = state.orders[orderDateId].findIndex((order) => order.header.id === action.payload.header.id);
             if (index !== -1) {
-                state.orders[index] = action.payload;
+                state.orders[orderDateId][index] = action.payload;
             }
         },
         openUpdateOrderStatusModal(state, action: PayloadAction<Repository.Order>) {
@@ -54,15 +66,21 @@ const ordersSlice = createSlice({
             state.isModalOpen = false;
         },
         updateOrderStatus(state, action: PayloadAction<OrderStatus>) {
-            const index = state.orders.findIndex((order) => order.header.id === state.editedOrder?.header.id);
+            const editedOrder = state.editedOrder
+            const orderDateId = orderDateIdFromDate(editedOrder?.header.createdAt ?? "");
+
+            const index = state.orders[orderDateId].findIndex((order) => order.header.id === editedOrder?.header.id);
             if (index !== -1) {
-                state.orders[index].header.status = action.payload.name;
+                state.orders[orderDateId][index].header.status = action.payload.name;
             }
+        },
+        setOrderDateId(state, action: PayloadAction<string|null>) {
+            state.displayedDateId = action.payload;
         }
 
     }
 });
 
 export const { setOrders, setSelectedOrderStatus, setEditedOrder, addOrder, removeOrder, updateOrder } = ordersSlice.actions;
-export const { closeUpdateOrderStatusModal, openUpdateOrderStatusModal,updateOrderStatus } = ordersSlice.actions;
+export const { closeUpdateOrderStatusModal,setOrderDateId, openUpdateOrderStatusModal,updateOrderStatus } = ordersSlice.actions;
 export default ordersSlice.reducer;
