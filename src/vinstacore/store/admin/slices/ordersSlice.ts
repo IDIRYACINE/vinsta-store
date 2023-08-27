@@ -3,6 +3,11 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { orderDateIdFromDate, Repository } from "@vinstacore/index";
 
+interface UpdateOrderStatusPayload{
+    orderId: string;
+    status: OrderStatus;
+}
+
 export interface OrdersState {
     orders: {[key:string] : Repository.Order[]};
     editedOrder: Repository.Order | null;
@@ -65,14 +70,13 @@ const ordersSlice = createSlice({
         closeUpdateOrderStatusModal(state) {
             state.isModalOpen = false;
         },
-        updateOrderStatus(state, action: PayloadAction<OrderStatus>) {
-            const editedOrder = state.editedOrder
+        updateOrderStatus(state, action: PayloadAction<UpdateOrderStatusPayload>) {
+            const {orderId,status} = action.payload;
             const orderDateId = state.displayedDateId??"";
 
-            console.log(state.orders[orderDateId])
-            const index = state.orders[orderDateId].findIndex((order) => order.header.id === editedOrder?.header.id);
+            const index = state.orders[orderDateId].findIndex((order) => order.header.id === orderId);
             if (index !== -1) {
-                state.orders[orderDateId][index].header.status = action.payload.name;
+                state.orders[orderDateId][index].header.status = status.name;
             }
         },
         setOrderDateId(state, action: PayloadAction<string|null>) {

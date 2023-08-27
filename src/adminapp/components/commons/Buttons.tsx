@@ -4,7 +4,6 @@ import { OrderStatus } from "@adminapp/modules/orders/domain/OrderStatus";
 import { Button, MenuItem, InputLabel, FormControl, Select, SelectChangeEvent } from "@mui/material";
 import clsx from "clsx";
 import { ColorEntity, Repository, SizeEntity } from "@vinstacore/index";
-import { useState } from "react";
 
 interface BaseContainedButtonProps {
     className?: string;
@@ -143,18 +142,14 @@ function SizesSelector(props: SizeSelectorProps) {
 
 interface OrderStatusSelectorProps {
     statusList: OrderStatus[];
-    value? : string;
+    value : string;
     onChange: (orderStatusName: string) => void;
 }
 function OrderStatusSelector(props: OrderStatusSelectorProps) {
     const { onChange, statusList,value } = props
 
-    const [status, setStatus] = useState<string>(value??statusList[0].name);
-
-
     function handleChange(event: SelectChangeEvent<string>) {
         onChange(event.target.value)
-        setStatus(event.target.value)
     }
 
     return (
@@ -164,7 +159,7 @@ function OrderStatusSelector(props: OrderStatusSelectorProps) {
             id="order-status-select"
             label="OrderStatus"
             onChange={handleChange}
-            value={status}
+            value={value}
         >
             {statusList.map(status => {
                 return (

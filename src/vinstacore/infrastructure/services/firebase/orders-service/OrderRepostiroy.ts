@@ -1,6 +1,6 @@
 import { OrderMapper } from "@vinstacore/domains/orders";
 import { CreateResponse, DeleteResponse, Repository, UpdateResponse } from "@vinstacore/infrastructure/ports";
-import { CreateOrderProps, DeleteOrderProps, IOrderRepostiroy, FindOrderProps, LoadOrderProps, LoadOrderResponse, UpdateOrderStatusProps, FindOrderResponse, DeleteOrderResponse, DeleteOrderSegmentProps } from "@vinstacore/infrastructure/ports/services/OrdersServicePort";
+import { CreateOrderProps, DeleteOrderProps, IOrderRepostiroy, FindOrderProps, LoadOrderProps, LoadOrderResponse, UpdateOrderStatusProps, FindOrderResponse, DeleteOrderResponse, DeleteOrderSegmentProps, FindOrderStatusResponse, MarkReclaimOrderProps, ReclaimOrderResponse } from "@vinstacore/infrastructure/ports/services/OrdersServicePort";
 
 import { Database, get, ref, remove, set, update } from "firebase/database";
 
@@ -19,16 +19,17 @@ export class FirebaseOrderRepository implements IOrderRepostiroy {
 
     }
 
-    async find(options: FindOrderProps): Promise<FindOrderResponse> {
+    async findOrderStatus(options: FindOrderProps): Promise<FindOrderStatusResponse> {
 
-        const ordersRef = ref(this.db, `${this.orderCollection}/${options.orderId.value}`);
+        const statusRef = ref(this.db, `${this.statusCollection}/${options.dateId}/${options.orderId.value}`);
 
-        const order: Repository.Order = (await get(ordersRef)) as unknown as Repository.Order
+        const status: string = (await get(statusRef)) as unknown as string
 
         return {
-            data: order
+            data: status
         }
     }
+
     async load(options: LoadOrderProps): Promise<LoadOrderResponse> {
         const ordersRef = ref(this.db, `${this.orderCollection}`)
 
@@ -79,7 +80,7 @@ export class FirebaseOrderRepository implements IOrderRepostiroy {
 
         return set(orderRef, order).then(() => {
 
-            const statusRef = ref(this.db, `${this.statusCollection}/${options.orderId.value}`)
+            const statusRef = ref(this.db, `${this.statusCollection}/${dateId}/${options.orderId.value}`)
             const status = {
                 status: order.header.status,
             }
@@ -93,22 +94,28 @@ export class FirebaseOrderRepository implements IOrderRepostiroy {
     }
 
     async updateOrderStatus(options: UpdateOrderStatusProps): Promise<UpdateResponse> {
-        const statusRef = ref(this.db, `${this.statusCollection}/${options.orderId.value}`)
+        const statusRef = ref(this.db, `${this.statusCollection}/${options.dateId}/${options.orderId.value}`)
 
-        const orderRef = ref(this.db, `${this.orderCollection}/${options.dateId}/${options.orderId.value}`)
+        const orderRef = ref(this.db, `${this.orderCollection}/${options.dateId}/${options.orderId.value}/header/status`)
 
-        const newHeader :Partial<Repository.OrderHeader> ={
+        const newHeader: Partial<Repository.OrderHeader> = {
             status: options.orderStatus
         }
 
-        const updateData: any = {
-            header: newHeader
-        };
 
 
-        update(orderRef, updateData)
+        set(orderRef, newHeader.status)
 
         return update(statusRef, newHeader).then(() => ({}));
+    }
+
+
+    async markReclaimed(options: MarkReclaimOrderProps): Promise<ReclaimOrderResponse> {
+
+        const orderRef = ref(this.db, `${this.orderCollection}/${options.dateId}/${options.orderId}/header/restocked`)
+
+        set(orderRef, true)
+        return {}
     }
 
     async delete(options: DeleteOrderProps): Promise<DeleteResponse> {
@@ -121,6 +128,8 @@ export class FirebaseOrderRepository implements IOrderRepostiroy {
     async deleteSegment(options: DeleteOrderSegmentProps): Promise<DeleteOrderResponse> {
         const orderRef = ref(this.db, `${this.orderCollection}/${options.dateId}`)
         const statusRef = ref(this.db, `${this.statusCollection}/${options.dateId}`)
+
+        remove(statusRef)
 
         return remove(orderRef).then(() => ({}));
     }

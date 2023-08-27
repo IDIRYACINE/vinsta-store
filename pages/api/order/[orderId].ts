@@ -12,12 +12,11 @@ const orderService: OrderServicePort = FirebaseAdapter.ordersService();
  async function GET(req: NextApiRequest, res: NextApiResponse) {
 
   const orderId = req.query.orderId as string;
+  const dateId = req.query.dateId as string;
 
-  const response = (await orderService.find({
-    orderId
+  const response = (await orderService.trackOrderstatus({
+    orderId,dateId
   })).data
-
-
 
   return res.status(200).json({ data: response });
 }

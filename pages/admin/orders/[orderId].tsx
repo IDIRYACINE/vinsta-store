@@ -6,6 +6,7 @@ import { orderSelector } from "@vinstacore/store/selectors"
 import ShippingCard from "@adminapp/modules/orders/components/ShippingCard"
 import ItemsList from "@adminapp/modules/orders/components/ItemsList"
 import { useLoadOrderIdParam } from "@vinstacore/hooks/useOrder"
+import { orderDateIdFromDate } from "@vinstacore/index"
 
 function OrderDetaillsPage() {
 
@@ -24,11 +25,20 @@ function OrderDetaillsPage() {
         )
     }
 
+    const shoppingCardProps = {
+        address: order.shipping,
+        status: order.header.status,
+        restocked: order.header.restock,
+        orderId: order.header.id,
+        dateId: orderDateIdFromDate(order.header.createdAt),
+        items : order.items
+    }
+
     return (
         <Box className={className}>
 
 
-            <ShippingCard restocked={order.header.restock} address={order.shipping} status={order.header.status} />
+            <ShippingCard {...shoppingCardProps} />
 
             <ItemsList items={order.items} />
 

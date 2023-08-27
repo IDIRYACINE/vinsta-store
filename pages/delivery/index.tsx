@@ -3,25 +3,31 @@ import { Container } from "@mui/material"
 
 import { Box, Button, Typography } from "@mui/material"
 import { AppTextField } from "@storefront/modules/shipping/ui/Components"
-import { findOrderApi } from "@vinstacore/api/orderApi"
+import { findOrderStatusApi } from "@vinstacore/api/orderApi"
 import { Repository } from "@vinstacore/infrastructure/ports/IRepositories"
 import { useState } from "react"
 
 export default function DeliveryPage() {
 
-    const [order, setOrder] = useState<Repository.Order | null>(null)
+    const [status, setStatus] = useState<string | null>(null)
     const [orderId, setOrderId] = useState("")
+    const [dateId, setDateId] = useState("")
 
 
     function onOrderIdChange(value: string) {
         setOrderId(value)
     }
 
-    function onTrackOrder() {
-        findOrderApi({
+    function onDateIdChange(value: string) {
+        setDateId(value)
+    }
 
-        }).then((order) => {
-            setOrder(order)
+    function onTrackOrder() {
+        findOrderStatusApi({
+            orderId: orderId,
+            dateId: dateId
+        }).then((orderStatus) => {
+            setStatus(orderStatus)
         })
     }
 
@@ -32,15 +38,24 @@ export default function DeliveryPage() {
         onChange: onOrderIdChange
     }
 
+    const dateIdFieldProps = {
+        label: "Date Id",
+        value: dateId,
+        onChange: onDateIdChange,
+        className : "w-40"
+    }
+
     return (
         <Container className="flex flex-col justify-center items-center ">
 
 
-            <Typography >ID : {order?.header?.id}</Typography>
-            <Typography className="mb-2">Status : {order?.header?.status}</Typography>
+            <Typography >ID : {orderId}</Typography>
+            <Typography className="mb-2">Status : {status}</Typography>
 
             <Box className="flex flex-row justify-start items-center max-w-fit">
-                <AppTextField {...trackerFieldProps} />
+                    <AppTextField {...dateIdFieldProps} />
+                    <AppTextField {...trackerFieldProps} />
+
                 <Button onClick={onTrackOrder}>Track</Button>
 
 

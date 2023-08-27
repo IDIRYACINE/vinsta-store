@@ -3,7 +3,7 @@
 import { Container, Modal, Box, Button, Typography } from "@mui/material"
 import { ActionsRow, DisplayTypography } from "src/storefront/components"
 import { useState } from "react"
-import { Destination, Repository, DeliveryType, destinations, calculateDeliveryPrice } from "@vinstacore/index"
+import { Destination, Repository, DeliveryType, destinations, calculateDeliveryPrice, orderDateIdFromDate } from "@vinstacore/index"
 import { AppTextField, DestinationSelector } from "./Components"
 import { useAppDispatch, useAppSelector } from "@vinstacore/store/clientHooks"
 import { selectCustomerCartItems, selectCustomerCartPrice } from "@vinstacore/store/selectors"
@@ -22,6 +22,7 @@ export function ShippingForm(props: ShippingFormProps) {
     const { cart, onClose } = props
     const dispatch = useAppDispatch()
     const [orderId, setOrderId] = useState<string | null>(null)
+    const [dateId,setDateId] = useState<string | null>(null)
 
     const deliveryTypes = DeliveryType.values()
 
@@ -96,14 +97,19 @@ export function ShippingForm(props: ShippingFormProps) {
         createOrderApi({ order, orderId: order.header.id }).then((res) => {
             dispatch(updateOrderId(order.header.id))
             setOrderId(order.header.id)
+            setDateId(orderDateIdFromDate(order.header.createdAt))
         })
 
     }
 
     if (orderId != null) {
-        return (<Container sx={formStyle}>
+        return (
+        <Container sx={formStyle}>
             <DisplayTypography text={`Order Id: ${orderId}`} />
-        </Container>)
+            <DisplayTypography text={`Date Id: ${dateId}`} />
+
+        </Container>
+        )
     }
 
     return (

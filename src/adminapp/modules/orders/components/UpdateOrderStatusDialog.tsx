@@ -1,49 +1,58 @@
 "use client";
 
 import { OrderStatusSelector, BaseContainedButton } from "src/adminapp/components/commons/Buttons";
-import { Box, Modal, Typography,Paper } from "@mui/material";
-
+import { TextField, Modal, Typography, Paper } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "@vinstacore/store/clientHooks";
-import { closeUpdateOrderStatusModal, updateOrderStatus } from "@vinstacore/store/admin/slices/ordersSlice";
+import { updateOrderStatus } from "@vinstacore/store/admin/slices/ordersSlice";
 import { orderDateIdFromDate, updateOrderStatusApi } from "@vinstacore/index";
 import { OrderStatus, orderStatusList } from "../domain/OrderStatus";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useLoadOrderIdParam } from "@vinstacore/hooks/useOrder";
 import { orderSelector } from "@vinstacore/store/selectors";
 
 
 interface UpdateOrderStatusDialogProps {
     isOpen: boolean
-    onClose: () => void
+    onClose: () => void,
+    setOrderStatus: (orderStatus: OrderStatus) => void
+    newOrderStatus: OrderStatus
 }
 
 function UpdateOrderStatusDialog(props: UpdateOrderStatusDialogProps) {
     const dispatch = useAppDispatch()
-    const { isOpen, onClose } = props
-    const {orderId} = useLoadOrderIdParam()
+    const { isOpen, onClose, newOrderStatus, setOrderStatus } = props
+    const { orderId } = useLoadOrderIdParam()
 
-    const order = useAppSelector(state => orderSelector({...state , orderId}))
+    const order = useAppSelector(state => orderSelector({ ...state, orderId }))
 
-    const newOrderStatus = useRef<OrderStatus>(orderStatusList[0])
 
     function onConfirm() {
-        if(!order) return
+        if (!order) return
 
-        dispatch(updateOrderStatus(newOrderStatus.current))
+        dispatch(updateOrderStatus({
+            orderId: order.header.id,
+            status: newOrderStatus
+        }))
 
-        const orderStatus =  newOrderStatus.current.name
-            
+        const orderStatus = newOrderStatus.name
+
         const dateId = orderDateIdFromDate(order.header.createdAt)
 
-        updateOrderStatusApi({ orderId, dateId,orderStatus })
+        updateOrderStatusApi({ orderId, dateId, orderStatus })
 
         onClose()
 
     }
 
+    function onUpdateOrderStatus(orderStatusName: string) {
+        setOrderStatus(orderStatusList.find(x => x.name === orderStatusName)!)
+
+    }
+
     const orderStatusSelectProps = {
         statusList: orderStatusList,
-        onChange: (orderStatusName: string) => newOrderStatus.current = orderStatusList.find(x => x.name === orderStatusName)!,
+        onChange: onUpdateOrderStatus,
+        value: newOrderStatus.name
     }
 
     return (
@@ -67,8 +76,12 @@ function UpdateOrderStatusDialog(props: UpdateOrderStatusDialogProps) {
     )
 }
 
-function UpdateOrderStatusButton() {
+interface UpdateOrderStatusButtonProps {
+    status: string
+}
+function UpdateOrderStatusButton(props: UpdateOrderStatusButtonProps) {
     const [isModalOpen, setIsModalOpen] = useState(false)
+    const [newOrderStatus, setOrderStatus] = useState<OrderStatus>(orderStatusList[0])
 
     function onOpen() {
         setIsModalOpen(true)
@@ -78,11 +91,21 @@ function UpdateOrderStatusButton() {
         setIsModalOpen(false)
     }
 
+
+    const dialogProps = {
+        isOpen: isModalOpen,
+        onClose: onClose,
+        setOrderStatus: setOrderStatus,
+        newOrderStatus: newOrderStatus
+    }
     return (
-        <div >
+        <div className="flex flex-row justify-between w-full">
+            <TextField id="outlined-order-status" className="mr-1" label="Order Status" variant="outlined" value={props.status} InputProps={{
+                readOnly: true,
+            }} />
 
             <BaseContainedButton onClick={onOpen}>Update Status</BaseContainedButton>
-            <UpdateOrderStatusDialog isOpen={isModalOpen} onClose={onClose} />
+            <UpdateOrderStatusDialog {...dialogProps} />
         </div>
     )
 }

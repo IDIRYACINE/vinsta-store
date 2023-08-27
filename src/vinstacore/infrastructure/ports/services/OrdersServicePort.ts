@@ -8,8 +8,8 @@ export interface OrderServicePort {
     updateOrderStatus(options: UpdateOrderRawProps): Promise<UpdateOrderResponse>
     deleteSegment(options: DeleteOrderRawProps): Promise<DeleteOrderResponse>
     load(options: LoadOrderRawProps): Promise<LoadOrderResponse>
-    cancel(options: CancelOrderRawProps): Promise<CancelOrderResponse>
-    find(options: FindOrderRawProps): Promise<FindOrderResponse> 
+    reclaim(options: ReclaimOrderRawProps): Promise<ReclaimOrderResponse>
+    trackOrderstatus(options: FindOrderRawProps): Promise<FindOrderStatusResponse> 
 
 }
 
@@ -34,10 +34,18 @@ export interface DeleteOrderSegmentProps{
 
 export interface FindOrderProps {
     orderId: OrderId
+    dateId:string
 }
 
-export interface CancelOrderProps {
-    orderId:string
+export interface ReclaimOrderProps {
+    orderId:string,
+    dateId:string,
+    items: Repository.OrderItem[]
+ }
+
+ export interface MarkReclaimOrderProps{
+    orderId:string,
+    dateId:string,
  }
 
 export interface LoadOrderProps { }
@@ -58,11 +66,12 @@ export interface DeleteOrderRawProps {
 }
 
 export interface FindOrderRawProps {
-    orderId: string
+    orderId: string,
+    dateId:string
 }
 
 
-export interface CancelOrderRawProps { }
+export interface ReclaimOrderRawProps { }
 
 export interface LoadOrderRawProps { }
 
@@ -72,7 +81,7 @@ export interface UpdateOrderResponse { }
 
 export interface DeleteOrderResponse { }
 
-export interface CancelOrderResponse { }
+export interface ReclaimOrderResponse { }
 
 export interface LoadOrderResponse {
     data:  Repository.OrderTreasure[],
@@ -85,11 +94,17 @@ export interface FindOrderResponse {
 }
 
 
+export interface FindOrderStatusResponse {
+    data : string
+}
+
+
 export interface IOrderRepostiroy {
     create(createProps: CreateOrderProps): Promise<CreateOrderResponse>
     updateOrderStatus(updateProps: UpdateOrderStatusProps): Promise<UpdateOrderResponse>
     delete(deleteProps: DeleteOrderProps): Promise<DeleteOrderResponse>
     deleteSegment(deleteProps: DeleteOrderSegmentProps): Promise<DeleteOrderResponse>
     load(loadProps: LoadOrderProps): Promise<LoadOrderResponse>
-    find(findProps: FindOrderProps): Promise<FindOrderResponse>
+    findOrderStatus(findProps: FindOrderProps): Promise<FindOrderStatusResponse>
+    markReclaimed(reclaimProps: MarkReclaimOrderProps): Promise<ReclaimOrderResponse>
 }

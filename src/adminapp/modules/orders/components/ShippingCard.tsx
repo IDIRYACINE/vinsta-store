@@ -8,24 +8,25 @@ import { UpdateOrderStatusButton } from "./UpdateOrderStatusDialog"
 interface ShippingCardProps {
     address: Repository.Contacts,
     status: string,
-    restocked?: boolean,
-    orderId : string,
-    dateId : string
+    restocked?: boolean | undefined,
+    orderId: string,
+    dateId: string,
+    items: Repository.OrderItem[]
 }
 
-function ShippingCard({ address, status,restocked,orderId,dateId }: ShippingCardProps) {
+function ShippingCard({ address, status, restocked, orderId, items,dateId }: ShippingCardProps) {
     const className = "p-4 flex flex-col justify-center items-start w-96"
 
     const shipingPrice = `${address.shipingPrice} Da`
 
-    const displayRestockButton = restocked  &&( status === EOrderStatus.cancelled  )
+    const displayRestockButton = (restocked === undefined) && (status === EOrderStatus.cancelled)
 
     return (
         <Card className={className}>
             <div className="w-full flex flex-row justify-between items-center">
                 <Typography variant="h6">Shipping</Typography>
                 {
-                    displayRestockButton ? <RestockButton dateId={dateId} orderId={orderId}/>: null
+                    displayRestockButton ? <RestockButton dateId={dateId} orderId={orderId} items={items} /> : null
                 }
             </div>
             <Divider className="w-full mb-2" />
@@ -58,29 +59,26 @@ function ShippingCard({ address, status,restocked,orderId,dateId }: ShippingCard
             </div>
             <Divider className="w-full mb-2 mt-2" />
 
-            <div className="flex flex-row justify-between w-full">
-                <TextField id="outlined-order-status" className="mr-1" label="Order Status" variant="outlined" defaultValue={status} InputProps={{
-                    readOnly: true,
-                }} />
-                <UpdateOrderStatusButton />
 
-            </div>
+            <UpdateOrderStatusButton status={status} />
+
 
 
         </Card>
     )
 }
 
-interface RestockButtonProps{
-    orderId : string
-    dateId:string
+interface RestockButtonProps {
+    orderId: string
+    dateId: string,
+    items : Repository.OrderItem[]
 }
-function RestockButton({orderId,dateId}:RestockButtonProps){
+function RestockButton({ orderId, dateId,items }: RestockButtonProps) {
     const dispatch = useAppDispatch()
-    
+
     const restock = () => {
         dispatch(restockOrder(orderId))
-        restockOrderApi({orderId,dateId,items:[]})
+        restockOrderApi({ orderId, dateId, items })
     }
 
     return (

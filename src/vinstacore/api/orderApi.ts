@@ -33,15 +33,16 @@ interface CreateOrderApiOptions {
     orderId: string | number;
 }
 
-interface LoadOrderApiOptions {
-    orderId?: string | number;
+interface LoadOrderStatusApiOptions {
+    orderId: string | number;
+    dateId:string|number
 }
 
 const baseApi = `${baseUrl}/api/order`
 
 
-export async function findOrderApi(props: LoadOrderApiOptions): Promise<Repository.Order> {
-    const targetUrl = `${baseApi}/${props.orderId}`
+export async function findOrderStatusApi(props: LoadOrderStatusApiOptions): Promise<string> {
+    const targetUrl = `${baseApi}/${props.orderId}?dateId=${props.dateId}`
     let response = await fetch(targetUrl, {
         method: "GET",
 
@@ -49,7 +50,7 @@ export async function findOrderApi(props: LoadOrderApiOptions): Promise<Reposito
 
     let json = await response.json();
 
-    return json.data;
+    return json.data.status;
 }
 
 export async function loadOrdersApi(): Promise<Repository.OrderTreasure[]> {
@@ -105,5 +106,13 @@ export async function deleteOrderSegmentApi(options:DeleteOrderSegmentApiOptions
 
 
 export async function restockOrderApi(options: RestockOrderApiOptions) {
+    const response = await fetch(`${baseApi}/reclaim`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(options),
+    });
 
+    return response.json();
 }

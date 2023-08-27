@@ -1,7 +1,7 @@
 import { UpdatedField } from "@vinstacore/commons/api.base";
 import { OrderId, OrderMapper, } from "@vinstacore/domains/orders";
 import { CategoryServicePort, ProductServicePort } from "@vinstacore/infrastructure/ports";
-import { CancelOrderProps, CancelOrderResponse, CreateOrderRawProps, CreateOrderResponse, DeleteOrderRawProps, DeleteOrderResponse, FindOrderRawProps, FindOrderResponse, LoadOrderRawProps, LoadOrderResponse, OrderServicePort, UpdateOrderRawProps, UpdateOrderResponse } from "@vinstacore/infrastructure/ports/services/OrdersServicePort";
+import { ReclaimOrderProps, ReclaimOrderResponse, CreateOrderRawProps, CreateOrderResponse, DeleteOrderRawProps, DeleteOrderResponse, FindOrderRawProps, FindOrderResponse, FindOrderStatusResponse, LoadOrderRawProps, LoadOrderResponse, OrderServicePort, UpdateOrderRawProps, UpdateOrderResponse } from "@vinstacore/infrastructure/ports/services/OrdersServicePort";
 import { FirebaseOrderRepository } from "./OrderRepostiroy";
 
 
@@ -15,13 +15,10 @@ export class FirebaseOrderService implements OrderServicePort {
 
     }
 
-    async cancel(options: CancelOrderProps): Promise<CancelOrderResponse> {
+    async reclaim(options: ReclaimOrderProps): Promise<ReclaimOrderResponse> {
 
-        const order = (await this.find({
-            orderId: options.orderId
-        })).data
 
-        order.items.forEach(product => {
+        options.items.forEach(product => {
             let images = (product.images ?? [])
                 .map((image, index) => {
                     return {
@@ -45,18 +42,22 @@ export class FirebaseOrderService implements OrderServicePort {
             })
         })
 
-        return this.deleteSegment({
-            dateId: options.orderId
+        this.ordersRepo.markReclaimed({
+            orderId: options.orderId,
+            dateId: options.dateId
         })
+
+        return {}
     }
 
-    async find(options: FindOrderRawProps): Promise<FindOrderResponse> {
+    async trackOrderstatus(options: FindOrderRawProps): Promise<FindOrderStatusResponse> {
 
 
 
-        return this.ordersRepo.find(
+        return this.ordersRepo.findOrderStatus(
             {
-                orderId: new OrderId(options.orderId)
+                orderId: new OrderId(options.orderId),
+                dateId : options.dateId
             }
         )
     }
