@@ -3,8 +3,18 @@ import { baseUrl } from "./config";
 
 interface DeleteOrderApiOptions {
     orderId: string | number;
+    dateId : string | number;
 }
 
+interface DeleteOrderSegmentApiOptions {
+    dateId: string | number;
+}
+
+interface RestockOrderApiOptions{
+    dateId:string | number;
+    orderId:string | number;
+    items:Repository.OrderItem[]
+}
 
 type PartialOrder = Omit<Repository.Order, "header" | "shipping" | "items"> & {
     header?: Partial<Repository.OrderHeader>;
@@ -13,9 +23,10 @@ type PartialOrder = Omit<Repository.Order, "header" | "shipping" | "items"> & {
 };
 
 
-interface UpdateOrderApiOptions {
+interface UpdateOrderStatusApiOptions {
     orderId: string | number;
-    updatedFields: PartialOrder;
+    orderStatus: string,
+    dateId:string
 }
 interface CreateOrderApiOptions {
     order: Repository.Order;
@@ -64,7 +75,7 @@ export async function createOrderApi(options: CreateOrderApiOptions) {
     return response.json();
 }
 
-export async function updateOrderApi(options: UpdateOrderApiOptions) {
+export async function updateOrderStatusApi(options: UpdateOrderStatusApiOptions) {
     const response = await fetch(baseApi, {
         method: "PUT",
         headers: {
@@ -77,9 +88,22 @@ export async function updateOrderApi(options: UpdateOrderApiOptions) {
 }
 
 export async function deleteOrderApi(options: DeleteOrderApiOptions) {
-    const response = await fetch(`${baseApi}?OrderId=${options.orderId}`, {
+    const response = await fetch(`${baseApi}?orderId=${options.orderId}&&dateId=${options.dateId}`, {
         method: "DELETE",
     });
 
     return response.json();
+}
+
+export async function deleteOrderSegmentApi(options:DeleteOrderSegmentApiOptions){
+    const response = await fetch(`${baseApi}?dateId=${options.dateId}`, {
+        method: "DELETE",
+    });
+
+    return response.json();
+}
+
+
+export async function restockOrderApi(options: RestockOrderApiOptions) {
+
 }

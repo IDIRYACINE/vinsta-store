@@ -4,10 +4,9 @@ interface OrderStatus {
     color: string
 }
 const orderStatusList = [
+    { name: 'onHold', color: 'orange-500' },
     { name: 'confirmed', color: 'green-500' },
     { name: 'shipped', color: 'blue-500' },
-    { name: 'onHold', color: 'orange-500' },
-    { name: 'delivered', color: 'green-700' },
     { name: 'cancelled', color: 'red-500' }]
 
 function orderStatusfromString(value: string): OrderStatus {

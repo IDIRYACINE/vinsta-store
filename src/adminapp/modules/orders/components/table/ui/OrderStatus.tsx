@@ -4,9 +4,10 @@ import { OrderStatus } from "@adminapp/modules/orders/domain/OrderStatus"
 import { Typography, Card, Tab, Tabs } from "@mui/material"
 import { useState, SyntheticEvent } from "react"
 
-import { setOrderDateId, setSelectedOrderStatus, } from "@vinstacore/store/admin/slices/ordersSlice";
+import { deleteOrdersSegment, setOrderDateId, setSelectedOrderStatus, } from "@vinstacore/store/admin/slices/ordersSlice";
 import { useAppDispatch, useAppSelector } from "@vinstacore/store/clientHooks";
 import { BaseContainedButton } from "@adminapp/components/commons/Buttons";
+import { deleteOrderSegmentApi } from "@vinstacore/api/orderApi";
 
 
 interface OrderStatusLabelProps {
@@ -30,6 +31,7 @@ interface OrderStatusTabProps {
 }
 function OrderStatusTab(props: OrderStatusTabProps) {
     const [orderStatus, setOrderStatus] = useState<string>(props.statusList[0].name);
+    const displayedDateId = useAppSelector(state => state.adminOrders.displayedDateId)
     const dispatch = useAppDispatch()
 
     const handleChange = (event: SyntheticEvent, newValue: string) => {
@@ -43,6 +45,14 @@ function OrderStatusTab(props: OrderStatusTabProps) {
         dispatch(setOrderDateId(null))
     }
 
+    const deleteOrderSegment = () => {
+        deleteOrderSegmentApi({
+            dateId : displayedDateId!
+        }).then(() => {
+            dispatch(deleteOrdersSegment())
+        })
+    }
+
     return (
         <div className="flex flex-row w-full items-center justify-between">
             <Card className="mb-1">
@@ -54,7 +64,9 @@ function OrderStatusTab(props: OrderStatusTabProps) {
                     }
                 </Tabs>
             </Card>
-        <BaseContainedButton onClick={navigateToOrdersRoot}>Back</BaseContainedButton>
+            <BaseContainedButton onClick={navigateToOrdersRoot}>Back</BaseContainedButton>
+            <BaseContainedButton onClick={deleteOrderSegment}>Delete</BaseContainedButton>
+
         </div>
     )
 }

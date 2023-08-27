@@ -28,7 +28,7 @@ function OrderDetaillsPage() {
         <Box className={className}>
 
 
-            <ShippingCard address={order.shipping} status={order.header.status} />
+            <ShippingCard restocked={order.header.restock} address={order.shipping} status={order.header.status} />
 
             <ItemsList items={order.items} />
 

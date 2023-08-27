@@ -67,8 +67,9 @@ const ordersSlice = createSlice({
         },
         updateOrderStatus(state, action: PayloadAction<OrderStatus>) {
             const editedOrder = state.editedOrder
-            const orderDateId = orderDateIdFromDate(editedOrder?.header.createdAt ?? "");
+            const orderDateId = state.displayedDateId??"";
 
+            console.log(state.orders[orderDateId])
             const index = state.orders[orderDateId].findIndex((order) => order.header.id === editedOrder?.header.id);
             if (index !== -1) {
                 state.orders[orderDateId][index].header.status = action.payload.name;
@@ -76,11 +77,24 @@ const ordersSlice = createSlice({
         },
         setOrderDateId(state, action: PayloadAction<string|null>) {
             state.displayedDateId = action.payload;
+        },
+        deleteOrdersSegment(state, ) {
+            const orderDateId = state.displayedDateId!;
+            delete state.orders[orderDateId];
+            state.displayedDateId = null;
+        },
+        restockOrder(state,action: PayloadAction<String>){
+            const orderDateId = state.displayedDateId!;
+            const orderId = action.payload;
+            const index = state.orders[orderDateId].findIndex((order) => order.header.id === orderId);
+            if (index !== -1) {
+                state.orders[orderDateId][index].header.restock = true;
+            }
         }
 
     }
 });
 
-export const { setOrders, setSelectedOrderStatus, setEditedOrder, addOrder, removeOrder, updateOrder } = ordersSlice.actions;
-export const { closeUpdateOrderStatusModal,setOrderDateId, openUpdateOrderStatusModal,updateOrderStatus } = ordersSlice.actions;
+export const { setOrders,restockOrder, setSelectedOrderStatus, setEditedOrder, addOrder, removeOrder, updateOrder } = ordersSlice.actions;
+export const { closeUpdateOrderStatusModal,deleteOrdersSegment,setOrderDateId, openUpdateOrderStatusModal,updateOrderStatus } = ordersSlice.actions;
 export default ordersSlice.reducer;

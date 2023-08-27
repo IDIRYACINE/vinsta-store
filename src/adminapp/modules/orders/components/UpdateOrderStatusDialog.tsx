@@ -5,9 +5,11 @@ import { Box, Modal, Typography,Paper } from "@mui/material";
 
 import { useAppDispatch, useAppSelector } from "@vinstacore/store/clientHooks";
 import { closeUpdateOrderStatusModal, updateOrderStatus } from "@vinstacore/store/admin/slices/ordersSlice";
-import { updateOrderApi } from "@vinstacore/index";
+import { orderDateIdFromDate, updateOrderStatusApi } from "@vinstacore/index";
 import { OrderStatus, orderStatusList } from "../domain/OrderStatus";
 import { useRef, useState } from "react";
+import { useLoadOrderIdParam } from "@vinstacore/hooks/useOrder";
+import { orderSelector } from "@vinstacore/store/selectors";
 
 
 interface UpdateOrderStatusDialogProps {
@@ -18,20 +20,24 @@ interface UpdateOrderStatusDialogProps {
 function UpdateOrderStatusDialog(props: UpdateOrderStatusDialogProps) {
     const dispatch = useAppDispatch()
     const { isOpen, onClose } = props
-    const orderId = useAppSelector(state => state.adminOrders.editedOrder?.header.id)!
+    const {orderId} = useLoadOrderIdParam()
+
+    const order = useAppSelector(state => orderSelector({...state , orderId}))
 
     const newOrderStatus = useRef<OrderStatus>(orderStatusList[0])
 
     function onConfirm() {
+        if(!order) return
+
         dispatch(updateOrderStatus(newOrderStatus.current))
 
-        const updatedFields = {
-            header: {
-                status: newOrderStatus.current.name
-            }
-        }
+        const orderStatus =  newOrderStatus.current.name
+            
+        const dateId = orderDateIdFromDate(order.header.createdAt)
 
-        updateOrderApi({ orderId, updatedFields })
+        updateOrderStatusApi({ orderId, dateId,orderStatus })
+
+        onClose()
 
     }
 
@@ -45,7 +51,7 @@ function UpdateOrderStatusDialog(props: UpdateOrderStatusDialogProps) {
         <Modal className="flex flex-col justify-center items-center p-2" open={isOpen}
             onClose={onClose}>
 
-            <Paper className="flex flex-col justify-between items-center">
+            <Paper className="flex flex-col justify-between items-center p-2">
                 <Typography variant="h6">Update Order Status</Typography>
                 <OrderStatusSelector {...orderStatusSelectProps} />
 

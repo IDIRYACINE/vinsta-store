@@ -95,7 +95,6 @@ export function ShippingForm(props: ShippingFormProps) {
 
         createOrderApi({ order, orderId: order.header.id }).then((res) => {
             dispatch(updateOrderId(order.header.id))
-            dispatch(setCart([]))
             setOrderId(order.header.id)
         })
 

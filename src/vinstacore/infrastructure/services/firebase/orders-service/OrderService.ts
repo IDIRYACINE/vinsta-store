@@ -45,8 +45,8 @@ export class FirebaseOrderService implements OrderServicePort {
             })
         })
 
-        return this.delete({
-            orderId: options.orderId
+        return this.deleteSegment({
+            dateId: options.orderId
         })
     }
 
@@ -111,23 +111,23 @@ export class FirebaseOrderService implements OrderServicePort {
         }
     }
 
-    async update(options: UpdateOrderRawProps): Promise<UpdateOrderResponse> {
+    async updateOrderStatus(options: UpdateOrderRawProps): Promise<UpdateOrderResponse> {
 
-        const updatedFields = options.updatedFields.map((field: any) => {
-            return new UpdatedField(field.fieldName, field.newValue)
-        })
+        
 
-        return this.ordersRepo.update(
+        return this.ordersRepo.updateOrderStatus(
             {
                 orderId: new OrderId(options.orderId),
-                updatedFields: updatedFields
+                orderStatus: options.orderStatus,
+                dateId: options.dateId
             }
         )
     }
-    async delete(options: DeleteOrderRawProps): Promise<DeleteOrderResponse> {
+    
+    async deleteSegment(options: DeleteOrderRawProps): Promise<DeleteOrderResponse> {
 
-        return this.ordersRepo.delete(
-            { orderId: new OrderId(options.orderId) }
+        return this.ordersRepo.deleteSegment(
+            { dateId: options.dateId}
         )
     }
 

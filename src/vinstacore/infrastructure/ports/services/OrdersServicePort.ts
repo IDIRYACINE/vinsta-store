@@ -5,8 +5,8 @@ import { Repository } from "../IRepositories"
 
 export interface OrderServicePort {
     create(options: CreateOrderRawProps): Promise<CreateOrderResponse>
-    update(options: UpdateOrderRawProps): Promise<UpdateOrderResponse>
-    delete(options: DeleteOrderRawProps): Promise<DeleteOrderResponse>
+    updateOrderStatus(options: UpdateOrderRawProps): Promise<UpdateOrderResponse>
+    deleteSegment(options: DeleteOrderRawProps): Promise<DeleteOrderResponse>
     load(options: LoadOrderRawProps): Promise<LoadOrderResponse>
     cancel(options: CancelOrderRawProps): Promise<CancelOrderResponse>
     find(options: FindOrderRawProps): Promise<FindOrderResponse> 
@@ -18,13 +18,18 @@ export interface CreateOrderProps {
     order: OrderEntity
 }
 
-export interface UpdateOrderProps {
+export interface UpdateOrderStatusProps {
     orderId: OrderId,
-    updatedFields: Partial<Repository.Order>
+    orderStatus: string
+    dateId:string
 
 }
 export interface DeleteOrderProps {
     orderId: OrderId
+}
+
+export interface DeleteOrderSegmentProps{
+    dateId:string
 }
 
 export interface FindOrderProps {
@@ -44,11 +49,12 @@ export interface CreateOrderRawProps {
 
 export interface UpdateOrderRawProps {
     orderId: string,
-    updatedFields: any
+    orderStatus: string,
+    dateId:string
 
 }
 export interface DeleteOrderRawProps {
-    orderId: string
+    dateId: string
 }
 
 export interface FindOrderRawProps {
@@ -81,8 +87,9 @@ export interface FindOrderResponse {
 
 export interface IOrderRepostiroy {
     create(createProps: CreateOrderProps): Promise<CreateOrderResponse>
-    update(updateProps: UpdateOrderProps): Promise<UpdateOrderResponse>
+    updateOrderStatus(updateProps: UpdateOrderStatusProps): Promise<UpdateOrderResponse>
     delete(deleteProps: DeleteOrderProps): Promise<DeleteOrderResponse>
+    deleteSegment(deleteProps: DeleteOrderSegmentProps): Promise<DeleteOrderResponse>
     load(loadProps: LoadOrderProps): Promise<LoadOrderResponse>
     find(findProps: FindOrderProps): Promise<FindOrderResponse>
 }

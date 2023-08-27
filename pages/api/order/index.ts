@@ -52,16 +52,16 @@ async function PUT(req: NextApiRequest, res: NextApiResponse) {
   const options = req.body
 
 
-  const response = await orderService.update(options);
+  const response = await orderService.updateOrderStatus(options);
 
   return res.status(200).json({ data: response });
 }
 
 async function DELETE(req: NextApiRequest, res: NextApiResponse) {
-  const orderId = req.query.orderId as string
+  const dateId = req.query.dateId as string
 
-  const response = await orderService.delete({
-    orderId: orderId
+  const response = await orderService.deleteSegment({
+    dateId: dateId
   });
 
   return res.status(200).json({ data: response });

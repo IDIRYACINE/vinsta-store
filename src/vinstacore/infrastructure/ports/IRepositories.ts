@@ -51,6 +51,7 @@ export module Repository {
         id: string,
         status: string,
         createdAt: string,
+        restock?: boolean,
         total: number
     }
 

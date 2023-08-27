@@ -1,6 +1,6 @@
 import { OrderMapper } from "@vinstacore/domains/orders";
 import { CreateResponse, DeleteResponse, Repository, UpdateResponse } from "@vinstacore/infrastructure/ports";
-import { CreateOrderProps, DeleteOrderProps, IOrderRepostiroy, FindOrderProps, LoadOrderProps, LoadOrderResponse, UpdateOrderProps, FindOrderResponse } from "@vinstacore/infrastructure/ports/services/OrdersServicePort";
+import { CreateOrderProps, DeleteOrderProps, IOrderRepostiroy, FindOrderProps, LoadOrderProps, LoadOrderResponse, UpdateOrderStatusProps, FindOrderResponse, DeleteOrderResponse, DeleteOrderSegmentProps } from "@vinstacore/infrastructure/ports/services/OrdersServicePort";
 
 import { Database, get, ref, remove, set, update } from "firebase/database";
 
@@ -92,17 +92,35 @@ export class FirebaseOrderRepository implements IOrderRepostiroy {
 
     }
 
-    async update(options: UpdateOrderProps): Promise<UpdateResponse> {
-        const orderRef = ref(this.db, `${this.orderCollection}/${options.orderId.value}`)
+    async updateOrderStatus(options: UpdateOrderStatusProps): Promise<UpdateResponse> {
+        const statusRef = ref(this.db, `${this.statusCollection}/${options.orderId.value}`)
 
-        const updateData: Partial<Repository.Order> = options.updatedFields;
+        const orderRef = ref(this.db, `${this.orderCollection}/${options.dateId}/${options.orderId.value}`)
+
+        const newHeader :Partial<Repository.OrderHeader> ={
+            status: options.orderStatus
+        }
+
+        const updateData: any = {
+            header: newHeader
+        };
 
 
-        return update(orderRef, updateData).then(() => ({}));
+        update(orderRef, updateData)
+
+        return update(statusRef, newHeader).then(() => ({}));
     }
 
     async delete(options: DeleteOrderProps): Promise<DeleteResponse> {
         const orderRef = ref(this.db, `${this.orderCollection}/${options.orderId.value}`)
+
+        return remove(orderRef).then(() => ({}));
+    }
+
+
+    async deleteSegment(options: DeleteOrderSegmentProps): Promise<DeleteOrderResponse> {
+        const orderRef = ref(this.db, `${this.orderCollection}/${options.dateId}`)
+        const statusRef = ref(this.db, `${this.statusCollection}/${options.dateId}`)
 
         return remove(orderRef).then(() => ({}));
     }

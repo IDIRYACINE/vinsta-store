@@ -1,21 +1,33 @@
+import { BaseContainedButton } from "@adminapp/components/commons/Buttons"
 import { Card, Divider, Typography, Box, TextField } from "@mui/material"
-import { Repository } from "@vinstacore/index"
+import { EOrderStatus, Repository, restockOrderApi } from "@vinstacore/index"
+import { restockOrder } from "@vinstacore/store/admin/slices/ordersSlice"
+import { useAppDispatch } from "@vinstacore/store/clientHooks"
 import { UpdateOrderStatusButton } from "./UpdateOrderStatusDialog"
 
 interface ShippingCardProps {
     address: Repository.Contacts,
-    status : string
+    status: string,
+    restocked?: boolean,
+    orderId : string,
+    dateId : string
 }
 
-function ShippingCard({ address,status }: ShippingCardProps) {
+function ShippingCard({ address, status,restocked,orderId,dateId }: ShippingCardProps) {
     const className = "p-4 flex flex-col justify-center items-start w-96"
 
     const shipingPrice = `${address.shipingPrice} Da`
 
+    const displayRestockButton = restocked  &&( status === EOrderStatus.cancelled  )
 
     return (
         <Card className={className}>
-            <Typography variant="h6">Shipping</Typography>
+            <div className="w-full flex flex-row justify-between items-center">
+                <Typography variant="h6">Shipping</Typography>
+                {
+                    displayRestockButton ? <RestockButton dateId={dateId} orderId={orderId}/>: null
+                }
+            </div>
             <Divider className="w-full mb-2" />
 
             <div className="flex flex-col mb-4 w-full">
@@ -56,6 +68,24 @@ function ShippingCard({ address,status }: ShippingCardProps) {
 
 
         </Card>
+    )
+}
+
+interface RestockButtonProps{
+    orderId : string
+    dateId:string
+}
+function RestockButton({orderId,dateId}:RestockButtonProps){
+    const dispatch = useAppDispatch()
+    
+    const restock = () => {
+        dispatch(restockOrder(orderId))
+        restockOrderApi({orderId,dateId,items:[]})
+    }
+
+    return (
+        <BaseContainedButton onClick={restock}>Restock</BaseContainedButton>
+
     )
 }
 
