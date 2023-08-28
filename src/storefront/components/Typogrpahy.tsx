@@ -1,14 +1,15 @@
-import { Container, SxProps, Theme, Typography } from "@mui/material"
+import { Container, SxProps, Theme, Typography,Accordion,AccordionSummary,AccordionDetails } from "@mui/material"
+import ExpandMoreIcon from '@mui/icons-material/Add';
 
 interface PriceDisplayProps {
     currency: string,
     price: number | string,
-    inverted : boolean 
+    inverted: boolean
 }
 
 export function PriceDisplay(props: PriceDisplayProps) {
 
-    const { price, currency,inverted } = props
+    const { price, currency, inverted } = props
 
     const bgColor = inverted ? "burlywood" : "white"
     const textColor = inverted ? "white" : "burlywood"
@@ -25,12 +26,12 @@ export function PriceDisplay(props: PriceDisplayProps) {
 interface DisplayTypographyProps {
     text: string,
     color?: string,
-    sx ?: SxProps<Theme>,
-    className? : string
+    sx?: SxProps<Theme>,
+    className?: string
 }
 
 export function DisplayTypography(props: DisplayTypographyProps) {
-    const { text, color,sx ,className} = props
+    const { text, color, sx, className } = props
 
 
     return <Typography textAlign="center" className={className} sx={sx} variant="h2" color={color}>{text}</Typography>
@@ -64,12 +65,27 @@ export function SubTitleTypograph(props: TypographProps) {
 
 }
 
+interface SandwichTypographyProps{
+    text?: string,
+    color?: string,
+    title: string
+}
+export function SandwichTypography(props: SandwichTypographyProps) {
+    const { text, color,title } = props
 
-export function SandwichTypography(props: DisplayTypographyProps) {
-    const { text, color } = props
+    return (
+        <Accordion className="bg-primary w-full" square={true}>
+            <AccordionSummary 
+                expandIcon={<ExpandMoreIcon color="secondary" />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+            >
+                <Typography color={color}>{title}</Typography>
+            </AccordionSummary>
+            <AccordionDetails >
+                <Typography color={color}>{text}</Typography>
+            </AccordionDetails>
+        </Accordion>
 
-
-    return (<Container>
-        <Typography color={color}>{text}</Typography>
-    </Container>)
+    )
 }

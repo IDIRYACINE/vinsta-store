@@ -1,4 +1,4 @@
-import { Card, CardActionArea, CardContent, CardMedia, Typography } from "@mui/material";
+import { Card, CardActionArea, CardContent, CardMedia, Paper,Typography } from "@mui/material";
 import { useAppDispatch } from "@vinstacore/store/clientHooks";
 import { setDisplayedProduct } from "@vinstacore/store/customer/slices/productsSlice";
 import { Repository } from "@vinstacore/index";
@@ -30,9 +30,7 @@ export function ProductCard(props: ProductCardProps) {
                     title={product.name}
                 />
 
-                <CardContent className="flex flex-col justify-end items-start absolute top-0 left-0 w-full h-full backdrop-brightness-50">
-
-                    <div className="border-2 border-white flex flex-row p-1">
+                <CardContent className="bg-primary flex flex-col justify-center" >
                         <Typography color="white" gutterBottom variant="h5" component="div">
                             {product.name}
                         </Typography>
@@ -40,7 +38,6 @@ export function ProductCard(props: ProductCardProps) {
                         <Typography color="white" variant="body2" >
                             {product.price} DA
                         </Typography>
-                    </div>
                 </CardContent>
             </CardActionArea>
         </Card>

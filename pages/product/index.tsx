@@ -15,21 +15,14 @@ import { convertProductToCartItem, goBack } from "@storefront/modules/products/l
 
 export default function Page() {
 
-    const continerStyle = {
-        "display": "flex",
-        "flexDirection": "row",
-        "justifyContent": "center",
-        "alignItems": "center",
-        "height": "100vh",
-        "width": "100vw"
-    }
+   
 
     const product = useAppSelector(state => state.customerProducts.displayedProduct)
     const categoryId = useAppSelector(state => state.customerProducts.displayedCategory!)
     const dispatch = useAppDispatch()
     const router = useRouter()
 
-    const textColor = "black"
+    const textColor = "white"
 
     if (product == null) {
         return (<Typography>
@@ -51,28 +44,26 @@ export default function Page() {
     }
 
     const infosBoxClassName = clsx([
-        "flex flex-col justify-between items-center p-1 min-w-screen",
-        "md:min-w-screen-3/4"
+        "flex flex-col justify-between items-center p-2 min-w-screen ",
+        "md:min-w-screen-3/4 bg-primary"
     ])
 
-    const mainBoxClassName = "flex flex-col md:flex-row"
-
+    const mainBoxClassName = "flex flex-col md:flex-row mt-5"
+    
     return (
-        <Container sx={continerStyle}>
-            <Box className={mainBoxClassName}>
-                <DisplayImageRoster images={product.imageUrls} />
+        <Box className={mainBoxClassName}>
+        <DisplayImageRoster images={product.imageUrls} />
 
-                <Box className={infosBoxClassName}>
-                    <Typography variant="h2" color={textColor}>{product.name}</Typography>
-                    <PriceDisplay inverted={true} currency="DA" price={product.price} />
+        <Box className={infosBoxClassName} sx={{minHeight:"24rem"}}>
+            <Typography variant="h2" color={textColor}>{product.name}</Typography>
+            <PriceDisplay inverted={false} currency="DA" price={product.price} />
 
-                    <SandwichTypography color={textColor} text="Description" />
+            <SandwichTypography color={textColor} title="Description" text={product.description} />
 
-                    <ActionsRow {...actionsRowProps} />
+            <ActionsRow {...actionsRowProps} />
 
-                </Box>
+        </Box>
 
-            </Box>
-        </Container>
+    </Box>
     )
 }

@@ -49,9 +49,9 @@ export function DisplayImageRoster(props: DisplayImageRosterProps) {
     }
 
     return (
-        <Box sx={{ display: 'flex', flexDirection: "row" }}>
+        <Box className="flex flex-col-reverse md:flex-row">
 
-            <Box sx={{ display: 'flex', flexDirection: "column" }}>
+            <Box className="flex flex-col">
                 {images.map(image => {
                     return <DisplayImage image={image} {...previewProps} key={image.id} />
                 })}

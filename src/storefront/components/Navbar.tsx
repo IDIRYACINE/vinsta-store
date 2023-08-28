@@ -11,6 +11,7 @@ import { setProductFilters } from '@vinstacore/store/customer/slices/productsSli
 import {cartItemsCountSelector} from '@vinstacore/store/selectors'
 import { useState } from 'react';
 import { ProductFilterSearch } from './Filters';
+import Logo from '@common/Logo';
 
 interface AppDrawerProps {
     open: boolean,
@@ -72,17 +73,6 @@ export const DrawerHeader = styled('div')(({ theme }) => ({
     justifyContent: 'flex-end',
 }));
 
-export function Logo() {
-
-    return (
-        <>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                Logo
-            </Typography>
-        </>
-    )
-
-}
 
 interface AppCartButtonProps {
     onClick: () => void,
@@ -164,7 +154,7 @@ export function Navbar() {
                     }
 
                     <IconButton onClick={navigateToHome}>
-                        <Logo />
+                        <Logo color="#ffffff"/>
                     </IconButton>
                     <Box className="flex flex-row justify-evenly">
                         <AppDeliveryButton onClick={navigateToDelivery} />

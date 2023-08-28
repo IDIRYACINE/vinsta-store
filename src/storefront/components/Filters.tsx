@@ -13,12 +13,14 @@ interface ToggleFilterProps<T> {
     extractItemName: (item: T) => string,
     extractItemId: (item: T) => string,
     updateFilter: (items: T[]) => void,
-    name: string
+    name: string,
+    color? :"primary" | "secondary"
+
 }
 
 function ToggleFilterGroup<T>(props: ToggleFilterProps<T>) {
 
-    const { items, extractItemId, extractItemName, name, updateFilter } = props
+    const { items, extractItemId, extractItemName, name, updateFilter,color } = props
     const [selections, setSelections] = useState<string[]>(() => []);
 
 
@@ -38,15 +40,16 @@ function ToggleFilterGroup<T>(props: ToggleFilterProps<T>) {
 
     return (
         <div className="flex flex-col justify-center items-start w-full p-2">
-            <Typography>{name}</Typography>
+            <Typography color={color}>{name}</Typography>
             <ToggleButtonGroup
                 size="small"
+                color={color}
                 sx={{
                     width: "100%",
                     display: "grid",
-                    gridTemplateColumns: "auto auto auto auto",
-                    gridGap: "0.5rem",
-                    padding: "1rem",
+                    gridTemplateColumns: "1fr 1fr",
+                    gridGap: "0.2rem",
+                    padding: "0.5rem",
                 }}
                 value={selections}
                 onChange={handleChange}
@@ -55,7 +58,7 @@ function ToggleFilterGroup<T>(props: ToggleFilterProps<T>) {
                     items.map((item) => {
                         const id = extractItemId(item)
 
-                        return <ToggleButton key={id} value={id}>{extractItemName(item)} </ToggleButton>
+                        return <ToggleButton key={id} value={id} color={color}>{extractItemName(item)} </ToggleButton>
                     })
                 }
             </ToggleButtonGroup>
@@ -116,12 +119,13 @@ interface FilterRangeButtonProps {
     name: string,
     onChange: (value: number[]) => void,
     min: number,
-    max: number
+    max: number,
+    color? :string
 
 }
 
 function FilterRangeButton(props: FilterRangeButtonProps) {
-    const { min, max, name, onChange, } = props
+    const { min, max, name, onChange,color } = props
     const [range, setRange] = useState<number[]>([min, max]);
 
 
@@ -140,12 +144,13 @@ function FilterRangeButton(props: FilterRangeButtonProps) {
 
 
         <Container className=" flex flex-col justify-center items-start w-full p-2 ">
-            <Typography id="range-slider" >Price</Typography>
+            <Typography color={color} id="range-slider" >Price</Typography>
             <div className="flex flex-row justify-center items-center px-3 w-full">
                 <Slider
                     getAriaLabel={() => name}
                     value={range}
                     min={min}
+                    color="secondary"
                     max={max}
                     onChange={updateFilter}
                     valueLabelDisplay="auto"
@@ -173,7 +178,7 @@ export function ProductFilterSearch(props: ProductFilterSearchProps) {
 
 
     const className = clsx([
-        "flex flex-col justify-start items-center h-full py-2 overflow-y-scroll overflow-x-hidden",
+        "flex flex-col justify-start items-center h-full p-4 overflow-y-scroll overflow-x-hidden bg-primary",
         props.className
     ])
 
@@ -237,21 +242,24 @@ export function ProductFilterSearch(props: ProductFilterSearchProps) {
     const priceFilterProps = {
         name: "Price Filter",
         onChange: setPriceFilter,
+        color : "white",
         min: 100,
         max: 2000
     }
 
-    const sizeFilterProps = {
+    const sizeFilterProps:ToggleFilterProps<SizeEntity> = {
         name: "Size",
         items: sizes,
+        color : "secondary",
         extractItemName: (item: SizeEntity) => item.size.value,
         extractItemId: (item: SizeEntity) => item.id.value.toString(),
         updateFilter: setSizeFilter,
     }
 
-    const colorFilterProps = {
+    const colorFilterProps:ToggleFilterProps<ColorEntity>  = {
         name: "Color",
         items: colors,
+        color : "secondary",
         extractItemName: (item: ColorEntity) => item.color.value,
         extractItemId: (item: ColorEntity) => item.id.value.toString(),
         updateFilter: setColorFilter,

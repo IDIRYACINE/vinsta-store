@@ -22,13 +22,13 @@ export function CategoryNavigation() {
 
     return (
         <Box className="flex flex-col p-2 w-full">
-            <Typography>Categories</Typography>
+            <Typography color="secondary">Categories</Typography>
             <List>
                 {
                     categories.map((category) => {
                         return (
                             <ListItemButton key={category.id} onClick={(_) => onCategoryClick(category)}>
-                                <ListItemText primary={category.name} />
+                                <ListItemText color="white" primary={<Typography color="secondary">{category.name}</Typography>} />
                             </ListItemButton>
                         )
                     })

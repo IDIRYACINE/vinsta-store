@@ -56,7 +56,7 @@ export function ActionsRow(props: ActionsRowProps) {
 
 
     return (
-            <Button className="h-20 w-60" onClick={addToCart}>
+            <Button className="h-10 w-full bg-white" onClick={addToCart}>
                 <Box className="flex flex-row justify-evenly items-center w-full">
                     <Typography variant="body1">Add to cart</Typography>
                     <ShoppingCart />

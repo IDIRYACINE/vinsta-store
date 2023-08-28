@@ -5,6 +5,7 @@ import { useAppDispatch } from "@vinstacore/store/clientHooks";
 import { Repository } from "@vinstacore/index";
 import { useRouter } from "next/navigation";
 import { setDisplayedCategory } from "@vinstacore/store/customer/slices/productsSlice";
+import Logo from "@common/Logo";
 
 
 interface CategoryCardProps {
@@ -34,12 +35,10 @@ export function CategoryCard(props: CategoryCardProps) {
 
                 <CardContent className="flex flex-col justify-end items-start absolute top-0 left-0 w-full h-full backdrop-brightness-50">
 
-                    <div className="border-2 border-white flex flex-row p-1">
-                    <Typography  className="mr-2" variant="body2" color="white">
-                        logo
-                    </Typography>
+                    <div className="border-2 border-white flex flex-row p-1 items-center">
+                    <Logo color="#ffffff"/>
 
-                    <Typography color="white" gutterBottom variant="h5" component="div">
+                    <Typography className="ml-1" color="white" gutterBottom variant="h5" component="div">
                         {category.name}
                     </Typography>
                     </div>

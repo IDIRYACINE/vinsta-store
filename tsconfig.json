@@ -24,7 +24,8 @@
     "paths": {
       "@adminapp/*": [ "src/adminapp/*" ],
       "@vinstacore/*": [ "src/vinstacore/*" ],
-      "@storefront/*": [ "src/storefront/*" ]
+      "@storefront/*": [ "src/storefront/*" ],
+      "@common/*" : [ "src/common/*" ],
     },
     "plugins": [
       {
