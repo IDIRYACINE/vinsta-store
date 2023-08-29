@@ -27,3 +27,21 @@
 #appbar-container{
     width : 100%;
 }
+
+.app-divider{
+    border-top: 1px solid brown;
+    width: 60%;
+    position: relative;
+    margin-right: 1rem;
+}
+
+.app-divider::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: -5px;
+    right: 0;
+    width: 10px;
+    height: 10px;
+    background-color: brown;
+  }

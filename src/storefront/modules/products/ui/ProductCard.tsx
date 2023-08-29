@@ -30,7 +30,7 @@ export function ProductCard(props: ProductCardProps) {
                     title={product.name}
                 />
 
-                <CardContent className="bg-primary flex flex-col justify-center" >
+                <CardContent className="bg-primary flex flex-row justify-between" >
                         <Typography color="white" gutterBottom variant="h5" component="div">
                             {product.name}
                         </Typography>

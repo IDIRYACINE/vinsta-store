@@ -33,12 +33,13 @@ function CategoryActionsCell(props: CategoryActionsCellProps) {
 }
 interface CategoryTableCellProps {
     value: string;
+    className? : string
 }
 
 function CategoryTableCell(props: CategoryTableCellProps) {
     return (
         <TableCell>
-            <Typography> {props.value}</Typography>
+            <Typography className={props.className}> {props.value}</Typography>
         </TableCell>
     );
 }
@@ -50,7 +51,7 @@ interface CategoryImageCellProps {
 function CategoryTableImageCell(props: CategoryImageCellProps) {
     return (
         <TableCell>
-            <Box className="flex flex-row ">
+            <Box className="flex flex-row items-center">
                 <Image width="50" height="50" src={props.imageUrl} alt="" />
                 <Typography className="ml-1">{props.name}</Typography>
             </Box>
@@ -84,7 +85,7 @@ function CategoryRow(props: CategoryRowProps) {
         <TableRow >
             <CategoryTableImageCell imageUrl={item.imageUrl} name={item.name} />
             <CategoryTableCell value={item.id} />
-            <CategoryTableCell value={item.description ?? ""} />
+            <CategoryTableCell className="truncate" value={item.description ?? ""} />
             <CategoryActionsCell onDelete={handleDelete} onEdit={handleEdit} />
         </TableRow>
     );

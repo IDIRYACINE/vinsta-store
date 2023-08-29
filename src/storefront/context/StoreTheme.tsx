@@ -3,6 +3,9 @@
 import { createTheme } from "@mui/material/styles";
 import { brown } from '@mui/material/colors';
 
+const primaryMain = brown[500];
+const primaryLight = brown[300];
+
 const theme = createTheme({
   breakpoints: {
     values: {
@@ -57,14 +60,38 @@ const theme = createTheme({
         {
           props: { color: 'primary' },
           style: {
-          backgroundColor: brown[300],
+            backgroundColor: brown[300],
 
+          }
         }
-      }
       ]
-    }
+    },
 
     //
+
+    MuiToggleButton: {
+      styleOverrides: {
+        root: {
+          "&.Mui-selected": {
+            color: primaryMain,
+            backgroundColor: '#fefefe',
+            "&:hover": {
+              color: "white",
+            }
+          },
+
+        }
+      },
+      variants: [
+        {
+          props: { color: 'primary' },
+          style: {
+            color: "white"
+
+          }
+        }
+      ]
+    }
   },
 },
 );

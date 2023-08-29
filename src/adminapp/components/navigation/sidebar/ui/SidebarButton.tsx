@@ -21,7 +21,7 @@ export default function SidebarButton(props: SidebarButtonProps) {
     const router = useRouter()
 
     const activeClassName = clsx([
-        'w-full  text-white'
+        'w-full  text-white bg-primary'
     ])
 
     const passiveClassName = clsx([

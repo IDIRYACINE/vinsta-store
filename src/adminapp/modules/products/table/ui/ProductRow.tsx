@@ -38,12 +38,13 @@ function ProductActionsCell(props: ProductActionsCellProps) {
 }
 interface ProductTableCellProps {
     value: string;
+    className? : string
 }
 
 function ProductTableCell(props: ProductTableCellProps) {
     return (
         <TableCell>
-            <Typography> {props.value}</Typography>
+            <Typography className={props.className}> {props.value}</Typography>
         </TableCell>
     );
 }
@@ -55,7 +56,7 @@ interface ProductImageCellProps {
 function ProductTableImageCell(props: ProductImageCellProps) {
     return (
         <TableCell>
-            <Box className="flex flex-row ">
+            <Box className="flex flex-row items-center">
                 <Image width="50" height="50" src={props.imageUrl} alt="" />
                 <Typography className="ml-1">{props.name}</Typography>
             </Box>
@@ -88,7 +89,7 @@ function ProductRow(props: ProductRowProps) {
         <TableRow >
             <ProductTableImageCell imageUrl={item.imageUrls[0].url} name={item.name} />
             <ProductTableCell value={item.id} />
-            <ProductTableCell value={item.description ?? ""} />
+            <ProductTableCell className="truncate" value={item.description ?? ""} />
             <ProductActionsCell onDelete={handleDelete} onEdit={handleEdit} />
         </TableRow>
     );

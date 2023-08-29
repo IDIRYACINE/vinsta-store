@@ -27,7 +27,12 @@ export function CategoryGrid() {
     }
 
     return (
-        <Grid className={className} container spacing={maxHorizontalCards}>
+        <Box className="flex flex-col justify-start items-center w-full py-4 m-0">
+            <Box className="flex flex-row items-center w-full">
+                <span className="app-divider"/>
+                <Typography variant="h4">Categories</Typography>
+            </Box>
+        <Grid  className="flex flex-row justify-center items-center w-full px-4 m-0" container spacing={maxHorizontalCards}>
             {
                 categories.map(category => {
                     return (
@@ -38,5 +43,6 @@ export function CategoryGrid() {
                 })
             }
         </Grid>
+        </Box>
     )
 }

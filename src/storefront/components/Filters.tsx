@@ -58,7 +58,7 @@ function ToggleFilterGroup<T>(props: ToggleFilterProps<T>) {
                     items.map((item) => {
                         const id = extractItemId(item)
 
-                        return <ToggleButton key={id} value={id} color={color}>{extractItemName(item)} </ToggleButton>
+                        return <ToggleButton key={id} value={id} color="primary">{extractItemName(item)} </ToggleButton>
                     })
                 }
             </ToggleButtonGroup>
