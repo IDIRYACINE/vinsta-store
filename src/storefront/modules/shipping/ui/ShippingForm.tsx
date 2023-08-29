@@ -2,7 +2,7 @@
 
 import { Container, Modal, Box, Button, Typography } from "@mui/material"
 import { ActionsRow, DisplayTypography } from "src/storefront/components"
-import { useState } from "react"
+import { forwardRef, useState } from "react"
 import { Destination, Repository, DeliveryType, destinations, calculateDeliveryPrice, orderDateIdFromDate } from "@vinstacore/index"
 import { AppTextField, DestinationSelector } from "./Components"
 import { useAppDispatch, useAppSelector } from "@vinstacore/store/clientHooks"
@@ -12,28 +12,83 @@ import { createOrderApi } from "@vinstacore/index"
 import { generateOrder } from "../logic/helper"
 import { setCart, updateOrderId } from "@vinstacore/store/customer/slices/cartSlice"
 
+interface ShippingFormState {
+    destination: Destination,
+    fullName: string,
+    phoneNumber: string,
+    homeAddress: string,
+    deliveryType: DeliveryType,
+    dateId: string | null
+    orderId: string | null
+}
 
 interface ShippingFormProps {
     cart: Repository.OrderItem[],
     totalPrice: number,
+    stateObject: ShippingFormState,
+    setStateObject: (state: ShippingFormState) => void,
     onClose: () => void
 }
 export function ShippingForm(props: ShippingFormProps) {
-    const { cart, onClose } = props
-    const dispatch = useAppDispatch()
-    const [orderId, setOrderId] = useState<string | null>(null)
-    const [dateId,setDateId] = useState<string | null>(null)
-
+    const { cart, onClose, stateObject, setStateObject } = props
     const deliveryTypes = DeliveryType.values()
 
+    const dispatch = useAppDispatch()
 
-    const [destination, selectDestination] = useState<Destination>(destinations[0])
-    const [fullName, updateFullName] = useState<string>("")
-    const [phoneNumber, updatePhone] = useState<string>("")
-    const [homeAddress, onHomeAddressChange] = useState<string>("")
-    const [deliveryType, selectDeliveryType] = useState<DeliveryType>(deliveryTypes[0])
 
-    const deliveryPrice = calculateDeliveryPrice(deliveryType, destination)
+
+
+    const deliveryPrice = calculateDeliveryPrice(stateObject.deliveryType, stateObject.destination)
+
+    function updateFullName(fullName: string) {
+        setStateObject({
+            ...stateObject,
+            fullName
+        })
+    }
+
+    function updatePhone(phoneNumber: string) {
+        setStateObject({
+            ...stateObject,
+            phoneNumber
+        })
+
+    }
+
+    function selectDestination(destination: Destination) {
+        setStateObject({
+            ...stateObject,
+            destination
+        })
+    }
+
+    function selectDeliveryType(deliveryType: DeliveryType) {
+        setStateObject({
+            ...stateObject,
+            deliveryType
+        })
+    }
+
+    function onHomeAddressChange(homeAddress: string) {
+        setStateObject({
+            ...stateObject,
+            homeAddress
+        })
+    }
+
+    function setOrderId(orderId: string) {
+        setStateObject({
+            ...stateObject,
+            orderId
+        })
+    }
+
+    function setDateId(dateId: string) {
+        setStateObject({
+            ...stateObject,
+            dateId
+        })
+    }
 
 
     const formStyle = {
@@ -48,7 +103,7 @@ export function ShippingForm(props: ShippingFormProps) {
 
     const fullNameFieldProps = {
         label: "FullName",
-        value: fullName,
+        value: stateObject.fullName,
         onChange: updateFullName,
         className: "mr-2"
     }
@@ -56,19 +111,19 @@ export function ShippingForm(props: ShippingFormProps) {
 
     const phoneFieldProps = {
         label: "Phone",
-        value: phoneNumber,
+        value: stateObject.phoneNumber,
         onChange: updatePhone
     }
 
     const destinationSelectorProps = {
         destinations: destinations,
-        destination: destination,
+        destination: stateObject.destination,
         deliveryPrice,
         selectDestination: selectDestination,
         deliveryTypes: deliveryTypes,
-        deliveryType: deliveryType,
+        deliveryType: stateObject.deliveryType,
         selectDeliveryType: selectDeliveryType,
-        homeAddress: homeAddress,
+        homeAddress: stateObject.homeAddress,
         onHomeAddressChange: onHomeAddressChange
     }
 
@@ -85,12 +140,12 @@ export function ShippingForm(props: ShippingFormProps) {
     function handleShipping() {
         const order: Repository.Order = generateOrder({
             cart,
-            deliveryType,
+            deliveryType: stateObject.deliveryType,
             deliveryPrice,
-            homeAddress,
-            destination: destination,
-            customer: fullName,
-            phone: phoneNumber,
+            homeAddress: stateObject.homeAddress,
+            destination: stateObject.destination,
+            customer: stateObject.fullName,
+            phone: stateObject.phoneNumber,
         })
 
 
@@ -102,13 +157,13 @@ export function ShippingForm(props: ShippingFormProps) {
 
     }
 
-    if (orderId != null) {
+    if (stateObject.orderId != null) {
         return (
-        <Container sx={formStyle}>
-            <DisplayTypography text={`Order Id: ${orderId}`} />
-            <DisplayTypography text={`Date Id: ${dateId}`} />
+            <Container sx={formStyle}>
+                <DisplayTypography text={`Order Id: ${stateObject.orderId}`} />
+                <DisplayTypography text={`Date Id: ${stateObject.dateId}`} />
 
-        </Container>
+            </Container>
         )
     }
 
@@ -132,11 +187,24 @@ interface ShippingDialogProps {
     isModalOpen: boolean,
     closeModel: () => void
 }
-export function ShippingDialog(props:ShippingDialogProps) {
-    const {closeModel,isModalOpen} = props
+export function ShippingDialog(props: ShippingDialogProps) {
+    const { closeModel, isModalOpen } = props
 
     const cart = useAppSelector(state => selectCustomerCartItems(state))
     const totalPrice = useAppSelector(state => selectCustomerCartPrice(state))
+
+    const [stateObject, setStateObject] = useState<ShippingFormState>({
+        destination: destinations[0],
+        fullName: "",
+        phoneNumber: "",
+        homeAddress: "",
+        deliveryType: DeliveryType.values()[0],
+        dateId: null,
+        orderId: null
+
+    })
+
+    const canDisplayForm = (cart.length > 0) || (stateObject.orderId !== null)
 
 
     function onClose() {
@@ -159,19 +227,30 @@ export function ShippingDialog(props:ShippingDialogProps) {
         alignItems: "center",
     }
 
+    const shippingFormProps = {
+        cart,
+        totalPrice,
+        stateObject,
+        setStateObject,
+        onClose
+    }
+
+    const ShippingFormBuilder =  (
+                <Box sx={contentStyle} >
+                    <ShippingForm {...shippingFormProps} />
+                </Box>
+    )
+
+    let Widget : JSX.Element  = <DisplayTypography text="Cart is empty" />
+
+    Widget = canDisplayForm ? ShippingFormBuilder : Widget
+
 
     return (
         <Modal style={modalStyle} open={isModalOpen}
             onClose={onClose}>
 
-            {
-                cart.length === 0 ? <DisplayTypography text="Cart is empty" />
-                    : <Box sx={contentStyle}>
-                        <ShippingForm cart={cart} totalPrice={totalPrice} onClose={onClose} />
-                    </Box>
-            }
-
-
+            {Widget}
 
         </Modal>
     )

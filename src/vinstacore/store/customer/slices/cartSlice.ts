@@ -2,6 +2,12 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { Repository } from "@vinstacore/index";
 
+interface OrderStatePayload {
+    orderId: string;
+    dateId: string;
+
+}
+
 export interface cartState {
     cart: Repository.OrderItem[];
     editedItem: Repository.OrderItem | null;
@@ -42,6 +48,7 @@ const cartSlice = createSlice({
 
             state.cart = state.cart.filter((item) => item.productId !== targetItem.productId);
             state.totalPrice -= targetItem.price
+            state.isModalOpen = false;
 
         },
         updateItem(state, action: PayloadAction<Repository.OrderItem>) {
@@ -51,8 +58,9 @@ const cartSlice = createSlice({
             }
         },
 
-        updateOrderId(stae, action: PayloadAction<string | null>) {
-            stae.orderId = action.payload;
+        updateOrderId(state, action: PayloadAction<string | null>) {
+            state.orderId = action.payload;
+            state.cart = [];
         },
 
         openItemDialog(state, action: PayloadAction<Repository.OrderItem>) {
@@ -62,7 +70,8 @@ const cartSlice = createSlice({
         closeItemDialog(state) {
             state.isModalOpen = false;
             state.editedItem = null
-        }
+        },
+        
 
 
     }

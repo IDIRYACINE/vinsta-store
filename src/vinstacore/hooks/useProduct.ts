@@ -2,8 +2,8 @@ import { setProducts, } from "@vinstacore/store/customer/slices/productsSlice";
 import { setProducts as setProductsAdmin } from "@vinstacore/store/admin/slices/productsSlice";
 import { useAppDispatch, useAppSelector } from "@vinstacore/store/clientHooks"
 import { categoryProductsSelector } from "@vinstacore/store/selectors"
-import { useEffect, useRef } from "react"
 import { loadProductsApi } from ".."
+import useSWR from "swr";
 
 
 export const useLoadDispatchProducts = () => {
@@ -14,25 +14,26 @@ export const useLoadDispatchProducts = () => {
 
     const products = useAppSelector(state => categoryProductsSelector(state))
 
-    const mounted = useRef(false)
 
-    useEffect(() => {
-        if ((products.length === 0) && !mounted.current) {
-            loadProductsApi({ categoryId: displayedCategoryId }).then((loadedProducts) => {
-                if (loadedProducts.length === 0) return
-                dispatch(
+    const { data, error, isLoading } = useSWR({categoryId:displayedCategoryId}, loadProductsApi,{
+        revalidateOnMount: true,
+    })
 
-                    setProducts(
-                        {
-                            categoryId: displayedCategoryId,
-                            products: loadedProducts
-                        }
-                    ))
-            })
-            mounted.current = true
 
+    if ((products.length === 0)) {
+        if (data && data.length !== 0) {
+            dispatch(
+                setProducts(
+                    {
+                        categoryId: displayedCategoryId,
+                        products: data
+                    }
+                ))
         }
-    }, [dispatch, displayedCategoryId, products.length])
+    }
+
+    return { isLoading, data, error }
+
 }
 
 
@@ -44,19 +45,21 @@ export const useLoadDispatchProductsAdmin = () => {
 
     const categoryId = useAppSelector(state => state.adminProducts.displayedCategoryId)!
 
-    const mounted = useRef(false)
+    const { data, error, isLoading } = useSWR({ categoryId }, loadProductsApi,{
+        revalidateOnMount: true,
+    })
 
-    useEffect(() => {
-        if ((products.length === 0) && !mounted.current) {
-            loadProductsApi({ categoryId }).then((loadedProducts) => {
-                if (loadedProducts.length === 0) return
-                dispatch(
-                    setProductsAdmin(
-                        loadedProducts
-                    ))
-            })
-            mounted.current = true
 
+    if ((products.length === 0)) {
+        if (data && data.length !== 0) {
+            dispatch(
+                setProductsAdmin(
+                    data
+                ))
         }
-    }, [dispatch, products.length, categoryId])
+    }
+
+    return { isLoading, data, error }
+
+
 }

@@ -1,6 +1,6 @@
 'use client'
 
-import { Box } from "@mui/material"
+import { Box, CircularProgress } from "@mui/material"
 import clsx from "clsx"
 import ProductManagerHeader from "./ProductManagerHeader"
 import { ProductTable } from "../../table"
@@ -20,9 +20,15 @@ function ProductPage() {
 
     const products = useAppSelector(state => state.adminProducts.products)
 
-    useLoadDispatchProductsAdmin()
+    const {isLoading} = useLoadDispatchProductsAdmin()
 
-    
+    if(isLoading){
+        return (
+            <Box className="flex flex-row h-full w-full justify-center items-center relative">
+                <CircularProgress/>
+            </Box>
+        )
+    }
 
 
     return (

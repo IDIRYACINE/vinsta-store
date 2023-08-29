@@ -8,6 +8,9 @@ import { CategoryHeader, CategoryRow } from "./CategoryRow";
 import { Box } from "@mui/material";
 import { Repository } from "@vinstacore/index";
 
+import { useLoadDispatchCategories } from "@vinstacore/hooks/useCategory";
+import { CircularProgress } from "@mui/material";
+
 interface TableProps {
   headersData: string[];
   rowsData: Repository.Category[];
@@ -17,6 +20,9 @@ function CategoryTable(props: TableProps) {
 
   const { headersData, rowsData } = props
 
+  const { isLoading, data, error } = useLoadDispatchCategories(true)
+
+
   return (
     <Box>
       <TableContainer component={Paper}>
@@ -25,12 +31,16 @@ function CategoryTable(props: TableProps) {
             <CategoryHeader headers={headersData} />
           </TableHead>
           <TableBody>
-            {rowsData.map((row) => (
-              <CategoryRow
-                key={row.id}
-                item={row}
-              />
-            ))}
+            {
+
+              isLoading ? <CircularProgress /> :
+
+                rowsData.map((row) => (
+                  <CategoryRow
+                    key={row.id}
+                    item={row}
+                  />
+                ))}
           </TableBody>
         </Table>
       </TableContainer>

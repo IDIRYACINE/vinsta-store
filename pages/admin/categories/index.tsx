@@ -14,7 +14,6 @@ import { DeleteCategoryDialog } from "@adminapp/modules/categories/manager/ui/De
 
 export default function Page() {
 
-    useLoadDispatchCategories(true);
 
 
     const categories = useAppSelector(state => selectAdminAllCategories(state))

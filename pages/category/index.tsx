@@ -1,8 +1,8 @@
 
-import { Box, useMediaQuery } from "@mui/material";
+import { Box, CircularProgress, useMediaQuery } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
-import { useMemo} from "react";
+import { useMemo } from "react";
 import { setProductFilters } from "@vinstacore/store/customer/slices/productsSlice";
 import { ProductGrid } from "@storefront/index";
 import { useAppDispatch, useAppSelector } from "@vinstacore/store/clientHooks";
@@ -15,6 +15,7 @@ import { useLoadDispatchProducts } from "@vinstacore/hooks/useProduct";
 
 
 export default function Page() {
+    const { isLoading } = useLoadDispatchProducts()
 
     const dispatch = useAppDispatch()
 
@@ -41,8 +42,7 @@ export default function Page() {
     }, [products, filters])
 
 
-    useLoadDispatchProducts()
-   
+
 
     function onFilterChange(newFilters: IProductFilter[]) {
         dispatch(setProductFilters(newFilters))
@@ -60,6 +60,13 @@ export default function Page() {
     }
 
 
+    if (isLoading) {
+        return (
+            <Box className="flex flex-row h-full w-full justify-center items-center relative">
+            </Box>
+        )
+    }
+
     return (
         <Box className="flex flex-row h-full w-full justify-center items-center relative">
             {
@@ -67,7 +74,11 @@ export default function Page() {
 
             }
 
-            <ProductGrid {...productGridProps} />
+            {
+                isLoading ? <CircularProgress /> : <ProductGrid {...productGridProps} />
+
+            }
+
 
         </Box>
     )
