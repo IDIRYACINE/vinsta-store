@@ -18,6 +18,6 @@ export default function Page() {
 
 
 
-    return isLoading? <CircularProgress/> : <Widget/>
+    return isLoading? <div className="flex flex-row justify-center items-center"><CircularProgress/></div> : <Widget/>
 }
 

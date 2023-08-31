@@ -31,7 +31,8 @@ function OrderDetaillsPage() {
         restocked: order.header.restock,
         orderId: order.header.id,
         dateId: orderDateIdFromDate(order.header.createdAt),
-        items : order.items
+        items : order.items,
+        totalPrice : order.header.total
     }
 
     return (

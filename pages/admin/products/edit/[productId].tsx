@@ -11,7 +11,7 @@ function EditProductPage() {
 
     const {isLoading,data,error} = useLoadDispatchCategories(true)
 
-    return isLoading? <CircularProgress/> : <ProductEditor categories={categories} />
+    return isLoading? <div className="flex flex-row justify-center items-center"><CircularProgress/></div> : <ProductEditor categories={categories} />
 
 }
 

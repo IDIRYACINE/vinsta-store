@@ -16,10 +16,10 @@ export default function Home() {
 
 
     return (
-        <Box className="h-screen">
+        <Box className="h-screen w-full">
             <HeroSection />
             {
-                isLoading?  <CircularProgress/> : <CategoryGrid />
+                isLoading?  <div className="flex flex-row justify-center items-center"><CircularProgress/></div> : <CategoryGrid />
             }
             <AppFooter/>
         </Box>

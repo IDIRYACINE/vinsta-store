@@ -15,12 +15,57 @@ export default function Logo(props: LogoProps) {
     return (
         <div className={props.className} dangerouslySetInnerHTML={{
             __html: `
-      <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width=${width} height=${height} viewBox="0 0 50 50">
-      <g fill=${color} fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" 
-        stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" 
-        font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
-        <path d="M25.03125,1c-0.43573,-0.01356 -0.83004,0.25669 -0.97461,0.66797l-5.76367,16.33203h-17.29297c-0.42654,-0.00004 -0.80616,0.27046 -0.9454,0.67363c-0.13924,0.40317 -0.00745,0.85029 0.32821,1.11348l13.44531,10.56445l-5.77734,17.33203c-0.13624,0.40793 0.00358,0.85728 0.34722,1.1159c0.34364,0.25861 0.81413,0.26857 1.16841,0.02473l15.43359,-10.61133l15.43359,10.61133c0.35427,0.24384 0.82477,0.23389 1.16841,-0.02473c0.34364,-0.25861 0.48346,-0.70797 0.34722,-1.1159l-5.77734,-17.33203l13.44531,-10.56445c0.33566,-0.26319 0.46745,-0.71031 0.32821,-1.11348c-0.13924,-0.40317 -0.51886,-0.67367 -0.9454,-0.67363h-17.29297l-5.76367,-16.33203c-0.13695,-0.38963 -0.49932,-0.655 -0.91211,-0.66797zM25,5.00391l5.05664,14.32812c0.14091,0.40023 0.51905,0.66798 0.94336,0.66797h15.10742l-11.72461,9.21289c-0.33278,0.2607 -0.4657,0.70247 -0.33203,1.10352l5.05664,15.16797l-13.54102,-9.30859c-0.34121,-0.23447 -0.79161,-0.23447 -1.13281,0l-13.54102,9.30859l5.05664,-15.16797c0.13367,-0.40104 0.00075,-0.84282 -0.33203,-1.10352l-11.72461,-9.21289h15.10742c0.42431,0.00001 0.80245,-0.26774 0.94336,-0.66797zM20,22c-1.09306,0 -2,0.90694 -2,2h-0.5c-0.276,0 -0.5,0.224 -0.5,0.5v1c0,0.276 0.224,0.5 0.5,0.5h0.5v4c0,1.09306 0.90694,2 2,2h8c1.09306,0 2,-0.90694 2,-2v-2l3,2v-6l-3,2v-2c0,-1.09306 -0.90694,-2 -2,-2zM20,24h8v6h-8z"></path></g></g>
-        </svg>
+            <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+            <svg
+               viewBox="0 0 46.790002 62.53"
+               version="1.1"
+               id="svg30"
+               sodipodi:docname="Asset 2.svg"
+               width=${width}
+               height=${height}
+               inkscape:version="1.2.2 (732a01da63, 2022-12-09, custom)"
+               xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+               xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+               xmlns="http://www.w3.org/2000/svg"
+               xmlns:svg="http://www.w3.org/2000/svg">
+              <sodipodi:namedview
+                 id="namedview32"
+                 pagecolor="#ffffff"
+                 bordercolor="#000000"
+                 borderopacity="0.25"
+                 inkscape:showpageshadow="2"
+                 inkscape:pageopacity="0.0"
+                 inkscape:pagecheckerboard="0"
+                 inkscape:deskcolor="#d1d1d1"
+                 showgrid="false"
+                 inkscape:zoom="1.5475614"
+                 inkscape:cx="222.93139"
+                 inkscape:cy="98.542134"
+                 inkscape:window-width="1366"
+                 inkscape:window-height="717"
+                 inkscape:window-x="0"
+                 inkscape:window-y="27"
+                 inkscape:window-maximized="1"
+                 inkscape:current-layer="Layer_1-2" />
+              <defs
+                 id="defs4">
+                <style
+                   id="style2">.cls-1{fill:${color};}</style>
+              </defs>
+              <g
+                 id="Layer_2"
+                 data-name="Layer 2">
+                <g
+                   id="Layer_1-2"
+                   data-name="Layer 1">
+                  <path
+                     class="cls-1"
+                     d="M 46.79,0 H 37.61 L 37.35,0.84 32,18.05 28,5.26 26.61,0.84 26.35,0 h -5.91 l -0.26,0.84 -1.38,4.42 -4,12.79 v 0 L 9.44,0.84 9.18,0 H 0 l 0.26,0.84 10,31.93 -9,28.92 L 1,62.53 h 9.19 l 0.26,-0.84 4.44,-14.21 4,12.79 0.71,2.26 h 7.77 l 0.63,-2.26 4,-12.79 4.44,14.21 0.26,0.84 h 9.18 l -0.26,-0.84 -9,-28.92 9.91,-31.93 z m -27.38,32.77 4,-12.8 4,12.8 v 0 l -4,12.79 z"
+                     id="path26" />
+                </g>
+              </g>
+            </svg>
+            
       ` }} />
     );
 }

@@ -8,6 +8,7 @@ import { deleteOrdersSegment, setOrderDateId, setSelectedOrderStatus, } from "@v
 import { useAppDispatch, useAppSelector } from "@vinstacore/store/clientHooks";
 import { BaseContainedButton } from "@adminapp/components/commons/Buttons";
 import { deleteOrderSegmentApi } from "@vinstacore/api/orderApi";
+import { DeleteOrderSegmentDialog } from "../../DeleteOrderSectionDialog";
 
 
 interface OrderStatusLabelProps {
@@ -34,6 +35,8 @@ function OrderStatusTab(props: OrderStatusTabProps) {
     const displayedDateId = useAppSelector(state => state.adminOrders.displayedDateId)
     const dispatch = useAppDispatch()
 
+    const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState<boolean>(false)
+
     const handleChange = (event: SyntheticEvent, newValue: string) => {
         const newOrderStauts = props.statusList.find(el => el.name === newValue)!
 
@@ -45,12 +48,24 @@ function OrderStatusTab(props: OrderStatusTabProps) {
         dispatch(setOrderDateId(null))
     }
 
+
     const deleteOrderSegment = () => {
         deleteOrderSegmentApi({
             dateId : displayedDateId!
         }).then(() => {
             dispatch(deleteOrdersSegment())
         })
+        setIsDeleteDialogOpen(false)
+    }
+
+    const displayDeleteDialog = ( ) =>{
+        setIsDeleteDialogOpen(true)
+    }
+
+    const dialogProps = {
+        isOpen: isDeleteDialogOpen,
+        onCancel: () => setIsDeleteDialogOpen(false),
+        onConfirm: deleteOrderSegment
     }
 
     return (
@@ -65,7 +80,8 @@ function OrderStatusTab(props: OrderStatusTabProps) {
                 </Tabs>
             </Card>
             <BaseContainedButton onClick={navigateToOrdersRoot}>Back</BaseContainedButton>
-            <BaseContainedButton onClick={deleteOrderSegment}>Delete</BaseContainedButton>
+            <BaseContainedButton onClick={displayDeleteDialog}>Delete</BaseContainedButton>
+            <DeleteOrderSegmentDialog {...dialogProps}/>
 
         </div>
     )

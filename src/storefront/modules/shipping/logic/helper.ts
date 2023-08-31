@@ -9,20 +9,21 @@ interface GenerateOrderOptions {
     phone: string,
     deliveryType: DeliveryType,
     homeAddress?: string,
-    deliveryPrice: number
+    deliveryPrice: number,
+    totalPrice:number
 
 
 }
 export function generateOrder(options: GenerateOrderOptions): Repository.Order {
 
-    const { cart, destination, phone, customer,homeAddress,deliveryType,deliveryPrice } = options
+    const { cart, destination, phone, customer,homeAddress,deliveryType,deliveryPrice,totalPrice } = options
 
 
     const header: Repository.OrderHeader = {
         id: uuidv4(),
         status: EOrderStatus.onHold,
         createdAt: Date(),
-        total: cart.length
+        total: totalPrice
     }
 
     const address = deliveryType.isDeliverHome ? `${destination.name} ${homeAddress}` : destination.name

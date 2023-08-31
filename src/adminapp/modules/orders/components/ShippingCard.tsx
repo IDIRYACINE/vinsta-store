@@ -11,13 +11,13 @@ interface ShippingCardProps {
     restocked?: boolean | undefined,
     orderId: string,
     dateId: string,
-    items: Repository.OrderItem[]
+    items: Repository.OrderItem[],
+    totalPrice :number
 }
 
-function ShippingCard({ address, status, restocked, orderId, items,dateId }: ShippingCardProps) {
+function ShippingCard({ address, status, restocked, orderId,totalPrice, items,dateId }: ShippingCardProps) {
     const className = "p-4 flex flex-col justify-center items-start w-96"
 
-    const shipingPrice = `${address.shipingPrice} Da`
 
     const displayRestockButton = (restocked === undefined) && (status === EOrderStatus.cancelled)
 
@@ -44,6 +44,10 @@ function ShippingCard({ address, status, restocked, orderId, items,dateId }: Shi
                     <Typography variant="body1">Phone</Typography>
                     <Typography variant="body1">{address.phone}</Typography>
                 </div>
+                <div className="flex flex-row justify-between w-full">
+                    <Typography className="text-bold" variant="body1">Total</Typography>
+                    <Typography variant="body1">{totalPrice + address.shipingPrice} DA</Typography>
+                </div>
                 <Divider className="w-full" />
 
             </div>
@@ -52,7 +56,7 @@ function ShippingCard({ address, status, restocked, orderId, items,dateId }: Shi
                 <TextField className="mr-1" id="outlined-shipping-method" label="Shipping Method" variant="outlined" defaultValue={address.shipingType} InputProps={{
                     readOnly: true,
                 }} />
-                <TextField id="outlined-cost-shipping" label="Shipping Cost" variant="outlined" defaultValue={shipingPrice} InputProps={{
+                <TextField id="outlined-cost-shipping" label="Shipping Cost" variant="outlined" defaultValue={address.shipingPrice} InputProps={{
                     readOnly: true,
                 }} />
 

@@ -30,7 +30,7 @@ interface ShippingFormProps {
     onClose: () => void
 }
 export function ShippingForm(props: ShippingFormProps) {
-    const { cart, onClose, stateObject, setStateObject } = props
+    const { cart, onClose, stateObject,totalPrice, setStateObject } = props
     const deliveryTypes = DeliveryType.values()
 
     const dispatch = useAppDispatch()
@@ -115,6 +115,13 @@ export function ShippingForm(props: ShippingFormProps) {
         onChange: updatePhone
     }
 
+    const totalPriceFieldProps = {
+        label: "TotalPrice",
+        value: deliveryPrice + totalPrice,
+        readOnly: true
+    }
+
+
     const destinationSelectorProps = {
         destinations: destinations,
         destination: stateObject.destination,
@@ -142,6 +149,7 @@ export function ShippingForm(props: ShippingFormProps) {
             cart,
             deliveryType: stateObject.deliveryType,
             deliveryPrice,
+            totalPrice,
             homeAddress: stateObject.homeAddress,
             destination: stateObject.destination,
             customer: stateObject.fullName,
@@ -176,6 +184,7 @@ export function ShippingForm(props: ShippingFormProps) {
             </Box>
 
             <DestinationSelector {...destinationSelectorProps} />
+            <AppTextField {...totalPriceFieldProps} />
 
             <ActionsRow {...actionsRowProps} />
 

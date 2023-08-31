@@ -25,7 +25,7 @@ function ProductPage() {
     if(isLoading){
         return (
             <Box className="flex flex-row h-full w-full justify-center items-center relative">
-                <CircularProgress/>
+                <div className="flex flex-row justify-center items-center"><CircularProgress/></div>
             </Box>
         )
     }

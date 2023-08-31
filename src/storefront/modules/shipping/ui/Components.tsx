@@ -21,6 +21,12 @@ export function DestinationSelector(props: DestinationSelectorProps) {
 
 
 
+    const deliveryPriceFieldProps = {
+        label: "DeliveryPrice",
+        value: deliveryPrice ,
+        readOnly: true
+    }
+
     const updateDestination = (event: SelectChangeEvent) => {
         const targetName = event.target.value as string
         const newDestination = destinations.find(element => element.name === targetName)
@@ -84,13 +90,14 @@ export function DestinationSelector(props: DestinationSelectorProps) {
                     </Select>
                 </FormControl>
 
-                <Typography className="w-full" variant="h6">Delivery Price : {deliveryPrice}</Typography>
+                <AppTextField {...deliveryPriceFieldProps} />
 
             </Box>
             {
                 deliveryType.isDeliverHome ?
 
                     <TextField 
+                        className="mt-1"
                         label="Addresse"
                         value={homeAddress}
                         onChange={updateHomeAddress}
@@ -107,25 +114,32 @@ export function DestinationSelector(props: DestinationSelectorProps) {
 
 interface AppTextFieldProps {
     label: string;
-    value: string;
-    onChange: (value: string) => void;
+    value: string|number;
+    onChange?: (value: string) => void;
     className?: string;
+    readonly?: boolean;
 
 }
 
 export function AppTextField(props: AppTextFieldProps) {
-    const { onChange, label, value, className } = props
+    const { onChange, label, value, className,readonly } = props
 
     function handleChange(event: ChangeEvent<HTMLInputElement>) {
-        onChange(event.target.value)
+        if(onChange !== null && onChange !== undefined){
+            onChange(event.target.value)
+        }
     }
 
     return (
         <TextField
             className={className}
             label={label}
+            
             value={value}
             onChange={handleChange}
+            inputProps={
+                { readOnly:readonly??false }
+            }
         />
     )
 }

@@ -9,9 +9,9 @@ export default function Page() {
 
     const {data,isLoading,error} = useLoadDispatchOrders()
 
-    let Widget =  displayedDateId ? OrdersPage : OrdersPageTable 
+    let Widget =  displayedDateId ? OrdersPageTable : OrdersPage  
 
 
-    return isLoading ? <CircularProgress/> : <Widget/>
+    return isLoading ? <div className="flex flex-row justify-center items-center"><CircularProgress/></div> : <Widget/>
 
 }
