@@ -110,7 +110,7 @@ function ProductCreator(props: ProductCreatorProps) {
         label: "Image Url",
         onChange: (value: string[]) => imageUrls.current = value,
         className: "my-2",
-        images: imageUrls,
+        images: imageUrls.current,
     }
 
     const categoriesSelectorProps = {

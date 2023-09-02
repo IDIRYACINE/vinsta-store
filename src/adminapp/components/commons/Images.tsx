@@ -46,12 +46,13 @@ interface ImageManagerProps {
     label: string;
     onChange: (value: string[]) => void;
     className?: string;
+    images? : string[]
 }
 
 function ImageManager(props: ImageManagerProps) {
-
-    const [preview, setPreview] = useState<string>("https://images.freeimages.com/images/large-previews/bb0/cat-in-window-1218032.jpg")
-    const [images, setImages] = useState<string[]>([])
+    const defaultImage = "https://images.freeimages.com/images/large-previews/bb0/cat-in-window-1218032.jpg"
+    const [preview, setPreview] = useState<string>(props.images?.[0] ?? defaultImage)
+    const [images, setImages] = useState<string[]>(props.images ?? [])
 
     const { onChange, label,   } = props
 

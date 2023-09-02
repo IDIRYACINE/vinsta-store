@@ -4,6 +4,7 @@ import { OrderStatus } from "@adminapp/modules/orders/domain/OrderStatus";
 import { Button, MenuItem, InputLabel, FormControl, Select, SelectChangeEvent } from "@mui/material";
 import clsx from "clsx";
 import { ColorEntity, Repository, SizeEntity } from "@vinstacore/index";
+import { useState } from "react";
 
 interface BaseContainedButtonProps {
     className?: string;
@@ -65,6 +66,7 @@ interface ColorSelectorProps {
     colors: ColorEntity[];
     onChange: (colorId: string) => void;
     className?: string
+    value?: number |string
 
 }
 
@@ -72,9 +74,16 @@ function ColorsSelector(props: ColorSelectorProps) {
     const { onChange, colors, className } = props
     const labelId = "color-select-label"
 
+    const [value,setValue] = useState<ColorEntity>(findColorEntity(props.value??""))
 
     function handleChange(event: SelectChangeEvent<string>) {
+        const colorEntity = findColorEntity(event.target.value)
         onChange(event.target.value)
+        setValue(colorEntity)
+    }
+
+    function findColorEntity(colorId: string|number) : ColorEntity  {
+        return colors.find(color => color.id.equalsRaw(colorId))!
     }
 
     return (
@@ -85,6 +94,8 @@ function ColorsSelector(props: ColorSelectorProps) {
                 id="color-select"
                 label="Color"
                 onChange={handleChange}
+                value={value?.id.value.toString()}
+
             >
                 {colors.map(color => {
                     return (
@@ -103,17 +114,27 @@ function ColorsSelector(props: ColorSelectorProps) {
 interface SizeSelectorProps {
     sizes: SizeEntity[];
     onChange: (sizeId: string) => void;
-    className?: string
+    className?: string,
+    value?: number |string
 }
 
 
 function SizesSelector(props: SizeSelectorProps) {
     const { onChange, sizes, className } = props
 
+    const [value,setValue] = useState<SizeEntity>(findSizeEntity(props.value??""))
+
     const labelId = "sizes-select-label"
 
+    function findSizeEntity(sizeId: string|number) : SizeEntity  {
+        return sizes.find(size => size.id.equalsRaw(sizeId))!
+    }
+
     function handleChange(event: SelectChangeEvent<string>) {
+        const sizeEntity = findSizeEntity(event.target.value)
+
         onChange(event.target.value)
+        setValue(sizeEntity)
     }
 
     return (
@@ -123,6 +144,7 @@ function SizesSelector(props: SizeSelectorProps) {
                 labelId={labelId}
                 id="sizes-simple-select"
                 label="Size"
+                value={value?.id.value.toString()}
                 onChange={handleChange}
             >
                 {sizes.map(size => {

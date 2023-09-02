@@ -77,6 +77,7 @@ function ProductEditor(props: ProductEditorProps) {
     const sizesSelectorProps = {
         onChange: (value: string) => sizeId.current = value,
         className: "w-full mr-2",
+        value: sizeId.current,
 
         sizes
     }
@@ -84,6 +85,7 @@ function ProductEditor(props: ProductEditorProps) {
     const colorsSelectorProps = {
         onChange: (value: string) => colorId.current = value,
         className: "w-full",
+        value: colorId.current,
 
         colors
     }
@@ -135,7 +137,7 @@ function ProductEditor(props: ProductEditorProps) {
         label: "Image Url",
         onChange: (value: string[]) => imageUrls.current = value,
         className: "my-2",
-        images: imageUrls,
+        images: imageUrls.current,
     }
 
 
