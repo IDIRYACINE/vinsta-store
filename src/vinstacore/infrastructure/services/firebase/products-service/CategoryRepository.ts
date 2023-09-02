@@ -43,6 +43,7 @@ export class CategoryRepostiroy implements ICategoryRepostiroy {
             id: options.id.value,
             name: options.name.value,
             imageUrl: options.image.image,
+            description: options.description
         };
 
         const categoryDoc = doc(this.firestore, this.categoryCollection, category.id);

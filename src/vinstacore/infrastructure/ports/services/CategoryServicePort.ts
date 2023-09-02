@@ -36,7 +36,8 @@ export interface IncrementCategoryProps {
 export interface CreateCategoryProps {
     name: CategoryName,
     id: CategoryId,
-    image: ImageUrl
+    image: ImageUrl,
+    description?: string
 }
 
 export interface UpdateCategoryProps {
@@ -59,7 +60,8 @@ export interface FindCategoryProps {
 export interface CreateCategoryRawProps {
     name: string,
     id: string,
-    imageUrl: string
+    imageUrl: string,
+    description?: string
 }
 
 export interface UpdateCategoryRawProps {

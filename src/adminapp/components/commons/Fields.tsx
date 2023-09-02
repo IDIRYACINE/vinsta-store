@@ -8,12 +8,13 @@ interface AppTextFieldProps {
     onChange: (value: string) => void;
     className?: string;
     readOnly?: boolean;
+    value?: string;
 
 }
 
 function AppTextField(props: AppTextFieldProps) {
     const { onChange, label, className } = props
-    const [value, setValue] = useState<string>("")
+    const [value, setValue] = useState<string>(props.value??"")
 
     const readOnly = props.readOnly ?? false
 

@@ -3,23 +3,26 @@ import { Repository ,navigateReplace,AdminRoutes} from "@vinstacore/index";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
 
 
-interface createCategoryOptions {
+interface CreateCategoryOptions {
     name: string,
     description?: string,
     imageUrl: string,
     code: string,
-}
+} 
+
+interface UpdateCategoryOptions {
+    name: string,
+    description?: string,
+    imageUrl: string,
+    code: string,
+    productCount: number
+} 
 
 export class CategoryEditorController {
 
 
 
-    public cancel() {
-
-
-    }
-
-    public createCategory(options: createCategoryOptions): Repository.Category {
+    public createCategory(options: CreateCategoryOptions): Repository.Category {
         let category = {
             productCount: 0,
             id: options.code,
@@ -33,13 +36,13 @@ export class CategoryEditorController {
 
     }
 
-    public updateCategory(options: createCategoryOptions): Repository.Category {
+    public updateCategory(options: UpdateCategoryOptions): Repository.Category {
         let category = {
-            productCount: 0,
             id: options.code,
             name: options.name,
             imageUrl: options.imageUrl,
-            description: options.description
+            description: options.description,
+            productCount: options.productCount
         }
 
 

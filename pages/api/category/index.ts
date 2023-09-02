@@ -35,8 +35,7 @@ async function GET(req: NextApiRequest, res: NextApiResponse) {
 
 async function POST(req: NextApiRequest, res: NextApiResponse) {
   const options = req.body
-
-
+  
   const response = await categoryService.create(options);
 
   return res.status(200).json({ data: response });

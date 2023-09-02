@@ -26,6 +26,8 @@ function CategoryEditorPage() {
     const categoryId = useRef(category?.id ?? "")
     const description= useRef(category?.description ?? "")
 
+    console.log(category)
+
 
     const router = useRouter()
 
@@ -62,16 +64,17 @@ function CategoryEditorPage() {
 
     function onSave() {
 
-        let category = controller.updateCategory({
+        let updatedCategory = controller.updateCategory({
             name: name.current,
             imageUrl: imageUrl.current,
             description: description.current,
             code: categoryId.current,
+            productCount: category?.productCount ?? 0
         })
         
-        dispatch(updateCategory(category))
+        dispatch(updateCategory(updatedCategory))
 
-        updateCategoryApi(category).then((res)=>{
+        updateCategoryApi(updatedCategory).then((res)=>{
             goBack(router)
         })
         

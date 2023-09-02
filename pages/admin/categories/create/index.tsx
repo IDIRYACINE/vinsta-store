@@ -63,6 +63,7 @@ function CategoryCreatorPage() {
             code: categoryId.current,
         })
 
+
         dispatch(addCategory(category))
         createCategoryApi(category).then((res) => {
             goBack(router)
