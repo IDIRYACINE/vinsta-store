@@ -1,7 +1,7 @@
 import { UpdatedField } from "@vinstacore/commons/api.base";
-import { OrderId, OrderMapper, } from "@vinstacore/domains/orders";
+import { EOrderStatus, OrderId, OrderMapper, } from "@vinstacore/domains/orders";
 import { CategoryServicePort, ProductServicePort } from "@vinstacore/infrastructure/ports";
-import { ReclaimOrderProps, ReclaimOrderResponse, CreateOrderRawProps, CreateOrderResponse, DeleteOrderRawProps, DeleteOrderResponse, FindOrderRawProps, FindOrderResponse, FindOrderStatusResponse, LoadOrderRawProps, LoadOrderResponse, OrderServicePort, UpdateOrderRawProps, UpdateOrderResponse } from "@vinstacore/infrastructure/ports/services/OrdersServicePort";
+import { ReclaimOrderProps, ReclaimOrderResponse, CreateOrderRawProps, CreateOrderResponse, DeleteOrderRawProps, DeleteOrderResponse, FindOrderRawProps, FindOrderResponse, FindOrderStatusResponse, LoadOrderRawProps, LoadOrderResponse, OrderServicePort, UpdateOrderRawProps, UpdateOrderResponse, ClaimProductsResponse } from "@vinstacore/infrastructure/ports/services/OrdersServicePort";
 import { FirebaseOrderRepository } from "./OrderRepostiroy";
 
 
@@ -47,6 +47,12 @@ export class FirebaseOrderService implements OrderServicePort {
             dateId: options.dateId
         })
 
+        this.updateOrderStatus({
+            orderId: options.orderId,
+            orderStatus: EOrderStatus.cancelled,
+            dateId: options.dateId
+        })
+
         return {}
     }
 
@@ -64,9 +70,6 @@ export class FirebaseOrderService implements OrderServicePort {
 
     async create(options: CreateOrderRawProps): Promise<CreateOrderResponse> {
 
-        this.updateProductListings(options);
-
-
         return this.ordersRepo.create({
             orderId: new OrderId(options.orderId),
             order: this.orderMapper.toDomain(options.order)
@@ -75,10 +78,10 @@ export class FirebaseOrderService implements OrderServicePort {
 
     }
 
-    private async updateProductListings(options: CreateOrderRawProps) {
+    async claimProducts(options: ReclaimOrderProps) : Promise<ClaimProductsResponse> {
         const updatedCategories: { [key: string]: { total: number; items: string[]; }; } = {};
 
-        options.order.items.forEach(item => {
+        options.items.forEach(item => {
             let category = updatedCategories[item.categoryId];
 
             if (category === undefined) {
@@ -110,6 +113,15 @@ export class FirebaseOrderService implements OrderServicePort {
             })
             );
         }
+
+
+        this.updateOrderStatus({
+            orderId: options.orderId,
+            orderStatus: EOrderStatus.confirmed,
+            dateId: options.dateId
+        })
+
+        return {}
     }
 
     async updateOrderStatus(options: UpdateOrderRawProps): Promise<UpdateOrderResponse> {

@@ -22,7 +22,7 @@ const initialState: OrdersState = {
     editedOrder: null,
     displayedDateId: null,
     isModalOpen: false,
-    selectedOrderStatus: orderStatusfromString("confirmed")
+    selectedOrderStatus: orderStatusfromString("onHold")
 };
 
 const ordersSlice = createSlice({

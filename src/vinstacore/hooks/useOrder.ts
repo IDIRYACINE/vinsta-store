@@ -1,9 +1,9 @@
+import { baseOrderApi,loadOrdersApi } from "@vinstacore/api/orderApi"
 import { setOrders } from "@vinstacore/store/admin/slices/ordersSlice"
 import { useAppDispatch } from "@vinstacore/store/clientHooks"
 import { useRouter } from "next/router"
 import {  useEffect, useState } from "react"
 import useSWR from "swr"
-import { baseApi, loadOrdersApi } from ".."
 
 
 export const useLoadOrderIdParam = () => {
@@ -22,13 +22,14 @@ export const useLoadOrderIdParam = () => {
 
 
 export const useLoadDispatchOrders = () => {
-    const { data, error, isLoading } = useSWR(baseApi, loadOrdersApi,{
+    const { data, error, isLoading } = useSWR(baseOrderApi, loadOrdersApi,{
         revalidateOnMount: true,
     })
 
     const dispatch = useAppDispatch()
 
     if(data){
+        console.log(data)
         dispatch(setOrders(data))
     }
 

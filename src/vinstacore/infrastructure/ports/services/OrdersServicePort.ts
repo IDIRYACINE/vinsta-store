@@ -10,6 +10,7 @@ export interface OrderServicePort {
     load(options: LoadOrderRawProps): Promise<LoadOrderResponse>
     reclaim(options: ReclaimOrderRawProps): Promise<ReclaimOrderResponse>
     trackOrderstatus(options: FindOrderRawProps): Promise<FindOrderStatusResponse> 
+    claimProducts(options: ReclaimOrderRawProps) : Promise<ClaimProductsResponse>
 
 }
 
@@ -76,6 +77,8 @@ export interface ReclaimOrderRawProps { }
 export interface LoadOrderRawProps { }
 
 export interface CreateOrderResponse { }
+
+export interface ClaimProductsResponse { }
 
 export interface UpdateOrderResponse { }
 

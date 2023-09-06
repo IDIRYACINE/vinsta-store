@@ -38,11 +38,11 @@ interface LoadOrderStatusApiOptions {
     dateId:string|number
 }
 
-const baseApi = `${baseUrl}/api/order`
+export const baseOrderApi = `${baseUrl}/api/order`
 
 
 export async function findOrderStatusApi(props: LoadOrderStatusApiOptions): Promise<string> {
-    const targetUrl = `${baseApi}/${props.orderId}?dateId=${props.dateId}`
+    const targetUrl = `${baseOrderApi}/${props.orderId}?dateId=${props.dateId}`
     let response = await fetch(targetUrl, {
         method: "GET",
 
@@ -54,7 +54,7 @@ export async function findOrderStatusApi(props: LoadOrderStatusApiOptions): Prom
 }
 
 export async function loadOrdersApi(): Promise<Repository.OrderTreasure[]> {
-    let response = await fetch(baseApi, {
+    let response = await fetch(baseOrderApi, {
         method: "GET",
     });
 
@@ -65,7 +65,7 @@ export async function loadOrdersApi(): Promise<Repository.OrderTreasure[]> {
 
 
 export async function createOrderApi(options: CreateOrderApiOptions) {
-    const response = await fetch(baseApi, {
+    const response = await fetch(baseOrderApi, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -77,7 +77,7 @@ export async function createOrderApi(options: CreateOrderApiOptions) {
 }
 
 export async function updateOrderStatusApi(options: UpdateOrderStatusApiOptions) {
-    const response = await fetch(baseApi, {
+    const response = await fetch(baseOrderApi, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
@@ -89,7 +89,7 @@ export async function updateOrderStatusApi(options: UpdateOrderStatusApiOptions)
 }
 
 export async function deleteOrderApi(options: DeleteOrderApiOptions) {
-    const response = await fetch(`${baseApi}?orderId=${options.orderId}&&dateId=${options.dateId}`, {
+    const response = await fetch(`${baseOrderApi}?orderId=${options.orderId}&&dateId=${options.dateId}`, {
         method: "DELETE",
     });
 
@@ -97,7 +97,7 @@ export async function deleteOrderApi(options: DeleteOrderApiOptions) {
 }
 
 export async function deleteOrderSegmentApi(options:DeleteOrderSegmentApiOptions){
-    const response = await fetch(`${baseApi}?dateId=${options.dateId}`, {
+    const response = await fetch(`${baseOrderApi}?dateId=${options.dateId}`, {
         method: "DELETE",
     });
 
@@ -106,7 +106,20 @@ export async function deleteOrderSegmentApi(options:DeleteOrderSegmentApiOptions
 
 
 export async function restockOrderApi(options: RestockOrderApiOptions) {
-    const response = await fetch(`${baseApi}/reclaim`, {
+    const response = await fetch(`${baseOrderApi}/restock`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(options),
+    });
+
+    return response.json();
+}
+
+
+export async function claimOrderApi(options: RestockOrderApiOptions) {
+    const response = await fetch(`${baseOrderApi}/claim`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",

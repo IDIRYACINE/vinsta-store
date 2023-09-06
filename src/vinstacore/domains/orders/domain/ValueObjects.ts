@@ -1,5 +1,4 @@
-import { ColorEntity, SizeEntity } from '@vinstacore/domains/product'
-import { IOrderRepostiroy } from '@vinstacore/infrastructure/ports'
+
 import { Repository } from '@vinstacore/infrastructure/ports/IRepositories'
 
 
@@ -11,7 +10,7 @@ export class OrderId {
     }
 }
 
-export enum EOrderStatus { confirmed = "confirmed", declined = "declined", cancelled = "cancelled", onHold = "onHold" }
+export enum EOrderStatus { confirmed = "confirmed",cancelled = "cancelled", onHold = "onHold" }
 
 export class OrderStatus {
     constructor(public readonly value: EOrderStatus) { }
@@ -20,8 +19,6 @@ export class OrderStatus {
         switch (value) {
             case 'confirmed':
                 return new OrderStatus(EOrderStatus.confirmed)
-            case 'declined':
-                return new OrderStatus(EOrderStatus.declined)
             case 'cancelled':
                 return new OrderStatus(EOrderStatus.cancelled)
             case 'onHold':

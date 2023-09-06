@@ -1,9 +1,9 @@
 import { BaseContainedButton } from "@adminapp/components/commons/Buttons"
 import { Card, Divider, Typography, Box, TextField } from "@mui/material"
-import { EOrderStatus, Repository, restockOrderApi } from "@vinstacore/index"
-import { restockOrder } from "@vinstacore/store/admin/slices/ordersSlice"
+import { claimOrderApi, EOrderStatus, Repository, restockOrderApi } from "@vinstacore/index"
+import { restockOrder, updateOrderStatus } from "@vinstacore/store/admin/slices/ordersSlice"
 import { useAppDispatch } from "@vinstacore/store/clientHooks"
-import { UpdateOrderStatusButton } from "./UpdateOrderStatusDialog"
+import { orderStatusList } from "../domain/OrderStatus"
 
 interface ShippingCardProps {
     address: Repository.Contacts,
@@ -12,22 +12,32 @@ interface ShippingCardProps {
     orderId: string,
     dateId: string,
     items: Repository.OrderItem[],
-    totalPrice :number
+    totalPrice: number
 }
 
-function ShippingCard({ address, status, restocked, orderId,totalPrice, items,dateId }: ShippingCardProps) {
+function ShippingCard({ address, status, restocked, orderId, totalPrice, items, dateId }: ShippingCardProps) {
     const className = "p-4 flex flex-col justify-center items-start w-96"
 
 
-    const displayRestockButton = (restocked === undefined) && (status === EOrderStatus.cancelled)
+    const displayRestockButton = (restocked === undefined) && (status === EOrderStatus.confirmed)
+    const displayClaimButton = (restocked === undefined) && (status === EOrderStatus.onHold)
+
+    const ActionButton = () => {
+        if (displayRestockButton) {
+            return <RestockButton dateId={dateId} orderId={orderId} items={items} />
+        }
+        if (displayClaimButton) {
+            return <ClaimButton dateId={dateId} orderId={orderId} items={items}/>
+        }
+
+        return null
+    }
 
     return (
         <Card className={className}>
             <div className="w-full flex flex-row justify-between items-center">
                 <Typography variant="h6">Shipping</Typography>
-                {
-                    displayRestockButton ? <RestockButton dateId={dateId} orderId={orderId} items={items} /> : null
-                }
+                <ActionButton />
             </div>
             <Divider className="w-full mb-2" />
 
@@ -63,11 +73,6 @@ function ShippingCard({ address, status, restocked, orderId,totalPrice, items,da
             </div>
             <Divider className="w-full mb-2 mt-2" />
 
-
-            <UpdateOrderStatusButton status={status} />
-
-
-
         </Card>
     )
 }
@@ -75,9 +80,9 @@ function ShippingCard({ address, status, restocked, orderId,totalPrice, items,da
 interface RestockButtonProps {
     orderId: string
     dateId: string,
-    items : Repository.OrderItem[]
+    items: Repository.OrderItem[]
 }
-function RestockButton({ orderId, dateId,items }: RestockButtonProps) {
+function RestockButton({ orderId, dateId, items }: RestockButtonProps) {
     const dispatch = useAppDispatch()
 
     const restock = () => {
@@ -87,6 +92,22 @@ function RestockButton({ orderId, dateId,items }: RestockButtonProps) {
 
     return (
         <BaseContainedButton onClick={restock}>Restock</BaseContainedButton>
+
+    )
+}
+
+function ClaimButton({ orderId, dateId, items }: RestockButtonProps) {
+    const dispatch = useAppDispatch()
+
+    const status = orderStatusList.find(status => status.name === EOrderStatus.confirmed)!
+
+    const claim = () => {
+        dispatch(updateOrderStatus({ orderId, status}))
+        claimOrderApi({ orderId, dateId, items })
+    }
+
+    return (
+        <BaseContainedButton onClick={claim}>Confirm</BaseContainedButton>
 
     )
 }
