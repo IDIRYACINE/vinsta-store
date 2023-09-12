@@ -17,7 +17,7 @@ module.exports = {
         "screen-3/4" : "40vw"
       },
       minHeight : {
-        "h-96" : "24rem",
+        "96" : "24rem",
         "screen-1/2" : "50vh",
       },
       colors : {

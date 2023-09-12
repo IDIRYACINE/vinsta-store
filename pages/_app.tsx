@@ -5,7 +5,7 @@ import { usePathname, } from 'next/navigation';
 import { AdminLayout } from '@adminapp/components/context/AdminLayout';
 import { StoreLayout } from '@storefront/context/StoreLayout';
 import { UserProvider } from '@auth0/nextjs-auth0/client';
-
+import Head from 'next/head'
 import './globals.css';
 import { Provider } from 'react-redux';
 import { store } from '@vinstacore/store/store';
@@ -26,17 +26,26 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
     const Layout = isAdminPath ? AdminLayout : StoreLayout;
 
     return (
+
         <Provider store={store}>
 
             <UserProvider>
                 <Layout>
                     <div id="app-content">
+                        <Head >
+                            <title>Vinstaverse</title>
+
+                            <meta property="og:title" content="Vinstaverse" key="title" />
+
+                        </Head>
                         <Component {...pageProps} />
                     </div>
                 </ Layout >
 
             </UserProvider>
         </Provider>
+
+
     )
 
 

@@ -11,13 +11,14 @@ import { Panel } from "@vinstacore/index";
 
 interface SidebarButtonProps {
     panel: Panel;
+    toggleDrawer? : () => void
 }
 
 
 export default function SidebarButton(props: SidebarButtonProps) {
     const selectedPanelId = useAppSelector(state => state.adminNavigation.selectedId)
     const dispatch = useAppDispatch()
-
+    const {toggleDrawer} = props
     const router = useRouter()
 
     const activeClassName = clsx([
@@ -35,6 +36,10 @@ export default function SidebarButton(props: SidebarButtonProps) {
     function handleClick() {
         dispatch(setActivePanel(props.panel.id))
         router.replace(props.panel.path.value)
+        if(toggleDrawer){
+            toggleDrawer()
+
+        }
     }
 
     return (

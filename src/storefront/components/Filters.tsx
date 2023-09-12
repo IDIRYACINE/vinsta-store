@@ -167,10 +167,11 @@ function FilterRangeButton(props: FilterRangeButtonProps) {
 interface ProductFilterSearchProps {
     onFilterChange: (filters: IProductFilter[]) => void,
     className?: string,
-    filters: IProductFilter[]
+    filters: IProductFilter[],
+    toggleDrawer?: () => void
 }
 export function ProductFilterSearch(props: ProductFilterSearchProps) {
-    const { onFilterChange } = props
+    const { onFilterChange,toggleDrawer } = props
     let filters = [...props.filters]
 
     
@@ -269,7 +270,7 @@ export function ProductFilterSearch(props: ProductFilterSearchProps) {
         <Paper className={className}>
             <Toolbar />
 
-            <CategoryNavigation />
+            <CategoryNavigation toggleDrawer={toggleDrawer} />
 
             {isInProductPage ? <FilterRangeButton {...priceFilterProps} />
                 : null}

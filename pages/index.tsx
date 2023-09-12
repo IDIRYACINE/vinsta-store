@@ -19,7 +19,7 @@ export default function Home() {
         <Box className="h-screen w-full">
             <HeroSection />
             {
-                isLoading?  <div className="flex flex-row justify-center items-center"><CircularProgress/></div> : <CategoryGrid />
+                isLoading?  <div className="flex min-h-96 flex-row justify-center items-center"><CircularProgress/></div> : <CategoryGrid />
             }
             <AppFooter/>
         </Box>

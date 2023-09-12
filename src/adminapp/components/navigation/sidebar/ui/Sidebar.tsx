@@ -6,8 +6,10 @@ import { useAppSelector } from "@vinstacore/store/clientHooks"
 import { BaseContainedButton } from "@adminapp/components/commons/Buttons"
 import { useRouter } from "next/navigation"
 
-
-export default function Sidebar() {
+interface SidebarProps {
+    toggleDrawer?: () => void
+}
+export default function Sidebar({toggleDrawer}: SidebarProps) {
 
     const panels = useAppSelector(state => state.adminNavigation.panels)
     const router = useRouter()
@@ -19,6 +21,10 @@ export default function Sidebar() {
 
     function Logout(){
         router.replace("/api/auth/logout")
+        if(toggleDrawer){
+            toggleDrawer()
+
+        }
     }
 
 
@@ -26,7 +32,7 @@ export default function Sidebar() {
         <aside className={className}>
             {
                 panels.map((item, index) => {
-                    return (<SidebarButton panel={item} key={index}  ></SidebarButton>)
+                    return (<SidebarButton panel={item} key={index} toggleDrawer={toggleDrawer} ></SidebarButton>)
                 })
             }
             <BaseContainedButton onClick={Logout} className="w-full">

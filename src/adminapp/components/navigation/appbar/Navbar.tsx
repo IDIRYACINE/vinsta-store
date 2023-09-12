@@ -40,7 +40,7 @@ export default function Navbar({openDrawer,toggleDrawer,isSmallScreen}: NavbarPr
                 </Toolbar>
             </AppBar>
             <Toolbar />
-            <AppDrawer open={openDrawer} toggleDrawer={toggleDrawer} drawerWidth={drawerWidth}/>
+            <AppDrawer open={openDrawer} isSmallScreen={isSmallScreen} toggleDrawer={toggleDrawer} drawerWidth={drawerWidth}/>
         </div>
 
     )
@@ -51,12 +51,13 @@ interface AppDrawerProps {
     open: boolean,
     toggleDrawer: () => void,
     drawerWidth : string,
+    isSmallScreen: boolean,
 
 }
 
 function AppDrawer(props: AppDrawerProps) {
 
-    const { open, toggleDrawer,drawerWidth } = props
+    const { open, toggleDrawer,drawerWidth,isSmallScreen } = props
 
 
 
@@ -81,7 +82,7 @@ function AppDrawer(props: AppDrawerProps) {
             </DrawerHeader>
             <Divider />
 
-            <Sidebar />
+            <Sidebar toggleDrawer={isSmallScreen? toggleDrawer : undefined}/>
         </Drawer>
     )
 }

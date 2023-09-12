@@ -7,14 +7,19 @@ import {   activeCategorySelector ,} from "@vinstacore/store/selectors"
 import { Repository } from "@vinstacore/infrastructure/ports/IRepositories"
 import { setDisplayedCategory } from "@vinstacore/store/customer/slices/productsSlice"
 
-
-export function CategoryNavigation() {
+interface CategoryNavigationProps {
+    toggleDrawer? : () => void
+}
+export function CategoryNavigation({toggleDrawer}: CategoryNavigationProps)  {
 
     const dispatch = useAppDispatch()
     const categories = useAppSelector((state) => activeCategorySelector(state))
 
     function onCategoryClick(category: Repository.Category) {
         dispatch(setDisplayedCategory(category.id))
+        if(toggleDrawer){
+            toggleDrawer()
+        }
     }
 
 

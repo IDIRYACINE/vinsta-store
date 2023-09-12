@@ -1,17 +1,18 @@
 'use client';
 
 
-import { AppBar, IconButton, Divider, Typography, Toolbar, Drawer, Box, Badge, useMediaQuery,  } from '@mui/material';
+import { AppBar, IconButton, Divider, Typography, Toolbar, Drawer, Box, Badge, useMediaQuery, } from '@mui/material';
 import { useTheme, styled } from "@mui/material/styles";
 import { ShoppingCart, Menu, DeliveryDining, ChevronLeft } from '@mui/icons-material';
 import { ClientRoutes, IProductFilter } from '@vinstacore/index';
 import { useRouter } from 'next/navigation';
-import { useAppSelector, useAppDispatch,  } from '@vinstacore/store/clientHooks';
+import { useAppSelector, useAppDispatch, } from '@vinstacore/store/clientHooks';
 import { setProductFilters } from '@vinstacore/store/customer/slices/productsSlice';
-import {cartItemsCountSelector} from '@vinstacore/store/selectors'
+import { cartItemsCountSelector } from '@vinstacore/store/selectors'
 import { useState } from 'react';
 import { ProductFilterSearch } from './Filters';
 import Logo from '@common/Logo';
+import { useInPage } from '@vinstacore/hooks/useUtility';
 
 interface AppDrawerProps {
     open: boolean,
@@ -37,6 +38,7 @@ function AppDrawer(props: AppDrawerProps) {
         onFilterChange: onFilterChange,
         className: "flex-initial w-full left-0 bottom-0",
         filters: filters,
+        toggleDrawer: toggleDrawer
     }
 
     return (
@@ -135,6 +137,7 @@ export function Navbar() {
         setDrawerState(!openDrawer);
     };
 
+    const isInProductPage = useInPage('category')
 
 
     return (
@@ -142,7 +145,7 @@ export function Navbar() {
 
             <AppBar position="fixed">
                 <Toolbar color="white" className="flex flex-row justify-between">
-                    {isSmallScreen ?
+                    {isSmallScreen && isInProductPage ?
                         <IconButton
                             color="inherit"
                             onClick={toggleDrawer}
@@ -153,8 +156,9 @@ export function Navbar() {
                         </IconButton> : null
                     }
 
+
                     <IconButton onClick={navigateToHome}>
-                        <Logo color="#ffffff"/>
+                        <Logo width="25" height="25" color="#ffffff" />
                     </IconButton>
                     <Box className="flex flex-row justify-evenly">
                         <AppDeliveryButton onClick={navigateToDelivery} />
@@ -165,7 +169,7 @@ export function Navbar() {
             </AppBar>
 
             <AppDrawer open={openDrawer} toggleDrawer={toggleDrawer} />
-            <Toolbar/>
+            <Toolbar />
 
         </>
 

@@ -1,5 +1,5 @@
 import { Repository } from "..";
-import {baseUrl, isTest} from "./config"
+import { baseUrl,isTest } from "./config";
 
 
 
