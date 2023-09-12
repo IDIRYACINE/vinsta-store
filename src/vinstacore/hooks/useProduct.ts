@@ -59,7 +59,7 @@ export const useLoadDispatchProductsAdmin = () => {
         }
     }
 
-    return { isLoading, data, error }
+    return { isLoading, data:data??[], error }
 
 
 }

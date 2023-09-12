@@ -26,7 +26,6 @@ function CategoryEditorPage() {
     const categoryId = useRef(category?.id ?? "")
     const description= useRef(category?.description ?? "")
 
-    console.log(category)
 
 
     const router = useRouter()

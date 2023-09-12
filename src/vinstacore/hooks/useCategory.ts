@@ -13,7 +13,7 @@ export const useLoadDispatchCategories = (isAdmin=false) => {
     
     const dispatch = useAppDispatch()
 
-    if(data){
+    if(data && !isLoading){
         dispatch(isAdmin? setCategoriesAdmin(data) : setCategories(data))
     }
 

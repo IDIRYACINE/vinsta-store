@@ -1,4 +1,3 @@
-"use client";
 
 import { Box, Modal, Typography,Button,Card } from "@mui/material";
 import { useAppSelector,useAppDispatch, } from "@vinstacore/store/clientHooks";

@@ -1,5 +1,4 @@
 
-import { AppBody } from "@storefront/components/Generics";
 import { CartView } from "@storefront/modules/cart/ui/CartView";
 import { RemoveCartItemDialog } from "@storefront/modules/cart/ui/RemoveItemDialog";
 import { ShippingDialog } from "@storefront/modules/shipping/ui/ShippingForm";

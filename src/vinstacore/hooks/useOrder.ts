@@ -29,7 +29,6 @@ export const useLoadDispatchOrders = () => {
     const dispatch = useAppDispatch()
 
     if(data){
-        console.log(data)
         dispatch(setOrders(data))
     }
 

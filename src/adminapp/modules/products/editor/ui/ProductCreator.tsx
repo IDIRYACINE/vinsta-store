@@ -16,6 +16,7 @@ import { useRouter } from "next/navigation"
 import { createProductApi } from "@vinstacore/index";
 import { CategoriesSelector, ColorsSelector, SizesSelector } from "src/adminapp/components/commons/Buttons";
 import { Repository, sizes, colors, ColorEntity, SizeEntity } from "@vinstacore/index";
+import { isValidId } from "@vinstacore/libs/validator";
 
 interface ProductCreatorProps {
     categories: Repository.Category[]
@@ -52,7 +53,10 @@ function ProductCreator(props: ProductCreatorProps) {
         label: "Code",
         value: productId.current,
         onChange: (value: string) => productId.current = value,
-        className: "w-full"
+        className: "w-full",
+        required : true,
+        validator : isValidId,
+        helperText : "Code can't be number or empty"
     }
 
     const descriptionProps = {

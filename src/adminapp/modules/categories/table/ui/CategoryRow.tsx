@@ -12,7 +12,7 @@ import {useRouter} from "next/navigation"
 
 
 import {   openDeleteCategoryDialog, setEditedCategory, } from "@vinstacore/store/admin/slices/categoriesSlice";
-import { useAppDispatch, useAppSelector } from "@vinstacore/store/clientHooks";
+import { useAppDispatch } from "@vinstacore/store/clientHooks";
 
 
 interface CategoryActionsCellProps {

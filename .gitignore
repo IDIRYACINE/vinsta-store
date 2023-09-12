@@ -11,4 +11,4 @@ firebaseConfig.js
 firebaseConfig.ts
 analyze
 .env.local
-vinstacore/api/config.ts
+src/vinstacore/api/config.ts

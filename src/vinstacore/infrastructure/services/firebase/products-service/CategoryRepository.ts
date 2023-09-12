@@ -73,7 +73,6 @@ export class CategoryRepostiroy implements ICategoryRepostiroy {
 
     async delete(options: DeleteCategoryProps): Promise<DeleteCategoryResponse> {
         const categoryDoc = doc(this.firestore, this.categoryCollection, options.id.value);
-
-        return deleteDoc(categoryDoc).then(() => ({}));
+        return deleteDoc(categoryDoc).then(() => ({}))
     }
 }

@@ -1,7 +1,7 @@
 'use client'
 
 import TextField from '@mui/material/TextField';
-import {  ChangeEvent, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 interface AppTextFieldProps {
     label: string;
@@ -9,12 +9,15 @@ interface AppTextFieldProps {
     className?: string;
     readOnly?: boolean;
     value?: string;
-
+    validator?: (value: string) => boolean;
+    required?: boolean;
+    helperText?: string;
 }
 
 function AppTextField(props: AppTextFieldProps) {
-    const { onChange, label, className } = props
-    const [value, setValue] = useState<string>(props.value??"")
+    const { onChange, label, className,validator } = props
+    const helperText = props.helperText ?? "error"
+    const [value, setValue] = useState<string>(props.value ?? "")
 
     const readOnly = props.readOnly ?? false
 
@@ -23,11 +26,21 @@ function AppTextField(props: AppTextFieldProps) {
         setValue(event.target.value)
     }
 
+    const validate = () => {
+        if (validator) {
+            return validator(value)
+        }
+        return false
+    }
+
     return (
         <TextField
-        InputProps={{
-            readOnly,
-          }}
+            InputProps={{
+                readOnly,
+            }}
+            required={props.required ?? false}
+            error={validate()}
+            helperText={validate() ? helperText : ""}
             className={className}
             label={label}
             value={value}
@@ -47,8 +60,8 @@ interface AppTextAreaProps {
 
 
 function AppTextArea(props: AppTextAreaProps) {
-    const { onChange, label,  rowCount,className } = props
-    const [value, setValue] = useState<string>(props.value??"")
+    const { onChange, label, rowCount, className } = props
+    const [value, setValue] = useState<string>(props.value ?? "")
 
     function handleChange(event: ChangeEvent<HTMLInputElement>) {
         onChange(event.target.value)
@@ -70,4 +83,4 @@ function AppTextArea(props: AppTextAreaProps) {
 
 
 
-export { AppTextField,AppTextArea }
+export { AppTextField, AppTextArea }

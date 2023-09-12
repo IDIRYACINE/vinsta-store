@@ -20,7 +20,6 @@ function CategoryTable(props: TableProps) {
 
   const { headersData, rowsData } = props
 
-  const { isLoading, data, error } = useLoadDispatchCategories(true)
 
 
   return (
@@ -30,18 +29,17 @@ function CategoryTable(props: TableProps) {
           <TableHead>
             <CategoryHeader headers={headersData} />
           </TableHead>
-          <TableBody>
+           <TableBody>
             {
-
-              isLoading ? <CircularProgress /> :
-
-                rowsData.map((row) => (
-                  <CategoryRow
-                    key={row.id}
-                    item={row}
-                  />
-                ))}
+              rowsData.map((row) => (
+                <CategoryRow
+                  key={row.id}
+                  item={row}
+                />
+              ))
+            }
           </TableBody>
+          
         </Table>
       </TableContainer>
     </Box>

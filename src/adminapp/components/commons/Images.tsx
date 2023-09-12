@@ -16,14 +16,15 @@ interface SingleImageFieldProps {
 
 function SingleImageField(props: SingleImageFieldProps) {
     const { onChange, label } = props
-    const [value, setValue] = useState(props.value ?? "https://images.freeimages.com/images/large-previews/bb0/cat-in-window-1218032.jpg")
-
+    const [value, setValue] = useState(props.value ?? "")
+    const defaultImage = "https://images.freeimages.com/images/large-previews/bb0/cat-in-window-1218032.jpg"
     function handleChange(event: ChangeEvent<HTMLInputElement>) {
         onChange(event.target.value)
         setValue(event.target.value)
     }
 
     const className = clsx([props.className, "w-full"])
+    const displayDefault = value === ""
 
     return (
         <Box>
@@ -34,7 +35,7 @@ function SingleImageField(props: SingleImageFieldProps) {
                 onChange={handleChange}
             />
 
-            <Image height="200" width="200" src={value} alt="preview" />
+            <Image height="200" width="200" src={displayDefault?defaultImage:value} alt="preview" />
 
         </Box>
     )

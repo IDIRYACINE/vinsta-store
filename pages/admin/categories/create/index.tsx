@@ -14,6 +14,7 @@ import { createCategoryApi } from "@vinstacore/api/categoryApi";
 import { useAppDispatch } from "@vinstacore/store/clientHooks";
 import { CategoryEditorController, goBack } from "@adminapp/modules/categories/editor/logic/Controller"
 import { CreatorActions } from "@adminapp/modules/categories/editor/ui/Actions"
+import { isValidId } from "@vinstacore/libs/validator"
 
 
 function CategoryCreatorPage() {
@@ -41,9 +42,10 @@ function CategoryCreatorPage() {
         label: "Code",
         value: categoryId.current,
         onChange: (value: string) => categoryId.current = value,
-        className: "w-full"
-
-
+        className: "w-full",
+        required : true,
+        validator : isValidId,
+        helperText : "Code can't be number or empty"
     }
 
     const descriptionProps = {

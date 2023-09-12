@@ -7,7 +7,6 @@ import { ProductTable } from "../../table"
 
 
 import { DeleteProductDialog } from "./DeleteProductDialog"
-import {  useAppSelector } from "@vinstacore/store/clientHooks"
 import { useLoadDispatchProductsAdmin } from "@vinstacore/hooks/useProduct"
 
 
@@ -18,9 +17,8 @@ function ProductPage() {
 
     const className = clsx(["p-4 flex flex-col justify-center items-center"])
 
-    const products = useAppSelector(state => state.adminProducts.products)
 
-    const {isLoading} = useLoadDispatchProductsAdmin()
+    const {isLoading,data} = useLoadDispatchProductsAdmin()
 
     if(isLoading){
         return (
@@ -34,7 +32,7 @@ function ProductPage() {
     return (
         <Box className={className}>
             <ProductManagerHeader />
-            <ProductTable headersData={headersData} rowsData={products} />
+            <ProductTable headersData={headersData} rowsData={data} />
             <DeleteProductDialog />
         </Box>
 

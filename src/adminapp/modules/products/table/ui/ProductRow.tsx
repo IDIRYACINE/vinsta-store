@@ -13,7 +13,7 @@ import Image from "next/image";
 
 
 import { openDeleteProductDialog, setEditedProduct, } from "@vinstacore/store/admin/slices/productsSlice";
-import { useAppDispatch, useAppSelector } from "@vinstacore/store/clientHooks";
+import { useAppDispatch } from "@vinstacore/store/clientHooks";
 
 
 import { useRouter } from "next/navigation";
