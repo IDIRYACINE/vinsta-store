@@ -7,13 +7,13 @@ import { ProductTable } from "../../table"
 
 
 import { DeleteProductDialog } from "./DeleteProductDialog"
-import { useLoadDispatchProductsAdmin } from "@vinstacore/hooks/useProduct"
+import { useLoadDispatchProductsAdmin } from "@vinstacore/sdk/useProduct"
 
 
 
 function ProductPage() {
 
-    const headersData = ["Product Name", "Product Id", "Description", "Action"]
+    const headersData = ["Product Image", "Product Name", "Description", "Action"]
 
     const className = clsx(["p-4 flex flex-col justify-center items-center"])
 

@@ -16,7 +16,7 @@ export class ProductMapper implements MapperBase<ProductEntity, Repository.Produ
 
         return new ProductEntity(
             {
-                name: new ProductName(raw.id),
+                name: new ProductName(raw.name),
                 description: new ProductDescription(raw.description ?? ""),
                 id: new ProductId(raw.id),
                 quantity: new ProductQuantity(raw.quantity),

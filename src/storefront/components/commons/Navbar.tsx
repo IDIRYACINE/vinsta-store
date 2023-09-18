@@ -12,7 +12,7 @@ import { cartItemsCountSelector } from '@vinstacore/store/selectors'
 import { useState } from 'react';
 import { ProductFilterSearch } from './Filters';
 import Logo from '@common/Logo';
-import { useInPage } from '@vinstacore/hooks/useUtility';
+import { useInPage } from '@vinstacore/sdk/useUtility';
 
 interface AppDrawerProps {
     open: boolean,

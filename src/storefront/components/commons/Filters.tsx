@@ -5,7 +5,7 @@ import { useState, MouseEvent,   } from "react"
 import { FilterType, IProductFilter, ProductPriceFilter, sizes, SizeEntity, ProductSizeFilter, ColorEntity, ProductColorFilter, colors } from "@vinstacore/index"
 import clsx from "clsx"
 import { CategoryNavigation } from "@storefront/components/categories/ui/CategoryNavigation"
-import { useInPage } from "@vinstacore/hooks/useUtility"
+import { useInPage } from "@vinstacore/sdk/useUtility"
 
 interface ToggleFilterProps<T> {
     items: T[],

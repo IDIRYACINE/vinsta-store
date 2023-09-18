@@ -57,8 +57,7 @@ function ProductTableImageCell(props: ProductImageCellProps) {
     return (
         <TableCell>
             <Box className="flex flex-row items-center">
-                <img width="50" height="50" src={props.imageUrl} alt="" />
-                <Typography className="ml-1">{props.name}</Typography>
+                <img width="100" height="100" src={props.imageUrl} alt="" />
             </Box>
         </TableCell>
     );
@@ -88,7 +87,7 @@ function ProductRow(props: ProductRowProps) {
     return (
         <TableRow >
             <ProductTableImageCell imageUrl={item.imageUrls[0].url} name={item.name} />
-            <ProductTableCell value={item.id} />
+            <ProductTableCell value={item.name} />
             <ProductTableCell className="truncate" value={item.description ?? ""} />
             <ProductActionsCell onDelete={handleDelete} onEdit={handleEdit} />
         </TableRow>

@@ -4,7 +4,7 @@ import { Box, CircularProgress } from "@mui/material"
 import clsx from "clsx"
 
 
-import { useLoadDispatchCategories } from "@vinstacore/hooks/useCategory"
+import { useLoadDispatchCategories } from "@vinstacore/sdk/useCategory"
 import { CategoryTable } from "@adminapp/components/categories/table"
 import CategoryManagerHeader from "@adminapp/components/categories/manager/ui/CategoryManagerHeader"
 import { DeleteCategoryDialog } from "@adminapp/components/categories/manager/ui/DeleteCategoryDialog"

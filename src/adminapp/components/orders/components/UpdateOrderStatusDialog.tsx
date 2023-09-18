@@ -7,7 +7,7 @@ import { updateOrderStatus } from "@vinstacore/store/admin/slices/ordersSlice";
 import { orderDateIdFromDate, updateOrderStatusApi } from "@vinstacore/index";
 import { OrderStatus, orderStatusList } from "../domain/OrderStatus";
 import { useState } from "react";
-import { useLoadOrderIdParam } from "@vinstacore/hooks/useOrder";
+import { useLoadOrderIdParam } from "@vinstacore/sdk/useOrder";
 import { orderSelector } from "@vinstacore/store/selectors";
 
 

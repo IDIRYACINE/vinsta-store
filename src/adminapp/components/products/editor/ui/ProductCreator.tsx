@@ -9,14 +9,15 @@ import { addProduct, } from "@vinstacore/store/admin/slices/productsSlice";
 import { useAppDispatch } from "@vinstacore/store/clientHooks";
 
 
-import { useRef,  useState } from "react"
+import { useRef } from "react"
 import { goBack, ProductEditorController } from "../logic/Controller"
 import { CreatorActions } from "./Actions"
 import { useRouter } from "next/navigation"
 import { createProductApi } from "@vinstacore/index";
 import { CategoriesSelector, ColorsSelector, SizesSelector } from "src/adminapp/components/commons/Buttons";
 import { Repository, sizes, colors, ColorEntity, SizeEntity } from "@vinstacore/index";
-import { isValidId } from "@vinstacore/libs/validator";
+import {  isValidPhoneNumber, isValidProduct } from "@vinstacore/libs/validator";
+import { v4 as uuidv4 } from 'uuid';
 
 interface ProductCreatorProps {
     categories: Repository.Category[]
@@ -27,14 +28,17 @@ function ProductCreator(props: ProductCreatorProps) {
     const { categories } = props
 
 
-    const name = useRef<string>("")
-    const productId = useRef<string>("")
-    const description = useRef<string>("")
-    const imageUrls = useRef<string[]>([])
-    const price = useRef<string>("")
-    const categoryId = useRef<string>("")
-    const colorId = useRef<string>("")
-    const sizeId = useRef<string>("")
+    const productRef = useRef({
+        name: "",
+        productId: uuidv4(),
+        description: "",
+        price: "",
+        imageUrls: [] as string[],
+        categoryId: "",
+        colorId: "",
+        sizeId: ""
+    })
+
 
     const controller = new ProductEditorController()
 
@@ -44,65 +48,61 @@ function ProductCreator(props: ProductCreatorProps) {
 
     const nameProps = {
         label: "Name",
-        value: name.current,
-        onChange: (value: string) => name.current = value,
+        value: productRef.current.name,
+        onChange: (value: string) => productRef.current.name = value,
         className: "mr-2 w-full"
-    }
-
-    const codeProps = {
-        label: "Code",
-        value: productId.current,
-        onChange: (value: string) => productId.current = value,
-        className: "w-full",
-        required : true,
-        validator : isValidId,
-        helperText : "Code can't be number or empty"
     }
 
     const descriptionProps = {
         label: "Description",
-        value: description.current,
-        onChange: (value: string) => description.current = value,
+        value: productRef.current.description,
+        onChange: (value: string) => productRef.current.description = value,
         rowCount: 4,
         className: "my-2"
     }
 
     const priceProps = {
         label: "Price",
-        value: price.current,
-        onChange: (value: string) => price.current = value,
-        className: "w-full"
+        value: productRef.current.price,
+        onChange: (value: string) => productRef.current.price = value,
+        className: "w-full",
+        enforcer : (value:string) => value.replace(/[^0-9]/g, '')
     }
 
-  
+
 
 
 
     function onSave() {
-        const color = colors.find((el) => el.equalsById(colorId.current))
 
-        const size = sizes.find((el) => el.equalsById(sizeId.current))
+        if (!isValidProduct(productRef.current)) return;
+
+
+        const color = colors.find((el) => el.equalsById(productRef.current.colorId))
+
+        const size = sizes.find((el) => el.equalsById(productRef.current.sizeId))
 
         let product = controller.createProduct({
-            name: name.current,
-            imageUrls: imageUrls.current, description: description.current,
-            code: productId.current,
+            name: productRef.current.name,
+            imageUrls: productRef.current.imageUrls,
+            description: productRef.current.description,
+            code: productRef.current.productId,
             color: (color as ColorEntity).toRaw(),
             size: (size as SizeEntity).toRaw(),
-            price: parseFloat(price.current),
+            price: parseFloat(productRef.current.price),
             quantity: 1
         })
 
         dispatch(addProduct(product))
 
-        createProductApi({ product, categoryId:categoryId.current, productId: product.id }).then((res) => {
+        createProductApi({ product, categoryId: productRef.current.categoryId, productId: product.id }).then((res) => {
             goBack(router)
         })
 
 
     }
 
-   
+
 
     const actionsProps = {
         onSave: onSave,
@@ -112,24 +112,24 @@ function ProductCreator(props: ProductCreatorProps) {
 
     const imageProps = {
         label: "Image Url",
-        onChange: (value: string[]) => imageUrls.current = value,
+        onChange: (value: string[]) => productRef.current.imageUrls = value,
         className: "my-2",
-        images: imageUrls.current,
+        images: productRef.current.imageUrls,
     }
 
     const categoriesSelectorProps = {
         categories: categories,
-        onChange: (value: string) => categoryId.current = value,
+        onChange: (value: string) => productRef.current.categoryId = value,
     }
 
     const sizesSelectorProps = {
-        onChange: (value: string) => sizeId.current = value,
+        onChange: (value: string) => productRef.current.sizeId = value,
         className: "w-full mr-2",
         sizes
     }
 
     const colorsSelectorProps = {
-        onChange: (value: string) => colorId.current = value,
+        onChange: (value: string) => productRef.current.colorId = value,
         className: "w-full",
         colors
     }
@@ -137,10 +137,7 @@ function ProductCreator(props: ProductCreatorProps) {
     return (
         <Box className="w-full h-full flex flex-col justify-center items-center p-8 ">
             <Card className="flex flex-col p-4 w-full">
-                <Box className="flex flex-row my-2 w-full">
-                    <AppTextField {...nameProps} />
-                    <AppTextField {...codeProps} />
-                </Box>
+                <AppTextField {...nameProps} />
                 <Box className="flex flex-row my-2 w-full">
                     <AppTextField {...priceProps} />
                 </Box>

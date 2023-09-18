@@ -1,5 +1,5 @@
 import { useAppSelector,  } from "@vinstacore/store/clientHooks";
-import { useLoadDispatchOrders } from "@vinstacore/hooks/useOrder";
+import { useLoadDispatchOrders } from "@vinstacore/sdk/useOrder";
 import { OrdersPage, OrdersPageTable } from "@adminapp/components/orders/components/OrdersPage";
 import { CircularProgress } from "@mui/material";
 

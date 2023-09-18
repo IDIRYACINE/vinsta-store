@@ -15,6 +15,7 @@ import { updateProduct, } from "@vinstacore/store/admin/slices/productsSlice";
 import { updateProductApi } from "@vinstacore/index"
 import { useAppDispatch, useAppSelector } from "@vinstacore/store/clientHooks";
 import { SizesSelector, ColorsSelector } from "@adminapp/components/commons/Buttons"
+import { isValidProduct } from "@vinstacore/libs/validator"
 
 
 interface ProductEditorProps {
@@ -25,9 +26,6 @@ function ProductEditor(props: ProductEditorProps) {
 
     let product = useAppSelector(state => state.adminProducts.editedProduct)
     const categoryId = useAppSelector(state => state.adminProducts.displayedCategoryId)
-    const name = useRef<string>(product?.name ?? "")
-    const productId = useRef<string>(product?.id ?? "")
-    const description = useRef<string>(product?.description ?? "")
 
     const imageUrlsProduct = () => {
         if (!product) return []
@@ -35,12 +33,21 @@ function ProductEditor(props: ProductEditorProps) {
         return product.imageUrls.map(el => el.url)
 
     }
+    
 
-    const imageUrls = useRef<string[]>(imageUrlsProduct())
 
-    const price = useRef<string>(product?.price.toString() ?? "0")
-    const colorId = useRef<string>(product?.color.id.toString() ?? "0")
-    const sizeId = useRef<string>(product?.size.id.toString() ?? "0")
+    const productRef = useRef({
+        name: product?.name ?? "",
+        productId: product?.id ?? "",
+        description: product?.description ?? "",
+        price: product?.price.toString() ?? "0",
+        imageUrls: imageUrlsProduct(),
+        categoryId: categoryId,
+        colorId: product?.color.id.toString() ?? "0",
+        sizeId: product?.size.id.toString() ?? "0"
+    })
+
+
 
     let controller = new ProductEditorController()
 
@@ -52,40 +59,31 @@ function ProductEditor(props: ProductEditorProps) {
 
     const nameProps = {
         label: "Name",
-        value: name.current,
-        onChange: (value: string) => name.current = value,
+        value: productRef.current.name,
+        onChange: (value: string) => productRef.current.name = value,
         className: "mr-2 w-full"
     }
 
-    const codeProps = {
-        label: "Code",
-        value: productId.current,
-        onChange: (value: string) => productId.current = value,
-        className: "w-full",
-        readOnly: true
-
-
-    }
     const descriptionProps = {
         label: "Description",
-        value: description.current,
-        onChange: (value: string) => description.current = value,
+        value: productRef.current.description,
+        onChange: (value: string) => productRef.current.description = value,
         rowCount: 4
     }
 
 
     const sizesSelectorProps = {
-        onChange: (value: string) => sizeId.current = value,
+        onChange: (value: string) => productRef.current.sizeId = value,
         className: "w-full mr-2",
-        value: sizeId.current,
+        value: productRef.current.sizeId,
 
         sizes
     }
 
     const colorsSelectorProps = {
-        onChange: (value: string) => colorId.current = value,
+        onChange: (value: string) => productRef.current.colorId = value,
         className: "w-full",
-        value: colorId.current,
+        value: productRef.current.colorId,
 
         colors
     }
@@ -93,8 +91,8 @@ function ProductEditor(props: ProductEditorProps) {
     const priceProps = {
         label: "Price",
 
-        value: price.current,
-        onChange: (value: string) => price.current = value,
+        value: productRef.current.price,
+        onChange: (value: string) => productRef.current.price = value,
         className: "w-full"
     }
 
@@ -103,18 +101,19 @@ function ProductEditor(props: ProductEditorProps) {
 
     function onSave() {
 
-        if (!categoryId || !productId) return;
+        if (!categoryId || !productRef.current.productId || !isValidProduct(productRef.current)) return;
 
-        const color = colors.find((el) => el.equalsById(colorId.current))
-        const size = sizes.find((el) => el.equalsById(sizeId.current))
+        const color = colors.find((el) => el.equalsById(productRef.current.colorId))
+        const size = sizes.find((el) => el.equalsById(productRef.current.sizeId))
 
         let product = controller.updateProduct({
-            name: name.current,
-            imageUrls: imageUrls.current, description: description.current,
-            code: productId.current,
+            name: productRef.current.name,
+            imageUrls: productRef.current.imageUrls,
+            description: productRef.current.description,
+            code: productRef.current.productId,
             color: (color as ColorEntity).toRaw(),
             size: (size as SizeEntity).toRaw(),
-            price: parseFloat(price.current),
+            price: parseFloat(productRef.current.price),
             quantity: 1
         })
 
@@ -135,19 +134,16 @@ function ProductEditor(props: ProductEditorProps) {
 
     const imageProps = {
         label: "Image Url",
-        onChange: (value: string[]) => imageUrls.current = value,
+        onChange: (value: string[]) => productRef.current.imageUrls = value,
         className: "my-2",
-        images: imageUrls.current,
+        images: productRef.current.imageUrls,
     }
 
 
     return (
         <Box className="w-full h-full flex flex-col justify-center items-center p-8">
             <Card className="flex flex-col p-4 w-full">
-                <Box className="flex flex-row my-2 w-full">
                     <AppTextField {...nameProps} />
-                    <AppTextField {...codeProps} />
-                </Box>
                 <Box className="flex flex-row my-2 w-full">
                     <AppTextField {...priceProps} />
                 </Box>

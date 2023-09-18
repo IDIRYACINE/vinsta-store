@@ -46,7 +46,7 @@ export class ProductRepostiroy implements IRepository {
     async create(options: CreateProductProps): Promise<CreateResponse> {
 
         const productRef = ref(this.db, `${this.productCollection}/${options.categoryId.value}/${options.productId.value}`)
-
+        
         const product: Repository.Product = this.mapper.toPersistence(options.product)
 
         return set(productRef, product).then(() => ({}))

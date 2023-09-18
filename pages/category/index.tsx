@@ -9,7 +9,7 @@ import { categoryProductsSelector, } from "@vinstacore/store/selectors";
 
 import { IProductFilter } from "@vinstacore/index";
 import { ProductFilterSearch } from "@storefront/components/commons/Filters";
-import { useLoadDispatchProducts } from "@vinstacore/hooks/useProduct";
+import { useLoadDispatchProducts } from "@vinstacore/sdk/useProduct";
 import { ProductGrid } from "@storefront/components/products/ui/ProductsGrid";
 
 

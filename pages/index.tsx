@@ -3,7 +3,7 @@ import { Box, CircularProgress } from "@mui/material";
 import AppFooter from "@storefront/components/commons/Footer";
 import { CategoryGrid } from "@storefront/components/categories/ui/CategoryGrid";
 import { HeroSection } from '@storefront/components/homepage/components/HeroSection';
-import { useLoadDispatchCategories } from "@vinstacore/hooks/useCategory";
+import { useLoadDispatchCategories } from "@vinstacore/sdk/useCategory";
 
 
 
