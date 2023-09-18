@@ -1,10 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  
+  important : true,
+  corePlugins: {
+    preflight: true,
+  },
   content: [
-    './storefront/**/*.tsx',
-    './adminapp/**/*.tsx',
-    './app/**/*.tsx'
+    './src/storefront/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/adminapp/**/*.{js,ts,jsx,tsx,mdx}',
+    './pages/**/*.{js,ts,jsx,tsx,mdx}'
 
   ],
   theme: {
@@ -12,6 +15,13 @@ module.exports = {
       minWidth : {
         "screen-half" : "50vw",
         "screen-3/4" : "40vw"
+      },
+      minHeight : {
+        "96" : "24rem",
+        "screen-1/2" : "50vh",
+      },
+      colors : {
+        'primary' : '#795548',
       }
     },
   },

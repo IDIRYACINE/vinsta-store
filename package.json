@@ -6,37 +6,32 @@
   "author": "IDIRYACINE <idiryacinesp@gmail.com>",
   "license": "MIT",
   "private": true,
-  "workspaces": [
-    "adminapp",
-    "storefront",
-    "vinstacore"
-  ],
   "scripts": {
     "devturbo": "next dev --turbo",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "stats" : "whybundled analyze/webpack-stats.json > analyze/whybundeled.txt",
+    "stats": "whybundled analyze/webpack-stats.json > analyze/whybundeled.txt",
     "statsby": "whybundled by analyze/webpack-stats.json"
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^3.1.0",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
+    "@mui/icons-material": "^5.14.3",
     "@mui/material": "^5.12.0",
     "@next-auth/firebase-adapter": "^2.0.1",
     "@reduxjs/toolkit": "^1.9.5",
-    "@vinstastore/storefront": "^0.1.0",
-    "@vinstastore/vinstaadmin": "^0.1.2",
-    "@vinstastore/vinstacore": "^1.0.0",
     "clsx": "^1.2.1",
+    "firebase": "^10.2.0",
     "next": "^13.4.19",
     "next-auth": "^4.22.1",
     "react": "18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.7",
     "redux": "^4.2.1",
+    "swr": "^2.2.1",
     "tailwindcss": "3.3.1"
   },
   "devDependencies": {

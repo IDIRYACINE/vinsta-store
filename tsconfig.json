@@ -18,13 +18,14 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "incremental": true,
+    "incremental": false,
     "composite": true,
     "baseUrl": ".",
     "paths": {
-      "@adminapp/*": [ "./adminapp/src/*" ],
-      "@vinstacore/*": [ "./vinstacore/src/*" ],
-      "@storefront/*": [ "./storefront/src/*" ]
+      "@adminapp/*": [ "src/adminapp/*" ],
+      "@vinstacore/*": [ "src/vinstacore/*" ],
+      "@storefront/*": [ "src/storefront/*" ],
+      "@common/*" : [ "src/common/*" ],
     },
     "plugins": [
       {
@@ -32,12 +33,13 @@
       }
     ]
   },
+
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-  ],
+, "pages/api/auth/[...auth0].ts", "..middleware.ts"  ],
   "exclude": [
     "node_modules"
   ]
