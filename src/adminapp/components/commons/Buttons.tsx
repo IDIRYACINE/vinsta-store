@@ -1,6 +1,6 @@
 'use client'
 
-import { OrderStatus } from "@adminapp/modules/orders/domain/OrderStatus";
+import { OrderStatus } from "@adminapp/components/orders/domain/OrderStatus";
 import { Button, MenuItem, InputLabel, FormControl, Select, SelectChangeEvent } from "@mui/material";
 import clsx from "clsx";
 import { ColorEntity, Repository, SizeEntity } from "@vinstacore/index";

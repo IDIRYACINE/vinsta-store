@@ -9,7 +9,7 @@ import Paper from "@mui/material/Paper";
 import { OrderHeader, OrderRow } from "./OrderRow";
 import { Box } from "@mui/material";
 import { OrderStatusTab } from "./OrderStatus";
-import { orderStatusList } from "@adminapp/modules/orders/domain/OrderStatus";
+import { orderStatusList } from "@adminapp/components/orders/domain/OrderStatus";
 import { Repository } from "@vinstacore/index";
 import { useRouter } from "next/navigation";
 

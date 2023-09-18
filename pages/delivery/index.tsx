@@ -2,7 +2,7 @@
 import { Container } from "@mui/material"
 
 import { Box, Button, Typography } from "@mui/material"
-import { AppTextField } from "@storefront/modules/shipping/ui/Components"
+import { AppTextField } from "@storefront/components/shipping/ui/Components"
 import { findOrderStatusApi } from "@vinstacore/api/orderApi"
 import { Repository } from "@vinstacore/infrastructure/ports/IRepositories"
 import { useState } from "react"

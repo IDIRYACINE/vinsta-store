@@ -1,7 +1,7 @@
 import clsx from "clsx"
 import { useAppDispatch, useAppSelector, } from "@vinstacore/store/clientHooks";
 import { orderDatesSelector, orderHeaderSelector } from "@vinstacore/store/selectors";
-import OrdersTable from "@adminapp/modules/orders/components/table/ui/OrdersTable";
+import OrdersTable from "@adminapp/components/orders/components/table/ui/OrdersTable";
 import { OrderDateCard } from "./OrdersDateCard"
 import { setOrderDateId } from "@vinstacore/store/admin/slices/ordersSlice";
 import { Grid, Typography } from "@mui/material";

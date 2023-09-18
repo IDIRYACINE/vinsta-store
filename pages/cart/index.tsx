@@ -1,7 +1,7 @@
 
-import { CartView } from "@storefront/modules/cart/ui/CartView";
-import { RemoveCartItemDialog } from "@storefront/modules/cart/ui/RemoveItemDialog";
-import { ShippingDialog } from "@storefront/modules/shipping/ui/ShippingForm";
+import { CartView } from "@storefront/components/cart/ui/CartView";
+import { RemoveCartItemDialog } from "@storefront/components/cart/ui/RemoveItemDialog";
+import { ShippingDialog } from "@storefront/components/shipping/ui/ShippingForm";
 import {  useAppSelector } from "@vinstacore/store/clientHooks";
 import {  selectCustomerCartItems, selectCustomerCartPrice} from "@vinstacore/store/selectors";
 import {useState} from 'react'

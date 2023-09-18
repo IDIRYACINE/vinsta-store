@@ -1,5 +1,5 @@
 import { Box, Paper } from "@mui/material";
-import { DisplayTypography } from "src/storefront/components";
+import { DisplayTypography } from "src/storefront/components/commons";
 import clsx from "clsx";
 import Logo from "@common/Logo";
 

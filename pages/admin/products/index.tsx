@@ -1,6 +1,6 @@
 import { useAppSelector } from "@vinstacore/store/clientHooks";
-import CategoryGrid from "@adminapp/modules/products/manager/components/CategoryGrid";
-import { ProductPage } from "@adminapp/modules/products/manager/ui/ProductPage";
+import CategoryGrid from "@adminapp/components/products/manager/components/CategoryGrid";
+import { ProductPage } from "@adminapp/components/products/manager/ui/ProductPage";
 import { useLoadDispatchCategories } from "@vinstacore/hooks/useCategory";
 import { CircularProgress } from "@mui/material";
 

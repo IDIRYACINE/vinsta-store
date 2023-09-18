@@ -1,4 +1,4 @@
-import { orderStatusfromString } from "@adminapp/modules/orders/domain/OrderStatus";
+import { orderStatusfromString } from "@adminapp/components/orders/domain/OrderStatus";
 import { TableCell, TableRow, Typography } from "@mui/material"
 import { Repository } from "@vinstacore/index";
 import { OrderStatusLabel } from "./OrderStatus"

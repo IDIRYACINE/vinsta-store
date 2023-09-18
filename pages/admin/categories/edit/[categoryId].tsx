@@ -1,8 +1,8 @@
 
 import { AppTextField, AppTextArea } from "src/adminapp/components/commons/Fields"
 import { Card, Box } from "@mui/material"
-import { EditorActions } from "@adminapp/modules/categories/editor/ui/Actions"
-import { CategoryEditorController, goBack } from "@adminapp/modules/categories/editor/logic/Controller"
+import { EditorActions } from "@adminapp/components/categories/editor/ui/Actions"
+import { CategoryEditorController, goBack } from "@adminapp/components/categories/editor/logic/Controller"
 import { useRef } from "react"
 import { SingleImageField } from "src/adminapp/components/commons/Images"
 import { useRouter } from "next/navigation"

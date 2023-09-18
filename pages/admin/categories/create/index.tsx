@@ -12,8 +12,8 @@ import { createCategoryApi } from "@vinstacore/api/categoryApi";
 
 
 import { useAppDispatch } from "@vinstacore/store/clientHooks";
-import { CategoryEditorController, goBack } from "@adminapp/modules/categories/editor/logic/Controller"
-import { CreatorActions } from "@adminapp/modules/categories/editor/ui/Actions"
+import { CategoryEditorController, goBack } from "@adminapp/components/categories/editor/logic/Controller"
+import { CreatorActions } from "@adminapp/components/categories/editor/ui/Actions"
 import { v4 as uuidv4 } from 'uuid';
 import { isValidCategory } from "@vinstacore/libs/validator"
 

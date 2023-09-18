@@ -1,5 +1,5 @@
 
-import { ProductCreator } from "@adminapp/modules/products/editor/ui/ProductCreator";
+import { ProductCreator } from "@adminapp/components/products/editor/ui/ProductCreator";
 import { useLoadDispatchCategories } from "@vinstacore/hooks/useCategory";
 import { CircularProgress } from "@mui/material";
 

@@ -1,4 +1,4 @@
-import { ProductEditor } from "@adminapp/modules/products/editor/ui/ProductEditor";
+import { ProductEditor } from "@adminapp/components/products/editor/ui/ProductEditor";
 
 import { useLoadDispatchCategories } from "@vinstacore/hooks/useCategory";
 import { CircularProgress } from "@mui/material";

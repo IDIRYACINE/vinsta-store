@@ -1,8 +1,8 @@
 "use client"
 
-import { Container, Modal, Box, Button, Typography } from "@mui/material"
-import { ActionsRow, DisplayTypography } from "src/storefront/components"
-import { forwardRef, useState } from "react"
+import { Container, Modal, Box } from "@mui/material"
+import { ActionsRow, DisplayTypography } from "src/storefront/components/commons"
+import { useState } from "react"
 import { Destination, Repository, DeliveryType, destinations, calculateDeliveryPrice, orderDateIdFromDate } from "@vinstacore/index"
 import { AppTextField, DestinationSelector } from "./Components"
 import { useAppDispatch, useAppSelector } from "@vinstacore/store/clientHooks"
@@ -10,7 +10,7 @@ import { selectCustomerCartItems, selectCustomerCartPrice } from "@vinstacore/st
 
 import { createOrderApi } from "@vinstacore/index"
 import { generateOrder } from "../logic/helper"
-import { setCart, updateOrderId } from "@vinstacore/store/customer/slices/cartSlice"
+import { updateOrderId } from "@vinstacore/store/customer/slices/cartSlice"
 
 interface ShippingFormState {
     destination: Destination,
