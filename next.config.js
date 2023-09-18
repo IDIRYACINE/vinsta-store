@@ -60,9 +60,7 @@ const nextConfig = {
   },
 
   reactStrictMode: true,
-  images: {
-    domains: ["images.freeimages.com"],
-  },
+  
 };
 
 module.exports = withBundleAnalyzer(nextConfig);

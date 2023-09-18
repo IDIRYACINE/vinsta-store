@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import {
     TableCell,
     TableRow,
@@ -7,7 +8,6 @@ import {
 import { Repository } from "@vinstacore/index";
 
 import {Edit,Delete} from '@mui/icons-material';
-import Image from "next/image";
 import {useRouter} from "next/navigation"
 
 
@@ -52,8 +52,7 @@ function CategoryTableImageCell(props: CategoryImageCellProps) {
     return (
         <TableCell>
             <Box className="flex flex-row items-center">
-                <Image width="50" height="50" src={props.imageUrl} alt="" />
-                <Typography className="ml-1">{props.name}</Typography>
+                <img width="100" height="100" src={props.imageUrl} alt="" />
             </Box>
         </TableCell>
     );
@@ -84,7 +83,7 @@ function CategoryRow(props: CategoryRowProps) {
     return (
         <TableRow >
             <CategoryTableImageCell imageUrl={item.imageUrl} name={item.name} />
-            <CategoryTableCell value={item.id} />
+            <CategoryTableCell value={item.name} />
             <CategoryTableCell className="truncate" value={item.description ?? ""} />
             <CategoryActionsCell onDelete={handleDelete} onEdit={handleEdit} />
         </TableRow>

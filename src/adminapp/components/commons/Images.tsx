@@ -1,8 +1,8 @@
+/* eslint-disable @next/next/no-img-element */
 'use client'
 
 import { Box, TextField } from "@mui/material";
 import clsx from "clsx";
-import Image from "next/image";
 import { ChangeEvent, useState } from "react";
 import { BaseContainedButton } from "src/adminapp/components/commons/Buttons";
 
@@ -35,7 +35,7 @@ function SingleImageField(props: SingleImageFieldProps) {
                 onChange={handleChange}
             />
 
-            <Image height="200" width="200" src={displayDefault?defaultImage:value} alt="preview" />
+            <img width="200" height="200" src={displayDefault?defaultImage:value} alt="preview" />
 
         </Box>
     )
@@ -95,7 +95,7 @@ function ImageManager(props: ImageManagerProps) {
             </Box>
 
             <Box >
-                <Image height="200" width="200" src={preview} alt="preview" />
+                <img width="200" height="200"  src={preview} alt="preview" />
 
                 <Box className="flex flex-row justify-center overflow-x-auto">
                     {images.map((image, index) => {
@@ -120,7 +120,7 @@ function ContainedImage(props: ContainedImageProps) {
     const { url, onDelete } = props;
     return (
         <Box className="relative">
-            <Image height="200" width="200" src={url} alt="image" />
+            <img width="200" height="200" src={url} alt="image" />
             <BaseContainedButton className="absolute top-0 right-0" onClick={onDelete} >Delete</BaseContainedButton>
         </Box>
     )

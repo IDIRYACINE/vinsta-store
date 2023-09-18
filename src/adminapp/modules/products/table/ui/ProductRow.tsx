@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import {
 
     TableCell,
@@ -9,7 +10,6 @@ import {
 import { Repository } from "@vinstacore/index"
 
 import { Edit, Delete } from '@mui/icons-material';
-import Image from "next/image";
 
 
 import { openDeleteProductDialog, setEditedProduct, } from "@vinstacore/store/admin/slices/productsSlice";
@@ -57,7 +57,7 @@ function ProductTableImageCell(props: ProductImageCellProps) {
     return (
         <TableCell>
             <Box className="flex flex-row items-center">
-                <Image width="50" height="50" src={props.imageUrl} alt="" />
+                <img width="50" height="50" src={props.imageUrl} alt="" />
                 <Typography className="ml-1">{props.name}</Typography>
             </Box>
         </TableCell>

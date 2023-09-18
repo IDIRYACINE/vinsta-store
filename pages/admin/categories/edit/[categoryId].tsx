@@ -13,6 +13,7 @@ import {   updateCategory, } from "@vinstacore/store/admin/slices/categoriesSlic
 import {   selectAdminEditCategory, } from "@vinstacore/store/selectors";
 
 import { useAppDispatch, useAppSelector } from "@vinstacore/store/clientHooks";
+import { isValidCategory } from "@vinstacore/libs/validator"
 
 
 function CategoryEditorPage() {
@@ -20,11 +21,12 @@ function CategoryEditorPage() {
     let category = useAppSelector(state => selectAdminEditCategory(state))
     const dispatch = useAppDispatch()
 
-
-    const name = useRef(category?.name ?? "")
-    const imageUrl = useRef(category?.imageUrl ?? "")
-    const categoryId = useRef(category?.id ?? "")
-    const description= useRef(category?.description ?? "")
+    const categoryRef = useRef({
+        name : category?.name ?? "",
+        imageUrl : category?.imageUrl ?? "",
+        code: category?.id ?? "",
+        description : category?.description ?? ""
+    })
 
 
 
@@ -37,15 +39,15 @@ function CategoryEditorPage() {
     
     const nameProps = {
         label: "Name",
-        value: name.current,
-        onChange: (value: string) => name.current = value,
+        value: categoryRef.current.name,
+        onChange: (value: string) => categoryRef.current.name = value,
         className: "mr-2 w-full"
     }
 
     const codeProps = {
         label: "Code",
-        value: categoryId.current,
-        onChange: (value: string) => categoryId.current = value,
+        value: categoryRef.current.code,
+        onChange: (value: string) => categoryRef.current.code = value,
         className: "w-full",
         readOnly : true
 
@@ -53,8 +55,8 @@ function CategoryEditorPage() {
     }
     const descriptionProps = {
         label: "Description",
-        value: description.current,
-        onChange: (value: string) => description.current = value,
+        value: categoryRef.current.description,
+        onChange: (value: string) => categoryRef.current.description = value,
         rowCount: 4
     }
 
@@ -63,11 +65,15 @@ function CategoryEditorPage() {
 
     function onSave() {
 
+        if(!isValidCategory(categoryRef.current) ){
+            return
+        }
+
         let updatedCategory = controller.updateCategory({
-            name: name.current,
-            imageUrl: imageUrl.current,
-            description: description.current,
-            code: categoryId.current,
+            name: categoryRef.current.name,
+            imageUrl: categoryRef.current.imageUrl,
+            description: categoryRef.current.description,
+            code: categoryRef.current.code,
             productCount: category?.productCount ?? 0
         })
         
@@ -90,8 +96,8 @@ function CategoryEditorPage() {
 
     const imageProps = {
         label: "Image Url",
-        value: imageUrl.current,
-        onChange: (value: string) => imageUrl.current = value,
+        value: categoryRef.current.imageUrl,
+        onChange: (value: string) => categoryRef.current.imageUrl = value,
         className: "my-2"
     }
 

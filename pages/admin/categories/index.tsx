@@ -4,7 +4,6 @@ import { Box, CircularProgress } from "@mui/material"
 import clsx from "clsx"
 
 
-import { selectAdminAllCategories } from "@vinstacore/store/selectors"
 import { useLoadDispatchCategories } from "@vinstacore/hooks/useCategory"
 import { CategoryTable } from "@adminapp/modules/categories/table"
 import CategoryManagerHeader from "@adminapp/modules/categories/manager/ui/CategoryManagerHeader"
@@ -18,7 +17,7 @@ export default function Page() {
     const { isLoading, data, error } = useLoadDispatchCategories(true)
 
 
-    const headersData = ["Category Name", "Category Id", "Description", "Action"]
+    const headersData = ["Category Image", "Category Name", "Description", "Action"]
 
 
     const className = clsx(["p-4 flex flex-col justify-center items-center"])
