@@ -21,7 +21,7 @@ module.exports = {
         "screen-1/2" : "50vh",
       },
       colors : {
-        'primary' : '#795548',
+        'primary' : '#000000',
       }
     },
   },

@@ -1,10 +1,10 @@
 'use client'
 
 import { createTheme } from "@mui/material/styles";
-import { brown } from '@mui/material/colors';
+import { grey } from '@mui/material/colors';
 
-const primaryMain = brown[500];
-const primaryLight = brown[300];
+const primaryMain = grey[900];
+const primaryLight = grey[800];
 
 const theme = createTheme({
   breakpoints: {
@@ -18,8 +18,8 @@ const theme = createTheme({
   },
   palette: {
     primary: {
-      light: brown[300],
-      main: brown[500],
+      light: grey[800],
+      main: grey[900],
       contrastText: '#ffffff',
 
     },
@@ -32,10 +32,10 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           "&.MuiButton-contained": {
-            backgroundColor: brown[300],
+            backgroundColor: grey[800],
 
             "&.MuiButton-contained:hover": {
-              backgroundColor: brown[500],
+              backgroundColor: grey[900],
             },
 
           }
@@ -48,7 +48,7 @@ const theme = createTheme({
         {
           props: { color: 'filled' },
           style: {
-            backgroundColor: brown[300],
+            backgroundColor: grey[800],
           },
         },
       ],
@@ -60,7 +60,7 @@ const theme = createTheme({
         {
           props: { color: 'primary' },
           style: {
-            backgroundColor: brown[300],
+            backgroundColor: grey[800],
 
           }
         }

@@ -11,6 +11,10 @@ export function HeroSection() {
         "backgroundImage": "url('assets/heroBackground.jpg')",
         "backgroundSize": "cover",
     }
+    const boxStyle_2= {
+        "backgroundImage": "url('assets/heroBackground1.jpg')",
+        "backgroundSize": "cover",
+    }
 
     const boxClassName = clsx([
         "flex-1 mt-2 w-full h-full absolute z-0 opacity-10 ",
@@ -32,14 +36,7 @@ export function HeroSection() {
     return (
         <Box className={containerClassName} >
             <Box className={boxClassName} sx={boxStyle} />
-
-            <Paper className={paperClassName} color="primary">
-                <DisplayTypography  className="text-bold" color="white" text="Welcome to" />
-                <div className="flex flex-row justify-center items-center">
-                <Logo color="#ffffff"/>
-                <DisplayTypography  className="text-bold" color="white" text="instaverse" />
-                </div>
-            </Paper>
+            <Box className={boxClassName} sx={boxStyle_2} />
         </Box>
     )
 }
