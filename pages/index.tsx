@@ -16,7 +16,7 @@ export default function Home() {
 
 
     return (
-        <Box className="h-screen w-full">
+        <Box className="h-full w-full">
             <HeroSection />
             {
                 isLoading?  <div className="flex min-h-96 flex-row justify-center items-center"><CircularProgress/></div> : <CategoryGrid />

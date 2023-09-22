@@ -20,6 +20,9 @@ module.exports = {
         "96" : "24rem",
         "screen-1/2" : "50vh",
       },
+      width:{
+        "screen-half" : "50vw",
+      },
       colors : {
         'primary' : '#000000',
       }

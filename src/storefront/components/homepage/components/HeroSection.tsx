@@ -1,42 +1,34 @@
-import { Box, Paper } from "@mui/material";
-import { DisplayTypography } from "src/storefront/components/commons";
+import { Box } from "@mui/material";
 import clsx from "clsx";
-import Logo from "@common/Logo";
-
+import Image from 'next/image'
 
 
 export function HeroSection() {
 
-    const boxStyle = {
-        "backgroundImage": "url('assets/heroBackground.jpg')",
-        "backgroundSize": "cover",
-    }
-    const boxStyle_2= {
-        "backgroundImage": "url('assets/heroBackground1.jpg')",
-        "backgroundSize": "cover",
-    }
-
-    const boxClassName = clsx([
-        "flex-1 mt-2 w-full h-full absolute z-0 opacity-10 ",
-        "md:relative md:opacity-100 md:z-1 md:min-w-screen-half"
-    ])
-
 
     const containerClassName = clsx([
-        "flex flex-row justify-center items-center  ",
-        "h-screen w-full p-0 m-0 relative",
-        
+        "flex flex-col md:flex-row justify-center items-center  ",
+        "h-full md:h-screen w-full p-0 m-0 relative",
+
     ])
 
-
-    const paperClassName = clsx([
-        "flex flex-col h-full w-full justify-center items-center p-0 md:p-2 ",
+    const heroClassName = clsx([
+        "w-full h-full md:w-1/2"
     ])
+
 
     return (
         <Box className={containerClassName} >
-            <Box className={boxClassName} sx={boxStyle} />
-            <Box className={boxClassName} sx={boxStyle_2} />
+
+            <div className={heroClassName}>
+                <Image fill={true} className="relative"  src="/assets/heroBackground1.jpg" alt="hero" />
+            </div>
+
+            <div className={heroClassName}>
+                <Image fill={true} className="relative" src="/assets/heroBackground.jpg" alt="hero2" />
+            </div>
+
+
         </Box>
     )
 }
