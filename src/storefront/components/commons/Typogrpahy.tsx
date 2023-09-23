@@ -11,8 +11,8 @@ export function PriceDisplay(props: PriceDisplayProps) {
 
     const { price, currency, inverted } = props
 
-    const bgColor = inverted ? "burlywood" : "white"
-    const textColor = inverted ? "white" : "burlywood"
+    const bgColor = inverted ? "black" : "white"
+    const textColor = inverted ? "white" : "black"
 
     return (
         <Container sx={{ backgroundColor: bgColor, display: "flex", justifyContent: "center" }}>

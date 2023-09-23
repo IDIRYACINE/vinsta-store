@@ -16,7 +16,7 @@ export function CategoryGrid() {
     );
     let maxHorizontalCards = 2;
 
-    const className = "flex flex-row justify-center items-center h-full w-full p-4 m-0"
+    const className = "flex flex-row justify-center items-center h-full min-h-96 p-4 m-0"
 
     if (categories.length === 0) {
         return (

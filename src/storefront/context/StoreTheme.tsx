@@ -32,7 +32,7 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           "&.MuiButton-contained": {
-            backgroundColor: grey[800],
+            backgroundColor: grey[600],
 
             "&.MuiButton-contained:hover": {
               backgroundColor: grey[900],
@@ -42,6 +42,17 @@ const theme = createTheme({
         },
       },
     },
+
+    MuiListItemButton : {
+      styleOverrides: {
+        root:{
+          "&:hover": {
+            backgroundColor: grey[900],
+            color : 'black'
+        }
+      }
+    },
+  },
 
     MuiContainer: {
       variants: [
@@ -72,16 +83,19 @@ const theme = createTheme({
     MuiToggleButton: {
       styleOverrides: {
         root: {
+          outlineColor: grey[50],
+           outlineWidth: '0.1rem',
+           outlineStyle: 'solid',
           "&:hover":{
-            color: "white",
-
+            backgroundColor: grey[50],
+            color : 'black'
           },
 
           "&.Mui-selected": {
             color: primaryMain,
             backgroundColor: '#fefefe',
             "&:hover": {
-              color: "white",
+              backgroundColor: '#fefefe',
             }
           },
 
