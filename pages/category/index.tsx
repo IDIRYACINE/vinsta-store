@@ -29,6 +29,8 @@ export default function Page() {
     const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'))
 
     const filteredProducts = useMemo(() => {
+        if (products.length === 0) return []
+
         return products.filter((product) => {
             let shouldDisplay = true
             filters.forEach((filter) => {

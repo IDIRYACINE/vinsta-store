@@ -41,7 +41,6 @@ export const useLoadDispatchProductsAdmin = () => {
 
     const dispatch = useAppDispatch()
 
-    const products = useAppSelector(state => state.adminProducts.products)
 
     const categoryId = useAppSelector(state => state.adminProducts.displayedCategoryId)!
 
@@ -50,14 +49,12 @@ export const useLoadDispatchProductsAdmin = () => {
     })
 
 
-    if ((products.length === 0)) {
         if (data && data.length !== 0) {
             dispatch(
                 setProductsAdmin(
                     data
                 ))
         }
-    }
 
     return { isLoading, data:data??[], error }
 

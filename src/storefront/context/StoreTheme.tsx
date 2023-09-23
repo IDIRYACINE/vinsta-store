@@ -20,7 +20,7 @@ const theme = createTheme({
     primary: {
       light: grey[800],
       main: grey[900],
-      contrastText: '#ffffff',
+      contrastText: '#000000',
 
     },
     secondary: {
@@ -72,6 +72,11 @@ const theme = createTheme({
     MuiToggleButton: {
       styleOverrides: {
         root: {
+          "&:hover":{
+            color: "white",
+
+          },
+
           "&.Mui-selected": {
             color: primaryMain,
             backgroundColor: '#fefefe',

@@ -11,13 +11,17 @@ export default function Page() {
 
     const categoryId = useAppSelector(state => state.adminProducts.displayedCategoryId)
 
-    const {isLoading,data,error} = useLoadDispatchCategories(true)
+    const {isLoading} = useLoadDispatchCategories(true)
+
+    if(isLoading){
+        return  <div className="flex flex-row justify-center items-center"><CircularProgress/></div>
+    }
 
 
     let Widget = categoryId ? ProductPage : CategoryGrid
 
 
 
-    return isLoading? <div className="flex flex-row justify-center items-center"><CircularProgress/></div> : <Widget/>
+    return  <Widget/>
 }
 

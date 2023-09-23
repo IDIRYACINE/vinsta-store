@@ -168,7 +168,11 @@ export function Navbar() {
                 </Toolbar>
             </AppBar>
 
-            <AppDrawer open={openDrawer} toggleDrawer={toggleDrawer} />
+            {isSmallScreen && isInProductPage ? 
+                <AppDrawer open={openDrawer} toggleDrawer={toggleDrawer} />
+                :null
+            }
+            
             <Toolbar />
 
         </>
