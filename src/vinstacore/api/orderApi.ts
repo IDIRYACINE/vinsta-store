@@ -16,6 +16,11 @@ interface RestockOrderApiOptions{
     items:Repository.OrderItem[]
 }
 
+interface CancelOrderApiOptions{
+    dateId:string | number;
+    orderId:string | number;
+}
+
 type PartialOrder = Omit<Repository.Order, "header" | "shipping" | "items"> & {
     header?: Partial<Repository.OrderHeader>;
     shipping?: Partial<Repository.Contacts>;
@@ -120,6 +125,18 @@ export async function restockOrderApi(options: RestockOrderApiOptions) {
 
 export async function claimOrderApi(options: RestockOrderApiOptions) {
     const response = await fetch(`${baseOrderApi}/claim`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(options),
+    });
+
+    return response.json();
+}
+
+export async function cancelOrderApi(options: CancelOrderApiOptions) {
+    const response = await fetch(`${baseOrderApi}/cancel`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",

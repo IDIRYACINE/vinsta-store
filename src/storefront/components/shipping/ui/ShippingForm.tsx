@@ -112,12 +112,14 @@ export function ShippingForm(props: ShippingFormProps) {
     const phoneFieldProps = {
         label: "Phone",
         value: stateObject.phoneNumber,
-        onChange: updatePhone
+        onChange: updatePhone,
+        enforcer : (value:string) => value.replace(/[^0-9]/g, '')
+
     }
 
     const totalPriceFieldProps = {
         label: "TotalPrice",
-        value: deliveryPrice + totalPrice,
+        value: (deliveryPrice + totalPrice).toString(),
         readOnly: true
     }
 
@@ -158,9 +160,7 @@ export function ShippingForm(props: ShippingFormProps) {
 
 
         createOrderApi({ order, orderId: order.header.id }).then((res) => {
-            dispatch(updateOrderId(order.header.id))
-            setOrderId(order.header.id)
-            setDateId(orderDateIdFromDate(order.header.createdAt))
+            dispatch(updateOrderId({ orderId: order.header.id, dateId: orderDateIdFromDate(order.header.createdAt)}))
         })
 
     }

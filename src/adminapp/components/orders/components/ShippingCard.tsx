@@ -1,6 +1,6 @@
 import { BaseContainedButton } from "@adminapp/components/commons/Buttons"
 import { Card, Divider, Typography, Box, TextField } from "@mui/material"
-import { claimOrderApi, EOrderStatus, Repository, restockOrderApi } from "@vinstacore/index"
+import { cancelOrderApi, claimOrderApi, EOrderStatus, Repository, restockOrderApi } from "@vinstacore/index"
 import { restockOrder, updateOrderStatus } from "@vinstacore/store/admin/slices/ordersSlice"
 import { useAppDispatch } from "@vinstacore/store/clientHooks"
 import { orderStatusList } from "../domain/OrderStatus"
@@ -27,7 +27,12 @@ function ShippingCard({ address, status, restocked, orderId, totalPrice, items, 
             return <RestockButton dateId={dateId} orderId={orderId} items={items} />
         }
         if (displayClaimButton) {
-            return <ClaimButton dateId={dateId} orderId={orderId} items={items}/>
+            return (
+                <div className="flex flex-row gap-8">
+                    <ClaimButton dateId={dateId} orderId={orderId} items={items}/>
+                    <CancelButton dateId={dateId} orderId={orderId} />
+                </div>
+            )
         }
 
         return null
@@ -108,6 +113,26 @@ function ClaimButton({ orderId, dateId, items }: RestockButtonProps) {
 
     return (
         <BaseContainedButton onClick={claim}>Confirm</BaseContainedButton>
+
+    )
+}
+interface CancelButtonProps{
+    orderId: string
+    dateId: string,
+}
+
+function CancelButton({ orderId, dateId }: CancelButtonProps) {
+    const dispatch = useAppDispatch()
+
+    const status = orderStatusList.find(status => status.name === EOrderStatus.cancelled)!
+
+    const cancel = () => {
+        dispatch(updateOrderStatus({ orderId, status}))
+        cancelOrderApi({ orderId, dateId })
+    }
+
+    return (
+        <BaseContainedButton onClick={cancel}>Cancel</BaseContainedButton>
 
     )
 }

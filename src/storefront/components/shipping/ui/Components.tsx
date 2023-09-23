@@ -9,21 +9,21 @@ interface DestinationSelectorProps {
     deliveryTypes: DeliveryType[],
     deliveryType: DeliveryType,
     selectDeliveryType: (deliveryType: DeliveryType) => void,
-    homeAddress: string ,
+    homeAddress: string,
     onHomeAddressChange: (value: string) => void,
     deliveryPrice: number,
 }
 
 export function DestinationSelector(props: DestinationSelectorProps) {
     const { destinations, destination, selectDestination } = props
-    const { deliveryTypes, deliveryType,deliveryPrice, selectDeliveryType } = props
+    const { deliveryTypes, deliveryType, deliveryPrice, selectDeliveryType } = props
     const { homeAddress, onHomeAddressChange } = props
 
 
 
     const deliveryPriceFieldProps = {
         label: "DeliveryPrice",
-        value: deliveryPrice ,
+        value: deliveryPrice.toString(),
         readOnly: true
     }
 
@@ -96,7 +96,7 @@ export function DestinationSelector(props: DestinationSelectorProps) {
             {
                 deliveryType.isDeliverHome ?
 
-                    <TextField 
+                    <TextField
                         className="mt-1"
                         label="Addresse"
                         value={homeAddress}
@@ -111,35 +111,55 @@ export function DestinationSelector(props: DestinationSelectorProps) {
     )
 }
 
-
 interface AppTextFieldProps {
     label: string;
-    value: string|number;
     onChange?: (value: string) => void;
     className?: string;
-    readonly?: boolean;
-
+    readOnly?: boolean;
+    value?: string;
+    validator?: (value: string) => boolean;
+    enforcer?: (value: string) => string;
+    required?: boolean;
+    helperText?: string;
 }
-
 export function AppTextField(props: AppTextFieldProps) {
-    const { onChange, label, value, className,readonly } = props
+    const { onChange, label, enforcer, className, validator } = props
+    const helperText = props.helperText ?? "error"
+    const [value, setValue] = useState<string>(props.value ?? "")
+
+    const readOnly = props.readOnly ?? false
 
     function handleChange(event: ChangeEvent<HTMLInputElement>) {
-        if(onChange !== null && onChange !== undefined){
-            onChange(event.target.value)
+        let newVal = event.target.value
+        if (enforcer) {
+            newVal = enforcer(newVal)
         }
+        if (onChange) {
+            onChange(newVal)
+
+        }
+        setValue(newVal)
+    }
+
+    const validate = () => {
+        if (validator) {
+            return validator(value)
+        }
+        return false
     }
 
     return (
         <TextField
+            InputProps={{
+                readOnly,
+            }}
+            required={props.required ?? false}
+            error={validate()}
+            helperText={validate() ? helperText : ""}
             className={className}
             label={label}
-            
             value={value}
             onChange={handleChange}
-            inputProps={
-                { readOnly:readonly??false }
-            }
         />
     )
 }
