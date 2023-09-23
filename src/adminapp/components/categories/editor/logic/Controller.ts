@@ -1,6 +1,6 @@
 
 import { Repository ,navigateReplace,AdminRoutes} from "@vinstacore/index";
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
 
 interface CreateCategoryOptions {
