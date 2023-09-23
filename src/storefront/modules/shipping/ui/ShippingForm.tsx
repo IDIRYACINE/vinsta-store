@@ -158,9 +158,10 @@ export function ShippingForm(props: ShippingFormProps) {
 
 
         createOrderApi({ order, orderId: order.header.id }).then((res) => {
-            dispatch(updateOrderId(order.header.id))
-            setOrderId(order.header.id)
-            setDateId(orderDateIdFromDate(order.header.createdAt))
+            dispatch(updateOrderId({
+                orderId : order.header.id,
+                dateId: orderDateIdFromDate(order.header.createdAt)
+            }))
         })
 
     }
