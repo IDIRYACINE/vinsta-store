@@ -10,20 +10,25 @@ interface AppTextFieldProps {
     readOnly?: boolean;
     value?: string;
     validator?: (value: string) => boolean;
+    enforcer? : (value:string) => string;
     required?: boolean;
     helperText?: string;
 }
 
 function AppTextField(props: AppTextFieldProps) {
-    const { onChange, label, className,validator } = props
+    const { onChange, label, enforcer,className,validator } = props
     const helperText = props.helperText ?? "error"
     const [value, setValue] = useState<string>(props.value ?? "")
 
     const readOnly = props.readOnly ?? false
 
     function handleChange(event: ChangeEvent<HTMLInputElement>) {
-        onChange(event.target.value)
-        setValue(event.target.value)
+        let newVal = event.target.value
+        if(enforcer){
+            newVal = enforcer(newVal)
+        }
+        onChange(newVal)
+        setValue(newVal)
     }
 
     const validate = () => {

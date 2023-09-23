@@ -2,16 +2,19 @@
 import { Container } from "@mui/material"
 
 import { Box, Button, Typography } from "@mui/material"
-import { AppTextField } from "@storefront/modules/shipping/ui/Components"
+import { AppTextField } from "@storefront/components/shipping/ui/Components"
 import { findOrderStatusApi } from "@vinstacore/api/orderApi"
-import { Repository } from "@vinstacore/infrastructure/ports/IRepositories"
+import { useAppSelector } from "@vinstacore/store/clientHooks"
+import { selectTrackingOrder } from "@vinstacore/store/selectors"
 import { useState } from "react"
 
 export default function DeliveryPage() {
 
     const [status, setStatus] = useState<string | null>(null)
-    const [orderId, setOrderId] = useState("")
-    const [dateId, setDateId] = useState("")
+    const {storeDateId,storeOrderId} = useAppSelector(selectTrackingOrder)
+    
+    const [orderId, setOrderId] = useState(storeOrderId??"")
+    const [dateId, setDateId] = useState(storeDateId??"")
 
 
     function onOrderIdChange(value: string) {

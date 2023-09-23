@@ -34,7 +34,7 @@ async function GET(req: NextApiRequest, res: NextApiResponse,service:ProductServ
 async function POST(req: NextApiRequest, res: NextApiResponse,service:ProductServicePort) {
 
   const options = req.body;
-
+  
   const response = await service.create(options);
 
   return res.status(200).json({ data: response });

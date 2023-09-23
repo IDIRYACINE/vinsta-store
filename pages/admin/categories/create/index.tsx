@@ -12,17 +12,20 @@ import { createCategoryApi } from "@vinstacore/api/categoryApi";
 
 
 import { useAppDispatch } from "@vinstacore/store/clientHooks";
-import { CategoryEditorController, goBack } from "@adminapp/modules/categories/editor/logic/Controller"
-import { CreatorActions } from "@adminapp/modules/categories/editor/ui/Actions"
-import { isValidId } from "@vinstacore/libs/validator"
+import { CategoryEditorController, goBack } from "@adminapp/components/categories/editor/logic/Controller"
+import { CreatorActions } from "@adminapp/components/categories/editor/ui/Actions"
+import { v4 as uuidv4 } from 'uuid';
+import { isValidCategory } from "@vinstacore/libs/validator"
 
 
 function CategoryCreatorPage() {
 
-    const name = useRef("")
-    const imageUrl = useRef("")
-    const categoryId = useRef("")
-    const description = useRef("")
+    const categoryRef = useRef({
+        name : "",
+        imageUrl : "",
+        code: uuidv4(),
+        description : ""
+    })
 
     const controller = new CategoryEditorController()
 
@@ -33,36 +36,29 @@ function CategoryCreatorPage() {
 
     const nameProps = {
         label: "Name",
-        value: name.current,
-        onChange: (value: string) => name.current = value,
+        value: categoryRef.current.name,
+        onChange: (value: string) => categoryRef.current.name = value,
         className: "mr-2 w-full"
-    }
-
-    const codeProps = {
-        label: "Code",
-        value: categoryId.current,
-        onChange: (value: string) => categoryId.current = value,
-        className: "w-full",
-        required : true,
-        validator : isValidId,
-        helperText : "Code can't be number or empty"
     }
 
     const descriptionProps = {
         label: "Description",
-        value: description.current,
-        onChange: (value: string) => description.current = value,
+        value: categoryRef.current.description,
+        onChange: (value: string) => categoryRef.current.description = value,
         rowCount: 4,
         className: "my-2"
     }
 
     function onSave() {
+        if(!isValidCategory(categoryRef.current) ){
+            return 
+        }
 
         let category = controller.createCategory({
-            name: name.current,
-            imageUrl: imageUrl.current,
-            description: description.current,
-            code: categoryId.current,
+            name: categoryRef.current.name,
+            imageUrl: categoryRef.current.imageUrl,
+            description: categoryRef.current.description,
+            code: categoryRef.current.code,
         })
 
 
@@ -81,17 +77,14 @@ function CategoryCreatorPage() {
 
     const imageProps = {
         label: "Image Url",
-        onChange: (value: string) => imageUrl.current = value,
+        onChange: (value: string) => categoryRef.current.imageUrl = value,
         className: "my-2"
     }
 
     return (
         <Box className="w-full h-full flex flex-col justify-center items-center p-8 ">
             <Card className="flex flex-col p-4 w-full">
-                <Box className="flex flex-row my-2 w-full">
-                    <AppTextField {...nameProps} />
-                    <AppTextField {...codeProps} />
-                </Box>
+                <AppTextField {...nameProps} />
                 <AppTextArea {...descriptionProps} />
                 <SingleImageField {...imageProps} />
                 <CreatorActions {...actionsProps} />

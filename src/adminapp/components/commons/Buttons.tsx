@@ -1,6 +1,6 @@
 'use client'
 
-import { OrderStatus } from "@adminapp/modules/orders/domain/OrderStatus";
+import { OrderStatus } from "@adminapp/components/orders/domain/OrderStatus";
 import { Button, MenuItem, InputLabel, FormControl, Select, SelectChangeEvent } from "@mui/material";
 import clsx from "clsx";
 import { ColorEntity, Repository, SizeEntity } from "@vinstacore/index";
@@ -83,7 +83,9 @@ function ColorsSelector(props: ColorSelectorProps) {
     }
 
     function findColorEntity(colorId: string|number) : ColorEntity  {
-        return colors.find(color => color.id.equalsRaw(colorId))!
+        let targetColor =  colors.find(color => color.id.equalsRaw(colorId))
+        if(!targetColor) targetColor = colors[0]
+        return targetColor
     }
 
     return (
@@ -127,7 +129,9 @@ function SizesSelector(props: SizeSelectorProps) {
     const labelId = "sizes-select-label"
 
     function findSizeEntity(sizeId: string|number) : SizeEntity  {
-        return sizes.find(size => size.id.equalsRaw(sizeId))!
+        let target = sizes.find(size => size.id.equalsRaw(sizeId))
+        if(!target) target = sizes[0]
+        return target
     }
 
     function handleChange(event: SelectChangeEvent<string>) {

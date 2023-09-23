@@ -1,4 +1,4 @@
-import { OrderStatus, orderStatusfromString } from "@adminapp/modules/orders/domain/OrderStatus";
+import { OrderStatus, orderStatusfromString } from "@adminapp/components/orders/domain/OrderStatus";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { orderDateIdFromDate, Repository } from "@vinstacore/index";

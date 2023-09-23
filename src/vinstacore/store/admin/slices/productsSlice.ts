@@ -5,7 +5,7 @@ import { Repository } from "@vinstacore/index";
 export interface ProductsState {
     products: Repository.Product[];
     editedProduct: Repository.Product | null;
-    displayedCategoryId : number | null | string,
+    displayedCategoryId : string| null,
     isModalOpen: boolean;
 }
 
@@ -42,7 +42,7 @@ const productsSlice = createSlice({
                 state.products[index] = action.payload;
             }
         },
-        setDisplayedCategory(state ,action:PayloadAction<number |string| null>){
+        setDisplayedCategory(state ,action:PayloadAction<string| null>){
             state.displayedCategoryId = action.payload;
         },
         openDeleteProductDialog(state, action: PayloadAction<Repository.Product>) {

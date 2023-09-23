@@ -2,7 +2,7 @@
 
 import { createTheme } from "@mui/material/styles";
 
-import { brown } from '@mui/material/colors';
+import { grey } from '@mui/material/colors';
 
 const theme = createTheme({
   breakpoints: {
@@ -16,8 +16,8 @@ const theme = createTheme({
   },
   palette: {
     primary: {
-      light: brown[300],
-      main: brown[500],
+      light: grey[900],
+      main: grey[800],
       contrastText: '#ffffff',
 
     },
@@ -30,10 +30,10 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           "&.MuiButton-contained": {
-            backgroundColor: brown[300],
+            backgroundColor: grey[900],
 
             "&.MuiButton-contained:hover": {
-              backgroundColor: brown[500],
+              backgroundColor: grey[800],
             },
 
           }
@@ -45,7 +45,7 @@ const theme = createTheme({
         {
           props: { color: 'filled' },
           style: {
-            backgroundColor: brown[300],
+            backgroundColor: grey[900],
           },
         },
       ],

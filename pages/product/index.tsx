@@ -5,10 +5,10 @@ import { useRouter } from "next/navigation";
 import { useAppSelector, useAppDispatch,  } from "@vinstacore/store/clientHooks";
 import {  addItem } from "@vinstacore/store/customer/slices/cartSlice";
 
-import { DisplayImageRoster, PriceDisplay, SandwichTypography, } from "src/storefront/components";
+import { DisplayImageRoster, PriceDisplay, SandwichTypography, } from "@storefront/components/commons";
 import clsx from "clsx"
-import { ActionsRow } from "@storefront/modules/products/components/Components";
-import { convertProductToCartItem, goBack } from "@storefront/modules/products/logic/helpers";
+import { ActionsRow } from "@storefront/components/products/components/Components";
+import { convertProductToCartItem, goBack } from "@storefront/components/products/logic/helpers";
 
 
 

@@ -1,9 +1,9 @@
 
 import { Box, CircularProgress } from "@mui/material";
-import AppFooter from "@storefront/components/Footer";
-import { CategoryGrid } from "@storefront/modules/categories/ui/CategoryGrid";
-import { HeroSection } from '@storefront/modules/homepage/components/HeroSection';
-import { useLoadDispatchCategories } from "@vinstacore/hooks/useCategory";
+import AppFooter from "@storefront/components/commons/Footer";
+import { CategoryGrid } from "@storefront/components/categories/ui/CategoryGrid";
+import { HeroSection } from '@storefront/components/homepage/components/HeroSection';
+import { useLoadDispatchCategories } from "@vinstacore/sdk/useCategory";
 
 
 
@@ -16,7 +16,7 @@ export default function Home() {
 
 
     return (
-        <Box className="h-screen w-full">
+        <Box className="h-full w-full">
             <HeroSection />
             {
                 isLoading?  <div className="flex min-h-96 flex-row justify-center items-center"><CircularProgress/></div> : <CategoryGrid />

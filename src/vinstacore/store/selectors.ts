@@ -41,6 +41,7 @@ const selectCustomerDisplayedCategory = (state: RootState) => state.customerProd
 const selectCustomerAllCategories = (state: RootState) => state.customerProducts.categories
 const selectCustomerCartItems = (state: RootState) => state.customerOrders.cart
 const selectCustomerCartPrice = (state: RootState) => state.customerOrders.totalPrice
+const selectCustomerOrder = (state: RootState) => state.customerOrders
 
 const categoryProductsSelector = createSelector([selectAllCustomerProducts, selectCustomerDisplayedCategory], (allProducts, displayedCategoryId) => {
     const products: ProductTreasure[] = allProducts.filter(products => products.categoryId === displayedCategoryId)
@@ -66,6 +67,13 @@ const cartItemsCountSelector = createSelector([selectCustomerCartItems], (cartIt
     return cartItems.length
 })
 
+const selectTrackingOrder = createSelector([selectCustomerOrder],(order) => {
+    return {
+        storeOrderId: order.orderId,
+        storeDateId: order.dateId
+    }
+})
+
 export { categoryProductsSelector,cartItemsCountSelector, activeCategorySelector, displayedProductsSelector }
-export {selectCustomerCartItems,orderDatesSelector}
+export {selectCustomerCartItems,orderDatesSelector,selectTrackingOrder}
 export {orderSelector,selectCustomerCartPrice,orderHeaderSelector,selectAdminAllCategories,selectAdminEditCategory}

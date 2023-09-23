@@ -3,9 +3,9 @@ import { Box, Typography } from "@mui/material"
 import clsx from "clsx"
 import { useAppSelector } from "@vinstacore/store/clientHooks"
 import { orderSelector } from "@vinstacore/store/selectors"
-import ShippingCard from "@adminapp/modules/orders/components/ShippingCard"
-import ItemsList from "@adminapp/modules/orders/components/ItemsList"
-import { useLoadOrderIdParam } from "@vinstacore/hooks/useOrder"
+import ShippingCard from "@adminapp/components/orders/components/ShippingCard"
+import ItemsList from "@adminapp/components/orders/components/ItemsList"
+import { useLoadOrderIdParam } from "@vinstacore/sdk/useOrder"
 import { orderDateIdFromDate } from "@vinstacore/index"
 
 function OrderDetaillsPage() {

@@ -4,13 +4,13 @@ import { useTheme } from "@mui/material/styles";
 
 import { useMemo } from "react";
 import { setProductFilters } from "@vinstacore/store/customer/slices/productsSlice";
-import { ProductGrid } from "@storefront/index";
 import { useAppDispatch, useAppSelector } from "@vinstacore/store/clientHooks";
 import { categoryProductsSelector, } from "@vinstacore/store/selectors";
 
 import { IProductFilter } from "@vinstacore/index";
-import { ProductFilterSearch } from "@storefront/components/Filters";
-import { useLoadDispatchProducts } from "@vinstacore/hooks/useProduct";
+import { ProductFilterSearch } from "@storefront/components/commons/Filters";
+import { useLoadDispatchProducts } from "@vinstacore/sdk/useProduct";
+import { ProductGrid } from "@storefront/components/products/ui/ProductsGrid";
 
 
 
@@ -29,6 +29,8 @@ export default function Page() {
     const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'))
 
     const filteredProducts = useMemo(() => {
+        if (products.length === 0) return []
+
         return products.filter((product) => {
             let shouldDisplay = true
             filters.forEach((filter) => {

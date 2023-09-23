@@ -8,12 +8,18 @@ interface OrderStatePayload {
 
 }
 
+interface UpdateOrderPayload {
+    orderId: string;
+    dateId: string;
+}
+
 export interface cartState {
     cart: Repository.OrderItem[];
     editedItem: Repository.OrderItem | null;
     isModalOpen: boolean;
     totalPrice: number,
-    orderId: string | null
+    orderId: string | null,
+    dateId: string | null
 }
 
 
@@ -22,6 +28,7 @@ const initialState: cartState = {
     editedItem: null,
     isModalOpen: false,
     totalPrice: 0,
+    dateId:"",
     orderId: ""
 };
 
@@ -58,8 +65,9 @@ const cartSlice = createSlice({
             }
         },
 
-        updateOrderId(state, action: PayloadAction<string | null>) {
-            state.orderId = action.payload;
+        updateOrderId(state, action: PayloadAction<UpdateOrderPayload>) {
+            state.orderId = action.payload.orderId;
+            state.dateId = action.payload.dateId;
             state.cart = [];
         },
 
