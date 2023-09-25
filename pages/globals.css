@@ -29,11 +29,30 @@
 }
 
 .app-divider{
-    border-top: 1px solid brown;
+    border-top: 1px solid black;
     width: 60%;
     position: relative;
     margin-right: 1rem;
 }
+
+
+.app-divider-right{
+    border-top: 1px solid black;
+    width: 60%;
+    position: relative;
+    margin-left: 1rem;
+}
+
+.app-divider-right::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: -5px;
+    left: 0;
+    width: 10px;
+    height: 10px;
+    background-color: black;
+  }
 
 .app-divider::after {
     content: "";
@@ -43,5 +62,5 @@
     right: 0;
     width: 10px;
     height: 10px;
-    background-color: brown;
+    background-color: black;
   }

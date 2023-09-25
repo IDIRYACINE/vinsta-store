@@ -10,8 +10,8 @@ import { useLoadDispatchCategories } from "@vinstacore/sdk/useCategory";
 
 export default function Home() {
 
-    
-    const {isLoading,data,error} =useLoadDispatchCategories();
+
+    const { isLoading, data, error } = useLoadDispatchCategories();
 
 
 
@@ -19,9 +19,12 @@ export default function Home() {
         <Box className="h-full w-full">
             <HeroSection />
             {
-                isLoading?  <div className="flex min-h-96 flex-row justify-center items-center"><CircularProgress/></div> : <CategoryGrid />
+                isLoading ? <div className="flex min-h-96 flex-row justify-center items-center"><CircularProgress /></div> : <CategoryGrid />
             }
-            <AppFooter/>
+            <div className="flex flex-row justify-end">
+                <span className="app-divider-right inline-block " />
+            </div>
+            <AppFooter />
         </Box>
     )
 
