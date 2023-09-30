@@ -21,11 +21,11 @@ export function HeroSection() {
         <Box className={containerClassName} >
 
             <div className={heroClassName}>
-                <Image fill={true} className="relative"  src="/assets/heroBackground1.jpg" alt="hero" />
+                <Image fill={true} className="relative"  src="/assets/heroBackground.jpg" alt="hero" />
             </div>
 
             <div className={heroClassName}>
-                <Image fill={true} className="relative" src="/assets/heroBackground.jpg" alt="hero2" />
+                <Image fill={true} className="relative" src="/assets/heroBackground1.jpg" alt="hero2" />
             </div>
 
 
