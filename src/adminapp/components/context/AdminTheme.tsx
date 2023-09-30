@@ -34,6 +34,7 @@ const theme = createTheme({
 
             "&.MuiButton-contained:hover": {
               backgroundColor: "#fefefe",
+              color:grey[900]
             },
 
 
