@@ -1,11 +1,10 @@
 "use client"
 
 import {  Toolbar, Paper, ToggleButtonGroup, ToggleButton, Container, Slider, FormControl, InputLabel, MenuItem, Popover, Select, SelectChangeEvent, Typography, } from "@mui/material"
-import { useState, MouseEvent, useEffect,  } from "react"
+import { useState, MouseEvent,   } from "react"
 import { FilterType, IProductFilter, ProductPriceFilter, sizes, SizeEntity, ProductSizeFilter, ColorEntity, ProductColorFilter, colors } from "@vinstacore/index"
 import clsx from "clsx"
-import { usePathname, } from "next/navigation"
-import { CategoryNavigation } from "@storefront/modules/categories/ui/CategoryNavigation"
+import { CategoryNavigation } from "@storefront/components/categories/ui/CategoryNavigation"
 import { useInPage } from "@vinstacore/hooks/useUtility"
 
 interface ToggleFilterProps<T> {

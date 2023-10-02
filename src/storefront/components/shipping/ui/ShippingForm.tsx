@@ -6,7 +6,7 @@ import { useState } from "react"
 import { Destination, Repository, DeliveryType, destinations, calculateDeliveryPrice, orderDateIdFromDate } from "@vinstacore/index"
 import { AppTextField, DestinationSelector } from "./Components"
 import { useAppDispatch, useAppSelector } from "@vinstacore/store/clientHooks"
-import { selectCustomerCartItems, selectCustomerCartPrice } from "@vinstacore/store/selectors"
+import { selectCustomerCartItems, selectCustomerCartPrice, selectTrackingOrder } from "@vinstacore/store/selectors"
 
 import { createOrderApi } from "@vinstacore/index"
 import { generateOrder } from "../logic/helper"
@@ -18,8 +18,7 @@ interface ShippingFormState {
     phoneNumber: string,
     homeAddress: string,
     deliveryType: DeliveryType,
-    dateId: string | null
-    orderId: string | null
+   
 }
 
 interface ShippingFormProps {
@@ -27,10 +26,12 @@ interface ShippingFormProps {
     totalPrice: number,
     stateObject: ShippingFormState,
     setStateObject: (state: ShippingFormState) => void,
-    onClose: () => void
+    onClose: () => void,
+    storeDateId : string | null,
+    storeOrderId : string | null
 }
 export function ShippingForm(props: ShippingFormProps) {
-    const { cart, onClose, stateObject,totalPrice, setStateObject } = props
+    const { cart, onClose, stateObject,totalPrice, setStateObject,storeDateId,storeOrderId } = props
     const deliveryTypes = DeliveryType.values()
 
     const dispatch = useAppDispatch()
@@ -75,22 +76,6 @@ export function ShippingForm(props: ShippingFormProps) {
             homeAddress
         })
     }
-
-    function setOrderId(orderId: string) {
-        setStateObject({
-            ...stateObject,
-            orderId
-        })
-    }
-
-    function setDateId(dateId: string) {
-        setStateObject({
-            ...stateObject,
-            dateId
-        })
-    }
-
-
     const formStyle = {
         display: "flex",
         flexDirection: "column",
@@ -165,11 +150,11 @@ export function ShippingForm(props: ShippingFormProps) {
 
     }
 
-    if (stateObject.orderId != null) {
+    if (storeOrderId != null) {
         return (
             <Container sx={formStyle}>
-                <DisplayTypography text={`Order Id: ${stateObject.orderId}`} />
-                <DisplayTypography text={`Date Id: ${stateObject.dateId}`} />
+                <DisplayTypography text={`Order Id: ${storeOrderId}`} />
+                <DisplayTypography text={`Date Id: ${storeDateId}`} />
 
             </Container>
         )
@@ -202,18 +187,18 @@ export function ShippingDialog(props: ShippingDialogProps) {
     const cart = useAppSelector(state => selectCustomerCartItems(state))
     const totalPrice = useAppSelector(state => selectCustomerCartPrice(state))
 
+    const {storeDateId,storeOrderId} = useAppSelector(selectTrackingOrder)
+
     const [stateObject, setStateObject] = useState<ShippingFormState>({
         destination: destinations[0],
         fullName: "",
         phoneNumber: "",
         homeAddress: "",
         deliveryType: DeliveryType.values()[0],
-        dateId: null,
-        orderId: null
 
     })
 
-    const canDisplayForm = (cart.length > 0) || (stateObject.orderId !== null)
+    const canDisplayForm = (cart.length > 0) || (storeOrderId !== null)
 
 
     function onClose() {
@@ -241,7 +226,8 @@ export function ShippingDialog(props: ShippingDialogProps) {
         totalPrice,
         stateObject,
         setStateObject,
-        onClose
+        onClose,
+        storeDateId,storeOrderId
     }
 
     const ShippingFormBuilder =  (

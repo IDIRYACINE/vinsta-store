@@ -38,6 +38,7 @@ export class OrderItem {
         public readonly name: string,
         public readonly color :Repository.Color,
         public readonly size :Repository.Size,
+        public readonly images:string[]
 
     ) { }
 
@@ -49,7 +50,8 @@ export class OrderItem {
             persistence.price,
             persistence.name,
             persistence.color,
-            persistence.size
+            persistence.size,
+            persistence.images
 
         )
     }

@@ -71,7 +71,7 @@ export module Repository {
         categoryId: string,
         name: string,
         price: number
-        images?: string[]
+        images: string[]
     }
 
     export interface Order {

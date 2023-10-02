@@ -37,6 +37,8 @@ export class OrderMapper implements MapperBase<OrderEntity, Repository.Order>{
 
     toPersistence(domain: OrderEntity): Repository.Order {
         const items = domain.items.map(item => {
+
+
             return {
                 productId: item.productId,
                 quantity: item.quantity,
@@ -44,7 +46,8 @@ export class OrderMapper implements MapperBase<OrderEntity, Repository.Order>{
                 categoryId: item.categoryId,
                 name: item.name,
                 size : item.size,
-                color :item.color
+                color :item.color,
+                images: item.images,
                 
             }
         })
