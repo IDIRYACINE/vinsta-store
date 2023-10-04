@@ -35,7 +35,7 @@ function ShippingCard({ address, status, restocked, orderId, totalPrice, items, 
             )
         }
 
-        return null
+        return <></>
     }
 
     return (
